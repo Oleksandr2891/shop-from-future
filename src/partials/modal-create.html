@@ -1,0 +1,43 @@
+<div class="modal-create">
+    <button type="button" class="modal__close-btn" data-modal-close>
+        <svg class="modal__close-icon">
+            <use href="./images/sprite.svg#icon-closeblack"></use>
+        </svg>
+    </button>
+
+    <h2 class="modal-create__heading">Создать объявление</h2>
+    <label class="modal-create__field">
+        Название товара
+        <input type="text" class="modal-create__input" required minlength="2">
+    </label>
+
+    <label class="modal-create__field">
+        Фото
+        <ul class="modal-create__photo">
+            <li></li>
+        </ul>
+
+    </label>
+    <label class="modal-create__field">
+        Описание товара
+        <textarea name="user-description" class="modal-create__input modal-create__description"
+            placeholder="Введите описание"></textarea>
+    </label>
+    <label class="modal-create__field">
+        Категория товара
+        <select class="modal-create__select">
+            <option></option>
+        </select>
+    </label>
+    <label class="modal-create__field">
+        Цена
+        <input type="text" class="modal-create__input" placeholder="0.00 €">
+    </label>
+    <label class=" modal-create__field">
+        Телефон
+        <input type="tel" name="user-tel" class="modal-create__input" pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+            title="096-999-99-99" placeholder="+38 (0--) --- -- --" required>
+    </label>
+
+    <button type="submit" class="modal-create__btn">Добавить</button>
+</div>
