@@ -1,6 +1,24 @@
 {
   "apiUrl": "https://callboard-backend.goit.global",
-  "mainPage": ["/call/ads", "/call?page=1", "/call/categories"],
+  "baseTpl": {
+    "header": {
+      "getCategories": "/call/categories",
+      "tpl": "/header.hbs"
+    },
+    "footer": {
+      "tpl": "/footer.hbs"
+    }
+  },
+  "componentsTpl": {
+    "ads": {
+      "getAds": "/call/ads",
+      "tpl": "/components/ads.hbs"
+    },
+    "goods": {
+      "getGoods": "/call?page=1",
+      "tpl": "/components/goods.hbs"
+    }
+  },
   "register": [
     {
       "link": "/auth/register",
