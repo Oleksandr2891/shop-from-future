@@ -1,11 +1,11 @@
-/*
- * Главный файл стилей.
- * Все паршалы подключаются сюда.
- */
+// base styles
+@import './base/common';
+@import './base/container';
+// utils
 
-// Стили для файла с примером HTML-фрагмента
-
-
-@import './backdrop';
-@import './modalRegister';
-
+// common components
+@import './components/backdrop';
+@import './components/modalRegister';
+@import './components/modal-create';
+@import './components/swiper';
+// loyouts
