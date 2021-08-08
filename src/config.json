@@ -19,6 +19,7 @@
       "tpl": "/components/goods.hbs"
     }
   },
+  "modalTpl": {},
   "register": [
     {
       "link": "/auth/register",

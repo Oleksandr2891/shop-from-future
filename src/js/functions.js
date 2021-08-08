@@ -1,5 +1,6 @@
 import config from '../config.json';
 import { refs } from './refs';
+import Api from './api';
 // export const isJSON = data => {
 //   try {
 //     JSON.parse(data);
@@ -9,14 +10,10 @@ import { refs } from './refs';
 //   }
 // };
 
-export const getDataServer = (path = '/') => {
-  return fetch(config.apiUrl + path)
-    .then(response => response.json())
-    .catch(err => console.log(err));
-};
+const api = new Api();
 
 const getHeader = () => {
-  getDataServer(config.baseTpl.header.getCategories).then(data => {
+  api.getData(config.baseTpl.header.getCategories).then(data => {
     const headerTpl = require('../tpl/header.hbs').default;
 
     refs.header.innerHTML = headerTpl(data);
@@ -30,12 +27,12 @@ const getFooter = () => {
 };
 
 const getMainPage = () => {
-  getDataServer(config.componentsTpl.ads.getAds).then(data => {
+  api.getData(config.componentsTpl.ads.getAds).then(data => {
     const adsTpl = require('../tpl/components/ads.hbs').default;
     refs.ads.innerHTML = adsTpl(data);
     console.log(data);
   });
-  getDataServer(config.componentsTpl.goods.getGoods).then(data => {
+  api.getData(config.componentsTpl.goods.getGoods).then(data => {
     const goodsTpl = require('../tpl/components/goods.hbs').default;
     refs.content.innerHTML = goodsTpl(data);
     console.log(data);
@@ -60,9 +57,9 @@ export const renderContent = path => {
   if (refs.footer.childElementCount === 0) {
     getFooter();
   }
-  getDataServer(path).then(data => {
+  api.getData(path).then(data => {
     const categoryTpl = require('../tpl/category.hbs').default;
-    document.querySelector('#content').innerHTML = categoryTpl(data);
+    refs.content.innerHTML = categoryTpl(data);
 
     console.log(data);
 

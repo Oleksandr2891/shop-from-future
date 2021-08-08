@@ -1,7 +1,7 @@
 <h1>header</h1>
 <form action=''>
   <input data-search='/call/find?search=' type='text' class='search__input' />
-  <button class='search__button'>Search</button>
+  <button data-search='search' class='search__button'>Search</button>
 </form>
 <a href='/'>home</a>
 <ul>
@@ -10,3 +10,6 @@
     <ul><a href='/call/specific/{{this}}'>{{this}}</a></ul>
   {{/each}}
 </ul>
+<br />
+<button data-action='open-modal' data-value='auth'>Open modal</button>
+<button data-action='close-modal'>Close modal</button>

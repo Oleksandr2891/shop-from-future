@@ -2,6 +2,8 @@ import './sass/main.scss';
 import { refs } from './js/refs';
 import { renderContent } from './js/functions';
 
+import { renderModals } from './js/renderModals';
+
 const getPath = () => {
   return location.pathname + location.search;
 };
@@ -15,10 +17,21 @@ document.addEventListener('click', e => {
     renderContent(path);
   } else if (e.target.closest('button')) {
     e.preventDefault();
-    const input = refs.header.querySelector('.search__input');
-    if (input.value != '') {
-      const path = input.dataset.search + input.value;
-      renderContent(path);
+    if (e.target.dataset.action === 'open-modal') {
+      renderModals[e.target.dataset.value]();
+    }
+    if (e.target.dataset.action === 'close-modal') {
+      // can add style for animation before close modal window
+
+      // close modal
+      renderModals.closeModal();
+    }
+    if (e.target.dataset.search === 'search') {
+      const input = refs.header.querySelector('.search__input');
+      if (input.value != '') {
+        const path = input.dataset.search + input.value;
+        renderContent(path);
+      }
     }
   } else {
     return false;
