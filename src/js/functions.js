@@ -35,6 +35,8 @@ const getMainPage = () => {
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     const goodsTpl = require('../tpl/components/goods.hbs').default;
     refs.content.innerHTML = goodsTpl(data);
+    const swiper = require('../js/swiper').default;
+
     console.log(data);
   });
 };
