@@ -34,10 +34,22 @@ const getMainPage = () => {
   });
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     const goodsTpl = require('../tpl/components/goods.hbs').default;
-    refs.content.innerHTML = goodsTpl(data);
 
-    const swiper = require('../js/swiper').default;
+    const newData = [];
     console.log(data);
+
+    Object.keys(data).forEach(item => {
+      const obj = {
+        name: '',
+        data: [],
+      };
+      obj.name = item;
+      obj.data = data[item];
+      newData.push(obj);
+    });
+    console.log(newData);
+    refs.content.innerHTML = goodsTpl(newData);
+    const swiper = require('../js/swiper').default;
   });
 };
 

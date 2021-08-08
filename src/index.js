@@ -8,6 +8,7 @@ const getPath = () => {
 };
 
 renderContent(getPath());
+
 document.addEventListener('click', e => {
   if (e.target.closest('a')) {
     e.preventDefault();

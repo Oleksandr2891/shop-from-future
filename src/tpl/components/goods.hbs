@@ -1,23 +1,26 @@
 {{#each this}}
-<div class="swiper-container">
-    <h2></h2>
+  <div class='swiper-container'>
+    <h2>{{name}}</h2>
+
     <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-        <!-- Slides -->
-        <div class="swiper-slide">Slide 1</div>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
+    <div class='swiper-wrapper'>
+      {{#each data}}
+        <div class='swiper-slide'>{{_id}}</div>
+
+      {{/each}}
+      <!-- Slides -->
+
     </div>
-    {{!--
+    {{!
     <!-- If we need pagination -->
-    <div class="swiper-pagination"></div> --}}
+    <div class="swiper-pagination"></div> }}
 
     <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    <div class='swiper-button-prev'></div>
+    <div class='swiper-button-next'></div>
 
-    {{!--
+    {{!
     <!-- If we need scrollbar -->
-    <div class="swiper-scrollbar"></div> --}}
-</div>
+    <div class="swiper-scrollbar"></div> }}
+  </div>
 {{/each}}
