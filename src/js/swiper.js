@@ -1,3 +1,4 @@
+
 import 'swiper/swiper-bundle.css';
 import Swiper from 'swiper/bundle';
 
@@ -22,3 +23,4 @@ export const swiper = new Swiper('.swiper-container', {
     //     el: '.swiper-scrollbar',
     // },
 });
+

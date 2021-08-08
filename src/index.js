@@ -1,7 +1,6 @@
 import './sass/main.scss';
 import { refs } from './js/refs';
 import { renderContent } from './js/functions';
-
 import { renderModals } from './js/renderModals';
 
 const getPath = () => {
