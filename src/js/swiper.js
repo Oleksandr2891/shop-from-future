@@ -6,21 +6,31 @@ export const swiper = new Swiper('.swiper-container', {
     // Optional parameters
     direction: 'horizontal',
     loop: true,
+    slidesPerView: 1,
+    spaceBetween: 15,
 
-    // // If we need pagination
-    // pagination: {
-    //     el: '.swiper-pagination',
-    // },
-
-    // Navigation arrows
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
     },
 
-    // // And if we need scrollbar
-    // scrollbar: {
-    //     el: '.swiper-scrollbar',
-    // },
+    breakpoints: {
+        320: {
+            slidesPerView: 1,
+            spaceBetween: 20
+        },
+
+        600: {
+            slidesPerView: 2,
+            spaceBetween: 30
+        },
+
+        1280: {
+            slidesPerView: 4,
+            spaceBetween: 30
+        },
+
+    }
 });
+
 
