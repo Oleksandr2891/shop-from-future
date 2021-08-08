@@ -1,26 +1,17 @@
 {{#each this}}
-  <div class='swiper-container'>
-    <h2>{{name}}</h2>
-
-    <!-- Additional required wrapper -->
-    <div class='swiper-wrapper'>
-      {{#each data}}
-        <div class='swiper-slide'>{{_id}}</div>
-
-      {{/each}}
-      <!-- Slides -->
-
+<div class='swiper-container'>
+  <h2>{{name}}</h2>
+  <div class='swiper-wrapper'>
+    {{#each data}}
+    <div class='swiper-slide'>
+      <div class='card-image'><img src="{{imageUrls.[0]}}" alt="{{title}}">
+      </div>
+      <h3 class='card-name'>{{title}}</h3>
+      <p class='card-price'>{{oldPrice}} {{price}}</p>
     </div>
-    {{!
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div> }}
-
-    <!-- If we need navigation buttons -->
-    <div class='swiper-button-prev'></div>
-    <div class='swiper-button-next'></div>
-
-    {{!
-    <!-- If we need scrollbar -->
-    <div class="swiper-scrollbar"></div> }}
+    {{/each}}
   </div>
+  <div id="btn-slider" class='swiper-button-prev'></div>
+  <div id="btn-slider" class='swiper-button-next'></div>
+</div>
 {{/each}}
