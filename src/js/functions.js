@@ -35,6 +35,7 @@ const getMainPage = () => {
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     const goodsTpl = require('../tpl/components/goods.hbs').default;
     refs.content.innerHTML = goodsTpl(data);
+
     console.log(data);
   });
 };
