@@ -57,9 +57,11 @@ const getMainPage = () => {
 
 export const renderContent = path => {
   console.log(refs.ads);
+  console.log(location.pathname);
   if (path === '/') {
     history.pushState(null, null, path);
     getHeader();
+
     getMainPage();
     getFooter();
     return false;
@@ -75,7 +77,11 @@ export const renderContent = path => {
   }
   api.getData(path).then(data => {
     const categoryTpl = require('../tpl/category.hbs').default;
-    refs.content.innerHTML = categoryTpl(data);
+    const card = require('../tpl/components/productCard.hbs').default;
+
+    const categoryData = card(data);
+
+    refs.content.innerHTML = categoryTpl({ categoryData });
 
     console.log(data);
 
