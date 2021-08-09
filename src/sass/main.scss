@@ -1,7 +1,7 @@
-/*
- * Главный файл стилей.
- * Все паршалы подключаются сюда.
- */
+// base styles
+@import './base/common';
+@import './base/container';
+// utils
 
 // Стили для файла с примером HTML-фрагмента
 @import './common.scss';
@@ -11,3 +11,10 @@
 @import './layout/header.scss';
 @import './layout/mobile-menu.scss';
 @import './layout/tablet-filter.scss';
+// common components
+@import './components/backdrop';
+@import './components/modalRegister';
+@import './components/modal-create';
+@import './components/swiper';
+@import './components/modalCardOneGood';
+

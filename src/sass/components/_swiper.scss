@@ -1,0 +1,86 @@
+.swiper-container {
+  width: 100%;
+  height: 100%;
+
+  .swiper-wrapper {
+    width: 290px;
+    height: 300px;
+  }
+
+
+    .swiper-button-prev, .swiper-button-next {
+    width: 32px;
+    height: 60px;
+    background: #F4F4F4;
+    box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.01);
+    }
+}
+
+  #btn-slider::after {
+
+    color: black;
+  }
+.swiper-slide {
+  display: flex;
+  flex-direction: column;  
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+
+  .card-image {
+    width: 253px;
+    height: 253px;
+  }
+  .card-name {
+    display: block;
+
+  }
+  .card-price {
+    display: block;
+   
+  }
+}
+
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.swiper-button-prev {
+  width: 32px;
+  height: 60px;
+  background: #F4F4F4;
+  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.01);
+}
+
+//  {
+//     position: absolute;
+//     top: 50%;
+//     /* width: calc(var(--swiper-navigation-size) / 44 * 27); */
+//     /* height: var(--swiper-navigation-size); */
+//     margin-top: calc(0px - (var(--swiper-navigation-size) / 2));
+//     z-index: 10;
+//     cursor: pointer;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     color: var(--swiper-navigation-color, var(--swiper-theme-color));
+// }

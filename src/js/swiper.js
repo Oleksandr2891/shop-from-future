@@ -1,0 +1,36 @@
+
+import 'swiper/swiper-bundle.css';
+import Swiper from 'swiper/bundle';
+
+export const swiper = new Swiper('.swiper-container', {
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 15,
+
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+
+    breakpoints: {
+        320: {
+            slidesPerView: 1,
+            spaceBetween: 20
+        },
+
+        600: {
+            slidesPerView: 2,
+            spaceBetween: 30
+        },
+
+        1280: {
+            slidesPerView: 4,
+            spaceBetween: 30
+        },
+
+    }
+});
+
+

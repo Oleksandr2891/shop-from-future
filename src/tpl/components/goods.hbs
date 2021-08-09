@@ -1,1 +1,17 @@
-<h1>goods</h1>
+{{#each this}}
+<div class='swiper-container'>
+  <h2>{{name}}</h2>
+  <div class='swiper-wrapper'>
+    {{#each data}}
+    <div class='swiper-slide'>
+      <div class='card-image'><img src="{{imageUrls.[0]}}" alt="{{title}}">
+      </div>
+      <h3 class='card-name'>{{title}}</h3>
+      <p class='card-price'>{{oldPrice}} {{price}}</p>
+    </div>
+    {{/each}}
+  </div>
+  <div id="btn-slider" class='swiper-button-prev'></div>
+  <div id="btn-slider" class='swiper-button-next'></div>
+</div>
+{{/each}}

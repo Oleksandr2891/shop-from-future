@@ -1,7 +1,6 @@
 import './sass/main.scss';
 import { refs } from './js/refs';
 import { renderContent } from './js/functions';
-
 import { renderModals } from './js/renderModals';
 
 const getPath = () => {
@@ -9,6 +8,7 @@ const getPath = () => {
 };
 
 renderContent(getPath());
+
 document.addEventListener('click', e => {
   if (e.target.closest('a')) {
     e.preventDefault();
