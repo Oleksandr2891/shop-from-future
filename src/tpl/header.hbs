@@ -1,173 +1,149 @@
- <h1>header</h1>
-<form action=''>
-  <input data-search='/call/find?search=' type='text' class='search__input' />
-  <button data-search='search' class='search__button'>Search</button>
-</form>
-<a href='/'>home</a>
-<ul> --}}
-
-  {{#each this}}
-    <ul><a href='/call/specific/{{this}}'>{{this}}</a></ul>
-  {{/each}}
-</ul>
-<br />
-
-<button data-action='open-modal' data-value='createEditProduct'>Open modal</button>
-<button data-action='close-modal'>Close modal</button>
-
-<div id='modal'></div>
-
-
-  <div class="container">
-    <div class="header__mobile">
-      <button type="button" class="mobile-button">
-        <svg class="ikon-burger" width="20px" height="20px">
-          <use href=""></use>
-        </svg>
-      </button>
-      <a href="">
-        <img class="mobile__logo" src="" alt="logo">
+<div class='container'>
+  <div class='header__mobile'>
+    <button type='button' class='mobile-button'>
+      <svg class='ikon-burger' width='20px' height='20px'>
+        <use href=''></use>
+      </svg>
+    </button>
+    <a href='/'>
+      <img class='mobile__logo' src='' alt='logo' />
+    </a>
+    <button type='button' class='mobile-button'>
+      <svg class='ikon-search' width='24px' height='24px'>
+        <use href=''></use>
+      </svg>
+    </button>
+  </div>
+  <div class='header__wrapper'>
+    <nav class='nav'>
+      <a href=''>
+        <img class='header__logo logo' src='{{this.logo}}' alt='logo' />
       </a>
-      <button type="button" class="mobile-button">
-        <svg class="ikon-search" width="24px" height="24px">
-          <use href=""></use>
-        </svg>
-      </button>
-    </div>
-    <div class="header__wrapper">
-      <nav class="nav">
-        <a href="">
-          <img class="header__logo logo" src="" alt="logo">
-        </a>
-        <form class="header__form_desktop">
-          <input class="header__find" data-search='/call/find?search=' type='text'>
-          <button type="submit" data-search='search' class="search__btn">
-          </button>
-        </form>
-      </nav>
-      <div class="box">
-        <ul class="list registration log-in">
-          <li class="item registration__item">
-            <button class="registration__btn-reg" type="button">Регистрация</button>
-          </li>
-          <li class="item registration__item">
-            <button class="registration__btn-in" type="button">Войти</button>
-          </li>
-        </ul>
-        <ul class="list cabinet">
-          <li class="item cabinet__item">
-            <button class="cabinet__in" type="button">
-              <svg class="ikon-user" width="20px" height="20px">
-                <use href=""></use>
-              </svg>Мой кабинет</button>
-          </li>
-          <li class="item cabinet__item">
-            <button class="cabinet__out" type="button">
-              <svg class="ikon-out" width="20px" height="20px">
-                <use href=""></use>
-              </svg>
-            </button>
-          </li>
-        </ul>
-        <button class="header__btn" type="button">Создать объявление</button>
-      </div>
-    </div>
-    <div class="filter">
-      <ul class="list filter__list_desktop">
-        {{#each this}}
-        <li class="item filter__item_desktop">
-          <button type="button" class="filter__btn">{{this}}</button>
-        </li>
-        {{/each}}
-      </ul>
-      <form class="header__form_tablet">
-        <input class="header__find" data-search='/call/find?search=' type='text'>
-        <button type="submit" data-search='search' class="search__btn">
+      <form class='header__form_desktop'>
+        <input class='header__find' data-search='/call/find?search=' type='text' />
+        <button type='submit' data-search='search' class='search__btn'>
         </button>
       </form>
-      <button class="filter__btn_open" type="button">
-        <svg class="ikon-tune" width="24px" height="24px">
-          <use href=""></use>
-        </svg>
-        Фильтры
-      </button>
-      <button class="reset-btn" type="reset">
-        <svg class="ikon-replay" width="24px" height="24px">
-          <use href=""></use>
-        </svg>
-        Очистить
-      </button>
-    </div>
-    </div>
-    <div class="tablet-menu">
-      <div class="container">
-      <div class="filter_tablet">
-        <ul class="list filter__list_tablet">
-          {{#each this}}
-          <li class="item filter__item_tablet">
-            <button type="button" class="filter__btn">{{this}}</button>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-      </div>
-    </div>
-    <!-- MOBILE-MENU -->
-    <div class="mobile-container">
-    <div class="mobile-menu">
-      <button class="btn-close" type="button">
-        <svg class="ikon-close" width="24px" height="24px">
-          <use href=""></use>
-        </svg>
-      </button>
-      <ul class="list log-in mobile-menu__registration">
-        <li class="item registration__item">
-          <button class="registration__btn-reg" type="button">Регистрация</button>
+    </nav>
+    <div class='box'>
+      <ul class='list registration log-in'>
+        <li class='item registration__item'>
+          <button class='registration__btn-reg' type='button'>Регистрация</button>
         </li>
-        <li class="item registration__item">
-          <button class="registration__btn-in" type="button">Войти</button>
+        <li class='item registration__item'>
+          <button class='registration__btn-in' type='button'>Войти</button>
         </li>
       </ul>
-      <ul class="list cabinet mobile-menu__cabinet">
-        <li class="item cabinet__item">
-          <button class="cabinet__in" type="button">
-            <svg class="ikon-user" width="20px" height="20px">
-              <use href=""></use>
-            </svg>Мой кабинет
-          </button>
+      <ul class='list cabinet'>
+        <li class='item cabinet__item'>
+          <button class='cabinet__in' type='button'>
+            <svg class='ikon-user' width='20px' height='20px'>
+              <use href=''></use>
+            </svg>Мой кабинет</button>
         </li>
-        <li class="item cabinet__item">
-          <button class="cabinet__out" type="button">
-            <svg class="ikon-out" width="20px" height="20px">
-              <use href=""></use>
+        <li class='item cabinet__item'>
+          <button class='cabinet__out' type='button'>
+            <svg class='ikon-out' width='20px' height='20px'>
+              <use href=''></use>
             </svg>
           </button>
         </li>
       </ul>
-      <div class="mobile__wrapper">
-        <button class="filter__btn_mobile" type="button">
-          <svg width="24px" height="24px">
-            <use href=""></use>
-          </svg>
-          Фильтры
-        </button>
-        <button class="reset-btn_mobile" type="reset">
-          <svg width="24px" height="24px">
-            <use href=""></use>
-          </svg>
-          Очистить
-        </button>
-      </div>
-      <ul class="list filter__list_mobile">
-        {{#each this}}
-        <li class="item filter__item_mobile">
-          <button type="button" class="filter__btn">{{this}}</button>
+      <button class='header__btn' type='button'>Создать объявление</button>
+    </div>
+  </div>
+  <div class='filter'>
+    <ul class='list filter__list_desktop'>
+      {{#each this.data}}
+        <li class='item filter__item_desktop'>
+          <a href='/call/specific/{{this}}' class='filter__btn'>{{this}}</a>
         </li>
+      {{/each}}
+    </ul>
+    <form class='header__form_tablet'>
+      <input class='header__find' data-search='/call/find?search=' type='text' />
+      <button type='submit' data-search='search' class='search__btn'>
+      </button>
+    </form>
+    <button class='filter__btn_open' type='button'>
+      <svg class='ikon-tune' width='24px' height='24px'>
+        <use href=''></use>
+      </svg>
+      Фильтры
+    </button>
+    <button class='reset-btn' type='reset'>
+      <svg class='ikon-replay' width='24px' height='24px'>
+        <use href=''></use>
+      </svg>
+      Очистить
+    </button>
+  </div>
+</div>
+<div class='tablet-menu'>
+  <div class='container'>
+    <div class='filter_tablet'>
+      <ul class='list filter__list_tablet'>
+        {{#each this.data}}
+          <li class='item filter__item_tablet'>
+            <a href='/call/specific/{{this}}' class='filter__btn'>{{this}}</a>
+          </li>
         {{/each}}
       </ul>
     </div>
+  </div>
+</div>
+<!-- MOBILE-MENU -->
+<div class='mobile-container'>
+  <div class='mobile-menu'>
+    <button class='btn-close' type='button'>
+      <svg class='ikon-close' width='24px' height='24px'>
+        <use href=''></use>
+      </svg>
+    </button>
+    <ul class='list log-in mobile-menu__registration'>
+      <li class='item registration__item'>
+        <button class='registration__btn-reg' type='button'>Регистрация</button>
+      </li>
+      <li class='item registration__item'>
+        <button class='registration__btn-in' type='button'>Войти</button>
+      </li>
+    </ul>
+    <ul class='list cabinet mobile-menu__cabinet'>
+      <li class='item cabinet__item'>
+        <button class='cabinet__in' type='button'>
+          <svg class='ikon-user' width='20px' height='20px'>
+            <use href=''></use>
+          </svg>Мой кабинет
+        </button>
+      </li>
+      <li class='item cabinet__item'>
+        <button class='cabinet__out' type='button'>
+          <svg class='ikon-out' width='20px' height='20px'>
+            <use href=''></use>
+          </svg>
+        </button>
+      </li>
+    </ul>
+    <div class='mobile__wrapper'>
+      <button class='filter__btn_mobile' type='button'>
+        <svg width='24px' height='24px'>
+          <use href=''></use>
+        </svg>
+        Фильтры
+      </button>
+      <button class='reset-btn_mobile' type='reset'>
+        <svg width='24px' height='24px'>
+          <use href=''></use>
+        </svg>
+        Очистить
+      </button>
     </div>
-
-<button data-action='close-modal'>Close modal</button>
-<div id='modal'></div>
-
+    <ul class='list filter__list_mobile'>
+      {{#each this.data}}
+        <li class='item filter__item_mobile'>
+          <a href='/call/specific/{{this}}' class='filter__btn'>{{this}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
