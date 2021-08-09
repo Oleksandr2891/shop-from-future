@@ -3,10 +3,21 @@
 @import './base/container';
 // utils
 @import './utils/variables';
+
+// Стили для файла с примером HTML-фрагмента
+@import './common.scss';
+@import './container.scss';
+
+/*====layout====*/
+@import './layout/header.scss';
+@import './layout/mobile-menu.scss';
+@import './layout/tablet-filter.scss';
 // common components
 @import './components/backdrop';
+@import './components/mainModal';
 @import './components/modalRegister';
 @import './components/modal-create';
 @import './components/swiper';
 @import './components/modalCardOneGood';
-// loyouts
+
+

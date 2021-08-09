@@ -40,14 +40,6 @@
 }
 
 // Наполнение
-.modal_close-btn {
-  position: absolute;
-  top: 19px;
-  right: 20px;
-  width: 14px;
-  height: 14px;
-  background-color: var(--primary-white-color);
-}
 
 @media screen and (min-width: 768px) {
   .modal_close-btn {
