@@ -26,6 +26,7 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
+    "material-icons": "^1.1.1",
     "swiper": "^6.8.1"
   }
 }
