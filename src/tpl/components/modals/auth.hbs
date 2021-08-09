@@ -2,10 +2,18 @@
 
 <div class='backdrop'>
   <div id='modalAuthorization' class='modal_div'>
-    <button type='button' class='modal_close-btn'>#</button>
+    <button type='button' class='modal_close-btn'>
+      {{!-- <svg>
+        <use href="../images/sprite.svg#icon-closeblack"></use>
+      </svg> --}}
+    </button>
     <p class='modal_paragraph-register-google'>Для авторизации можете использовать Google Account:</p>
     <div class='center'>
-      <button type='button' class='modal_button-register-google'>#</button>
+      <button type='button' class='modal_button-register-google'>
+        <svg class="modal_button-svg-google">
+          <use href="{{sprite}}#icon-google-icon"></use>
+        </svg>
+      </button>
     </div>
     <p class='modal_paragraph-register-email'>Или войдите в приложение используя e-mail и пароль:</p>
     <form>
