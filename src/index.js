@@ -27,6 +27,22 @@ document.addEventListener('click', e => {
       // close modal
       refs.modal.innerHTML = '';
     }
+    if (e.target.closest('button').dataset.action === 'open-filter') {
+      const filterMenuNode = refs.header.querySelector('.mobile-menu');
+      if (filterMenuNode.classList.contains('hidden')) {
+        filterMenuNode.classList.remove('hidden');
+      } else {
+        filterMenuNode.classList.add('hidden');
+      }
+    }
+    if (e.target.closest('button').dataset.action === 'open-filter') {
+      const filterMenuNode = refs.header.querySelector('.tablet-menu');
+      if (filterMenuNode.classList.contains('hidden')) {
+        filterMenuNode.classList.remove('hidden');
+      } else {
+        filterMenuNode.classList.add('hidden');
+      }
+    }
     if (e.target.dataset.search === 'search') {
       const input = refs.header.querySelector('.search__input');
       if (input.value != '') {
