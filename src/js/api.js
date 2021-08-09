@@ -1,6 +1,8 @@
 import config from '../config.json';
 
 export default class Api {
+  #data = {};
+
   constructor(name, path) {
     this.name = name;
     this.path = path;
@@ -22,6 +24,15 @@ export default class Api {
     if (res.length < 1) return Promise.reject('Нет данных');
 
     return res;
+  }
+
+
+  get data() {
+    return this.#data;
+  }
+
+  set data(data) {
+    return this.#data = data;
   }
 
   // async getData(id) {
