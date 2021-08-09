@@ -8,6 +8,10 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  font-family: var(--main-text);
+}
+
 h1,
 h2,
 h3,
@@ -36,8 +40,9 @@ img {
 button {
   display: inline-block;
   border: none;
-  color: var(--button-color);
+  background-color: var(--accent-color);
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
+  color: var(--primary-white-color);
 }

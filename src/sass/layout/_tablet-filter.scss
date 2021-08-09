@@ -1,0 +1,35 @@
+/*================TABLET-FILTER=================*/
+.tablet-menu {
+  display: none;
+}
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .tablet-menu {
+    display: block;
+    background-color: #02182d;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .filter_tablet {
+    display: block;
+    padding: 30px 40px;
+    background: #02182d;
+    box-shadow: 15px 15px 55px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.filter__list_tablet {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.filter__item_tablet {
+  margin-right: 10px;
+}
+
+.filter__item_tablet:nth-child(-n + 5) {
+  margin-bottom: 20px;
+}

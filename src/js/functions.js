@@ -15,9 +15,11 @@ const api = new Api();
 const getHeader = () => {
   api.getData(config.baseTpl.header.getCategories).then(data => {
     const headerTpl = require('../tpl/header.hbs').default;
-
-    refs.header.innerHTML = headerTpl(data);
-    console.log(data);
+    const logo = require('../images/logo.svg');
+    const obj = { data, logo };
+    refs.header.innerHTML = headerTpl(obj);
+    console.log(obj);
+    console.log(obj.data);
   });
 };
 
