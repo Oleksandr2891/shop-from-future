@@ -1,0 +1,52 @@
+// {{#each this}}
+//   <div class='category__card-wrapper'>
+//     <a href='#' class='' data-link='{{_id}}'>
+//       <div class='category__card-image'><img src='{{imageUrls}}' alt='{{title}}' />
+//       </div>
+//       <h3 class='category__card-image'>{{title}}</h3>
+//       <p class='category__card-price'>{{price}}</p>
+//     </a>
+//   </div>
+// {{/each}}
+.category__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -20px;
+  margin-left: -20px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+}
+.category__card-wrapper {
+  width: 286px;
+  margin-top: 20px;
+  margin-left: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding-bottom: 21px;
+}
+.category__image-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 286px;
+  height: 239px;
+}
+.category__card-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 286px;
+  height: 239px;
+  object-fit: cover;
+}
+
+.category__card-title {
+  font-size: inherit;
+  margin-top: 10px;
+}
+.category__card-price {
+  margin-top: 3px;
+
+  color: var(--accent-color);
+}

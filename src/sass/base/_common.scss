@@ -13,6 +13,7 @@ body {
 }
 a {
   text-decoration: none;
+  color: inherit;
   font-family: inherit;
 }
 h1,
@@ -28,6 +29,7 @@ ol {
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 0;
+  list-style: none;
 }
 
 img {
