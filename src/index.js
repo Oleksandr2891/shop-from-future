@@ -13,7 +13,7 @@ renderContent(getPath());
 document.addEventListener('click', e => {
   if (e.target.closest('a')) {
     e.preventDefault();
-    const path = e.target.getAttribute('href');
+    const path = e.target.closest('a').getAttribute('href');
     history.pushState(null, null, path);
     renderContent(path);
   } else if (e.target.closest('button')) {
