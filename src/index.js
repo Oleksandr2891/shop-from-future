@@ -21,7 +21,7 @@ document.addEventListener('click', e => {
     if (e.target.dataset.action === 'open-modal') {
       renderModals[e.target.dataset.value]();
     }
-    if (e.target.dataset.action === 'close-modal') {
+    if (e.target.closest('button').dataset.action === 'close-modal') {
       // can add style for animation before close modal window
 
       // close modal
@@ -34,6 +34,7 @@ document.addEventListener('click', e => {
         renderContent(path);
       }
     }
+    console.log(e.target.closest('span'));
   } else {
     return false;
   }

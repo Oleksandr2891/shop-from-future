@@ -5,7 +5,7 @@
         <use href=''></use>
       </svg>
     </button>
-    <a href=''>
+    <a href='/'>
       <img class='mobile__logo' src='' alt='logo' />
     </a>
     <button type='button' class='mobile-button'>
@@ -56,7 +56,7 @@
     <ul class='list filter__list_desktop'>
       {{#each this.data}}
         <li class='item filter__item_desktop'>
-          <button type='button' class='filter__btn'>{{this}}</button>
+          <a href='/call/specific/{{this}}' class='filter__btn'>{{this}}</a>
         </li>
       {{/each}}
     </ul>
@@ -85,7 +85,7 @@
       <ul class='list filter__list_tablet'>
         {{#each this.data}}
           <li class='item filter__item_tablet'>
-            <button type='button' class='filter__btn'>{{this}}</button>
+            <a href='/call/specific/{{this}}' class='filter__btn'>{{this}}</a>
           </li>
         {{/each}}
       </ul>
@@ -141,7 +141,7 @@
     <ul class='list filter__list_mobile'>
       {{#each this.data}}
         <li class='item filter__item_mobile'>
-          <button type='button' class='filter__btn'>{{this}}</button>
+          <a href='/call/specific/{{this}}' class='filter__btn'>{{this}}</a>
         </li>
       {{/each}}
     </ul>
