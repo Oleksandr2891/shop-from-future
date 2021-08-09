@@ -25,7 +25,7 @@ document.addEventListener('click', e => {
       // can add style for animation before close modal window
 
       // close modal
-      renderModals.closeModal();
+      refs.modal.innerHTML = '';
     }
     if (e.target.dataset.search === 'search') {
       const input = refs.header.querySelector('.search__input');
