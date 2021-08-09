@@ -1,16 +1,20 @@
 {{#each this}}
 <div class='swiper-container'>
 
-  <h2>{{name}}</h2>
+  <h2 class="swiper-title">{{name}}</h2>
+  <a href="#" class="swiper-link__once-category">Смотреть все</a>
   <p>Товары домашнего обихода, видео, аудио, наушники, камеры, аксессуары и многое другое</p>
   <div class='swiper-wrapper'>
     {{#each data}}
     <div class='swiper-slide'>
       <a href="#" class="swiper-container__link-card" data-link="{{_id}}">
-        <div class='card-image'><img src="{{imageUrls.[0]}}" alt="{{title}}">
+        <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}" alt="{{title}}">
         </div>
         <h3 class='card-name'>{{title}}</h3>
-        <p class='card-price'>{{oldPrice}} {{price}}</p>
+        <p class='card-price'>
+          <span class="old-price"> {{oldPrice}} </span>
+          <span class="price"> {{price}}&#8364</span>
+        </p>
       </a>
     </div>
     {{/each}}
@@ -19,5 +23,4 @@
   <div id="btn-slider" class='swiper-button-prev'></div>
   <div id="btn-slider" class='swiper-button-next'></div>
 </div>
-<div class="swiper-pagination"></div>
 {{/each}}
