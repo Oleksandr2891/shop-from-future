@@ -14,7 +14,7 @@ renderContent(getPath());
 document.addEventListener('click', e => {
   if (e.target.closest('a')) {
     e.preventDefault();
-    const path = e.target.getAttribute('href');
+    const path = e.target.closest('a').getAttribute('href');
     history.pushState(null, null, path);
     renderContent(path);
   } else if (e.target.closest('button')) {
@@ -28,6 +28,22 @@ document.addEventListener('click', e => {
 
       // close modal
       refs.modal.innerHTML = '';
+    }
+    if (e.target.closest('button').dataset.action === 'open-filter') {
+      const filterMenuNode = refs.header.querySelector('.mobile-menu');
+      if (filterMenuNode.classList.contains('hidden')) {
+        filterMenuNode.classList.remove('hidden');
+      } else {
+        filterMenuNode.classList.add('hidden');
+      }
+    }
+    if (e.target.closest('button').dataset.action === 'open-filter') {
+      const filterMenuNode = refs.header.querySelector('.tablet-menu');
+      if (filterMenuNode.classList.contains('hidden')) {
+        filterMenuNode.classList.remove('hidden');
+      } else {
+        filterMenuNode.classList.add('hidden');
+      }
     }
     if (e.target.dataset.search === 'search') {
       const input = refs.header.querySelector('.search__input');

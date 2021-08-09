@@ -1,27 +1,27 @@
 <div class='container'>
   <div class='header__mobile'>
-    <button type='button' class='mobile-button'>
-      <svg class='ikon-burger' width='20px' height='20px'>
+    <button type='button' class='mobile-button' data-action='open-filter'>
+      <span class="material-icons-round icons">menu</span>
         <use href=''></use>
       </svg>
     </button>
     <a href='/'>
-      <img class='mobile__logo' src='' alt='logo' />
+      <img class='mobile__logo' src='{{this.logo}}' alt='logo' />
     </a>
     <button type='button' class='mobile-button'>
-      <svg class='ikon-search' width='24px' height='24px'>
-        <use href=''></use>
-      </svg>
+        <span class="material-icons-round icons">search</span>
     </button>
   </div>
   <div class='header__wrapper'>
     <nav class='nav'>
-      <a href=''>
+      <a href='/'>
+     
         <img class='header__logo logo' src='{{this.logo}}' alt='logo' />
       </a>
       <form class='header__form_desktop'>
         <input class='header__find' data-search='/call/find?search=' type='text' />
-        <button type='submit' data-search='search' class='search__btn'>
+        <button class="search__btn">
+          <span class="material-icons icons">search</span>
         </button>
       </form>
     </nav>
@@ -37,15 +37,11 @@
       <ul class='list cabinet'>
         <li class='item cabinet__item'>
           <button class='cabinet__in' type='button'>
-            <svg class='ikon-user' width='20px' height='20px'>
-              <use href=''></use>
-            </svg>Мой кабинет</button>
+            <span class="material-icons-outlined icons">account_circle</span>Мой кабинет</button>
         </li>
         <li class='item cabinet__item'>
           <button class='cabinet__out' type='button'>
-            <svg class='ikon-out' width='20px' height='20px'>
-              <use href=''></use>
-            </svg>
+                    <span class="material-icons-round icons">logout</span>
           </button>
         </li>
       </ul>
@@ -63,23 +59,20 @@
     <form class='header__form_tablet'>
       <input class='header__find' data-search='/call/find?search=' type='text' />
       <button type='submit' data-search='search' class='search__btn'>
+        <span class="material-icons icons">search</span>
       </button>
     </form>
-    <button class='filter__btn_open' type='button'>
-      <svg class='ikon-tune' width='24px' height='24px'>
-        <use href=''></use>
-      </svg>
+    <button class='filter__btn_open' type='button' data-action='open-filter'>
+      <span class="material-icons icons">tune</span>
       Фильтры
     </button>
     <button class='reset-btn' type='reset'>
-      <svg class='ikon-replay' width='24px' height='24px'>
-        <use href=''></use>
-      </svg>
+              <span class="material-icons icons">replay</span>
       Очистить
     </button>
   </div>
 </div>
-<div class='tablet-menu'>
+<div class='tablet-menu hidden'>
   <div class='container'>
     <div class='filter_tablet'>
       <ul class='list filter__list_tablet'>
@@ -94,7 +87,7 @@
 </div>
 <!-- MOBILE-MENU -->
 <div class='mobile-container'>
-  <div class='mobile-menu'>
+  <div class='mobile-menu hidden'>
     <button class='btn-close' type='button'>
       <svg class='ikon-close' width='24px' height='24px'>
         <use href=''></use>

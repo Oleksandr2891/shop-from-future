@@ -7,6 +7,7 @@
 // Стили для файла с примером HTML-фрагмента
 
 // common components
+@import './components/category';
 @import './components/backdrop';
 @import './components/mainModal';
 @import './components/modalRegister';
@@ -14,6 +15,7 @@
 @import './components/swiper';
 @import './components/modalCardOneGood';
 @import './components/animation-modal';
+
 
 /*====layout====*/
 @import './layout/header.scss';

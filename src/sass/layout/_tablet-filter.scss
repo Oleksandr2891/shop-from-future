@@ -1,6 +1,7 @@
 /*================TABLET-FILTER=================*/
 .tablet-menu {
   display: none;
+  z-index: 10;
 }
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .tablet-menu {
@@ -15,9 +16,7 @@
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .filter_tablet {
     display: block;
-    padding: 30px 40px;
-    background: #02182d;
-    box-shadow: 15px 15px 55px rgba(0, 0, 0, 0.3);
+    // padding: 30px 40px;
   }
 }
 
@@ -32,4 +31,7 @@
 
 .filter__item_tablet:nth-child(-n + 5) {
   margin-bottom: 20px;
+}
+.hidden {
+  display: none;
 }
