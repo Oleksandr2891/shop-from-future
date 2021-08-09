@@ -1,27 +1,22 @@
-<div class="card-goods">
-    <button type='button' class='modal__close-btn' data-modal-close></button>
+<div class="card-goods">  
     <div class="card-goods__left">
         <img src="" alt="">
     </div>
     <div class="card-goods__right">
-        <h2 class="card-goods__name">Название товара</h2>
+        <h2 class="card-goods__name">{{title}}</h2>
         <p class="card-goods__code">Код товара</p>
-        <p class="card-goods__price">Price</p>
+        <p class="card-goods__price">{{price}}</p>
 
         <button type="submit" class="card-goods__btn-information">Информация о продавце</button>
 
         <button type="submit" class="card-goods__btn card-goods__btn-favorites">В избранное
-            <svg class="card-goods-icon">
-                <use href="./images/sprite.svg#icon-favourite"></use>
-            </svg>
+            <span class="material-icons-outlined card-goods-icon">favorite_border</span>            
         </button>
         <button type="submit" class="card-goods__btn card-goods__btn-share">Поделиться
-            <svg class="card-goods-icon">
-                <use href="./images/sprite.svg#icon-share"></use>
-            </svg>
+        <span class="material-icons-outlined card-goods-icon">share</span>
         </button>
 
         <h3 class="card-goods__heading-desc">Описание</h3>
-        <p class="card-goods__desc">Текст описания</p>
+        <p class="card-goods__desc">{{description}}</p>
     </div>
 </div>
