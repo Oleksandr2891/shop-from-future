@@ -2,6 +2,7 @@ import './sass/main.scss';
 import { refs } from './js/refs';
 import { renderContent } from './js/functions';
 import { renderModals } from './js/renderModals';
+import 'material-icons/iconfont/material-icons.css';
 
 const getPath = () => {
   return location.pathname + location.search;

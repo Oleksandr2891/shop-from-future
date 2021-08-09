@@ -2,11 +2,14 @@
 @import './base/common';
 @import './base/container';
 // utils
+@import './utils/variables';
 
 // common components
 @import './components/backdrop';
+@import './components/mainModal';
 @import './components/modalRegister';
 @import './components/modal-create';
 @import './components/swiper';
 @import './components/modalCardOneGood';
+
 // loyouts
