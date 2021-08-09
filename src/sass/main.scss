@@ -5,8 +5,8 @@
 @import './utils/variables';
 
 // Стили для файла с примером HTML-фрагмента
-@import './common.scss';
-@import './container.scss';
+@import './base/common.scss';
+@import './base/container.scss';
 
 /*====layout====*/
 @import './layout/header.scss';
@@ -19,5 +19,3 @@
 @import './components/modal-create';
 @import './components/swiper';
 @import './components/modalCardOneGood';
-
-
