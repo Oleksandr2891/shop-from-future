@@ -3,6 +3,7 @@ import { refs } from './js/refs';
 import { renderContent } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
+import { animateModal } from './js/animation-modal';
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -20,6 +21,7 @@ document.addEventListener('click', e => {
     e.preventDefault();
     if (e.target.dataset.action === 'open-modal') {
       renderModals[e.target.dataset.value]();
+      animateModal();
     }
     if (e.target.closest('button').dataset.action === 'close-modal') {
       // can add style for animation before close modal window
@@ -34,8 +36,22 @@ document.addEventListener('click', e => {
         renderContent(path);
       }
     }
-    console.log(e.target.closest('span'));
+  } else if (e.target) {
+    //   Закрытие модалки по нажатию на backdrop
+    if (e.target.classList.contains('backdrop')) {
+      refs.modal.innerHTML = '';
+    }
   } else {
     return false;
   }
 });
+
+document.addEventListener('keydown', e => {
+  if (e.keyCode === 27) {
+    refs.modal.innerHTML = '';
+  }
+});
+
+// document.addEventListener('submit', e => {
+//   refs.modal.innerHTML = '';
+// });
