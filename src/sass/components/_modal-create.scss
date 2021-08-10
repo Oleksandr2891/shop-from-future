@@ -1,3 +1,21 @@
+.modal-create__wrapper {
+  width: 950px;
+  height: 698px;
+  padding-left: 20px;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    width: 724px;
+    height: 698px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 1025px;
+    height: 574px;
+    padding-left: 94px;
+    padding-right: 125px;
+  }
+}
 
 .modal-create__heading {
   font-weight: bold;
@@ -17,7 +35,6 @@
 
 @media screen and (min-width: 768px) {
   .modal-create__field {
-    height: 698px;
     margin-left: 0;
     display: flex;
     justify-content: space-between;
@@ -31,18 +48,15 @@
   max-width: 251px;
   padding-left: 23px;
   margin-top: 10px;
-}
 
-@media screen and (min-width: 768px) {
-  .modal-create__input {
+  @media screen and (min-width: 768px) {
     width: 100%;
     max-width: 458px;
     height: 56px;
+    margin-top: 0;
   }
-}
 
-@media screen and (min-width: 1280px) {
-  .modal-create__input {
+  @media screen and (min-width: 1280px) {
     width: 100%;
     max-width: 610px;
   }
@@ -79,30 +93,22 @@
   margin-top: 40px;
   padding: 21px;
 
-  font-weight: 500;
+  font-weight: bold;
   font-size: 12px;
   line-height: 14px;
   text-align: center;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  background: #ff6b09;
   border-color: transparent;
-  color: #ffffff;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-@media screen and (min-width: 768px) {
-  .modal-create__btn {
+  @media screen and (min-width: 768px) {
     width: 266px;
     height: 60px;
     padding: 22px;
-    margin-right: auto;
-    margin-left: auto;
   }
-}
 
-@media screen and (min-width: 1280px) {
-  .modal-create__btn {
+  @media screen and (min-width: 1280px) {
     width: 286px;
     height: 60px;
   }

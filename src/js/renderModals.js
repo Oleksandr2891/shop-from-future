@@ -40,6 +40,13 @@ export const renderModals = {
     refs.modal.innerHTML = modalTpl({ modalContent });
   },
 
+  modalExit: () => {
+    const contentForModal = require('../tpl/components/modals/modalExit.hbs').default;
+
+    const modalContent = contentForModal();
+    refs.modal.innerHTML = modalTpl({ modalContent });
+  },
+
   closeModal: () => {
     refs.modal.innerHTML = '';
   },
