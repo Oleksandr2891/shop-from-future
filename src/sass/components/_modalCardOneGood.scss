@@ -1,18 +1,4 @@
-.card-goods {
-  display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 96vw;
-  max-width: 290px;
-  height: 96vh;
-  max-height: 845px;
-  padding: 40px;
-  overflow: auto;
-  padding: 20px;
-}
-
+// y
 .card-goods__btn-information {
   width: 254px;
   height: 60px;
@@ -24,19 +10,47 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
+.card-goods__img {
+  margin-bottom: 50px;
+}
+.card-goods__title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.card-goods__code {
+  font-weight: 300;
+  font-size: 12px;
+  color: #878686;
+  margin-top: 5px;
+}
 
 .card-goods__price {
   margin-top: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--accent-color);
 }
 
 .card-goods-icon {
-  width: 14px;
-  height: 12px;
+  padding-left: 13px;
+  padding-bottom: 5px;
 }
 
 .card-goods__btn {
   margin-top: 20px;
   background-color: inherit;
+  color: #878686;
+  font-weight: 300;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  width: 96px;
+}
+
+.card-goods__btn-share {
+  margin-left: 40px;
 }
 
 .card-goods__heading-desc {
@@ -49,9 +63,11 @@
 
 @media screen and (min-width: 768px) {
   .card-goods {
-    max-width: 724px;
+    // max-width: 724px;
     height: 698px;
-    padding: 54px;
+    padding-left: 94px;
+    padding-right: 94px;
+    // padding: 54px;
   }
 }
 
@@ -63,7 +79,7 @@
   }
 }
 
-@media screen and (min-width: 71280px) {
+@media screen and (min-width: 1280px) {
   .card-goods__btn-information {
     margin-top: 40px;
     width: 255px;
@@ -73,9 +89,12 @@
 
 @media screen and (min-width: 1280px) {
   .card-goods {
-    max-width: 950px;
-    height: 698px;
-    padding: 57px;
+    width: 1025px;
+    height: 674px;
+    // max-width: 950px;
+    // height: 698px;
+    padding-left: 94px;
+    padding-right: 125px;
   }
 }
 
@@ -89,14 +108,14 @@
 @media screen and (min-width: 768px) {
   .card-goods__right,
   .card-goods__left {
-    flex-basis: calc((100% - 38px) / 2);
+    flex-basis: calc((100% - 60px) / 2);
   }
 }
 
 @media screen and (min-width: 1280px) {
   .card-goods__right,
   .card-goods__left {
-    flex-basis: calc((100% - 40px) / 2);
+    flex-basis: calc((100% - 80px) / 2);
   }
 }
 

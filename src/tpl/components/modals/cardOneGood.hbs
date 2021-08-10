@@ -1,11 +1,12 @@
 <div class="card-goods">  
     <div class="card-goods__left">
-        <img src="" alt="">
+        <img src="{{imageUrls}}" alt="" class="card-goods__img">
     </div>
     <div class="card-goods__right">
-        <h2 class="card-goods__name">{{title}}</h2>
+        
+        <h2 class="card-goods__title">{{title}}</h2>
         <p class="card-goods__code">Код товара</p>
-        <p class="card-goods__price">{{price}}</p>
+        <p class="card-goods__price">{{price}}€</p>
 
         <button type="submit" class="card-goods__btn-information">Информация о продавце</button>
 
@@ -18,5 +19,22 @@
 
         <h3 class="card-goods__heading-desc">Описание</h3>
         <p class="card-goods__desc">{{description}}</p>
+      
     </div>
+    
 </div>
+
+{{!-- const modalContent = contentForModal({
+category: 'recreation and sport',
+description: 'lets play football',
+imageUrls: [
+'https://storage.googleapis.com/kidslikev2_bucket/8cc8c7fb-c61b-4904-a2f1-3fe018955a00.jpg',
+],
+isOnSale: false,
+phone: '+380930000000',
+price: 200,
+title: 'Football',
+userId: '5fd27aeb0031930017e91795',
+__v: 0,
+_id: '5fd390a06da6ab0017dbf594',
+}); --}}

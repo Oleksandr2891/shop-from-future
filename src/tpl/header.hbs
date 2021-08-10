@@ -38,9 +38,15 @@
         <button class='registration__btn-in' type='button' id="logOut" data-action="log-out">Выйти</button>
       </div>
       <ul class='list cabinet'>
-        <li class='item cabinet__item'>
-          <button class='cabinet__in' type='button'>
+        <li class='item cabinet__item my-cabinet'>
+          <button class='cabinet__in' type='button' data-action='open-cabinet'>
             <span class="material-icons-outlined icons">account_circle</span>Мой кабинет</button>
+            <div class="modal-cabinet hidden">
+             <ul class="menu-caminet">
+               <li class="item"><a class="link" href="http://">Мои объявления</a></li>
+               <li class="item"><a class="link" href="http://">Избранные</a></li>
+             </ul>
+            </div>
         </li>
         <li class='item cabinet__item'>
           <button class='cabinet__out' type='button'>
@@ -105,12 +111,18 @@
       </li>
     </ul>
     <ul class='list cabinet mobile-menu__cabinet'>
-      <li class='item cabinet__item'>
-        <button class='cabinet__in' type='button'>
+      <li class='item cabinet__item menu-cabinet'>
+        <button class='cabinet__in' type='button' data-action='open-cabinet-mobile'>
           <svg class='ikon-user' width='20px' height='20px'>
             <use href=''></use>
           </svg>Мой кабинет
         </button>
+        <div class="modal-cabinet-mobile hidden">
+             <ul class="menu-caminet">
+               <li class="item"><a class="link" href="http://">Мои объявления</a></li>
+               <li class="item"><a class="link" href="http://">Избранные</a></li>
+             </ul>
+            </div>
       </li>
       <li class='item cabinet__item'>
         <button class='cabinet__out' type='button'>

@@ -53,6 +53,22 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
+    if (e.target.closest('button').dataset.action === 'open-cabinet') {
+      const openMyCabinet = refs.header.querySelector('.modal-cabinet');
+      if (openMyCabinet.classList.contains('hidden')) {
+        openMyCabinet.classList.remove('hidden');
+      } else {
+        openMyCabinet.classList.add('hidden');
+      }
+    }
+    if (e.target.closest('button').dataset.action === 'open-cabinet-mobile') {
+      const openMyCabinetMob = refs.header.querySelector('.modal-cabinet-mobile');
+      if (openMyCabinetMob.classList.contains('hidden')) {
+        openMyCabinetMob.classList.remove('hidden');
+      } else {
+        openMyCabinetMob.classList.add('hidden');
+      }
+    }
     if (e.target.closest('button').dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.tablet-menu');
       if (filterMenuNode.classList.contains('hidden')) {

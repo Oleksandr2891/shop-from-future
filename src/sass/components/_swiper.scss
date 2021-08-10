@@ -30,25 +30,45 @@
     }
  }
 
+  .swiper-title{
+    margin-bottom: 16px;
+    font-family: Montserrat;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+
 }
 
 
-.swiper-container {
+.container-categories {
 
   width: 100%;
   height: 100%;
-  z-index: 0 !important;
+
+  p {
+    margin-bottom: 27px;
+    font-family: Montserrat;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: var(--text-grey-color);
+  }
 
   &:not(:last-child) {
   margin-bottom: 40px;
   
   }
 
-  .swiper-wrapper {
-    width: 290px;
-    height: 335px;
+  .swiper-link__once-category {
+    font-family: Montserrat;
+    font-size: 12px;
+    line-height: 1.25px;
+    letter-spacing: 0.02em;
+    text-decoration-line: underline;
+    color: var(--accent-color);
   }
-
+  
   .swiper-button-prev,
   .swiper-button-next {
     width: 32px;
@@ -71,10 +91,15 @@
   }
   &.swiper-button-next {
     right: -6px;
+    padding-right: 4px;
   }
   &.swiper-button-prev {
     left: -6px;
+    padding-left: 4px;
   }  
+  &:hover, &:focus {
+    background: var(--accent-color);
+  }
 
 }
 .swiper-slide {
@@ -82,7 +107,11 @@
   flex-direction: column;
   text-align: center;
   font-size: 18px;
+  width: 290px;
+  height: 335px;
   background: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
 
   /* Center slide text vertically */
   display: -webkit-box;
@@ -98,24 +127,62 @@
   -webkit-align-items: center;
   align-items: center;
 
-  .card-image {
+  .card-image__wrapper {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 5px;
     width: 253px;
     height: 253px;
   }
+
+  .card-image__img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 253px;
+      height: 253px;
+      object-fit: cover;
+  }
   .card-name {
     display: block;
+    font-family: Montserrat;
+    font-size: 12px;
+    line-height: 1.25;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--primary-black-color);
   }
   .card-price {
     display: block;
+    margin-bottom: 30px;
+    
+    .old-price {
+      font-family: Montserrat;
+      text-decoration: line-through;
+      font-size: 12px;
+      line-height: 1.25px;
+      letter-spacing: 0.04em;
+      color: #BBBBBB;
+    }
+    .price{
+      font-family: Montserrat;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 1.25px;
+      letter-spacing: 0.04em;
+      color: var(--accent-color);
+    }
   }
 }
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 90%;
-  object-fit: cover;
-}
+// .swiper-slide img {
+//   display: block;
+//   width: 100%;
+//   height: 90%;
+//   object-fit: cover;
+// }
 
 
 

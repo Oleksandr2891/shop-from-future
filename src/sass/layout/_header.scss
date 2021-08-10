@@ -5,9 +5,8 @@
 .header .container {
   padding-top: 15px;
   padding-bottom: 15px;
-}
-@media screen and (min-width: 768px) {
-  .header .container {
+
+  @media screen and (min-width: 768px) {
     padding-top: 35px;
     padding-bottom: 35px;
   }
@@ -183,19 +182,18 @@
 
 .filter {
   display: none;
-}
-@media screen and (min-width: 768px) {
-  .filter {
-    display: flex;
-    justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
     margin-top: 20px;
   }
-}
-@media screen and (min-width: 768px) {
-  .filter {
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
     margin-top: 24px;
   }
 }
+
 .filter__list_desktop {
   display: none;
 }

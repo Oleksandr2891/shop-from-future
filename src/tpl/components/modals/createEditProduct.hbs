@@ -8,9 +8,10 @@
 
   <label class='modal-create__field'>
     Фото
-    <ul class='modal-create__photo'>
+    <input type='file' class='modal-create__input modal-create__file' />
+    {{!-- <ul class='modal-create__photo'>
       <li></li>
-    </ul>
+    </ul> --}}
 
   </label>
   <label class='modal-create__field'>
@@ -23,9 +24,12 @@
   </label>
   <label class='modal-create__field'>
     Категория товара
+    {{!-- {{#each this.data}} --}}
     <select class='modal-create__select'>
       <option></option>
+      <option></option>      
     </select>
+    {{!-- {{/each}} --}}
   </label>
   <label class='modal-create__field'>
     Цена

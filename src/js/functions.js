@@ -1,6 +1,12 @@
 import config from '../config.json';
 import { refs } from './refs';
 import Api from './api';
+import 'swiper/swiper-bundle.css';
+import Swiper from 'swiper/bundle';
+import swiperConfig from './swiper';
+import SwiperCore, { Navigation, Pagination } from 'swiper/core';
+SwiperCore.use([Navigation, Pagination]);
+
 export const isJSON = data => {
   try {
     JSON.parse(data);
@@ -9,6 +15,12 @@ export const isJSON = data => {
     return false;
   }
 };
+
+
+
+
+
+
 
 const api = new Api();
 
@@ -30,14 +42,17 @@ const getFooter = () => {
 
 const getMainPage = () => {
   api.getData(config.componentsTpl.ads.getAds).then(data => {
+    const mainAdsArr = [...data.slice(5)];
+    const rigthAdsArr = [...data.slice(0, 2)];
+    const downAdsArr = [...data.slice(2, 5)];
     const adsTpl = require('../tpl/components/ads.hbs').default;
-    refs.ads.innerHTML = adsTpl(data);
-    console.log(data);
+    refs.ads.innerHTML = adsTpl({ mainAdsArr, rigthAdsArr, downAdsArr });
+    console.log({ mainAdsArr, rigthAdsArr, downAdsArr });
   });
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
-    const newData = [];
+    const goods = [];
     console.log(data);
 
     Object.keys(data).forEach(item => {
@@ -47,11 +62,14 @@ const getMainPage = () => {
       };
       obj.name = item;
       obj.data = data[item];
-      newData.push(obj);
+      goods.push(obj);
     });
-    console.log(newData);
-    refs.content.innerHTML = goodsTpl(newData);
-    const swiper = require('../js/swiper').default;
+    const text = function (goods) {
+
+    };
+
+    refs.content.innerHTML = goodsTpl({ goods, text });
+    new Swiper('.swiper-container', swiperConfig);
   });
 };
 

@@ -20,6 +20,13 @@ export const renderModals = {
     const modalContent = contentForModal();
     refs.modal.innerHTML = modalTpl({ modalContent });
   },
+  cardOneGood: () => {
+    const contentForModal = require('../tpl/components/modals/cardOneGood.hbs').default;
+
+    const modalContent = contentForModal();
+    refs.modal.innerHTML = modalTpl({ modalContent });
+  },
+
   goItStudents: () => {
     const contentForModal = require('../tpl/components/modals/goItStudents.hbs').default;
 
