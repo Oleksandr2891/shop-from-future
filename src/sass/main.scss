@@ -14,11 +14,15 @@
 @import './components/modal-create';
 @import './components/swiper';
 @import './components/modalCardOneGood';
+@import './components/modalMyOffice';
 @import './components/animation-modal';
 @import './components/modalExit';
+
 
 /*====layout====*/
 @import './layout/header.scss';
 @import './layout/mobile-menu.scss';
 @import './layout/tablet-filter.scss';
 @import './layout/footer.scss';
+@import './layout/ads.scss';
+
