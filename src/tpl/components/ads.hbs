@@ -1,1 +1,39 @@
-<h1>ads</h1>
+{{!-- <div class="swiper-container mySwiper">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+        </div>
+        <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+        </div>
+        <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+        </div>
+        <div class="swiper-slide">
+            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+</div> --}}
+
+
+<section class="hero">
+    <div class="hero__wrapper swiper-wrapper">
+        {{#each mainAdsArr}}
+        <div class="hero__slider swiper-slide">
+            <img class="slider-img" src="{{imageUrl}}">
+        </div>
+        {{/each}}
+        {{!-- <div class="hero__advertising">
+            <img class="advertising-img" src="./watch.jpg" alt="watch">
+            <img class="advertising-img" src="./watch.jpg" alt="watch">
+        </div> --}}
+    </div>
+    {{!-- <div class="hero__advertising_row">
+        <img class="advertising-img" src="./watch.jpg" alt="watch">
+        <img class="advertising-img" src="./watch.jpg" alt="watch">
+        <img class="advertising-img" src="./watch.jpg" alt="watch">
+    </div> --}}
+
+
+</section>
