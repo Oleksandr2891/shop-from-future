@@ -1,5 +1,7 @@
 export const animateModal = () => {
   const modalNode = document.querySelector('#mainModal');
-  console.log(modalNode);
+  // const modalRegNode = document.querySelector('#modal_register-div');
+  // console.log(modalNode);
   modalNode.classList.add('animation');
+  // modalRegNode.classList.add('animation');
 };
