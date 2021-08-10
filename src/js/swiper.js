@@ -1,15 +1,8 @@
-
-import 'swiper/swiper-bundle.css';
-import Swiper from 'swiper/bundle';
-import SwiperCore, { Navigation, Pagination } from 'swiper/core';
-SwiperCore.use([Navigation, Pagination]);
-
-
-
-export const swiper = new Swiper('.swiper-container', {
-
-    // Optional parameters
+export default {
     direction: 'horizontal',
+    // observer: true,
+    // observerSlideChildren: true,
+    // observerParents: true,
     loop: true,
     slidesPerView: 1,
     spaceBetween: 0,
@@ -40,6 +33,6 @@ export const swiper = new Swiper('.swiper-container', {
         },
 
     }
-});
+};
 
 
