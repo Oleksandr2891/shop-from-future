@@ -1,3 +1,19 @@
+.modal-exit__wrapper {
+  width: 290px;
+  height: 205px;
+  padding-left: 18px;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    width: 650px;
+    height: 230px;
+
+    padding-right: 105px;
+    padding-left: 105px;
+    padding-bottom: 61px;
+  }
+}
+
 .modal-exit__btn {
   width: 210px;
   height: 60px;
