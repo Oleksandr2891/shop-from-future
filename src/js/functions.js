@@ -1,6 +1,13 @@
 import config from '../config.json';
 import { refs } from './refs';
 import Api from './api';
+import 'swiper/swiper-bundle.css';
+import Swiper from 'swiper/bundle';
+import swiperConfig from './swiper';
+import SwiperCore, { Navigation, Pagination } from 'swiper/core';
+SwiperCore.use([Navigation, Pagination]);
+
+
 // export const isJSON = data => {
 //   try {
 //     JSON.parse(data);
@@ -9,6 +16,8 @@ import Api from './api';
 //     return false;
 //   }
 // };
+
+
 
 const api = new Api();
 
@@ -40,7 +49,7 @@ const getMainPage = () => {
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
-    const newData = [];
+    const goods = [];
     console.log(data);
 
     Object.keys(data).forEach(item => {
@@ -50,19 +59,24 @@ const getMainPage = () => {
       };
       obj.name = item;
       obj.data = data[item];
-      newData.push(obj);
+      goods.push(obj);
     });
-    console.log(newData);
-    refs.content.innerHTML = goodsTpl(newData);
-    const swiper = require('../js/swiper').default;
+    const text = function (goods) {
+
+    };
+
+    refs.content.innerHTML = goodsTpl({ goods, text });
+    new Swiper('.swiper-container', swiperConfig);
   });
 };
 
 export const renderContent = path => {
   console.log(refs.ads);
+  console.log(location.pathname);
   if (path === '/') {
     history.pushState(null, null, path);
     getHeader();
+
     getMainPage();
     getFooter();
     return false;
@@ -78,7 +92,11 @@ export const renderContent = path => {
   }
   api.getData(path).then(data => {
     const categoryTpl = require('../tpl/category.hbs').default;
-    refs.content.innerHTML = categoryTpl(data);
+    const card = require('../tpl/components/productCard.hbs').default;
+
+    const categoryData = card(data);
+
+    refs.content.innerHTML = categoryTpl({ categoryData });
 
     console.log(data);
 
