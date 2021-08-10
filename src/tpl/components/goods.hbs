@@ -1,15 +1,17 @@
-{{#each goods}}
+{{#each this}}
 <div class='swiper-container container-categories'>
-  <h2 class="swiper-title">{{name}}</h2>
+  <h2 class="swiper-title">{{__ name}}</h2>
   <a href="#" class="swiper-link__once-category">Смотреть все</a>
-  <p>{{text}}</p>
+  {{#if text}}
+  <p>{{__ text}}</p>
+  {{/if}}
   <div class='swiper-wrapper'>
     {{#each data}}
     <div class='swiper-slide'>
       <a href="#" class="swiper-container__link-card" data-link="{{_id}}">
-        <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}" alt="{{title}}">
+        <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}" alt="{{__ title}}">
         </div>
-        <h3 class='card-name'>{{title}}</h3>
+        <h3 class='card-name'>{{__ title}}</h3>
         <p class='card-price'>
           <span class="old-price"> {{oldPrice}} </span>
           <span class="price"> {{price}}&#8364</span>
@@ -22,4 +24,5 @@
   <div id="btn-slider" class='swiper-button-prev'></div>
   <div id="btn-slider" class='swiper-button-next'></div>
 </div>
+
 {{/each}}

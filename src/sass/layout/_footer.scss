@@ -58,3 +58,19 @@
     }
   }
 }
+
+.link-download__wrapper {
+  padding-bottom: 41px;
+  padding-top: 41px;
+  background-color: #02172A;
+  text-align: center;
+
+  .link-download{
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--primary-white-color);
+  }
+
+}

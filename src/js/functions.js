@@ -3,9 +3,11 @@ import { refs } from './refs';
 import Api from './api';
 import 'swiper/swiper-bundle.css';
 import Swiper from 'swiper/bundle';
-import swiperConfig from './swiper';
+import swiperConfigCategories from '../configSwiper.json';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
+import Handlebars from '../helpers';
 SwiperCore.use([Navigation, Pagination]);
+
 
 
 // export const isJSON = data => {
@@ -26,7 +28,7 @@ const getHeader = () => {
     const headerTpl = require('../tpl/header.hbs').default;
     const logo = require('../images/logo.svg');
     const obj = { data, logo };
-    refs.header.innerHTML = headerTpl(obj);
+    refs.header.innerHTML = headerTpl(obj, Handlebars);
     console.log(obj);
     console.log(obj.data);
   });
@@ -46,6 +48,20 @@ const getMainPage = () => {
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
+    const categorySales = function (obj) {
+      console.log(goods);
+      let text = [];
+      // goods.forEach((obj) => {
+      if (obj.name === "sales") {
+        obj.data.forEach(item => text.push(__(item.category)));
+      };
+      // });
+      // console.log(text);
+      text = text.filter((item, index) => text.indexOf(item) === index);
+      // console.log(text);
+      return !text.length ? false : text.join(", ");
+    };
+
     const goods = [];
     console.log(data);
 
@@ -57,13 +73,12 @@ const getMainPage = () => {
       obj.name = item;
       obj.data = data[item];
       goods.push(obj);
+      obj.text = categorySales(obj);
     });
-    const text = function (goods) {
+    // console.log(goods);
 
-    };
-
-    refs.content.innerHTML = goodsTpl({ goods, text });
-    new Swiper('.swiper-container', swiperConfig);
+    refs.content.innerHTML = goodsTpl(goods, Handlebars);
+    new Swiper('.swiper-container', swiperConfigCategories.card);
   });
 };
 
@@ -100,3 +115,11 @@ export const renderContent = path => {
     return data;
   });
 };
+
+export const __ = (key) => {
+  const lang = "ru"; /* соединить с выбором языка из localstorage*/
+  const vocabulary = {
+    ru: require('../i18n/ru.json')
+  };
+  return vocabulary[lang]?.[key] ? vocabulary[lang][key] : key;
+}

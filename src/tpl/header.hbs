@@ -2,20 +2,20 @@
   <div class='header__mobile'>
     <button type='button' class='mobile-button' data-action='open-filter'>
       <span class="material-icons-round icons">menu</span>
-        <use href=''></use>
+      <use href=''></use>
       </svg>
     </button>
     <a href='/'>
       <img class='mobile__logo' src='{{this.logo}}' alt='logo' />
     </a>
     <button type='button' class='mobile-button'>
-        <span class="material-icons-round icons">search</span>
+      <span class="material-icons-round icons">search</span>
     </button>
   </div>
   <div class='header__wrapper'>
     <nav class='nav'>
       <a href='/'>
-     
+
         <img class='header__logo logo' src='{{this.logo}}' alt='logo' />
       </a>
       <form class='header__form_desktop'>
@@ -41,19 +41,20 @@
         </li>
         <li class='item cabinet__item'>
           <button class='cabinet__out' type='button'>
-                    <span class="material-icons-round icons">logout</span>
+            <span class="material-icons-round icons">logout</span>
           </button>
         </li>
       </ul>
-      <button class='header__btn' type='button' data-action="open-modal" data-value="createEditProduct">Создать объявление</button>
+      <button class='header__btn' type='button' data-action="open-modal" data-value="createEditProduct">Создать
+        объявление</button>
     </div>
   </div>
   <div class='filter'>
     <ul class='list filter__list_desktop'>
       {{#each this.data}}
-        <li class='item filter__item_desktop'>
-          <a href='/call/specific/{{this}}' class='filter__btn'>{{this}}</a>
-        </li>
+      <li class='item filter__item_desktop'>
+        <a href='/call/specific/{{this}}' class='filter__btn'>{{__ this}}</a>
+      </li>
       {{/each}}
     </ul>
     <form class='header__form_tablet'>
@@ -67,7 +68,7 @@
       Фильтры
     </button>
     <button class='reset-btn' type='reset'>
-              <span class="material-icons icons">replay</span>
+      <span class="material-icons icons">replay</span>
       Очистить
     </button>
   </div>
@@ -77,9 +78,9 @@
     <div class='filter_tablet'>
       <ul class='list filter__list_tablet'>
         {{#each this.data}}
-          <li class='item filter__item_tablet'>
-            <a href='/call/specific/{{this}}' class='filter__btn'>{{this}}</a>
-          </li>
+        <li class='item filter__item_tablet'>
+          <a href='/call/specific/{{this}}' class='filter__btn'>{{__ this}}</a>
+        </li>
         {{/each}}
       </ul>
     </div>
@@ -133,9 +134,9 @@
     </div>
     <ul class='list filter__list_mobile'>
       {{#each this.data}}
-        <li class='item filter__item_mobile'>
-          <a href='/call/specific/{{this}}' class='filter__btn'>{{this}}</a>
-        </li>
+      <li class='item filter__item_mobile'>
+        <a href='/call/specific/{{this}}' class='filter__btn'>{{__ this}}</a>
+      </li>
       {{/each}}
     </ul>
   </div>
