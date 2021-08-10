@@ -4,9 +4,9 @@ import Api from './api';
 import 'swiper/swiper-bundle.css';
 import Swiper from 'swiper/bundle';
 import swiperConfig from './swiper';
+import swiperConfigAds from './adsSwiper';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 SwiperCore.use([Navigation, Pagination]);
-
 
 // export const isJSON = data => {
 //   try {
@@ -16,8 +16,6 @@ SwiperCore.use([Navigation, Pagination]);
 //     return false;
 //   }
 // };
-
-
 
 const api = new Api();
 
@@ -42,9 +40,10 @@ const getMainPage = () => {
     const mainAdsArr = [...data.slice(5)];
     const rigthAdsArr = [...data.slice(0, 2)];
     const downAdsArr = [...data.slice(2, 5)];
+    console.log(mainAdsArr);
     const adsTpl = require('../tpl/components/ads.hbs').default;
     refs.ads.innerHTML = adsTpl({ mainAdsArr, rigthAdsArr, downAdsArr });
-    console.log({ mainAdsArr, rigthAdsArr, downAdsArr });
+    new Swiper('.Ads-slider-container', swiperConfigAds);
   });
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     const goodsTpl = require('../tpl/components/goods.hbs').default;
@@ -61,9 +60,7 @@ const getMainPage = () => {
       obj.data = data[item];
       goods.push(obj);
     });
-    const text = function (goods) {
-
-    };
+    const text = function (goods) {};
 
     refs.content.innerHTML = goodsTpl({ goods, text });
     new Swiper('.swiper-container', swiperConfig);
