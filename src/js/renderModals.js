@@ -1,5 +1,6 @@
 import { refs } from './refs';
 import modalTpl from '../tpl/components/modal.hbs';
+import { api } from './functions';
 
 export const renderModals = {
   auth: () => {
@@ -17,10 +18,11 @@ export const renderModals = {
     const modalContent = contentForModal();
     refs.modal.innerHTML = modalTpl({ modalContent });
   },
-  cardOneGood: () => {
+  cardOneGood: id => {
     const contentForModal = require('../tpl/components/modals/cardOneGood.hbs').default;
-
-    const modalContent = contentForModal();
+    const item = api.data.content.find(item => id === item._id);
+    console.log(item);
+    const modalContent = contentForModal(item);
     refs.modal.innerHTML = modalTpl({ modalContent });
   },
 
