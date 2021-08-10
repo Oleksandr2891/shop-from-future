@@ -7,15 +7,18 @@ import swiperConfig from './swiper';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 SwiperCore.use([Navigation, Pagination]);
 
+export const isJSON = data => {
+  try {
+    JSON.parse(data);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
 
-// export const isJSON = data => {
-//   try {
-//     JSON.parse(data);
-//     return true;
-//   } catch (e) {
-//     return false;
-//   }
-// };
+
+
+
 
 
 
