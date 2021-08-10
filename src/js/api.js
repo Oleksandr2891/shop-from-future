@@ -1,5 +1,6 @@
 import config from '../config.json';
 import { isJSON } from './functions';
+
 export default class Api {
   #data = {};
 
@@ -10,11 +11,9 @@ export default class Api {
   }
 
   async send(path = this.path, method = 'GET', obj = {}) {
-    console.log(path);
     const options = {
       method,
       headers: { 'Content-Type': 'application/json' },
-      // body: JSON.stringify(obj),
     };
     if (obj.data) {
       options.body = JSON.stringify(obj.data);
@@ -25,17 +24,15 @@ export default class Api {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       };
     }
-    console.log(options);
+
     return await fetch(config.apiUrl + path, method === 'GET' ? {} : options)
       .then(res => {
-        console.log(res);
         if (!isJSON(res)) {
           return res.json();
         } else {
           return res;
         }
       })
-      // .then(res => res.json())
       .catch(err => console.log(err));
   }
 
@@ -46,9 +43,6 @@ export default class Api {
     return res;
   }
   async postData(path = this.path, obj = this.obj) {
-    console.log(obj);
-    console.log(path);
-
     const res = await this.send(path, 'POST', obj);
     return res;
   }
@@ -60,8 +54,4 @@ export default class Api {
   set data(data) {
     return (this.#data = data);
   }
-
-  // async getData(id) {
-  //   await this.send(id);
-  // }
 }

@@ -1,6 +1,6 @@
-import Api from './api';
 import config from '../config.json';
-const api = new Api();
+import { api } from './functions';
+
 const getUserData = () => {
   const inputEmailValue = document.querySelector('#email').value.trim();
   const inputPasswordValue = document.querySelector('#password').value.trim();
@@ -20,7 +20,6 @@ export function registr() {
 
 export function logIn() {
   api.postData(config.auth.login.link, getUserData()).then(data => {
-    console.log(data);
     localStorage.setItem('refreshToken', data.refreshToken);
     localStorage.setItem('accessToken', data.accessToken);
     localStorage.setItem('sid', data.sid);
@@ -28,14 +27,14 @@ export function logIn() {
   });
 }
 export function logOut() {
+  console.log(api.data);
   const objLogOut = {
     auth: true,
     body: false,
   };
-  console.log(objLogOut);
+
   api.postData(config.auth.logout.link, objLogOut).then(data => {
     console.log(data);
-    console.log('ok');
   });
 }
 
