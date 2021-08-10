@@ -4,6 +4,7 @@ import { renderContent } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
+import { registr, logIn } from './js/auth';
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -27,6 +28,17 @@ document.addEventListener('click', e => {
       // can add style for animation before close modal window
 
       // close modal
+      refs.modal.innerHTML = '';
+    }
+    if (e.target.dataset.action === 'user-register') {
+      e.preventDefault();
+      // console.log('ok');
+      registr();
+    }
+    if (e.target.dataset.action === 'user-log-in') {
+      e.preventDefault();
+      // console.log('ok');
+      logIn();
       refs.modal.innerHTML = '';
     }
     if (e.target.closest('button').dataset.action === 'open-filter') {
@@ -68,6 +80,4 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// document.addEventListener('submit', e => {
-//   refs.modal.innerHTML = '';
-// });
+// console.log(localStorage.getItem(accessToken));
