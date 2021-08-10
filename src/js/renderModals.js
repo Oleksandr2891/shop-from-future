@@ -3,15 +3,12 @@ import modalTpl from '../tpl/components/modal.hbs';
 
 export const renderModals = {
   auth: () => {
-    // handlebars
     const contentForModal = require('../tpl/components/modals/auth.hbs').default;
     const arr = [1, 2, 3];
     const sprite = require('../images/sprite.svg');
-    // console.log(testSvg);
 
-    // add modal content to hbs if need
     const modalContent = contentForModal({ arr, sprite });
-    // add modal to html
+
     refs.modal.innerHTML = modalTpl({ modalContent });
   },
   createEditProduct: () => {
