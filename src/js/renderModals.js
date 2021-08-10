@@ -20,6 +20,13 @@ export const renderModals = {
     const modalContent = contentForModal();
     refs.modal.innerHTML = modalTpl({ modalContent });
   },
+  cardOneGood: () => {
+    const contentForModal = require('../tpl/components/modals/cardOneGood.hbs').default;
+
+    const modalContent = contentForModal();
+    refs.modal.innerHTML = modalTpl({ modalContent });
+  },
+
   goItStudents: () => {
     const contentForModal = require('../tpl/components/modals/goItStudents.hbs').default;
 
@@ -28,6 +35,13 @@ export const renderModals = {
   },
   productCard: () => {
     const contentForModal = require('../tpl/components/modals/productCard.hbs').default;
+
+    const modalContent = contentForModal();
+    refs.modal.innerHTML = modalTpl({ modalContent });
+  },
+
+  modalExit: () => {
+    const contentForModal = require('../tpl/components/modals/modalExit.hbs').default;
 
     const modalContent = contentForModal();
     refs.modal.innerHTML = modalTpl({ modalContent });

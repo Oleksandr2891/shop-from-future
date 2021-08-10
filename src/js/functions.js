@@ -8,18 +8,14 @@ import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
 SwiperCore.use([Navigation, Pagination]);
 
-
-
-// export const isJSON = data => {
-//   try {
-//     JSON.parse(data);
-//     return true;
-//   } catch (e) {
-//     return false;
-//   }
-// };
-
-
+export const isJSON = data => {
+  try {
+    JSON.parse(data);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
 
 const api = new Api();
 
@@ -41,9 +37,12 @@ const getFooter = () => {
 
 const getMainPage = () => {
   api.getData(config.componentsTpl.ads.getAds).then(data => {
+    const mainAdsArr = [...data.slice(5)];
+    const rigthAdsArr = [...data.slice(0, 2)];
+    const downAdsArr = [...data.slice(2, 5)];
     const adsTpl = require('../tpl/components/ads.hbs').default;
-    refs.ads.innerHTML = adsTpl(data);
-    console.log(data);
+    refs.ads.innerHTML = adsTpl({ mainAdsArr, rigthAdsArr, downAdsArr });
+    console.log({ mainAdsArr, rigthAdsArr, downAdsArr });
   });
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     const goodsTpl = require('../tpl/components/goods.hbs').default;

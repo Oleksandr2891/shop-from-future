@@ -4,6 +4,7 @@ import { renderContent } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
+import { registr, logIn, logOut } from './js/auth';
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -29,12 +30,43 @@ document.addEventListener('click', e => {
       // close modal
       refs.modal.innerHTML = '';
     }
+    if (e.target.dataset.action === 'user-register') {
+      e.preventDefault();
+      // console.log('ok');
+      registr();
+    }
+    if (e.target.dataset.action === 'user-log-in') {
+      e.preventDefault();
+      // console.log('ok');
+      logIn();
+      refs.modal.innerHTML = '';
+    }
+    if (e.target.dataset.action === 'log-out') {
+      e.preventDefault();
+      logOut();
+    }
     if (e.target.closest('button').dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       if (filterMenuNode.classList.contains('hidden')) {
         filterMenuNode.classList.remove('hidden');
       } else {
         filterMenuNode.classList.add('hidden');
+      }
+    }
+    if (e.target.closest('button').dataset.action === 'open-cabinet') {
+      const openMyCabinet = refs.header.querySelector('.modal-cabinet');
+      if (openMyCabinet.classList.contains('hidden')) {
+        openMyCabinet.classList.remove('hidden');
+      } else {
+        openMyCabinet.classList.add('hidden');
+      }
+    }
+    if (e.target.closest('button').dataset.action === 'open-cabinet-mobile') {
+      const openMyCabinetMob = refs.header.querySelector('.modal-cabinet-mobile');
+      if (openMyCabinetMob.classList.contains('hidden')) {
+        openMyCabinetMob.classList.remove('hidden');
+      } else {
+        openMyCabinetMob.classList.add('hidden');
       }
     }
     if (e.target.closest('button').dataset.action === 'open-filter') {
@@ -68,6 +100,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// document.addEventListener('submit', e => {
-//   refs.modal.innerHTML = '';
-// });
+// console.log(localStorage.getItem(accessToken));
+// const token = localStorage.getItem(accessToken);
+// console.log(token);
