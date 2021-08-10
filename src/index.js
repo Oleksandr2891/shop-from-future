@@ -4,7 +4,7 @@ import { renderContent } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
-import { registr, logIn } from './js/auth';
+import { registr, logIn, logOut } from './js/auth';
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -40,6 +40,10 @@ document.addEventListener('click', e => {
       // console.log('ok');
       logIn();
       refs.modal.innerHTML = '';
+    }
+    if (e.target.dataset.action === 'log-out') {
+      e.preventDefault();
+      logOut();
     }
     if (e.target.closest('button').dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
@@ -81,3 +85,5 @@ document.addEventListener('keydown', e => {
 });
 
 // console.log(localStorage.getItem(accessToken));
+// const token = localStorage.getItem(accessToken);
+// console.log(token);

@@ -30,7 +30,12 @@
        "link": "/auth/login",
       "name": "Войти",
       "tpl": "login"
-     }
+     },
+     "logout": {
+      "link": "/auth/logout",
+      "name": "Выйти из учетной записи ",
+      "tpl": "episode"
+    }
 
   },
   "register": [

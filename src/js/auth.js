@@ -5,8 +5,11 @@ const getUserData = () => {
   const inputEmailValue = document.querySelector('#email').value.trim();
   const inputPasswordValue = document.querySelector('#password').value.trim();
   return {
-    email: inputEmailValue,
-    password: inputPasswordValue,
+    data: {
+      email: inputEmailValue,
+      password: inputPasswordValue,
+    },
+    auth: false,
   };
 };
 export function registr() {
@@ -23,6 +26,17 @@ export function logIn() {
     localStorage.setItem('sid', data.sid);
     //
   });
-
-  // form.reset();
 }
+export function logOut() {
+  const objLogOut = {
+    auth: true,
+    body: false,
+  };
+  console.log(objLogOut);
+  api.postData(config.auth.logout.link, objLogOut).then(data => {
+    console.log(data);
+    console.log('ok');
+  });
+}
+
+// form.reset();

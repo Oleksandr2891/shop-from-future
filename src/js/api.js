@@ -1,5 +1,5 @@
 import config from '../config.json';
-
+import { isJSON } from './functions';
 export default class Api {
   #data = {};
 
@@ -9,15 +9,33 @@ export default class Api {
     this.obj = obj;
   }
 
-  async send(path = this.path, method = 'GET', obj) {
+  async send(path = this.path, method = 'GET', obj = {}) {
     console.log(path);
     const options = {
       method,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(obj),
+      // body: JSON.stringify(obj),
     };
+    if (obj.data) {
+      options.body = JSON.stringify(obj.data);
+    }
+    if (obj.auth) {
+      options.headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      };
+    }
+    console.log(options);
     return await fetch(config.apiUrl + path, method === 'GET' ? {} : options)
-      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        if (!isJSON(res)) {
+          return res.json();
+        } else {
+          return res;
+        }
+      })
+      // .then(res => res.json())
       .catch(err => console.log(err));
   }
 

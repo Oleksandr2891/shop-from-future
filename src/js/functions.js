@@ -1,14 +1,14 @@
 import config from '../config.json';
 import { refs } from './refs';
 import Api from './api';
-// export const isJSON = data => {
-//   try {
-//     JSON.parse(data);
-//     return true;
-//   } catch (e) {
-//     return false;
-//   }
-// };
+export const isJSON = data => {
+  try {
+    JSON.parse(data);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
 
 const api = new Api();
 
