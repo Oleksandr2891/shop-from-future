@@ -6,6 +6,10 @@ import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 import { registr, logIn, logOut } from './js/auth';
 
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+import { error, success } from '@pnotify/core';
+
 const getPath = () => {
   return location.pathname + location.search;
 };
@@ -90,11 +94,15 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
+
     if (buttonTag.dataset.search === 'search') {
-      const input = refs.header.querySelector('.search__input');
+      const input = refs.header.querySelector('.header__find');
       if (input.value != '') {
         const path = input.dataset.search + input.value;
         renderContent(path);
+        success({ text: `Goods were found.`, delay: 1000 });
+      } else {
+        error({ text: 'Please enter a more specific query', delay: 1500 });
       }
     }
   } else if (e.target) {
