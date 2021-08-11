@@ -15,9 +15,13 @@ renderContent(getPath());
 document.addEventListener('click', e => {
   if (e.target.closest('a')) {
     e.preventDefault();
-    const path = e.target.closest('a').getAttribute('href');
-    history.pushState(null, null, path);
-    renderContent(path);
+    if (e.target.closest('a').dataset.id === undefined) {
+      const path = e.target.closest('a').getAttribute('href');
+      history.pushState(null, null, path);
+      renderContent(path);
+    } else {
+      renderModals.cardOneGood(e.target.closest('a').dataset.id);
+    }
   } else if (e.target.closest('button')) {
     e.preventDefault();
     if (e.target.dataset.action === 'open-modal') {
