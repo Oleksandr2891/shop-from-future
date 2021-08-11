@@ -8,6 +8,7 @@ import swiperConfigCategories from '../configSwiper.json';
 
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
+
 SwiperCore.use([Navigation, Pagination]);
 
 export const isJSON = data => {
@@ -45,28 +46,28 @@ const getHeader = () => {
 const getFooter = () => {
   const footerTpl = require('../tpl/footer.hbs').default;
   refs.footer.innerHTML = footerTpl();
+  // console.log(location.href);
+
+
 };
 
-const getMainPage = () => {
+const getMainPage = (page = 1) => {
   api.getData(config.componentsTpl.ads.getAds).then(data => {
     const mainAdsArr = [...data.slice(5)];
     const rigthAdsArr = [...data.slice(0, 2)];
     const downAdsArr = [...data.slice(2, 5)];
-    console.log(mainAdsArr);
     const adsTpl = require('../tpl/components/ads.hbs').default;
     refs.ads.innerHTML = adsTpl({ mainAdsArr, rigthAdsArr, downAdsArr });
 
     new Swiper('.Ads-slider-container', swiperConfigAds);
   });
-  api.getData(config.componentsTpl.goods.getGoods).then(data => {
-    console.log(Object.keys(data));
+  api.getData(config.componentsTpl.goods.getGoods + page).then(data => {
     const obj = {};
     Object.keys(data).forEach(item => {
       obj[item] = data[item];
     });
     api.data.content = obj;
-    console.log(api.data)
-    // api.data.mainPageData = data;
+
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
     const categorySales = function (obj) {
@@ -75,7 +76,7 @@ const getMainPage = () => {
       if (obj.name === 'sales') {
         obj.data.forEach(item => text.push(__(item.category)));
       }
-
+      console.log(obj);
       text = text.filter((item, index) => text.indexOf(item) === index);
 
       return !text.length ? false : text.join(', ');
@@ -93,20 +94,23 @@ const getMainPage = () => {
       goods.push(obj);
       obj.text = categorySales(obj);
     });
-
+    console.log(goods);
     refs.content.innerHTML = goodsTpl(goods, Handlebars);
     new Swiper('.swiper-container', swiperConfigCategories.card);
   });
 };
 
 export const renderContent = path => {
+  if (path !== '/') refs.linkPagination.classList.add('hidden');
   if (path === '/') {
     history.pushState(null, null, path);
+    api.data.content = {};
     getHeader();
-
     getMainPage();
     getFooter();
+
     return false;
+
   }
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
@@ -116,12 +120,13 @@ export const renderContent = path => {
   }
   if (refs.footer.childElementCount === 0) {
     getFooter();
+
   }
   api.getData(path).then(data => { 
     api.data.content[data[0].category] = data;
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;
-
+    console.log(data);
     const categoryData = card(data);
 
     refs.content.innerHTML = categoryTpl({ categoryData });
@@ -137,6 +142,7 @@ export const __ = key => {
   };
   return vocabulary[lang]?.[key] ? vocabulary[lang][key] : key;
 };
+
 
 export function previewFile(event) {
   const preview = event.target.closest('div').querySelector(`[for=${event.target.id}] img`);
