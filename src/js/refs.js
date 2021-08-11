@@ -4,4 +4,5 @@ export const refs = {
   footer: document.querySelector('#footer'),
   content: document.querySelector('#content'),
   modal: document.querySelector('#modal'),
+  linkPagination: document.querySelector('.link-download__wrapper')
 };

@@ -5,6 +5,10 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 import { registr, logIn, logOut } from './js/auth';
+import { api } from './js/functions';
+import config from './config.json';
+import { getNextPage } from './js/nextPage';
+const sales = "/call/specific/sales";
 
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
@@ -15,6 +19,7 @@ const getPath = () => {
 };
 
 renderContent(getPath());
+let counter = 1;
 
 document.addEventListener('click', e => {
   const linkTag = e.target.closest('a') || e.target.querySelector('a');
@@ -22,12 +27,37 @@ document.addEventListener('click', e => {
   console.log(linkTag)
   if (linkTag) {
     e.preventDefault();
-    if (linkTag.dataset.id === undefined) {
-      const path = linkTag.getAttribute('href');
-      history.pushState(null, null, path);
-      renderContent(path);
-    } else {
+
+    if (linkTag.dataset.action === "load-more") {
+      if (counter === 3) counter = 2;
+      else counter += 1;
+      api.data.counterMainPage = [counter];
+      const path = config.componentsTpl.goods.getGoods + counter;
+      getNextPage(path);
+      if (counter === 3) linkTag.classList.add('isDisabled');
+      // history.pushState(null, null, path);
+
+
+    } else if (linkTag.dataset.id === undefined) {
+      if (linkTag.getAttribute('href') === sales) {
+        const categoryTpl = require('./tpl/category.hbs').default;
+        const card = require('./tpl/components/productCard.hbs').default;
+        refs.ads.innerHTML = "";
+        const categoryData = card(api.data.content.sales);
+        refs.content.innerHTML = categoryTpl({ categoryData });
+
+        // console.log(api.data.content.sales);
+      } else {
+        const path = linkTag.getAttribute('href');
+
+
+        renderContent(path);
+      }
+    }
+
+    else {
       renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
+
     }
   } else if (buttonTag) {
     e.preventDefault();
@@ -50,6 +80,7 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
     }
+
     if (buttonTag.dataset.action === 'user-register') {
       registr();
     }
