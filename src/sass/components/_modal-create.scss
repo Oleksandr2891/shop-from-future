@@ -1,12 +1,14 @@
 .modal-create__wrapper {
-  width: 950px;
-  height: 698px;
+  width: 290px;
+  height: 845px;
   padding-left: 20px;
   text-align: center;
+  padding-right: 19px;
 
   @media screen and (min-width: 768px) {
     width: 724px;
     height: 698px;
+    padding-right: 55px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -18,6 +20,7 @@
 }
 
 .modal-create__heading {
+  margin-bottom: 20px;
   font-weight: bold;
   font-size: 20px;
   line-height: 24px;
@@ -25,7 +28,7 @@
 }
 
 .modal-create__field {
-  margin-top: 20px;
+  // margin-top: 20px;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -35,6 +38,7 @@
 
 @media screen and (min-width: 768px) {
   .modal-create__field {
+    margin-top: 20px;
     margin-left: 0;
     display: flex;
     justify-content: space-between;
@@ -48,12 +52,15 @@
   max-width: 251px;
   padding-left: 23px;
   margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px outset #bbbbbb;
 
   @media screen and (min-width: 768px) {
     width: 100%;
     max-width: 458px;
     height: 56px;
     margin-top: 0;
+    margin-bottom: 0;
   }
 
   @media screen and (min-width: 1280px) {
@@ -67,6 +74,22 @@
   width: 100%;
   max-width: 251px;
   margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px outset #bbbbbb;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 10px;
+    height: 56px;
+    width: 100%;
+    max-width: 458px;
+    margin-left: 17px;
+    margin-bottom: 0;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 100%;
+    max-width: 610px;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -90,7 +113,7 @@
   justify-content: center;
   width: 251px;
   height: 50px;
-  margin-top: 40px;
+  margin-top: 30px;
   padding: 21px;
 
   font-weight: bold;
@@ -120,4 +143,106 @@
 
 ::placeholder {
   font-size: 14px;
+}
+
+.img-plus-sixth {
+  @media screen and (min-width: 768px) {
+    display: block;
+    display: none !important;
+  }
+}
+
+///input
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  font-size: 2em;
+  font-weight: 700;
+  color: #bbbbbb;
+  background-color: #f5f6fb;
+  display: inline-block;
+  width: 78px;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // &:nth-child(2n) {
+  //   background-image: url(../images/plus.jpg);
+  //   background-repeat: no-repeat;
+  //   background-position-x: center;
+  //   background-position-y: center;
+  // }
+}
+.img-plus {
+  background-image: url(../images/plus.jpg);
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  margin-bottom: 10px;
+  // position: relative;
+  // overflow: hidden;
+  // width: 78px;
+  // height: 50px;
+}
+
+.modal-create__preview-img {
+  // height: 100%;
+  // width: 100%;
+  // background-color: white;
+  // width: 100%;
+  // width: 78px;
+  // height: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  // width: 286px;
+  // height: 239px;
+  object-fit: cover;
+}
+
+.modal-create__file-wrap {
+  margin-top: 10px;
+  width: 100%;
+  max-width: 458px;
+  margin-left: 0;
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+    margin-left: 30px;
+    flex-wrap: nowrap;
+    margin-bottom: 0;
+  }
+
+  @media screen and (min-width: 1280px) {
+    margin-top: 0;
+    margin-right: 152px;
+  }
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  border-color: var(--primary-black-color);
+}
+
+.inputfile + label {
+  cursor: pointer;
+}
+
+.inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
 }

@@ -2,7 +2,9 @@ import config from '../config.json';
 import { isJSON } from './functions';
 
 export default class Api {
-  #data = {};
+  #data = {
+    content: {}
+  };
 
   constructor(name, path, obj = {}) {
     this.name = name;

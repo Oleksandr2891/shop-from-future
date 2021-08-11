@@ -10,6 +10,10 @@ import config from './config.json';
 import { getNextPage } from './js/nextPage';
 const sales = "/call/specific/sales";
 
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+import { error, success } from '@pnotify/core';
+
 const getPath = () => {
   return location.pathname + location.search;
 };
@@ -18,20 +22,24 @@ renderContent(getPath());
 let counter = 1;
 
 document.addEventListener('click', e => {
-  if (e.target.closest('a')) {
+  const linkTag = e.target.closest('a') || e.target.querySelector('a');
+  const buttonTag = e.target.closest('button');
+  console.log(linkTag)
+  if (linkTag) {
     e.preventDefault();
-    if (e.target.closest('a').dataset.action === "load-more") {
+
+    if (linkTag.dataset.action === "load-more") {
       if (counter === 3) counter = 2;
       else counter += 1;
       api.data.counterMainPage = [counter];
       const path = config.componentsTpl.goods.getGoods + counter;
       getNextPage(path);
-      if (counter === 3) e.target.closest('a').classList.add('isDisabled');
+      if (counter === 3) linkTag.classList.add('isDisabled');
       // history.pushState(null, null, path);
 
 
-    } else if (e.target.closest('a').dataset.id === undefined) {
-      if (e.target.closest('a').getAttribute('href') === sales) {
+    } else if (linkTag.dataset.id === undefined) {
+      if (linkTag.getAttribute('href') === sales) {
         const categoryTpl = require('./tpl/category.hbs').default;
         const card = require('./tpl/components/productCard.hbs').default;
         refs.ads.innerHTML = "";
@@ -40,7 +48,7 @@ document.addEventListener('click', e => {
 
         // console.log(api.data.content.sales);
       } else {
-        const path = e.target.closest('a').getAttribute('href');
+        const path = linkTag.getAttribute('href');
 
 
         renderContent(path);
@@ -48,34 +56,44 @@ document.addEventListener('click', e => {
     }
 
     else {
-      renderModals.cardOneGood(e.target.closest('a').dataset.id);
+      renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
+
     }
-  } else if (e.target.closest('button')) {
+  } else if (buttonTag) {
     e.preventDefault();
-    if (e.target.dataset.action === 'open-modal') {
+    
+    if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.dataset.value]();
       animateModal();
+      // console.log(refs.modal);
+      refs.modal.querySelector('input').focus();
+      // if (document.querySelector('#formRegister')) {
+      //   const formRegister = document.querySelector('#formRegister');
+      //   console.log(formRegister);
+      //   formRegister.addEventListener('submit', e => {
+      //     console.log(e.target);
+      //     e.preventDefault();
+      //     console.log(e.target);
+      //   });
+      // }
     }
-    if (e.target.closest('button').dataset.action === 'close-modal') {
-      // can add style for animation before close modal window
-
-      // close modal
+    if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
     }
-    if (e.target.dataset.action === 'user-register') {
-      e.preventDefault();
+
+    if (buttonTag.dataset.action === 'user-register') {
       registr();
     }
-    if (e.target.dataset.action === 'user-log-in') {
-      e.preventDefault();
+
+    if (buttonTag.dataset.action === 'user-log-in') {
       logIn();
       refs.modal.innerHTML = '';
+
     }
-    if (e.target.dataset.action === 'log-out') {
-      e.preventDefault();
+    if (buttonTag.dataset.action === 'log-out') {
       logOut();
     }
-    if (e.target.closest('button').dataset.action === 'open-filter') {
+    if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       if (filterMenuNode.classList.contains('hidden')) {
         filterMenuNode.classList.remove('hidden');
@@ -83,7 +101,7 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
-    if (e.target.closest('button').dataset.action === 'open-cabinet') {
+    if (buttonTag.dataset.action === 'open-cabinet') {
       const openMyCabinet = refs.header.querySelector('.modal-cabinet');
       if (openMyCabinet.classList.contains('hidden')) {
         openMyCabinet.classList.remove('hidden');
@@ -91,7 +109,7 @@ document.addEventListener('click', e => {
         openMyCabinet.classList.add('hidden');
       }
     }
-    if (e.target.closest('button').dataset.action === 'open-cabinet-mobile') {
+    if (buttonTag.dataset.action === 'open-cabinet-mobile') {
       const openMyCabinetMob = refs.header.querySelector('.modal-cabinet-mobile');
       if (openMyCabinetMob.classList.contains('hidden')) {
         openMyCabinetMob.classList.remove('hidden');
@@ -99,7 +117,7 @@ document.addEventListener('click', e => {
         openMyCabinetMob.classList.add('hidden');
       }
     }
-    if (e.target.closest('button').dataset.action === 'open-filter') {
+    if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.tablet-menu');
       if (filterMenuNode.classList.contains('hidden')) {
         filterMenuNode.classList.remove('hidden');
@@ -107,11 +125,15 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
-    if (e.target.dataset.search === 'search') {
-      const input = refs.header.querySelector('.search__input');
+
+    if (buttonTag.dataset.search === 'search') {
+      const input = refs.header.querySelector('.header__find');
       if (input.value != '') {
         const path = input.dataset.search + input.value;
         renderContent(path);
+        success({ text: `Goods were found.`, delay: 1000 });
+      } else {
+        error({ text: 'Please enter a more specific query', delay: 1500 });
       }
     }
   } else if (e.target) {
@@ -125,11 +147,21 @@ document.addEventListener('click', e => {
 });
 
 document.addEventListener('keydown', e => {
-  if (e.keyCode === 27) {
+  // const key = e.key;
+  if (e.key === 'Escape') {
     refs.modal.innerHTML = '';
+  }
+  if (e.key === 'Enter') {
+    // refs.modal.querySelector('form')?.submit();
   }
 });
 
-// console.log(localStorage.getItem(accessToken));
-// const token = localStorage.getItem(accessToken);
-// console.log(token);
+
+
+
+
+
+
+
+
+
