@@ -17,43 +17,52 @@ const getPath = () => {
 renderContent(getPath());
 
 document.addEventListener('click', e => {
-  if (e.target.closest('a')) {
+  const linkTag = e.target.closest('a') || e.target.querySelector('a');
+  const buttonTag = e.target.closest('button');
+  console.log(linkTag)
+  if (linkTag) {
     e.preventDefault();
-    if (e.target.closest('a').dataset.id === undefined) {
-      const path = e.target.closest('a').getAttribute('href');
+    if (linkTag.dataset.id === undefined) {
+      const path = linkTag.getAttribute('href');
       history.pushState(null, null, path);
       renderContent(path);
     } else {
-      renderModals.cardOneGood(e.target.closest('a').dataset.id);
+      renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
     }
-  } else if (e.target.closest('button')) {
+  } else if (buttonTag) {
     e.preventDefault();
-    if (e.target.dataset.action === 'open-modal') {
+    
+    if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.dataset.value]();
       animateModal();
+      // console.log(refs.modal);
+      refs.modal.querySelector('input').focus();
+      // if (document.querySelector('#formRegister')) {
+      //   const formRegister = document.querySelector('#formRegister');
+      //   console.log(formRegister);
+      //   formRegister.addEventListener('submit', e => {
+      //     console.log(e.target);
+      //     e.preventDefault();
+      //     console.log(e.target);
+      //   });
+      // }
     }
-    if (e.target.closest('button').dataset.action === 'close-modal') {
-      // can add style for animation before close modal window
-
-      // close modal
+    if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
     }
-    if (e.target.dataset.action === 'user-register') {
-      e.preventDefault();
-      // console.log('ok');
+    if (buttonTag.dataset.action === 'user-register') {
       registr();
     }
-    if (e.target.dataset.action === 'user-log-in') {
-      e.preventDefault();
-      // console.log('ok');
+
+    if (buttonTag.dataset.action === 'user-log-in') {
       logIn();
       refs.modal.innerHTML = '';
+
     }
-    if (e.target.dataset.action === 'log-out') {
-      e.preventDefault();
+    if (buttonTag.dataset.action === 'log-out') {
       logOut();
     }
-    if (e.target.closest('button').dataset.action === 'open-filter') {
+    if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       if (filterMenuNode.classList.contains('hidden')) {
         filterMenuNode.classList.remove('hidden');
@@ -61,7 +70,7 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
-    if (e.target.closest('button').dataset.action === 'open-cabinet') {
+    if (buttonTag.dataset.action === 'open-cabinet') {
       const openMyCabinet = refs.header.querySelector('.modal-cabinet');
       if (openMyCabinet.classList.contains('hidden')) {
         openMyCabinet.classList.remove('hidden');
@@ -69,7 +78,7 @@ document.addEventListener('click', e => {
         openMyCabinet.classList.add('hidden');
       }
     }
-    if (e.target.closest('button').dataset.action === 'open-cabinet-mobile') {
+    if (buttonTag.dataset.action === 'open-cabinet-mobile') {
       const openMyCabinetMob = refs.header.querySelector('.modal-cabinet-mobile');
       if (openMyCabinetMob.classList.contains('hidden')) {
         openMyCabinetMob.classList.remove('hidden');
@@ -77,7 +86,7 @@ document.addEventListener('click', e => {
         openMyCabinetMob.classList.add('hidden');
       }
     }
-    if (e.target.closest('button').dataset.action === 'open-filter') {
+    if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.tablet-menu');
       if (filterMenuNode.classList.contains('hidden')) {
         filterMenuNode.classList.remove('hidden');
@@ -85,7 +94,8 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
-    if (e.target.closest('button').dataset.search === 'search') {
+
+    if (buttonTag.dataset.search === 'search') {
       const input = refs.header.querySelector('.header__find');
       if (input.value != '') {
         const path = input.dataset.search + input.value;
@@ -106,11 +116,21 @@ document.addEventListener('click', e => {
 });
 
 document.addEventListener('keydown', e => {
-  if (e.keyCode === 27) {
+  // const key = e.key;
+  if (e.key === 'Escape') {
     refs.modal.innerHTML = '';
+  }
+  if (e.key === 'Enter') {
+    // refs.modal.querySelector('form')?.submit();
   }
 });
 
-// console.log(localStorage.getItem(accessToken));
-// const token = localStorage.getItem(accessToken);
-// console.log(token);
+
+
+
+
+
+
+
+
+

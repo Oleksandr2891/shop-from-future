@@ -19,6 +19,17 @@ export const isJSON = data => {
   }
 };
 
+export const stringToCamelCase = (str) => {
+  const newMessage = str.split(' ')
+  const newArr = [newMessage[0]]
+
+  for(let i = 1; i < newMessage.length; i++){
+    const newWord = newMessage[i][0].toUpperCase() + newMessage[i].slice(1)
+    newArr.push(newWord)
+  }
+  return newArr.join('');
+}
+
 export const api = new Api();
 
 const getHeader = () => {
@@ -46,7 +57,6 @@ const getMainPage = () => {
     refs.ads.innerHTML = adsTpl({ mainAdsArr, rigthAdsArr, downAdsArr });
 
     new Swiper('.Ads-slider-container', swiperConfigAds);
-
   });
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     console.log(Object.keys(data));
@@ -55,6 +65,7 @@ const getMainPage = () => {
       obj[item] = data[item];
     });
     api.data.content = obj;
+    console.log(api.data)
     // api.data.mainPageData = data;
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
@@ -85,7 +96,6 @@ const getMainPage = () => {
 
     refs.content.innerHTML = goodsTpl(goods, Handlebars);
     new Swiper('.swiper-container', swiperConfigCategories.card);
-
   });
 };
 
@@ -107,8 +117,8 @@ export const renderContent = path => {
   if (refs.footer.childElementCount === 0) {
     getFooter();
   }
-  api.getData(path).then(data => {
-    api.data.content = data;
+  api.getData(path).then(data => { 
+    api.data.content[data[0].category] = data;
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;
 
@@ -127,3 +137,19 @@ export const __ = key => {
   };
   return vocabulary[lang]?.[key] ? vocabulary[lang][key] : key;
 };
+
+export function previewFile(event) {
+  const preview = event.target.closest('div').querySelector(`[for=${event.target.id}] img`);
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = '';
+  }
+}

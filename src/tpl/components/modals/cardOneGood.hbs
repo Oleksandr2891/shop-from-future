@@ -1,11 +1,13 @@
 <div class="card-goods">  
     <div class="card-goods__left">
-        <img src="{{imageUrls}}" alt="" class="card-goods__img">
+
+        <img src="{{imageUrls.[0]}}" alt="{{title}}" class="card-goods__img">
+
     </div>
     <div class="card-goods__right">
         
         <h2 class="card-goods__title">{{title}}</h2>
-        <p class="card-goods__code">Код товара</p>
+        <p class="card-goods__code">Категори товара: {{category}}</p>
         <p class="card-goods__price">{{price}}€</p>
 
         <button type="submit" class="card-goods__btn-information">Информация о продавце</button>
