@@ -5,7 +5,7 @@
       <div class="modal_register-div" id="modal_register-div">
             <p class='modal_paragraph-register-google'>Для авторизации можете использовать Google Account:</p>
             <div class='center'>
-              <button type='button' class='modal_button-register-google'>
+              <button type='button' data-action="sign-in-with-google" class='modal_button-register-google'>
                 <svg class="modal_button-svg-google">
                   <use href="{{sprite}}#icon-google-icon"></use>
                 </svg>
@@ -36,7 +36,7 @@
                   data-action="user-log-in"
                 >Войти</button>
                 <button
-                  type='submit'
+                  type='button'
                   class='modal_button-registeration modal_button-register' 
                   data-action="user-register"
                 >Регистрация</button>

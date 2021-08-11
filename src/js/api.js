@@ -2,21 +2,26 @@ import config from '../config.json';
 import { isJSON } from './functions';
 
 export default class Api {
-  #data = {};
+  #data = {
+    content: {}
+  };
 
   constructor(name, path, obj = {}) {
     this.name = name;
     this.path = path;
     this.obj = obj;
+ 
   }
 
   async send(path = this.path, method = 'GET', obj = {}) {
     const options = {
       headers: { 'Content-Type': 'application/json' },
     };
+
     if (method !== 'GET') {
       options.method = method;
     }
+
     if (obj.data) {
       options.body = JSON.stringify(obj.data);
     }

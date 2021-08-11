@@ -1,7 +1,7 @@
 {{#each this}}
 <div class='swiper-container container-categories'>
   <h2 class="swiper-title">{{__ name}}</h2>
-  <a href="#" class="swiper-link__once-category">Смотреть все</a>
+  <a class="swiper-link__once-category" href='/call/specific/{{name}}'>Смотреть все</a>
   {{#if text}}
   <p>{{__ text}}</p>
   {{/if}}
@@ -24,5 +24,4 @@
   <div id="btn-slider" class='swiper-button-prev'></div>
   <div id="btn-slider" class='swiper-button-next'></div>
 </div>
-
 {{/each}}
