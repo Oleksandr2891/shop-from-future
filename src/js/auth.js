@@ -1,7 +1,7 @@
 import config from '../config.json';
 import { api } from './functions';
 
-const getUserData = () => {
+const getInputData = () => {
   const inputEmailValue = document.querySelector('#email').value.trim();
   const inputPasswordValue = document.querySelector('#password').value.trim();
   return {
@@ -12,15 +12,19 @@ const getUserData = () => {
     auth: false,
   };
 };
+
 export const registr = () =>{
   api.postData(config.auth.register.link, getUserData()).then(data => console.log(data));
+
 
   // form.reset();
 }
 
+
 export const logIn = () => {
   api.postData(config.auth.login.link, getUserData()).then(data => {
     console.log(data);
+
     localStorage.setItem('refreshToken', data.refreshToken);
     localStorage.setItem('accessToken', data.accessToken);
     localStorage.setItem('sid', data.sid);
@@ -35,6 +39,23 @@ export const logOut =()=> {
     auth: true,
     body: false,
   };
+
+
+//   api.postData(config.auth.logout.link, objLogOut).then(data => data);
+// }
+// export const getUserData = () => {
+//   api
+//     .getData('/user', {
+//       auth: true,
+//       body: false,
+//     })
+//     .then(data => {
+//       api.data.user = data;
+//       console.log(api.data);
+//     });
+// };
+// form.reset();
+
   api.postData(config.auth.logout.link, objLogOut).then(data => {
     console.log(data);
   });
@@ -52,3 +73,4 @@ export const signInWithGoogle = () => {
   .then(data => console.log(data))
   .catch(err => console.log(err));
 }
+

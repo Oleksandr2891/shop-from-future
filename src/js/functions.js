@@ -5,6 +5,7 @@ import 'swiper/swiper-bundle.css';
 import Swiper from 'swiper/bundle';
 import swiperConfigAds from './adsSwiper';
 import swiperConfigCategories from '../configSwiper.json';
+import { getUserData } from './auth';
 
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
@@ -61,6 +62,7 @@ const getMainPage = (page = 1) => {
 
     new Swiper('.Ads-slider-container', swiperConfigAds);
   });
+
   api.getData(config.componentsTpl.goods.getGoods + page).then(data => {
     const obj = {};
     Object.keys(data).forEach(item => {
@@ -101,6 +103,9 @@ const getMainPage = (page = 1) => {
 };
 
 export const renderContent = path => {
+
+  getUserData();
+
   if (path !== '/') refs.linkPagination.classList.add('hidden');
   if (path === '/') {
     history.pushState(null, null, path);

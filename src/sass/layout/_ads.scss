@@ -54,7 +54,7 @@
   flex-wrap: nowrap;
 }
 .hero__title {
-  font-family: Montserrat;
+  font-family: var(--main-text);
   font-weight: bold;
   font-size: 18px;
   line-height: 1.22;
@@ -65,13 +65,13 @@
 .hero__price {
   display: flex;
   align-items: flex-start;
-  font-family: Montserrat;
+  font-family: var(--main-text);
   font-weight: bold;
   font-size: 34px;
   line-height: 1.22;
   letter-spacing: -0.02em;
 
-  color: #ff6b09;
+  color: var(--accent-color);
   &::before {
     display: inline-block;
     margin-top: 8px;
@@ -83,7 +83,7 @@
 }
 @media screen and (min-width: 768px) {
   .hero__title {
-    font-family: Montserrat;
+    font-family: var(--main-text);
     font-weight: bold;
     font-size: 40px;
     line-height: 1.23;
@@ -96,14 +96,14 @@
     display: flex;
     margin-right: 40px;
     align-items: flex-start;
-    font-family: Montserrat;
+    font-family: var(--main-text);
     font-style: normal;
     font-weight: bold;
     font-size: 54px;
     line-height: 1.22;
     letter-spacing: -0.02em;
 
-    color: #ff6b09;
+    color: var(--accent-color);
     &::before {
       display: inline-block;
       margin-top: 12px;
@@ -163,10 +163,10 @@
     }
     &:nth-child(2) {
       background-color: #fafafa;
-      color: #ff6b09;
+      color: var(--accent-color);
     }
     &:nth-child(3) {
-      background-color: #ff6b09;
+      background-color: var(--accent-color);
 
       color: #000000;
       .price-wrapper__price {
@@ -189,10 +189,10 @@
     &:nth-child(2) {
       background-color: #fafafa;
 
-      color: #ff6b09;
+      color: var(--accent-color);
     }
     &:nth-child(3) {
-      background-color: #ff6b09;
+      background-color: var(--accent-color);
 
       color: #000000;
       .price-wrapper__price {
@@ -216,8 +216,7 @@
   .price-wrapper__price {
     display: flex;
     align-items: flex-start;
-    font-family: Montserrat;
-
+    font-family: var(--main-text);
     font-weight: bold;
     font-size: 42px;
     line-height: 1.21;

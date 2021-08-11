@@ -122,5 +122,7 @@
       "name": "Список категорий",
       "tpl": "category"
     }
-  }
+  },
+  "favourites_URL": "/call/favourite"
 }
+

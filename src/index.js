@@ -4,16 +4,17 @@ import { renderContent } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
+import { addToFavourites } from './js/productsCRUD';
+import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
 import { api } from './js/functions';
 import config from './config.json';
 import { getNextPage } from './js/nextPage';
 const sales = "/call/specific/sales";
-
-
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import { error, success } from '@pnotify/core';
+
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -38,7 +39,9 @@ document.addEventListener('click', e => {
       // history.pushState(null, null, path);
 
 
-    } else if (linkTag.dataset.id === undefined) {
+    } else  if (linkTag.dataset.action === 'open-cabinet') {
+      renderCabinet();
+    }else if (linkTag.dataset.id === undefined) {
       if (linkTag.getAttribute('href') === sales) {
         const categoryTpl = require('./tpl/category.hbs').default;
         const card = require('./tpl/components/productCard.hbs').default;
@@ -105,6 +108,8 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
+
+
     if (buttonTag.dataset.action === 'open-cabinet') {
       const openMyCabinet = refs.header.querySelector('.modal-cabinet');
       if (openMyCabinet.classList.contains('hidden')) {
@@ -122,6 +127,7 @@ document.addEventListener('click', e => {
       }
     }
     if (buttonTag.dataset.action === 'open-filter') {
+
       const filterMenuNode = refs.header.querySelector('.tablet-menu');
       if (filterMenuNode.classList.contains('hidden')) {
         filterMenuNode.classList.remove('hidden');
@@ -130,8 +136,13 @@ document.addEventListener('click', e => {
       }
     }
 
+    if (buttonTag.dataset.action === 'add-to-favourite') {
+      addToFavourites(e.target.closest('button').dataset.id);
+    }
+
     if (buttonTag.dataset.search === 'search') {
       const input = refs.header.querySelector('.header__find');
+
       if (input.value != '') {
         const path = input.dataset.search + input.value;
         renderContent(path);

@@ -84,7 +84,6 @@
   margin-right: 10px;
 
   background-color: transparent;
-  // background-image: url(../images/search.svg);
   background-size: cover;
   background-repeat: no-repeat;
   border: none;
@@ -108,7 +107,7 @@
 
 .registration__btn-reg {
   padding: 0px 12px;
-  font-family: Montserrat;
+  font-family: var(--main-text);
   font-size: 12px;
   line-height: 1.25;
   color: #5e6671;
@@ -121,7 +120,7 @@
 
 .registration__btn-in {
   padding: 0px 12px;
-  font-family: Montserrat;
+  font-family: var(--main-text);
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -129,7 +128,7 @@
 
   letter-spacing: 0.02em;
 
-  color: #ff6b09;
+  color: var(--accent-color);
 
   background-color: transparent;
   border: none;
@@ -143,7 +142,7 @@
   padding: 0px 14px;
   display: inline-flex;
   align-items: center;
-  font-family: Montserrat;
+  font-family: var(--main-text);
   font-weight: 500;
   font-size: 12px;
   line-height: 1.25;
@@ -153,6 +152,7 @@
   background-color: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
 }
 .cabinet__in {
   border-right: 1px solid #465363;
@@ -165,14 +165,14 @@
 .header__btn {
   border: none;
   outline: none;
-  background: #ff6b09;
+  background: var(--accent-color);
   color: #ffffff;
 
   padding: 13px 38px;
   margin-left: 24px;
   height: 44px;
 
-  font-family: Montserrat;
+  font-family: var(--main-text);
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
@@ -212,8 +212,8 @@
 .filter__btn:hover,
 .filter__btn:focus,
 .filter__btn:active {
-  border-color: #ff6b09;
-  color: #ff6b09;
+  border-color: var(--accent-color);
+  color: var(--accent-color);
 }
 .filter__btn {
   display: inline-block;
@@ -222,7 +222,7 @@
   border: 1px solid #5e6671;
   border-radius: 20px;
   background-color: transparent;
-  font-family: Montserrat;
+  font-family: var(--main-text);
 
   font-size: 12px;
   line-height: 1.25;
@@ -242,7 +242,7 @@
     border: none;
     outline: none;
 
-    font-family: Montserrat;
+    font-family: var(--main-text);
     font-style: normal;
 
     font-size: 1.25;
@@ -260,7 +260,7 @@
   border: none;
   outline: none;
 
-  font-family: Montserrat;
+  font-family: var(--main-text);
   font-style: normal;
 
   font-size: 1.25;
