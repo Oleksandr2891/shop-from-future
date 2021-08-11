@@ -17,23 +17,47 @@
 </div> --}}
 
 
-<section class="hero">
-    <div class="hero__wrapper swiper-wrapper">
+<section >
+    <div class="hero">
+    <div class="Ads-slider-container">
+    <div class="swiper-wrapper">
         {{#each mainAdsArr}}
         <div class="hero__slider swiper-slide">
-            <img class="slider-img" src="{{imageUrl}}">
+            <div class="price-wrapper">
+            <h2 class="hero__title">{{title}}</h2>
+            <p class="hero__price">{{price}}</p>
+            </div>
+            <div>
+            <img class="slider-img"  src="{{imageUrl}}"  alt="{{title}}">
+            </div>
         </div>
         {{/each}}
-        {{!-- <div class="hero__advertising">
-            <img class="advertising-img" src="./watch.jpg" alt="watch">
-            <img class="advertising-img" src="./watch.jpg" alt="watch">
-        </div> --}}
     </div>
-    {{!-- <div class="hero__advertising_row">
-        <img class="advertising-img" src="./watch.jpg" alt="watch">
-        <img class="advertising-img" src="./watch.jpg" alt="watch">
-        <img class="advertising-img" src="./watch.jpg" alt="watch">
-    </div> --}}
+    <div class="swiper-pagination"></div>
+    </div>
+    <div class="hero__advertising">
+            {{#each rigthAdsArr}}
+            <div class="ads-box">
+            <div class="price-box">
+                <h2 class="price-wrapper__title">{{title}}</h2>
+                <p class="price-wrapper__price">{{price}}</p>
+            </div>
+            <img class="ads-img"  src="{{imageUrl}}" alt="{{title}}">
+            </div>
+            {{/each}}
+    </div>
+    </div>
+    <div class="hero__advertising_row">
+        {{#each downAdsArr}}
+        <div class="ads-box">
+        <div class="price-box">
+            <h2 class="price-wrapper__title">{{title}}</h2>
+            <p class="price-wrapper__price">{{price}}</p>
+        </div>
+        <img class="ads-img" src="{{imageUrl}}" alt="{{title}}">
+        </div>
+        {{/each}}
+    </div>
 
 
 </section>
