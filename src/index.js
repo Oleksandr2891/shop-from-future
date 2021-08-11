@@ -27,6 +27,17 @@ document.addEventListener('click', e => {
     if (e.target.dataset.action === 'open-modal') {
       renderModals[e.target.dataset.value]();
       animateModal();
+      // console.log(refs.modal);
+      refs.modal.querySelector('input').focus();
+      // if (document.querySelector('#formRegister')) {
+      //   const formRegister = document.querySelector('#formRegister');
+      //   console.log(formRegister);
+      //   formRegister.addEventListener('submit', e => {
+      //     console.log(e.target);
+      //     e.preventDefault();
+      //     console.log(e.target);
+      //   });
+      // }
     }
     if (e.target.closest('button').dataset.action === 'close-modal') {
       // can add style for animation before close modal window
@@ -42,8 +53,8 @@ document.addEventListener('click', e => {
     if (e.target.dataset.action === 'user-log-in') {
       e.preventDefault();
       // console.log('ok');
-      logIn();
-      refs.modal.innerHTML = '';
+      // logIn();
+      // refs.modal.innerHTML = '';
     }
     if (e.target.dataset.action === 'log-out') {
       e.preventDefault();
@@ -99,8 +110,12 @@ document.addEventListener('click', e => {
 });
 
 document.addEventListener('keydown', e => {
-  if (e.keyCode === 27) {
+  // const key = e.key;
+  if (e.key === 'Escape') {
     refs.modal.innerHTML = '';
+  }
+  if (e.key === 'Enter') {
+    // refs.modal.querySelector('form')?.submit();
   }
 });
 
