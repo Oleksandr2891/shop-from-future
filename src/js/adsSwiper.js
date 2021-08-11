@@ -1,11 +1,11 @@
-import 'swiper/swiper-bundle.css';
-import Swiper from 'swiper/bundle';
-import SwiperCore, { Navigation, Pagination } from 'swiper/core';
-SwiperCore.use([Navigation, Pagination]);
-
-export const adsSwiper = new Swiper('.hero', {
+export default {
   effect: 'cube',
   grabCursor: true,
+  // autoplay: {
+  //   delay: 2500,
+  //   disableOnInteraction: false,
+  // },
+
   cubeEffect: {
     shadow: true,
     slideShadows: true,
@@ -14,5 +14,6 @@ export const adsSwiper = new Swiper('.hero', {
   },
   pagination: {
     el: '.swiper-pagination',
+    clickable: true,
   },
-});
+};
