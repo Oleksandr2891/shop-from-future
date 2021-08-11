@@ -19,6 +19,17 @@ export const isJSON = data => {
   }
 };
 
+export const stringToCamelCase = (str) => {
+  const newMessage = str.split(' ')
+  const newArr = [newMessage[0]]
+
+  for(let i = 1; i < newMessage.length; i++){
+    const newWord = newMessage[i][0].toUpperCase() + newMessage[i].slice(1)
+    newArr.push(newWord)
+  }
+  return newArr.join('');
+}
+
 export const api = new Api();
 
 const getHeader = () => {
@@ -55,6 +66,7 @@ const getMainPage = () => {
       obj[item] = data[item];
     });
     api.data.content = obj;
+    console.log(api.data)
     // api.data.mainPageData = data;
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
@@ -107,8 +119,8 @@ export const renderContent = path => {
   if (refs.footer.childElementCount === 0) {
     getFooter();
   }
-  api.getData(path).then(data => {
-    api.data.content = data;
+  api.getData(path).then(data => { 
+    api.data.content[data[0].category] = data;
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;
 
