@@ -1,21 +1,38 @@
 import config from '../config.json';
+import { isJSON } from './functions';
 
 export default class Api {
   #data = {};
 
-  constructor(name, path) {
+  constructor(name, path, obj = {}) {
     this.name = name;
     this.path = path;
+    this.obj = obj;
   }
 
-  async send(path = this.path, method = 'GET') {
-    console.log(path);
+  async send(path = this.path, method = 'GET', obj = {}) {
     const options = {
       method,
       headers: { 'Content-Type': 'application/json' },
     };
-    return await fetch(config.apiUrl + path)
-      .then(res => res.json())
+    if (obj.data) {
+      options.body = JSON.stringify(obj.data);
+    }
+    if (obj.auth) {
+      options.headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      };
+    }
+
+    return await fetch(config.apiUrl + path, method === 'GET' ? {} : options)
+      .then(res => {
+        if (!isJSON(res)) {
+          return res.json();
+        } else {
+          return res;
+        }
+      })
       .catch(err => console.log(err));
   }
 
@@ -25,17 +42,16 @@ export default class Api {
 
     return res;
   }
-
+  async postData(path = this.path, obj = this.obj) {
+    const res = await this.send(path, 'POST', obj);
+    return res;
+  }
 
   get data() {
     return this.#data;
   }
 
   set data(data) {
-    return this.#data = data;
+    return (this.#data = data);
   }
-
-  // async getData(id) {
-  //   await this.send(id);
-  // }
 }

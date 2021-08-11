@@ -3,30 +3,31 @@ import { refs } from './refs';
 import Api from './api';
 import 'swiper/swiper-bundle.css';
 import Swiper from 'swiper/bundle';
-import swiperConfig from './swiper';
 import swiperConfigAds from './adsSwiper';
+import swiperConfigCategories from '../configSwiper.json';
+
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
+import Handlebars from '../helpers';
 SwiperCore.use([Navigation, Pagination]);
 
-// export const isJSON = data => {
-//   try {
-//     JSON.parse(data);
-//     return true;
-//   } catch (e) {
-//     return false;
-//   }
-// };
+export const isJSON = data => {
+  try {
+    JSON.parse(data);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
 
-const api = new Api();
+export const api = new Api();
 
 const getHeader = () => {
   api.getData(config.baseTpl.header.getCategories).then(data => {
     const headerTpl = require('../tpl/header.hbs').default;
     const logo = require('../images/logo.svg');
     const obj = { data, logo };
-    refs.header.innerHTML = headerTpl(obj);
-    console.log(obj);
-    console.log(obj.data);
+    refs.header.innerHTML = headerTpl(obj, Handlebars);
+    // api.data.categories = data;
   });
 };
 
@@ -43,13 +44,33 @@ const getMainPage = () => {
     console.log(mainAdsArr);
     const adsTpl = require('../tpl/components/ads.hbs').default;
     refs.ads.innerHTML = adsTpl({ mainAdsArr, rigthAdsArr, downAdsArr });
+
     new Swiper('.Ads-slider-container', swiperConfigAds);
+
   });
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
+    console.log(Object.keys(data));
+    const obj = {};
+    Object.keys(data).forEach(item => {
+      obj[item] = data[item];
+    });
+    api.data.content = obj;
+    // api.data.mainPageData = data;
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
+    const categorySales = function (obj) {
+      let text = [];
+
+      if (obj.name === 'sales') {
+        obj.data.forEach(item => text.push(__(item.category)));
+      }
+
+      text = text.filter((item, index) => text.indexOf(item) === index);
+
+      return !text.length ? false : text.join(', ');
+    };
+
     const goods = [];
-    console.log(data);
 
     Object.keys(data).forEach(item => {
       const obj = {
@@ -59,17 +80,16 @@ const getMainPage = () => {
       obj.name = item;
       obj.data = data[item];
       goods.push(obj);
+      obj.text = categorySales(obj);
     });
-    const text = function (goods) {};
 
-    refs.content.innerHTML = goodsTpl({ goods, text });
-    new Swiper('.swiper-container', swiperConfig);
+    refs.content.innerHTML = goodsTpl(goods, Handlebars);
+    new Swiper('.swiper-container', swiperConfigCategories.card);
+
   });
 };
 
 export const renderContent = path => {
-  console.log(refs.ads);
-  console.log(location.pathname);
   if (path === '/') {
     history.pushState(null, null, path);
     getHeader();
@@ -88,6 +108,7 @@ export const renderContent = path => {
     getFooter();
   }
   api.getData(path).then(data => {
+    api.data.content = data;
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;
 
@@ -95,8 +116,14 @@ export const renderContent = path => {
 
     refs.content.innerHTML = categoryTpl({ categoryData });
 
-    console.log(data);
-
     return data;
   });
+};
+
+export const __ = key => {
+  const lang = 'ru'; /* соединить с выбором языка из localstorage*/
+  const vocabulary = {
+    ru: require('../i18n/ru.json'),
+  };
+  return vocabulary[lang]?.[key] ? vocabulary[lang][key] : key;
 };
