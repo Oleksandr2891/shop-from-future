@@ -12,13 +12,13 @@ const getUserData = () => {
     auth: false,
   };
 };
-export function registr() {
+export const registr = () =>{
   api.postData(config.auth.register.link, getUserData()).then(data => console.log(data));
 
   // form.reset();
 }
 
-export function logIn() {
+export const logIn = () => {
   api.postData(config.auth.login.link, getUserData()).then(data => {
     console.log(data);
     localStorage.setItem('refreshToken', data.refreshToken);
@@ -29,7 +29,7 @@ export function logIn() {
     //
   });
 }
-export function logOut() {
+export const logOut =()=> {
   console.log(api.data);
   const objLogOut = {
     auth: true,
@@ -43,4 +43,12 @@ export function logOut() {
   localStorage.removeItem('sid');
 }
 
-// form.reset();
+export const signInWithGoogle = () => {
+  fetch(config.apiUrl + '/auth/google')
+  .then(res => {
+    
+    return res.json()
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+}
