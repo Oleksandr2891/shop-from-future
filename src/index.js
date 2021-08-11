@@ -10,11 +10,10 @@ import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
 import { api } from './js/functions';
 import config from './config.json';
 import { getNextPage } from './js/nextPage';
-const sales = "/call/specific/sales";
+const sales = '/call/specific/sales';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import { error, success } from '@pnotify/core';
-
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -29,7 +28,7 @@ document.addEventListener('click', e => {
   if (linkTag) {
     e.preventDefault();
 
-    if (linkTag.dataset.action === "load-more") {
+    if (linkTag.dataset.action === 'load-more') {
       if (counter === 3) counter = 2;
       else counter += 1;
       api.data.counterMainPage = [counter];
@@ -37,15 +36,13 @@ document.addEventListener('click', e => {
       getNextPage(path);
       if (counter === 3) linkTag.classList.add('isDisabled');
       // history.pushState(null, null, path);
-
-
-    } else  if (linkTag.dataset.action === 'open-cabinet') {
+    } else if (linkTag.dataset.action === 'open-cabinet') {
       renderCabinet();
-    }else if (linkTag.dataset.id === undefined) {
+    } else if (linkTag.dataset.id === undefined) {
       if (linkTag.getAttribute('href') === sales) {
         const categoryTpl = require('./tpl/category.hbs').default;
         const card = require('./tpl/components/productCard.hbs').default;
-        refs.ads.innerHTML = "";
+        refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
 
@@ -53,18 +50,14 @@ document.addEventListener('click', e => {
       } else {
         const path = linkTag.getAttribute('href');
 
-
         renderContent(path);
       }
-    }
-
-    else {
+    } else {
       renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
-
     }
   } else if (buttonTag) {
     e.preventDefault();
-    
+
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.dataset.value]();
       animateModal();
@@ -84,8 +77,8 @@ document.addEventListener('click', e => {
       refs.modal.innerHTML = '';
     }
 
-    if(buttonTag.dataset.action === 'sign-in-with-google'){
-      signInWithGoogle()
+    if (buttonTag.dataset.action === 'sign-in-with-google') {
+      signInWithGoogle();
     }
 
     if (buttonTag.dataset.action === 'user-register') {
@@ -95,7 +88,6 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'user-log-in') {
       logIn();
       refs.modal.innerHTML = '';
-
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
@@ -108,7 +100,6 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
-
 
     if (buttonTag.dataset.action === 'open-cabinet') {
       const openMyCabinet = refs.header.querySelector('.modal-cabinet');
@@ -127,7 +118,6 @@ document.addEventListener('click', e => {
       }
     }
     if (buttonTag.dataset.action === 'open-filter') {
-
       const filterMenuNode = refs.header.querySelector('.tablet-menu');
       if (filterMenuNode.classList.contains('hidden')) {
         filterMenuNode.classList.remove('hidden');
@@ -171,12 +161,4 @@ document.addEventListener('keydown', e => {
   }
 });
 
-
-
-
-
-
-
-
-
-
+document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});
