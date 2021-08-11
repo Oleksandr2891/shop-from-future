@@ -10,6 +10,7 @@ export default class Api {
     this.name = name;
     this.path = path;
     this.obj = obj;
+ 
   }
 
   async send(path = this.path, method = 'GET', obj = {}) {
@@ -17,6 +18,7 @@ export default class Api {
       method,
       headers: { 'Content-Type': 'application/json' },
     };
+    console.log(path)
     if (obj.data) {
       options.body = JSON.stringify(obj.data);
     }

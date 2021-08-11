@@ -4,11 +4,12 @@ import { renderContent } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
-import { registr, logIn, logOut } from './js/auth';
+import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
 import { api } from './js/functions';
 import config from './config.json';
 import { getNextPage } from './js/nextPage';
 const sales = "/call/specific/sales";
+
 
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
@@ -24,7 +25,6 @@ let counter = 1;
 document.addEventListener('click', e => {
   const linkTag = e.target.closest('a') || e.target.querySelector('a');
   const buttonTag = e.target.closest('button');
-  console.log(linkTag)
   if (linkTag) {
     e.preventDefault();
 
@@ -79,6 +79,10 @@ document.addEventListener('click', e => {
     }
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
+    }
+
+    if(buttonTag.dataset.action === 'sign-in-with-google'){
+      signInWithGoogle()
     }
 
     if (buttonTag.dataset.action === 'user-register') {
