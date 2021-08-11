@@ -46,7 +46,6 @@ const getMainPage = () => {
     refs.ads.innerHTML = adsTpl({ mainAdsArr, rigthAdsArr, downAdsArr });
 
     new Swiper('.Ads-slider-container', swiperConfigAds);
-
   });
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
     console.log(Object.keys(data));
@@ -85,7 +84,6 @@ const getMainPage = () => {
 
     refs.content.innerHTML = goodsTpl(goods, Handlebars);
     new Swiper('.swiper-container', swiperConfigCategories.card);
-
   });
 };
 
@@ -127,3 +125,19 @@ export const __ = key => {
   };
   return vocabulary[lang]?.[key] ? vocabulary[lang][key] : key;
 };
+
+export function previewFile(event) {
+  const preview = event.target.closest('div').querySelector(`[for=${event.target.id}] img`);
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = '';
+  }
+}
