@@ -5,21 +5,49 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 import { registr, logIn, logOut } from './js/auth';
+import { api } from './js/functions';
+import config from './config.json';
+import { getNextPage } from './js/nextPage';
+const sales = "/call/specific/sales";
 
 const getPath = () => {
   return location.pathname + location.search;
 };
 
 renderContent(getPath());
+let counter = 1;
 
 document.addEventListener('click', e => {
   if (e.target.closest('a')) {
     e.preventDefault();
-    if (e.target.closest('a').dataset.id === undefined) {
-      const path = e.target.closest('a').getAttribute('href');
-      history.pushState(null, null, path);
-      renderContent(path);
-    } else {
+    if (e.target.closest('a').dataset.action === "load-more") {
+      if (counter === 3) counter = 2;
+      else counter += 1;
+      api.data.counterMainPage = [counter];
+      const path = config.componentsTpl.goods.getGoods + counter;
+      getNextPage(path);
+      if (counter === 3) e.target.closest('a').classList.add('isDisabled');
+      // history.pushState(null, null, path);
+
+
+    } else if (e.target.closest('a').dataset.id === undefined) {
+      if (e.target.closest('a').getAttribute('href') === sales) {
+        const categoryTpl = require('./tpl/category.hbs').default;
+        const card = require('./tpl/components/productCard.hbs').default;
+        refs.ads.innerHTML = "";
+        const categoryData = card(api.data.content.sales);
+        refs.content.innerHTML = categoryTpl({ categoryData });
+
+        // console.log(api.data.content.sales);
+      } else {
+        const path = e.target.closest('a').getAttribute('href');
+
+
+        renderContent(path);
+      }
+    }
+
+    else {
       renderModals.cardOneGood(e.target.closest('a').dataset.id);
     }
   } else if (e.target.closest('button')) {
@@ -36,12 +64,10 @@ document.addEventListener('click', e => {
     }
     if (e.target.dataset.action === 'user-register') {
       e.preventDefault();
-      // console.log('ok');
       registr();
     }
     if (e.target.dataset.action === 'user-log-in') {
       e.preventDefault();
-      // console.log('ok');
       logIn();
       refs.modal.innerHTML = '';
     }

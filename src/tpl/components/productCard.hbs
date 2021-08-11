@@ -1,14 +1,14 @@
 <div class='category__wrapper'>
   {{#each this}}
-    <div class='category__card-wrapper'>
-      <a href='#' class='' data-id='{{_id}}'>
-        <div class='category__image-wrapper'>
-          <img class='category__card-image' src='{{imageUrls}}' alt='{{title}}' />
-        </div>
+  <div class='category__card-wrapper'>
+    <a href='#' class='' data-id='{{_id}}'>
+      <div class='category__image-wrapper'>
+        <img class='category__card-image' src='{{imageUrls.[0]}}' alt='{{title}}' />
+      </div>
 
-        <h3 class='category__card-title'>{{title}}</h3>
-        <p class='category__card-price'>{{price}}€</p>
-      </a>
-    </div>
+      <h3 class='category__card-title'>{{title}}</h3>
+      <p class='category__card-price'>{{price}}€</p>
+    </a>
+  </div>
   {{/each}}
 </div>
