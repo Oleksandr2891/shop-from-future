@@ -1,6 +1,6 @@
 import { refs } from './refs';
 import modalTpl from '../tpl/components/modal.hbs';
-import { api, previewFile } from './functions';
+import { api, previewFile, stringToCamelCase } from './functions';
 
 export const renderModals = {
   auth: () => {
@@ -21,11 +21,19 @@ export const renderModals = {
       input.addEventListener('change', previewFile);
     });
   },
+  cardOneGood: (id, category) => {
 
-  cardOneGood: id => {
     const contentForModal = require('../tpl/components/modals/cardOneGood.hbs').default;
-    const item = api.data.content.find(item => id === item._id);
-    console.log(item);
+    const normalizeCategory = stringToCamelCase(category)
+    const categories = []
+    Object.keys(api.data.content).forEach(item => categories.push(item))
+    console.log(categories)
+    let item = {}
+    if(!categories.includes(normalizeCategory)){
+      item = api.data.content.sales.find(item => id === item._id)    
+    }else {
+      item = api.data.content[normalizeCategory].find(item => id === item._id);
+    }
     const modalContent = contentForModal(item);
     refs.modal.innerHTML = modalTpl({ modalContent });
   },
