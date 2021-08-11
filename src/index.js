@@ -31,6 +31,17 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.dataset.value]();
       animateModal();
+      // console.log(refs.modal);
+      refs.modal.querySelector('input').focus();
+      // if (document.querySelector('#formRegister')) {
+      //   const formRegister = document.querySelector('#formRegister');
+      //   console.log(formRegister);
+      //   formRegister.addEventListener('submit', e => {
+      //     console.log(e.target);
+      //     e.preventDefault();
+      //     console.log(e.target);
+      //   });
+      // }
     }
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
@@ -38,9 +49,11 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'user-register') {
       registr();
     }
+
     if (buttonTag.dataset.action === 'user-log-in') {
       logIn();
       refs.modal.innerHTML = '';
+
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
@@ -95,8 +108,12 @@ document.addEventListener('click', e => {
 });
 
 document.addEventListener('keydown', e => {
-  if (e.keyCode === 27) {
+  // const key = e.key;
+  if (e.key === 'Escape') {
     refs.modal.innerHTML = '';
+  }
+  if (e.key === 'Enter') {
+    // refs.modal.querySelector('form')?.submit();
   }
 });
 

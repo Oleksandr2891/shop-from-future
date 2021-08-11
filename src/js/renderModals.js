@@ -1,7 +1,6 @@
 import { refs } from './refs';
 import modalTpl from '../tpl/components/modal.hbs';
-import { api } from './functions';
-import {stringToCamelCase} from './functions'
+import { api, previewFile, stringToCamelCase } from './functions';
 
 export const renderModals = {
   auth: () => {
@@ -18,8 +17,12 @@ export const renderModals = {
 
     const modalContent = contentForModal();
     refs.modal.innerHTML = modalTpl({ modalContent });
+    refs.modal.querySelectorAll('.inputfile').forEach(input => {
+      input.addEventListener('change', previewFile);
+    });
   },
   cardOneGood: (id, category) => {
+
     const contentForModal = require('../tpl/components/modals/cardOneGood.hbs').default;
     const normalizeCategory = stringToCamelCase(category)
     const categories = []
