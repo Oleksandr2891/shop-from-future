@@ -5,6 +5,8 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 import { registr, logIn, logOut } from './js/auth';
+import { addToFavourites } from './js/productsCRUD';
+import { renderCabinet } from './js/renderCabinet';
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -15,8 +17,12 @@ renderContent(getPath());
 document.addEventListener('click', e => {
   if (e.target.closest('a')) {
     e.preventDefault();
-    if (e.target.closest('a').dataset.id === undefined) {
+    if (e.target.closest('a').dataset.action === 'open-cabinet') {
+      renderCabinet();
+    } else if (e.target.closest('a').dataset.id === undefined) {
       const path = e.target.closest('a').getAttribute('href');
+      console.log(path);
+
       history.pushState(null, null, path);
       renderContent(path);
     } else {
@@ -57,22 +63,15 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
-    if (e.target.closest('button').dataset.action === 'open-cabinet') {
-      const openMyCabinet = refs.header.querySelector('.modal-cabinet');
-      if (openMyCabinet.classList.contains('hidden')) {
-        openMyCabinet.classList.remove('hidden');
-      } else {
-        openMyCabinet.classList.add('hidden');
-      }
-    }
-    if (e.target.closest('button').dataset.action === 'open-cabinet-mobile') {
-      const openMyCabinetMob = refs.header.querySelector('.modal-cabinet-mobile');
-      if (openMyCabinetMob.classList.contains('hidden')) {
-        openMyCabinetMob.classList.remove('hidden');
-      } else {
-        openMyCabinetMob.classList.add('hidden');
-      }
-    }
+
+    // if (e.target.closest('button').dataset.action === 'open-cabinet-mobile') {
+    //   const openMyCabinetMob = refs.header.querySelector('.modal-cabinet-mobile');
+    //   if (openMyCabinetMob.classList.contains('hidden')) {
+    //     openMyCabinetMob.classList.remove('hidden');
+    //   } else {
+    //     openMyCabinetMob.classList.add('hidden');
+    //   }
+    // }
     if (e.target.closest('button').dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.tablet-menu');
       if (filterMenuNode.classList.contains('hidden')) {
@@ -80,6 +79,9 @@ document.addEventListener('click', e => {
       } else {
         filterMenuNode.classList.add('hidden');
       }
+    }
+    if (e.target.closest('button').dataset.action === 'add-to-favourite') {
+      addToFavourites(e.target.closest('button').dataset.id);
     }
     if (e.target.dataset.search === 'search') {
       const input = refs.header.querySelector('.search__input');

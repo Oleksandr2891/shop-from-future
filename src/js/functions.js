@@ -5,6 +5,7 @@ import 'swiper/swiper-bundle.css';
 import Swiper from 'swiper/bundle';
 import swiperConfigAds from './adsSwiper';
 import swiperConfigCategories from '../configSwiper.json';
+import { getUserData } from './auth';
 
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
@@ -41,15 +42,12 @@ const getMainPage = () => {
     const mainAdsArr = [...data.slice(5)];
     const rigthAdsArr = [...data.slice(0, 2)];
     const downAdsArr = [...data.slice(2, 5)];
-    console.log(mainAdsArr);
     const adsTpl = require('../tpl/components/ads.hbs').default;
     refs.ads.innerHTML = adsTpl({ mainAdsArr, rigthAdsArr, downAdsArr });
 
     new Swiper('.Ads-slider-container', swiperConfigAds);
-
   });
   api.getData(config.componentsTpl.goods.getGoods).then(data => {
-    console.log(Object.keys(data));
     const obj = {};
     Object.keys(data).forEach(item => {
       obj[item] = data[item];
@@ -85,11 +83,11 @@ const getMainPage = () => {
 
     refs.content.innerHTML = goodsTpl(goods, Handlebars);
     new Swiper('.swiper-container', swiperConfigCategories.card);
-
   });
 };
 
 export const renderContent = path => {
+  getUserData();
   if (path === '/') {
     history.pushState(null, null, path);
     getHeader();

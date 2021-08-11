@@ -12,9 +12,11 @@ export default class Api {
 
   async send(path = this.path, method = 'GET', obj = {}) {
     const options = {
-      method,
       headers: { 'Content-Type': 'application/json' },
     };
+    if (method !== 'GET') {
+      options.method = method;
+    }
     if (obj.data) {
       options.body = JSON.stringify(obj.data);
     }
@@ -24,8 +26,7 @@ export default class Api {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       };
     }
-
-    return await fetch(config.apiUrl + path, method === 'GET' ? {} : options)
+    return await fetch(config.apiUrl + path, options)
       .then(res => {
         if (!isJSON(res)) {
           return res.json();
@@ -36,8 +37,8 @@ export default class Api {
       .catch(err => console.log(err));
   }
 
-  async getData(path = this.path) {
-    const res = await this.send(path);
+  async getData(path = this.path, obj = this.obj) {
+    const res = await this.send(path, 'GET', obj);
     if (res.length < 1) return Promise.reject('Нет данных');
 
     return res;
