@@ -14,7 +14,7 @@ const getInputData = () => {
 };
 
 export const registr = () =>{
-  api.postData(config.auth.register.link, getUserData()).then(data => console.log(data));
+  api.postData(config.auth.register.link, getInputData()).then(data => console.log(data));
 
 
   // form.reset();
@@ -22,7 +22,7 @@ export const registr = () =>{
 
 
 export const logIn = () => {
-  api.postData(config.auth.login.link, getUserData()).then(data => {
+  api.postData(config.auth.login.link, getInputData()).then(data => {
     console.log(data);
 
     localStorage.setItem('refreshToken', data.refreshToken);
@@ -39,23 +39,6 @@ export const logOut =()=> {
     auth: true,
     body: false,
   };
-
-
-//   api.postData(config.auth.logout.link, objLogOut).then(data => data);
-// }
-// export const getUserData = () => {
-//   api
-//     .getData('/user', {
-//       auth: true,
-//       body: false,
-//     })
-//     .then(data => {
-//       api.data.user = data;
-//       console.log(api.data);
-//     });
-// };
-// form.reset();
-
   api.postData(config.auth.logout.link, objLogOut).then(data => {
     console.log(data);
   });
@@ -63,6 +46,18 @@ export const logOut =()=> {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('sid');
 }
+
+export const getUserData = () => {
+  api
+    .getData('/user', {
+      auth: true,
+      body: false,
+    })
+    .then(data => {
+      api.data.user = data;
+      console.log(api.data);
+    });
+};
 
 export const signInWithGoogle = () => {
   fetch(config.apiUrl + '/auth/google')

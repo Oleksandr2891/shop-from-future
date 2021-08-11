@@ -128,10 +128,11 @@ export const renderContent = path => {
 
   }
   api.getData(path).then(data => { 
+    console.log(data[0].category)
     api.data.content[data[0].category] = data;
+    console.log(api.data)
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;
-    console.log(data);
     const categoryData = card(data);
 
     refs.content.innerHTML = categoryTpl({ categoryData });
