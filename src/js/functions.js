@@ -21,16 +21,16 @@ export const isJSON = data => {
   }
 };
 
-export const stringToCamelCase = (str) => {
-  const newMessage = str.split(' ')
-  const newArr = [newMessage[0]]
+export const stringToCamelCase = str => {
+  const newMessage = str.split(' ');
+  const newArr = [newMessage[0]];
 
-  for(let i = 1; i < newMessage.length; i++){
-    const newWord = newMessage[i][0].toUpperCase() + newMessage[i].slice(1)
-    newArr.push(newWord)
+  for (let i = 1; i < newMessage.length; i++) {
+    const newWord = newMessage[i][0].toUpperCase() + newMessage[i].slice(1);
+    newArr.push(newWord);
   }
   return newArr.join('');
-}
+};
 
 export const api = new Api();
 
@@ -48,8 +48,6 @@ const getFooter = () => {
   const footerTpl = require('../tpl/footer.hbs').default;
   refs.footer.innerHTML = footerTpl();
   // console.log(location.href);
-
-
 };
 
 const getMainPage = (page = 1) => {
@@ -103,7 +101,6 @@ const getMainPage = (page = 1) => {
 };
 
 export const renderContent = path => {
-
   getUserData();
 
   if (path !== '/') refs.linkPagination.classList.add('hidden');
@@ -115,7 +112,6 @@ export const renderContent = path => {
     getFooter();
 
     return false;
-
   }
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
@@ -125,12 +121,11 @@ export const renderContent = path => {
   }
   if (refs.footer.childElementCount === 0) {
     getFooter();
-
   }
-  api.getData(path).then(data => { 
-    console.log(data[0].category)
+  api.getData(path).then(data => {
+    console.log(data[0].category);
     api.data.content[data[0].category] = data;
-    console.log(api.data)
+    console.log(api.data);
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;
     const categoryData = card(data);
@@ -148,7 +143,6 @@ export const __ = key => {
   };
   return vocabulary[lang]?.[key] ? vocabulary[lang][key] : key;
 };
-
 
 export function previewFile(event) {
   const preview = event.target.closest('div').querySelector(`[for=${event.target.id}] img`);
