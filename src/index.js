@@ -1,12 +1,11 @@
 import './sass/main.scss';
 import { refs } from './js/refs';
-import { renderContent } from './js/functions';
+import { renderContent, getMainPage } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
 import { addToFavourites, removeFromFavourites } from './js/productsCRUD';
-
 
 import validator from 'validator';
 
@@ -21,8 +20,6 @@ import '@pnotify/core/dist/BrightTheme.css';
 import { error, success } from '@pnotify/core';
 import userDataTpl from './tpl/components/userData.hbs';
 
-
-
 const getPath = () => {
   return location.pathname + location.search;
 };
@@ -33,12 +30,13 @@ let counter = 1;
 document.addEventListener('click', e => {
   const linkTag = e.target.closest('a');
   const buttonTag = e.target.closest('button');
+
   if (!linkTag && !buttonTag) return false;
+
   if (linkTag) {
-    if (linkTag.dataset.action !== "sign-in-with-google") {
+    if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
     }
-
 
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
@@ -46,7 +44,6 @@ document.addEventListener('click', e => {
       const amountCategoriesWithSales = api.data.categories.length + 1;
       const amountCategoriesOnMainPages = Object.keys(api.data.content).length;
       if (amountCategoriesWithSales <= amountCategoriesOnMainPages) {
-
         refs.linkPaginationWrapper.classList.add('hidden');
         counter = 1;
         api.data.counterMainPage = [counter];
@@ -56,8 +53,7 @@ document.addEventListener('click', e => {
         api.data.counterMainPage = [counter];
         const path = config.componentsTpl.goods.getGoods + counter;
         getNextPage(path);
-      };
-
+      }
     } else if (linkTag.dataset.action === 'open-cabinet') {
       renderCabinet();
     } else if (linkTag.dataset.id === undefined) {
@@ -74,7 +70,6 @@ document.addEventListener('click', e => {
       } else {
         const path = linkTag.getAttribute('href');
 
-
         renderContent(path);
       }
     } else {
@@ -90,7 +85,6 @@ document.addEventListener('click', e => {
       refs.modal.querySelector('input').focus();
       document.querySelector('#user-log-in').disabled = true;
       document.querySelector('#user-register').disabled = true;
-
     }
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
@@ -102,18 +96,26 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'user-register') {
       registr();
-
     }
-    // 
+    //
     if (e.target.dataset.action === 'user-log-in') {
       e.preventDefault();
       // console.log('ok');
       logIn();
-      // refs.modal.innerHTML = '';
+      document.querySelector('#register-wraper').classList.add('hide');
+      document.querySelector('#cabinet-wraper').classList.remove('hide');
 
+      renderCabinet();
+      // getHeader();
+
+      // refs.modal.innerHTML = '';
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
+      document.querySelector('#cabinet-wraper').classList.add('hide');
+      document.querySelector('#register-wraper').classList.remove('hide');
+
+      getMainPage();
     }
     if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
@@ -154,9 +156,8 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'remove-from-favourites') {
-      removeFromFavourites(buttonTag.dataset.id)
+      removeFromFavourites(buttonTag.dataset.id);
     }
-
 
     if (buttonTag.dataset.action === 'show-user-data') {
       const path = '/user/' + e.target.closest('button').dataset.userid;
@@ -172,7 +173,6 @@ document.addEventListener('click', e => {
       }
       findUserData();
     }
-
 
     if (buttonTag.dataset.search === 'search') {
       const input = refs.header.querySelector('.header__find');
@@ -221,7 +221,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-
 // Слушатель для input
 document.addEventListener('input', e => {
   // console.log(e.target);
@@ -265,5 +264,3 @@ document.addEventListener('input', e => {
 });
 
 // document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});
-
-
