@@ -40,7 +40,7 @@ const getHeader = () => {
     const logo = require('../images/logo.svg');
     const obj = { data, logo };
     refs.header.innerHTML = headerTpl(obj, Handlebars);
-    // api.data.categories = data;
+    api.data.categories = data;
   });
 };
 
@@ -76,7 +76,6 @@ const getMainPage = (page = 1) => {
       if (obj.name === 'sales') {
         obj.data.forEach(item => text.push(__(item.category)));
       }
-      console.log(obj);
       text = text.filter((item, index) => text.indexOf(item) === index);
 
       return !text.length ? false : text.join(', ');
@@ -94,7 +93,7 @@ const getMainPage = (page = 1) => {
       goods.push(obj);
       obj.text = categorySales(obj);
     });
-    console.log(goods);
+
     refs.content.innerHTML = goodsTpl(goods, Handlebars);
     new Swiper('.swiper-container', swiperConfigCategories.card);
   });
@@ -103,7 +102,7 @@ const getMainPage = (page = 1) => {
 export const renderContent = path => {
   getUserData();
 
-  if (path !== '/') refs.linkPagination.classList.add('hidden');
+  if (path !== '/') refs.linkPaginationWrapper.classList.add('hidden');
   if (path === '/') {
     history.pushState(null, null, path);
     api.data.content = {};

@@ -15,6 +15,7 @@ import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import { error, success } from '@pnotify/core';
 
+
 const getPath = () => {
   return location.pathname + location.search;
 };
@@ -25,17 +26,31 @@ let counter = 1;
 document.addEventListener('click', e => {
   const linkTag = e.target.closest('a') || e.target.querySelector('a');
   const buttonTag = e.target.closest('button');
+  console.log(e.target);
+  // console.log(!linkTag);
+  // console.log(!buttonTag);
+  // if (!linkTag || !buttonTag) return false;
   if (linkTag) {
     e.preventDefault();
 
+    if (linkTag.dataset.action === 'open-main')
+      refs.linkPaginationWrapper.classList.remove('hidden');
     if (linkTag.dataset.action === 'load-more') {
-      if (counter === 3) counter = 2;
-      else counter += 1;
-      api.data.counterMainPage = [counter];
-      const path = config.componentsTpl.goods.getGoods + counter;
-      getNextPage(path);
-      if (counter === 3) linkTag.classList.add('isDisabled');
-      // history.pushState(null, null, path);
+      const amountCategoriesWithSales = api.data.categories.length + 1;
+      const amountCategoriesOnMainPages = Object.keys(api.data.content).length;
+      if (amountCategoriesWithSales <= amountCategoriesOnMainPages) {
+
+        refs.linkPaginationWrapper.classList.add('hidden');
+        counter = 1;
+        api.data.counterMainPage = [counter];
+        return false;
+      } else {
+        counter += 1;
+        api.data.counterMainPage = [counter];
+        const path = config.componentsTpl.goods.getGoods + counter;
+        getNextPage(path);
+      };
+
     } else if (linkTag.dataset.action === 'open-cabinet') {
       renderCabinet();
     } else if (linkTag.dataset.id === undefined) {
@@ -49,6 +64,7 @@ document.addEventListener('click', e => {
         // console.log(api.data.content.sales);
       } else {
         const path = linkTag.getAttribute('href');
+
 
         renderContent(path);
       }
@@ -161,4 +177,4 @@ document.addEventListener('keydown', e => {
   }
 });
 
-document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});
+// document.querySelector('.card-goods__btn-information').addEventListener('click', e => { });
