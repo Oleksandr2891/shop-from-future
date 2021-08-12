@@ -4,14 +4,13 @@ import { isJSON } from './functions';
 export default class Api {
   #data = {
     content: {},
-    
+
   };
 
   constructor(name, path, obj = {}) {
     this.name = name;
     this.path = path;
     this.obj = obj;
- 
   }
 
   async send(path = this.path, method = 'GET', obj = {}) {

@@ -21,16 +21,16 @@ export const isJSON = data => {
   }
 };
 
-export const stringToCamelCase = (str) => {
-  const newMessage = str.split(' ')
-  const newArr = [newMessage[0]]
+export const stringToCamelCase = str => {
+  const newMessage = str.split(' ');
+  const newArr = [newMessage[0]];
 
-  for(let i = 1; i < newMessage.length; i++){
-    const newWord = newMessage[i][0].toUpperCase() + newMessage[i].slice(1)
-    newArr.push(newWord)
+  for (let i = 1; i < newMessage.length; i++) {
+    const newWord = newMessage[i][0].toUpperCase() + newMessage[i].slice(1);
+    newArr.push(newWord);
   }
   return newArr.join('');
-}
+};
 
 export const api = new Api();
 
@@ -50,8 +50,6 @@ const getFooter = () => {
   const footerTpl = require('../tpl/footer.hbs').default;
   refs.footer.innerHTML = footerTpl();
   // console.log(location.href);
-
-
 };
 
 const getMainPage = (page = 1) => {
@@ -114,16 +112,28 @@ export const renderContent = path => {
   if (path === '/') {
     getMainPage();
     return false;
+
   }
   if(path === '/favourites'){
     console.log(api.data)
     renderCabinet()
+
   }
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
   }
-  api.getData(path).then(data => { 
+
+//   if (refs.header.childElementCount === 0) {
+//     getHeader();
+//   }
+//   if (refs.footer.childElementCount === 0) {
+//     getFooter();
+//   }
+  api.getData(path).then(data => {
+
     api.data.content[data[0].category] = data;
+
+
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;
     const categoryData = card(data);
@@ -138,7 +148,6 @@ export const __ = key => {
   };
   return vocabulary[lang]?.[key] ? vocabulary[lang][key] : key;
 };
-
 
 export function previewFile(event) {
   const preview = event.target.closest('div').querySelector(`[for=${event.target.id}] img`);
