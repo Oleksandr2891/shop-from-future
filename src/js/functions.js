@@ -52,7 +52,8 @@ const getFooter = () => {
   // console.log(location.href);
 };
 
-const getMainPage = (page = 1) => {
+export const getMainPage = (page = 1) => {
+  console.log('ok');
   api.getData(config.componentsTpl.ads.getAds).then(data => {
     const mainAdsArr = [...data.slice(5)];
     const rigthAdsArr = [...data.slice(0, 2)];
@@ -102,15 +103,15 @@ const getMainPage = (page = 1) => {
 };
 
 const googleRegister = () => {
-  const a = new URLSearchParams(location.search.slice(1))
-  if(a.get('accessToken')){
-    localStorage.setItem('accessToken', a.get('accessToken')) 
-    localStorage.setItem('refreshToken', a.get('refreshToken'))
-  };
-}
+  const a = new URLSearchParams(location.search.slice(1));
+  if (a.get('accessToken')) {
+    localStorage.setItem('accessToken', a.get('accessToken'));
+    localStorage.setItem('refreshToken', a.get('refreshToken'));
+  }
+};
 
 export const renderContent = path => {
- googleRegister()
+  googleRegister();
   getUserData();
 
   getHeader();
@@ -121,20 +122,16 @@ export const renderContent = path => {
   if (path === '/') {
     getMainPage();
     return false;
-
   }
   if (path === '/favourites') {
-    console.log(api.data)
-    renderCabinet()
-
+    console.log(api.data);
+    renderCabinet();
   }
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
   }
   api.getData(path).then(data => {
-
     api.data.content[data[0].category] = data;
-
 
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;
