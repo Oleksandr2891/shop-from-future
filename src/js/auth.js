@@ -21,6 +21,18 @@ const getUserData = () => {
   };
 };
 
+export const getUserData = () => {
+  api.getData('/user', {
+      auth: true,
+      body: false,
+    })
+    .then(data => {
+      api.data.user = data;
+      console.log(api.data);
+    });
+};
+
+
 export function registr() {
   api.postData(config.auth.register.link, getUserData()).then(data => {
     // console.log(data);
@@ -32,6 +44,7 @@ export function registr() {
     if (data.message) console.log(data.message);
     // console.log(data);
   });
+
 
 
   // if (data.accessToken) {
@@ -73,19 +86,10 @@ export const logOut =()=> {
   localStorage.removeItem('refreshToken');
   localStorage.removeItem('accessToken');
   localStorage.removeItem('sid');
+  getUserData()
 }
 
-export const getUserData = () => {
-  api
-    .getData('/user', {
-      auth: true,
-      body: false,
-    })
-    .then(data => {
-      api.data.user = data;
-      console.log(api.data);
-    });
-};
+
 
 export const signInWithGoogle = () => {
   fetch(config.apiUrl + '/auth/google')

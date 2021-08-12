@@ -21,4 +21,9 @@ export const renderCabinet = () => {
   if (api.data.user.calls.length < 1) {
     document.querySelector('.calls').classList.add('hidden');
   }
+  
+
+  history.pushState(null, null, '/favourites')
+  api.data.content = {}
+
 };

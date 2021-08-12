@@ -2,6 +2,7 @@ import { refs } from './refs';
 import modalTpl from '../tpl/components/modal.hbs';
 import { api, previewFile, stringToCamelCase } from './functions';
 
+
 export const renderModals = {
   auth: () => {
     const contentForModal = require('../tpl/components/modals/auth.hbs').default;
@@ -29,13 +30,23 @@ export const renderModals = {
     Object.keys(api.data.content).forEach(item => categories.push(item))
     console.log(categories)
     let item = {}
-    if(!categories.includes(normalizeCategory)){
+    if(location.pathname === '/favourites'){
+      item = api.data.user.favourites.find(item => id === item._id)
+    }else if(!categories.includes(normalizeCategory) && location.pathname !== '/favourites'){
       item = api.data.content.sales.find(item => id === item._id)    
     }else {
       item = api.data.content[normalizeCategory].find(item => id === item._id);
     }
     const modalContent = contentForModal(item);
     refs.modal.innerHTML = modalTpl({ modalContent });
+
+    if(api.data.user.favourites.find(item => id === item._id)){
+      
+      const modalGoods = document.querySelector('#card-goods')
+      modalGoods.querySelector('.card-goods-icon').textContent = 'favorite'
+      modalGoods.querySelector('.card-goods-icon').classList.add('card-goods-icon-active')
+      modalGoods.querySelector('.card-goods__btn-favorites').dataset.action = 'remove-from-favourites'
+    }
   },
 
   goItStudents: () => {
