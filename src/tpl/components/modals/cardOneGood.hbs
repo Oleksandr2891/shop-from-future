@@ -1,10 +1,33 @@
 <div class="card-goods" id="card-goods">
     <div class="card-goods__left">
-
-        <img src="{{imageUrls.[0]}}" alt="{{title}}" class="card-goods__img">
-        {{!-- <img src="{{imageUrls.[1]}}" alt="{{title}}" class="card-goods__img"> --}}
-
+        <div class="card-goods__firstwrapper">
+        <img src="{{imageUrls.[0]}}" alt="{{title}}" class="card-goods__img" id="mainImg">
+        </div>         
+        <div class="card-goods__container">
+            {{#each imageUrls}}
+            <div class="card-goods__wrapper">
+                <a class="card-goods__img-link" data-action="show-main-img">
+                    <img src="{{this}}" alt="{{title}}" class="card-goods__imgsecond">
+                    </a>        
+            </div>
+            {{/each}}
+        </div>                  
     </div>
+ {{!-- //////slider --}}
+<div class='swiper-container'>
+    <div class='swiper-wrapper card-goods__swiper'>
+        {{#each imageUrls}}
+        <div class='swiper-slide'>           
+                <div class='card-image__wrapper'>
+                    <img class="card-image__img" src="{{this}}" alt="{{title}}">
+                </div>           
+         </div>
+        {{/each}}
+    </div>
+    <div class="swiper-pagination"></div>
+    </div>
+    {{!-- ////slider --}}
+        
     <div class="card-goods__right">
 
         <h2 class="card-goods__title">{{title}}</h2>

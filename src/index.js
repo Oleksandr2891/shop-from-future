@@ -7,7 +7,6 @@ import { animateModal } from './js/animation-modal';
 
 import { addToFavourites, removeFromFavourites } from './js/productsCRUD';
 
-
 import validator from 'validator';
 
 import { renderCabinet } from './js/renderCabinet';
@@ -20,8 +19,6 @@ import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import { error, success } from '@pnotify/core';
 import userDataTpl from './tpl/components/userData.hbs';
-
-
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -38,10 +35,13 @@ document.addEventListener('click', e => {
   // console.log(!buttonTag);
   // if (!linkTag || !buttonTag) return false;
   if (linkTag) {
-    if (linkTag.dataset.action !== "sign-in-with-google") {
+    if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
     }
-
+    if (linkTag.dataset.action === 'show-main-img') {
+      const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
+      document.querySelector('#mainImg').setAttribute('src', srcChangeImg);
+    }
 
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
@@ -49,7 +49,6 @@ document.addEventListener('click', e => {
       const amountCategoriesWithSales = api.data.categories.length + 1;
       const amountCategoriesOnMainPages = Object.keys(api.data.content).length;
       if (amountCategoriesWithSales <= amountCategoriesOnMainPages) {
-
         refs.linkPaginationWrapper.classList.add('hidden');
         counter = 1;
         api.data.counterMainPage = [counter];
@@ -59,8 +58,7 @@ document.addEventListener('click', e => {
         api.data.counterMainPage = [counter];
         const path = config.componentsTpl.goods.getGoods + counter;
         getNextPage(path);
-      };
-
+      }
     } else if (linkTag.dataset.action === 'open-cabinet') {
       renderCabinet();
     } else if (linkTag.dataset.id === undefined) {
@@ -74,7 +72,6 @@ document.addEventListener('click', e => {
         // console.log(api.data.content.sales);
       } else {
         const path = linkTag.getAttribute('href');
-
 
         renderContent(path);
       }
@@ -91,7 +88,6 @@ document.addEventListener('click', e => {
       refs.modal.querySelector('input').focus();
       document.querySelector('#user-log-in').disabled = true;
       document.querySelector('#user-register').disabled = true;
-
     }
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
@@ -103,15 +99,13 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'user-register') {
       registr();
-
     }
-    // 
+    //
     if (e.target.dataset.action === 'user-log-in') {
       e.preventDefault();
       // console.log('ok');
       logIn();
       // refs.modal.innerHTML = '';
-
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
@@ -155,9 +149,8 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'remove-from-favourites') {
-      removeFromFavourites(buttonTag.dataset.id)
+      removeFromFavourites(buttonTag.dataset.id);
     }
-
 
     if (buttonTag.dataset.action === 'show-user-data') {
       const path = '/user/' + e.target.closest('button').dataset.userid;
@@ -173,7 +166,6 @@ document.addEventListener('click', e => {
       }
       findUserData();
     }
-
 
     if (buttonTag.dataset.search === 'search') {
       const input = refs.header.querySelector('.header__find');
@@ -222,7 +214,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-
 // Слушатель для input
 document.addEventListener('input', e => {
   // console.log(e.target);
@@ -266,5 +257,3 @@ document.addEventListener('input', e => {
 });
 
 // document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});
-
-
