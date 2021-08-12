@@ -15,7 +15,7 @@
       "tpl": "/components/ads.hbs"
     },
     "goods": {
-      "getGoods": "/call?page=1",
+      "getGoods": "/call?page=",
       "tpl": "/components/goods.hbs"
     }
   },
@@ -26,17 +26,16 @@
       "name": "Регистрация",
       "tpl": "register"
     },
-     "login": {
-       "link": "/auth/login",
+    "login": {
+      "link": "/auth/login",
       "name": "Войти",
       "tpl": "login"
-     },
-     "logout": {
+    },
+    "logout": {
       "link": "/auth/logout",
       "name": "Выйти из учетной записи ",
       "tpl": "episode"
     }
-
   },
   "register": [
     {
@@ -123,5 +122,7 @@
       "name": "Список категорий",
       "tpl": "category"
     }
-  }
+  },
+  "favourites_URL": "/call/favourite"
 }
+

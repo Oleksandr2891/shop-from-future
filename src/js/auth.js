@@ -4,11 +4,13 @@ import { refs } from './refs';
 
 // import validator from 'validator';
 
+
 const getUserData = () => {
   const inputEmail = document.querySelector('#email');
   const inputEmailValue = inputEmail.value.trim();
   const inputPassword = document.querySelector('#password');
   const inputPasswordValue = inputPassword.value.trim();
+
 
   return {
     data: {
@@ -18,6 +20,7 @@ const getUserData = () => {
     auth: false,
   };
 };
+
 export function registr() {
   api.postData(config.auth.register.link, getUserData()).then(data => {
     // console.log(data);
@@ -30,6 +33,7 @@ export function registr() {
     // console.log(data);
   });
 
+
   // if (data.accessToken) {
   //   console.log(data.accessToken);
   // refs.modal.innerHTML = '';
@@ -37,14 +41,17 @@ export function registr() {
   // form.reset();
 }
 
-export function logIn() {
-  api.postData(config.auth.login.link, getUserData()).then(data => {
+
+export const logIn = () => {
+  api.postData(config.auth.login.link, getInputData()).then(data => {
     console.log(data);
+
     if (data.message) console.log(data.message);
     if (data.accessToken) {
       // console.log(data.accessToken);
       refs.modal.innerHTML = '';
     }
+
     localStorage.setItem('refreshToken', data.refreshToken);
     localStorage.setItem('accessToken', data.accessToken);
     localStorage.setItem('sid', data.sid);
@@ -54,7 +61,7 @@ export function logIn() {
     //
   });
 }
-export function logOut() {
+export const logOut =()=> {
   console.log(api.data);
   const objLogOut = {
     auth: true,
@@ -68,4 +75,25 @@ export function logOut() {
   localStorage.removeItem('sid');
 }
 
-// form.reset();
+export const getUserData = () => {
+  api
+    .getData('/user', {
+      auth: true,
+      body: false,
+    })
+    .then(data => {
+      api.data.user = data;
+      console.log(api.data);
+    });
+};
+
+export const signInWithGoogle = () => {
+  fetch(config.apiUrl + '/auth/google')
+  .then(res => {
+    
+    return res.json()
+  })
+  .then(data => console.log(data))
+  .catch(err => console.log(err));
+}
+

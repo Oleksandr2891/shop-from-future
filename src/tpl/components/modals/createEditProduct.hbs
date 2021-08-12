@@ -6,14 +6,37 @@
     <input type='text' class='modal-create__input' required minlength='2' />
   </label>
 
-  <label class='modal-create__field'>
+  <div class='modal-create__field'>
     Фото
-    <input type='file' class='modal-create__input modal-create__file' />
-    {{!-- <ul class='modal-create__photo'>
-      <li></li>
-    </ul> --}}
-
-  </label>
+    {{!-- <input type='file' class='modal-create__input  modal-create__file'/>
+    <label for="file">+</label> --}}
+    <div class='modal-create__file-wrap'>
+    <input type="file" name="file" id="first" class="inputfile" />
+    <label for="first" class="img-plus">      
+      <img src="" class="modal-create__preview-img" />
+    </label>
+    <input type="file" name="file" id="second" class="inputfile" />
+    <label for="second" class="img-plus" >
+      <img src="" class="modal-create__preview-img" />
+    </label>
+    <input type="file" name="file" id="third" class="inputfile" />
+    <label for="third" class="img-plus">
+      <img src="" class="modal-create__preview-img" />
+    </label>
+    <input type="file" name="file" id="fourt" class="inputfile" />
+    <label for="fourt" class="img-plus">
+      <img src="" class="modal-create__preview-img" />
+    </label>
+    <input type="file" name="file" id="fifth" class="inputfile" />
+    <label for="fifth" class="img-plus">
+      <img src="" class="modal-create__preview-img" />
+    </label>
+    <input type="file" name="file" id="sixth" class="inputfile inputfile-sixth" />
+    <label for="sixth" class="img-plus img-plus-sixth">
+      <img src="" class="modal-create__preview-img" />
+    </label>
+  </div>        
+  </div>
   <label class='modal-create__field'>
     Описание товара
     <textarea

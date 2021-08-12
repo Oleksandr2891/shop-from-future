@@ -1,0 +1,49 @@
+<div class='swiper-container container-categories calls'>
+    <h2 class="swiper-title">Мои объявления</h2>
+    <a href="#" class="swiper-link__once-category">Смотреть все</a>
+    <div class='swiper-wrapper'>
+        {{#each userData.calls}}
+        <div class='swiper-slide'>
+            <a href="#" class="swiper-container__link-card" data-link="{{id}}">
+                <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}" alt="{{title}}">
+                </div>
+                <h3 class='card-name'>{{title}}</h3>
+                <p class='card-price'>
+                    <span class="old-price"> {{oldPrice}} </span>
+                    <span class="price"> {{price}}&#8364</span>
+                </p>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+    <div class="swiper-pagination"></div>
+    <div id="btn-slider" class='swiper-button-prev'></div>
+    <div id="btn-slider" class='swiper-button-next'></div>
+</div>
+
+
+
+<div class='swiper-container container-categories favourite'>
+    <h2 class="swiper-title">Избранное</h2>
+    <a href="#" class="swiper-link__once-category">Смотреть все</a>
+    <div class='swiper-wrapper'>
+        {{#each userData.favourites}}
+        <div class='swiper-slide'>
+            <a href="#" class="swiper-container__link-card" data-link="{{_id}}">
+                <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}"
+                        alt="{{title}}">
+                </div>
+                <h3 class='card-name'>{{title}}</h3>
+                <p class='card-price'>
+                    <span class="old-price"> {{oldPrice}} </span>
+                    <span class="price"> {{price}}&#8364</span>
+                </p>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+    <div class="swiper-pagination"></div>
+    <div id="btn-slider" class='swiper-button-prev'></div>
+    <div id="btn-slider" class='swiper-button-next'></div>
+</div>
+
