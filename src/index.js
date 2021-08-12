@@ -4,6 +4,8 @@ import { renderContent } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
+import { registr, logIn, logOut } from './js/auth';
+import validator from 'validator';
 import { addToFavourites } from './js/productsCRUD';
 import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
@@ -14,6 +16,7 @@ const sales = '/call/specific/sales';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import { error, success } from '@pnotify/core';
+
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -63,6 +66,8 @@ document.addEventListener('click', e => {
       animateModal();
       // console.log(refs.modal);
       refs.modal.querySelector('input').focus();
+      document.querySelector('#user-log-in').disabled = true;
+      document.querySelector('#user-register').disabled = true;
       // if (document.querySelector('#formRegister')) {
       //   const formRegister = document.querySelector('#formRegister');
       //   console.log(formRegister);
@@ -83,11 +88,15 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'user-register') {
       registr();
+      // console.log(data);
     }
-
-    if (buttonTag.dataset.action === 'user-log-in') {
+// 
+    if (e.target.dataset.action === 'user-log-in') {
+      e.preventDefault();
+      // console.log('ok');
       logIn();
-      refs.modal.innerHTML = '';
+      // refs.modal.innerHTML = '';
+
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
@@ -161,4 +170,48 @@ document.addEventListener('keydown', e => {
   }
 });
 
-document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});
+
+// Слушатель для input
+document.addEventListener('input', e => {
+  // console.log(e.target);
+  if (e.target.dataset.action === 'register-email') {
+    // console.log(e.target.value);
+    // console.log(validator.isStrongPassword);
+    if (!validator.isEmail(e.target.value)) {
+      if (e.target.classList.contains('valid')) {
+        e.target.classList.remove('valid');
+      }
+      e.target.classList.add('invalid');
+      document.querySelector('#user-log-in').disabled = true;
+      document.querySelector('#user-register').disabled = true;
+    }
+    if (validator.isEmail(e.target.value)) {
+      if (e.target.classList.contains('invalid')) {
+        e.target.classList.remove('invalid');
+      }
+      e.target.classList.add('valid');
+    }
+  }
+  if (e.target.dataset.action === 'register-password') {
+    // if ()
+    if (e.target.value.length < 4) {
+      if (e.target.classList.contains('valid')) {
+        e.target.classList.remove('valid');
+      }
+      e.target.classList.add('invalid');
+      document.querySelector('#user-log-in').disabled = true;
+      document.querySelector('#user-register').disabled = true;
+    }
+    if (e.target.value.length >= 4) {
+      if (e.target.classList.contains('invalid')) {
+        e.target.classList.remove('invalid');
+      }
+      e.target.classList.add('valid');
+      document.querySelector('#user-log-in').disabled = false;
+      document.querySelector('#user-register').disabled = false;
+    }
+  }
+});
+
+// document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});
+
