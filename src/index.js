@@ -7,7 +7,7 @@ import { animateModal } from './js/animation-modal';
 
 import { addToFavourites, removeFromFavourites } from './js/productsCRUD';
 
-import { registr, logIn, logOut } from './js/auth';
+
 import validator from 'validator';
 
 import { renderCabinet } from './js/renderCabinet';
@@ -38,10 +38,10 @@ document.addEventListener('click', e => {
   // console.log(!buttonTag);
   // if (!linkTag || !buttonTag) return false;
   if (linkTag) {
-    if(linkTag.dataset.action !== "sign-in-with-google"){
+    if (linkTag.dataset.action !== "sign-in-with-google") {
       e.preventDefault();
     }
-    
+
 
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
@@ -87,19 +87,11 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.dataset.value]();
       animateModal();
-      // console.log(refs.modal);
+
       refs.modal.querySelector('input').focus();
       document.querySelector('#user-log-in').disabled = true;
       document.querySelector('#user-register').disabled = true;
-      // if (document.querySelector('#formRegister')) {
-      //   const formRegister = document.querySelector('#formRegister');
-      //   console.log(formRegister);
-      //   formRegister.addEventListener('submit', e => {
-      //     console.log(e.target);
-      //     e.preventDefault();
-      //     console.log(e.target);
-      //   });
-      // }
+
     }
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
@@ -111,9 +103,9 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'user-register') {
       registr();
-      // console.log(data);
+
     }
-// 
+    // 
     if (e.target.dataset.action === 'user-log-in') {
       e.preventDefault();
       // console.log('ok');
@@ -162,7 +154,7 @@ document.addEventListener('click', e => {
       addToFavourites(e.target.closest('button').dataset.id);
     }
 
-    if(buttonTag.dataset.action === 'remove-from-favourites'){
+    if (buttonTag.dataset.action === 'remove-from-favourites') {
       removeFromFavourites(buttonTag.dataset.id)
     }
 

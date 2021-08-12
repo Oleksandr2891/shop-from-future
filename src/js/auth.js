@@ -5,7 +5,7 @@ import { refs } from './refs';
 // import validator from 'validator';
 
 
-const getUserData = () => {
+const getInputData = () => {
   const inputEmail = document.querySelector('#email');
   const inputEmailValue = inputEmail.value.trim();
   const inputPassword = document.querySelector('#password');
@@ -23,9 +23,9 @@ const getUserData = () => {
 
 export const getUserData = () => {
   api.getData('/user', {
-      auth: true,
-      body: false,
-    })
+    auth: true,
+    body: false,
+  })
     .then(data => {
       api.data.user = data;
       console.log(api.data);
@@ -74,7 +74,7 @@ export const logIn = () => {
     //
   });
 }
-export const logOut =()=> {
+export const logOut = () => {
   console.log(api.data);
   const objLogOut = {
     auth: true,
@@ -93,11 +93,11 @@ export const logOut =()=> {
 
 export const signInWithGoogle = () => {
   fetch(config.apiUrl + '/auth/google')
-  .then(res => {
-    
-    return res.json()
-  })
-  .then(data => console.log(data))
-  .catch(err => console.log(err));
+    .then(res => {
+
+      return res.json()
+    })
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 }
 
