@@ -125,6 +125,14 @@ document.addEventListener('click', e => {
         filterMenuNode.classList.add('hidden');
       }
     }
+    if (buttonTag.dataset.action === 'close-filter') {
+      refs.header.querySelector('.mobile-menu').classList.add('hidden');
+      refs.header.querySelector('.tablet-menu').classList.add('hidden');
+      refs.content.innerHTML = '';
+      const path = '/'
+      history.pushState(null, null, path);
+      getMainPage();
+    }
 
     if (buttonTag.dataset.action === 'open-cabinet') {
       const openMyCabinet = refs.header.querySelector('.modal-cabinet');
