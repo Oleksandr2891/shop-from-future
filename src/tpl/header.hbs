@@ -5,7 +5,7 @@
       <use href=''></use>
       </svg>
     </button>
-    <a href='/'>
+    <a href='/' data-action='open-main'>
       <img class='mobile__logo' src='{{this.logo}}' alt='logo' />
     </a>
     <button type='button' class='mobile-button'>
@@ -14,7 +14,7 @@
   </div>
   <div class='header__wrapper'>
     <nav class='nav'>
-      <a href='/'>
+      <a href='/' data-action='open-main'>
 
         <img class='header__logo logo' src='{{this.logo}}' alt='logo' />
       </a>
@@ -28,7 +28,8 @@
     <div class='box'>
       <ul class='list registration log-in'>
         <li class='item registration__item'>
-          <button class='registration__btn-reg' type='button' data-action="open-modal" data-value="auth" >Регистрация</button>
+          <button class='registration__btn-reg' type='button' data-action="open-modal"
+            data-value="auth">Регистрация</button>
         </li>
         <li class='item registration__item'>
           <button class='registration__btn-in' type='button' data-action="open-modal" data-value="auth">Войти</button>
@@ -39,14 +40,14 @@
       </div>
       <ul class='list cabinet'>
         <li class='item cabinet__item my-cabinet'>
-          <a class='cabinet__in' type='button'  data-action='open-cabinet'>
+          <a class='cabinet__in' type='button' data-action='open-cabinet'>
             <span class="material-icons-outlined icons">account_circle</span>Мой кабинет</a>
-            <div class="modal-cabinet hidden">
-             <ul class="menu-caminet">
-               <li class="item"><a class="link" href="http://">Мои объявления</a></li>
-               <li class="item"><a class="link" href="http://">Избранные</a></li>
-             </ul>
-            </div>
+          <div class="modal-cabinet hidden">
+            <ul class="menu-caminet">
+              <li class="item"><a class="link" href="http://">Мои объявления</a></li>
+              <li class="item"><a class="link" href="http://">Избранные</a></li>
+            </ul>
+          </div>
         </li>
         <li class='item cabinet__item'>
           <button class='cabinet__out' type='button'>
@@ -121,11 +122,11 @@
           </svg>Мой кабинет
         </button>
         <div class="modal-cabinet-mobile hidden">
-             <ul class="menu-caminet">
-               <li class="item"><a class="link" href="http://">Мои объявления</a></li>
-               <li class="item"><a class="link" href="http://">Избранные</a></li>
-             </ul>
-            </div>
+          <ul class="menu-caminet">
+            <li class="item"><a class="link" href="http://">Мои объявления</a></li>
+            <li class="item"><a class="link" href="http://">Избранные</a></li>
+          </ul>
+        </div>
       </li>
       <li class='item cabinet__item'>
         <button class='cabinet__out' type='button'>
