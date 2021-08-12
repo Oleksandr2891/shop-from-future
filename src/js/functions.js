@@ -101,7 +101,16 @@ const getMainPage = (page = 1) => {
   });
 };
 
+const googleRegister = () => {
+  const a = new URLSearchParams(location.search.slice(1))
+  if(a.get('accessToken')){
+    localStorage.setItem('accessToken', a.get('accessToken')) 
+    localStorage.setItem('refreshToken', a.get('refreshToken'))
+  };
+}
+
 export const renderContent = path => {
+ googleRegister()
   getUserData();
 
   getHeader();
@@ -122,13 +131,6 @@ export const renderContent = path => {
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
   }
-
-  //   if (refs.header.childElementCount === 0) {
-  //     getHeader();
-  //   }
-  //   if (refs.footer.childElementCount === 0) {
-  //     getFooter();
-  //   }
   api.getData(path).then(data => {
 
     api.data.content[data[0].category] = data;
