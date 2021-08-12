@@ -103,15 +103,15 @@
         <use href=''></use>
       </svg>
     </button>
-    <ul class='list log-in mobile-menu__registration'>
+    <ul class='list log-in mobile-menu__registration' id="register-wraper-mobile">
       <li class='item registration__item'>
-        <button class='registration__btn-reg' type='button'>Регистрация</button>
+        <button class='registration__btn-reg' type='button' data-action="open-modal" data-value="auth">Регистрация</button>
       </li>
       <li class='item registration__item'>
-        <button class='registration__btn-in' type='button'>Войти</button>
+        <button class='registration__btn-in' type='button' data-action="open-modal" data-value="auth">Войти</button>
       </li>
     </ul>
-    <ul class='list cabinet mobile-menu__cabinet'>
+    <ul class='list cabinet mobile-menu__cabinet hide' id="cabinet-wraper-mobile">
       <li class='item cabinet__item menu-cabinet'>
         <button class='cabinet__in' type='button' data-action='open-cabinet-mobile'>
           <svg class='ikon-user' width='20px' height='20px'>

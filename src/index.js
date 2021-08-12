@@ -64,7 +64,7 @@ document.addEventListener('click', e => {
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
-        const path = '/call/sales'
+        const path = '/call/sales';
         history.pushState(null, null, path);
         // console.log(api.data.content.sales);
       } else {
@@ -104,7 +104,8 @@ document.addEventListener('click', e => {
       logIn();
       document.querySelector('#register-wraper').classList.add('hide');
       document.querySelector('#cabinet-wraper').classList.remove('hide');
-
+      document.querySelector('#register-wraper-mobile').classList.add('hide');
+      document.querySelector('#cabinet-wraper-mobile').classList.remove('hide');
       renderCabinet();
       // getHeader();
 
@@ -114,7 +115,8 @@ document.addEventListener('click', e => {
       logOut();
       document.querySelector('#cabinet-wraper').classList.add('hide');
       document.querySelector('#register-wraper').classList.remove('hide');
-
+      document.querySelector('#register-wraper-mobile').classList.remove('hide');
+      document.querySelector('#cabinet-wraper-mobile').classList.add('hide');
       getMainPage();
     }
     if (buttonTag.dataset.action === 'open-filter') {
