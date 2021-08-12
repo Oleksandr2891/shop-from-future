@@ -131,6 +131,9 @@ export const renderContent = path => {
     refs.ads.innerHTML = '';
   }
   api.getData(path).then(data => {
+
+    history.pushState(null, null, path);
+
     api.data.content[data[0].category] = data;
 
     const categoryTpl = require('../tpl/category.hbs').default;

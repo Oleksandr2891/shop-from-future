@@ -28,12 +28,11 @@ renderContent(getPath());
 let counter = 1;
 
 document.addEventListener('click', e => {
-  const linkTag = e.target.closest('a') || e.target.querySelector('a');
+  const linkTag = e.target.closest('a');
   const buttonTag = e.target.closest('button');
-  // console.log(e.target);
-  // console.log(!linkTag);
-  // console.log(!buttonTag);
-  // if (!linkTag || !buttonTag) return false;
+
+  if (!linkTag && !buttonTag) return false;
+
   if (linkTag) {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
@@ -59,12 +58,14 @@ document.addEventListener('click', e => {
       renderCabinet();
     } else if (linkTag.dataset.id === undefined) {
       if (linkTag.getAttribute('href') === sales) {
+        refs.linkPaginationWrapper.classList.add('hidden');
         const categoryTpl = require('./tpl/category.hbs').default;
         const card = require('./tpl/components/productCard.hbs').default;
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
-
+        const path = '/call/sales'
+        history.pushState(null, null, path);
         // console.log(api.data.content.sales);
       } else {
         const path = linkTag.getAttribute('href');

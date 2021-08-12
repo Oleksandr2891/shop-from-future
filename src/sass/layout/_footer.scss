@@ -3,6 +3,7 @@
   padding-top: 38px;
   padding-bottom: 38px;
 
+
   @media screen and (min-width: 768px) {
     padding-top: 62px;
     padding-bottom: 62px;
@@ -71,6 +72,7 @@
     font-size: 20px;
     line-height: 1.2;
     color: var(--primary-white-color);
+    cursor: pointer;
   }
 
 }
