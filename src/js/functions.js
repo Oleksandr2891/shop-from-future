@@ -46,7 +46,7 @@ const getHeader = () => {
 };
 
 const getFooter = () => {
-  if (refs.footer.childElementCount === 0) return false;
+  if (refs.footer.childElementCount !== 0) return false;
   const footerTpl = require('../tpl/footer.hbs').default;
   refs.footer.innerHTML = footerTpl();
   // console.log(location.href);
@@ -114,7 +114,7 @@ export const renderContent = path => {
     return false;
 
   }
-  if(path === '/favourites'){
+  if (path === '/favourites') {
     console.log(api.data)
     renderCabinet()
 
@@ -123,12 +123,12 @@ export const renderContent = path => {
     refs.ads.innerHTML = '';
   }
 
-//   if (refs.header.childElementCount === 0) {
-//     getHeader();
-//   }
-//   if (refs.footer.childElementCount === 0) {
-//     getFooter();
-//   }
+  //   if (refs.header.childElementCount === 0) {
+  //     getHeader();
+  //   }
+  //   if (refs.footer.childElementCount === 0) {
+  //     getFooter();
+  //   }
   api.getData(path).then(data => {
 
     api.data.content[data[0].category] = data;
