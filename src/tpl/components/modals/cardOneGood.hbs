@@ -1,7 +1,8 @@
-<div class="card-goods">  
+<div class="card-goods" id="card-goods">  
     <div class="card-goods__left">
 
         <img src="{{imageUrls.[0]}}" alt="{{title}}" class="card-goods__img">
+        {{!-- <img src="{{imageUrls.[1]}}" alt="{{title}}" class="card-goods__img"> --}}
 
     </div>
     <div class="card-goods__right">
@@ -10,9 +11,13 @@
         <p class="card-goods__code">Категори товара: {{category}}</p>
         <p class="card-goods__price">{{price}}€</p>
 
-        <button type="button" class="card-goods__btn-information">Информация о продавце</button>
 
+        <button type="button" data-action="show-user-data" class="card-goods__btn-information" data-userId="{{userId}}">Информация о продавце</button>
+         <div class="user-data">
+            
+         </div>
         <button type="button" data-action="add-to-favourite" data-id="{{_id}}" class="card-goods__btn card-goods__btn-favorites">В избранное
+
             <span class="card-goods-icon material-icons-outlined">favorite_border</span>            
         </button>
         <button type="button" class="card-goods__btn card-goods__btn-share">Поделиться

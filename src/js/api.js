@@ -3,14 +3,14 @@ import { isJSON } from './functions';
 
 export default class Api {
   #data = {
-    content: {}
+    content: {},
+
   };
 
   constructor(name, path, obj = {}) {
     this.name = name;
     this.path = path;
     this.obj = obj;
- 
   }
 
   async send(path = this.path, method = 'GET', obj = {}) {
@@ -51,6 +51,10 @@ export default class Api {
   async postData(path = this.path, obj = this.obj) {
     const res = await this.send(path, 'POST', obj);
     return res;
+  }
+  async deleteData(path = this.path, obj = this.obj){
+    const res = await this.send(path, 'DELETE', obj); 
+    return res
   }
 
   get data() {

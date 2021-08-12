@@ -6,4 +6,5 @@ export const refs = {
   modal: document.querySelector('#modal'),
   linkPaginationWrapper: document.querySelector('.link-download__wrapper'),
   linkPagination: document.querySelector('.link-download')
+
 };

@@ -5,11 +5,11 @@
       <div class="modal_register-div" id="modal_register-div">
             <p class='modal_paragraph-register-google'>Для авторизации можете использовать Google Account:</p>
             <div class='center'>
-              <button type='button' data-action="sign-in-with-google" class='modal_button-register-google'>
+              <a href="https://callboard-backend.goit.global/auth/google" data-action="sign-in-with-google" class='modal_button-register-google'>
                 <svg class="modal_button-svg-google">
                   <use href="{{sprite}}#icon-google-icon"></use>
                 </svg>
-              </button>
+              </a>
             </div>
             <p class='modal_paragraph-register-email'>Или войдите в приложение используя e-mail и пароль:</p>
             <form id="formRegister">
@@ -19,7 +19,9 @@
                   placeholder='E-mail'
                   class='modal_input-email-register modal_input-register'
                   id="email"
-                />
+                  data-action="register-email"
+                  {{!-- required="required" --}}
+                >
               {{!-- </label> --}}
               {{!-- <label> --}}
                 <input
@@ -27,18 +29,23 @@
                   placeholder='Password'
                   class='modal_input-password-register modal_input-register'
                   id="password"
+                  {{!-- required="required" --}}
+                  data-action="register-password"
+                  
                 />
               {{!-- </label> --}}
               <div class='modal_div-button-register'>
                 <button
-                  type='submit'
+                  type='button'
                   class='modal_button-register-entrance modal_button-register' 
                   data-action="user-log-in"
+                  id="user-log-in"
                 >Войти</button>
                 <button
                   type='button'
                   class='modal_button-registeration modal_button-register' 
                   data-action="user-register"
+                  id="user-register"
                 >Регистрация</button>
               </div>
             </form>
