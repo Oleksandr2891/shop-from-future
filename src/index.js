@@ -16,6 +16,7 @@ const sales = '/call/specific/sales';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import { error, success } from '@pnotify/core';
+import userDataTpl from './tpl/components/userData.hbs';
 
 
 const getPath = () => {
@@ -139,15 +140,46 @@ document.addEventListener('click', e => {
       addToFavourites(e.target.closest('button').dataset.id);
     }
 
+    if (buttonTag.dataset.action === 'show-user-data') {
+      const path = '/user/' + e.target.closest('button').dataset.userid;
+
+      function findUserData() {
+        return fetch(config.apiUrl + path)
+          .then(response => {
+            return response.json();
+          })
+          .then(userData => {
+            document.querySelector('.user-data').innerHTML = userDataTpl(userData);
+          });
+      }
+      findUserData();
+    }
+
     if (buttonTag.dataset.search === 'search') {
       const input = refs.header.querySelector('.header__find');
+      const path = input.dataset.search + input.value;
+
+      function findGood() {
+        return fetch(config.apiUrl + path)
+          .then(response => {
+            return response.json();
+          })
+          .then(good => {
+            if (good.length < 1) {
+              error({ text: 'Your request is incorrect!', delay: 1500 });
+            }
+            if (good.length > 0) {
+              success({ text: `Goods were found.`, delay: 1000 });
+            }
+          });
+      }
+      findGood();
 
       if (input.value != '') {
         const path = input.dataset.search + input.value;
         renderContent(path);
-        success({ text: `Goods were found.`, delay: 1000 });
       } else {
-        error({ text: 'Please enter a more specific query', delay: 1500 });
+        error({ text: 'Please enter the date', delay: 1500 });
       }
     }
   } else if (e.target) {
