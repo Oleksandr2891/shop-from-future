@@ -6,7 +6,7 @@ import Swiper from 'swiper/bundle';
 import swiperConfigAds from './adsSwiper';
 import swiperConfigCategories from '../configSwiper.json';
 import { getUserData } from './auth';
-
+import { renderCabinet } from './renderCabinet';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
 
@@ -35,6 +35,7 @@ export const stringToCamelCase = (str) => {
 export const api = new Api();
 
 const getHeader = () => {
+  if (refs.header.childElementCount !== 0) return false;
   api.getData(config.baseTpl.header.getCategories).then(data => {
     const headerTpl = require('../tpl/header.hbs').default;
     const logo = require('../images/logo.svg');
@@ -45,6 +46,7 @@ const getHeader = () => {
 };
 
 const getFooter = () => {
+  if (refs.footer.childElementCount === 0) return false;
   const footerTpl = require('../tpl/footer.hbs').default;
   refs.footer.innerHTML = footerTpl();
   // console.log(location.href);
@@ -103,41 +105,29 @@ const getMainPage = (page = 1) => {
 };
 
 export const renderContent = path => {
-
   getUserData();
-
+  getHeader();
+  getFooter();
+  history.pushState(null, null, path);
   if (path !== '/') refs.linkPagination.classList.add('hidden');
+
   if (path === '/') {
-    history.pushState(null, null, path);
-    api.data.content = {};
-    getHeader();
     getMainPage();
-    getFooter();
-
     return false;
-
+  }
+  if(path === '/favourites'){
+    console.log(api.data)
+    renderCabinet()
   }
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
   }
-  if (refs.header.childElementCount === 0) {
-    getHeader();
-  }
-  if (refs.footer.childElementCount === 0) {
-    getFooter();
-
-  }
   api.getData(path).then(data => { 
-    console.log(data[0].category)
     api.data.content[data[0].category] = data;
-    console.log(api.data)
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;
     const categoryData = card(data);
-
     refs.content.innerHTML = categoryTpl({ categoryData });
-
-    return data;
   });
 };
 

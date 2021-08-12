@@ -3,7 +3,8 @@ import { isJSON } from './functions';
 
 export default class Api {
   #data = {
-    content: {}
+    content: {},
+    
   };
 
   constructor(name, path, obj = {}) {
@@ -51,6 +52,10 @@ export default class Api {
   async postData(path = this.path, obj = this.obj) {
     const res = await this.send(path, 'POST', obj);
     return res;
+  }
+  async deleteData(path = this.path, obj = this.obj){
+    const res = await this.send(path, 'DELETE', obj); 
+    return res
   }
 
   get data() {

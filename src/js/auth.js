@@ -13,6 +13,18 @@ const getInputData = () => {
   };
 };
 
+export const getUserData = () => {
+  api
+    .getData('/user', {
+      auth: true,
+      body: false,
+    })
+    .then(data => {
+      api.data.user = data;
+      console.log(api.data);
+    });
+};
+
 export const registr = () =>{
   api.postData(config.auth.register.link, getInputData()).then(data => console.log(data));
 
@@ -45,19 +57,10 @@ export const logOut =()=> {
   localStorage.removeItem('refreshToken');
   localStorage.removeItem('accessToken');
   localStorage.removeItem('sid');
+  getUserData()
 }
 
-export const getUserData = () => {
-  api
-    .getData('/user', {
-      auth: true,
-      body: false,
-    })
-    .then(data => {
-      api.data.user = data;
-      console.log(api.data);
-    });
-};
+
 
 export const signInWithGoogle = () => {
   fetch(config.apiUrl + '/auth/google')

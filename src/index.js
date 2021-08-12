@@ -4,7 +4,7 @@ import { renderContent } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
-import { addToFavourites } from './js/productsCRUD';
+import { addToFavourites, removeFromFavourites } from './js/productsCRUD';
 import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
 import { api } from './js/functions';
@@ -27,7 +27,10 @@ document.addEventListener('click', e => {
   const linkTag = e.target.closest('a') || e.target.querySelector('a');
   const buttonTag = e.target.closest('button');
   if (linkTag) {
-    e.preventDefault();
+    if(linkTag.dataset.action !== "sign-in-with-google"){
+      e.preventDefault();
+    }
+    
 
     if (linkTag.dataset.action === "load-more") {
       if (counter === 3) counter = 2;
@@ -52,13 +55,13 @@ document.addEventListener('click', e => {
         // console.log(api.data.content.sales);
       } else {
         const path = linkTag.getAttribute('href');
-
+        console.log('hello')
 
         renderContent(path);
       }
     }
-
     else {
+      console.log('hello')
       renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
 
     }
@@ -136,10 +139,12 @@ document.addEventListener('click', e => {
       }
     }
 
-    if (buttonTag.dataset.action === 'add-to-favourite') {
+    if (buttonTag.dataset.action === 'add-to-favourites') {
       addToFavourites(e.target.closest('button').dataset.id);
     }
-
+    if(buttonTag.dataset.action === 'remove-from-favourites'){
+      removeFromFavourites(buttonTag.dataset.id)
+    }
     if (buttonTag.dataset.search === 'search') {
       const input = refs.header.querySelector('.header__find');
 
