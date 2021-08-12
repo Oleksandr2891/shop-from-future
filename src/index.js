@@ -64,8 +64,8 @@ document.addEventListener('click', e => {
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
-        const path = '/call/sales'
-        history.pushState(null, null, path);
+        // const path = '/call/sales'
+        // history.pushState(null, null, path);
         // console.log(api.data.content.sales);
       } else {
         const path = linkTag.getAttribute('href');
