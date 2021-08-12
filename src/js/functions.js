@@ -130,7 +130,7 @@ export const renderContent = path => {
   //     getFooter();
   //   }
   api.getData(path).then(data => {
-
+    history.pushState(null, null, path);
     api.data.content[data[0].category] = data;
 
 
