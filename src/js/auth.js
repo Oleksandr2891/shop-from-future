@@ -22,13 +22,14 @@ const getInputData = () => {
 };
 
 export const getUserData = () => {
-  api.getData('/user', {
+  return api.getData('/user', {
     auth: true,
     body: false,
   })
     .then(data => {
       api.data.user = data;
       console.log(api.data);
+      return data
     });
 };
 
