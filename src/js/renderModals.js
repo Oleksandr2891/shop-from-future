@@ -1,6 +1,7 @@
 import { refs } from './refs';
 import modalTpl from '../tpl/components/modal.hbs';
 import { api, previewFile, stringToCamelCase } from './functions';
+import Handlebars from '../helpers';
 
 
 export const renderModals = {
@@ -15,8 +16,7 @@ export const renderModals = {
   },
   createEditProduct: () => {
     const contentForModal = require('../tpl/components/modals/createEditProduct.hbs').default;
-
-    const modalContent = contentForModal();
+    const modalContent = contentForModal({category: api.data.categories}, Handlebars);
     refs.modal.innerHTML = modalTpl({ modalContent });
     refs.modal.querySelectorAll('.inputfile').forEach(input => {
       input.addEventListener('change', previewFile);

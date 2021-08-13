@@ -125,7 +125,10 @@ export const renderContent = path => {
   }
   if (path === '/favourites') {
     console.log(api.data)
-    renderCabinet()
+    getUserData().then(data => {
+      renderCabinet()
+    })
+   
 
   }
   if (refs.ads.childElementCount > 0) {
