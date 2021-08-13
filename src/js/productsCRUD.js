@@ -45,14 +45,27 @@ export const removeFromFavourites = id => {
 
 export const addPost = () => {
   const addModalNode = document.querySelector('#add-post-form');
+  const images = [];
+  let imageCounter = 0;
+  addModalNode.querySelectorAll('.inputfile').forEach(item => {
+    if (item.files[0] !== undefined) {
+      images.push(item.files[0]);
+      imageCounter += 1;
+    }
+  });
 
+  if (images.length === 0) {
+    pnotify.error({ text: 'add images', delay: 1000 });
+    return false;
+  }
+
+  console.log(images);
   const inputsValueNewProduct = {
     title: addModalNode.querySelector('#product-title').value,
     description: addModalNode.querySelector('#product-description').value,
     category: addModalNode.querySelector('#product-category').value,
     price: addModalNode.querySelector('#product-price').value,
     phone: addModalNode.querySelector('#product-phone').value,
-    file: addModalNode.querySelector('#first').files[0],
   };
   console.log(inputsValueNewProduct);
   sendData('https://callboard-backend.goit.global/call', inputsValueNewProduct);
@@ -61,6 +74,7 @@ export const addPost = () => {
     for (const name in data) {
       formData.append(name, data[name]);
     }
+    images.forEach(item => formData.append('file', item));
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -68,6 +82,9 @@ export const addPost = () => {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
       body: formData,
+    }).then(data => {
+      pnotify.success({ text: 'seccess', delay: 1000 });
+      refs.modal.innerHTML = '';
     });
   }
 };
