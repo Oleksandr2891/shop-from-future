@@ -5,7 +5,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, removeFromFavourites ,addPost } from './js/productsCRUD';
+import { addToFavourites, removeFromFavourites, addPost } from './js/productsCRUD';
 
 import validator from 'validator';
 
@@ -35,7 +35,6 @@ document.addEventListener('click', e => {
     refs.modal.innerHTML = '';
   }
 
-
   if (!linkTag && !buttonTag) return false;
   if (linkTag) {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
@@ -46,7 +45,6 @@ document.addEventListener('click', e => {
       const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
       document.querySelector('#mainImg').setAttribute('src', srcChangeImg);
     }
-
 
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
@@ -74,7 +72,6 @@ document.addEventListener('click', e => {
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
-
       } else {
         const path = linkTag.getAttribute('href');
 
@@ -109,7 +106,7 @@ document.addEventListener('click', e => {
       registr();
     }
 
-    if(buttonTag.dataset.action === 'add-post'){
+    if (buttonTag.dataset.action === 'add-post') {
       addPost();
     }
     //
@@ -136,7 +133,7 @@ document.addEventListener('click', e => {
       refs.header.querySelector('.mobile-menu').classList.add('hidden');
       refs.header.querySelector('.tablet-menu').classList.add('hidden');
       refs.content.innerHTML = '';
-      const path = '/'
+      const path = '/';
       history.pushState(null, null, path);
       getMainPage();
     }
@@ -176,6 +173,7 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'show-user-data') {
       const path = '/user/' + e.target.closest('button').dataset.userid;
+      const buttonUserNode = document.querySelector('.card-goods__btn-information');
 
       function findUserData() {
         return fetch(config.apiUrl + path)
@@ -187,6 +185,7 @@ document.addEventListener('click', e => {
           });
       }
       findUserData();
+      buttonUserNode.classList.add('hidden');
     }
 
     if (buttonTag.dataset.search === 'search') {
