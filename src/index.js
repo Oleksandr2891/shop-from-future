@@ -144,12 +144,15 @@ document.addEventListener('click', e => {
     }
     if (buttonTag.dataset.action === 'close-filter') {
       refs.linkPaginationWrapper.classList.remove('hidden');
-      refs.header.querySelector('.mobile-menu').classList.add('hidden');
-      refs.header.querySelector('.tablet-menu').classList.add('hidden');
+      refs.header.querySelector('.mobile-menu').classList.remove('is-open');
+      refs.header.querySelector('.tablet-menu').classList.remove('is-open');
       refs.content.innerHTML = '';
       const path = '/';
       history.pushState(null, null, path);
       getMainPage();
+    }
+    if (buttonTag.dataset.action === 'open-input') {
+      document.querySelector('.header__form_mobile').classList.add('is-open');
     }
 
     if (buttonTag.dataset.action === 'open-cabinet') {
@@ -214,6 +217,7 @@ document.addEventListener('click', e => {
           });
       }
       findGood();
+      document.querySelector('.header__form_mobile').classList.remove('is-open');
 
       if (input.value != '') {
         const path = input.dataset.search + input.value;
