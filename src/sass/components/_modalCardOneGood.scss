@@ -189,11 +189,16 @@
 }
 
 .user-data {
-  margin-top: 10px;
+  margin-top: 40px;
   font-size: 12px;
   margin-bottom: 10px;
   font-weight: 300;
   color: #878686;
+  letter-spacing: 0.02em;
+}
+
+.user-data__email {
+  margin-bottom: 6px;
 }
 .card-goods__left {
   display: flex;
