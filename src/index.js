@@ -30,6 +30,12 @@ let counter = 1;
 document.addEventListener('click', e => {
   const linkTag = e.target.closest('a');
   const buttonTag = e.target.closest('button');
+
+  if (e.target.dataset.action === 'close-modal-backdrop') {
+    refs.modal.innerHTML = '';
+  }
+
+
   if (!linkTag && !buttonTag) return false;
   if (linkTag) {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
@@ -68,9 +74,7 @@ document.addEventListener('click', e => {
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
-        // const path = '/call/sales'
-        // history.pushState(null, null, path);
-        // console.log(api.data.content.sales);
+
       } else {
         const path = linkTag.getAttribute('href');
 
@@ -87,8 +91,11 @@ document.addEventListener('click', e => {
       animateModal();
 
       refs.modal.querySelector('input').focus();
-      document.querySelector('#user-log-in').disabled = true;
-      document.querySelector('#user-register').disabled = true;
+
+      if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
+        document.querySelector('#user-log-in').disabled = true;
+        document.querySelector('#user-register').disabled = true;
+      }
     }
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
@@ -108,19 +115,11 @@ document.addEventListener('click', e => {
     //
     if (e.target.dataset.action === 'user-log-in') {
       e.preventDefault();
-      // console.log('ok');
       logIn();
-
-      document.querySelector('#register-wraper').classList.add('hide');
-      document.querySelector('#cabinet-wraper').classList.remove('hide');
-
       renderCabinet();
-
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
-      document.querySelector('#cabinet-wraper').classList.add('hide');
-      document.querySelector('#register-wraper').classList.remove('hide');
 
       getMainPage();
     }
@@ -216,32 +215,20 @@ document.addEventListener('click', e => {
         error({ text: 'Please enter the date', delay: 1500 });
       }
     }
-  } else if (e.target) {
-    //   Закрытие модалки по нажатию на backdrop
-    if (e.target.classList.contains('backdrop')) {
-      refs.modal.innerHTML = '';
-    }
-  } else {
-    return false;
   }
 });
 
 document.addEventListener('keydown', e => {
-  // const key = e.key;
   if (e.key === 'Escape') {
     refs.modal.innerHTML = '';
   }
   if (e.key === 'Enter') {
-    // refs.modal.querySelector('form')?.submit();
   }
 });
 
 // Слушатель для input
 document.addEventListener('input', e => {
-  // console.log(e.target);
   if (e.target.dataset.action === 'register-email') {
-    // console.log(e.target.value);
-    // console.log(validator.isStrongPassword);
     if (!validator.isEmail(e.target.value)) {
       if (e.target.classList.contains('valid')) {
         e.target.classList.remove('valid');
@@ -277,4 +264,3 @@ document.addEventListener('input', e => {
     }
   }
 });
-
