@@ -1,7 +1,7 @@
 import config from '../config.json';
 import { api, rerenderLogIn, rerenderLogOut } from './functions';
 import { refs } from './refs';
-import {renderCabinet} from './renderCabinet'
+import { renderCabinet } from './renderCabinet';
 // import { checkToken } from './api';
 
 // import validator from 'validator';
@@ -24,6 +24,7 @@ const getInputData = () => {
 };
 
 export const getUserData = () => {
+  if (!localStorage.getItem('accessToken')) return Promise.resolve('no access token');
   return api
     .getData('/user', {
       auth: true,
@@ -84,12 +85,11 @@ export const logOut = () => {
   };
   api.postData(config.auth.logout.link, objLogOut).then(data => {
     console.log(data);
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('sid');
+    api.data.user = {};
   });
-  localStorage.removeItem('refreshToken');
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('sid');
-  getUserData();
-  rerenderLogOut();
 };
 
 export const signInWithGoogle = () => {

@@ -5,7 +5,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, removeFromFavourites ,addPost } from './js/productsCRUD';
+import { addToFavourites, removeFromFavourites, addPost } from './js/productsCRUD';
 
 import validator from 'validator';
 
@@ -17,8 +17,14 @@ import { getNextPage } from './js/nextPage';
 const sales = '/call/specific/sales';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
-import { error, success } from '@pnotify/core';
+import { error, success, info } from '@pnotify/core';
 import userDataTpl from './tpl/components/userData.hbs';
+
+export const pnotify = {
+  error,
+  success,
+  info,
+};
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -35,7 +41,6 @@ document.addEventListener('click', e => {
     refs.modal.innerHTML = '';
   }
 
-
   if (!linkTag && !buttonTag) return false;
   if (linkTag) {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
@@ -46,7 +51,6 @@ document.addEventListener('click', e => {
       const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
       document.querySelector('#mainImg').setAttribute('src', srcChangeImg);
     }
-
 
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
@@ -74,7 +78,6 @@ document.addEventListener('click', e => {
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
-
       } else {
         const path = linkTag.getAttribute('href');
 
@@ -109,17 +112,15 @@ document.addEventListener('click', e => {
       registr();
     }
 
-    if(buttonTag.dataset.action === 'add-post'){
+    if (buttonTag.dataset.action === 'add-post') {
       addPost();
     }
     //
     if (e.target.dataset.action === 'user-log-in') {
       logIn();
-     
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
-
       getMainPage();
     }
     if (buttonTag.dataset.action === 'open-filter') {
@@ -135,7 +136,7 @@ document.addEventListener('click', e => {
       refs.header.querySelector('.mobile-menu').classList.add('hidden');
       refs.header.querySelector('.tablet-menu').classList.add('hidden');
       refs.content.innerHTML = '';
-      const path = '/'
+      const path = '/';
       history.pushState(null, null, path);
       getMainPage();
     }
