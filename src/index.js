@@ -5,7 +5,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, removeFromFavourites } from './js/productsCRUD';
+import { addToFavourites, removeFromFavourites ,addPost } from './js/productsCRUD';
 
 import validator from 'validator';
 
@@ -30,9 +30,7 @@ let counter = 1;
 document.addEventListener('click', e => {
   const linkTag = e.target.closest('a');
   const buttonTag = e.target.closest('button');
-
   if (!linkTag && !buttonTag) return false;
-
   if (linkTag) {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
@@ -102,6 +100,10 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'user-register') {
       registr();
+    }
+
+    if(buttonTag.dataset.action === 'add-post'){
+      addPost();
     }
     //
     if (e.target.dataset.action === 'user-log-in') {
@@ -276,4 +278,3 @@ document.addEventListener('input', e => {
   }
 });
 
-// document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});
