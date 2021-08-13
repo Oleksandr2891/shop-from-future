@@ -84,9 +84,14 @@ document.addEventListener('click', e => {
       }
     } else {
       renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
+
     }
   } else if (buttonTag) {
     e.preventDefault();
+    if (buttonTag.dataset.action === 'open-card') {
+      renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
+      console.log("Карточка откройся");
+    }
 
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.closest('button').dataset.value]();
@@ -166,6 +171,7 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-to-favourites') {
+
       addToFavourites(e.target.closest('button').dataset.id);
     }
 
