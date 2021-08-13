@@ -50,7 +50,9 @@ document.addEventListener('click', e => {
       const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
       document.querySelector('#mainImg').setAttribute('src', srcChangeImg);
     }
-
+    if (linkTag.classList.contains('swiper-link__once-category')) {
+      window.scrollTo(0, 0);
+    }
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
     if (linkTag.dataset.action === 'load-more') {
