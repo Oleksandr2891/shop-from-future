@@ -4,7 +4,7 @@ import { renderContent, getMainPage } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
-import { addToFavourites, removeFromFavourites ,addPost } from './js/productsCRUD';
+import { addToFavourites, removeFromFavourites, addPost } from './js/productsCRUD';
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
@@ -37,7 +37,6 @@ document.addEventListener('click', e => {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
     }
-
 
     if (linkTag.dataset.action === 'show-main-img') {
       const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
@@ -82,7 +81,7 @@ document.addEventListener('click', e => {
     e.preventDefault();
 
     if (buttonTag.dataset.action === 'open-modal') {
-      renderModals[e.target.dataset.value]();
+      renderModals[e.target.closest('button').dataset.value]();
       animateModal();
 
       refs.modal.querySelector('input').focus();
@@ -108,18 +107,21 @@ document.addEventListener('click', e => {
     }
     //
     if (e.target.dataset.action === 'user-log-in') {
-
       logIn();
 
       success({ text: `You enter in your user profile`, delay: 1000 });
     }
+    if (buttonTag.dataset.action === 'are-you-sure') {
+      modalExit();
+    }
+
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
       info({ text: `You log out from user profile`, delay: 1000 });
 
-
       getMainPage();
     }
+
     if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       filterMenuNode.classList.add('is-open');
@@ -228,9 +230,9 @@ document.addEventListener('input', e => {
       e.target.classList.add('invalid');
       document.querySelector('#user-log-in').disabled = true;
       document.querySelector('#user-register').disabled = true;
-      }
+    }
     if (validator.isEmail(e.target.value)) {
-      if (e.target.classList.contains('invalid')) {     
+      if (e.target.classList.contains('invalid')) {
         e.target.classList.remove('invalid');
       }
       e.target.classList.add('valid');
