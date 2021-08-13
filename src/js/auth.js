@@ -1,6 +1,7 @@
 import config from '../config.json';
 import { api, rerenderLogIn, rerenderLogOut } from './functions';
 import { refs } from './refs';
+import {renderCabinet} from './renderCabinet'
 // import { checkToken } from './api';
 
 // import validator from 'validator';
@@ -10,13 +11,11 @@ import { refs } from './refs';
 // });
 
 const getInputData = () => {
-  const inputEmail = document.querySelector('#email');
-  const inputEmailValue = inputEmail.value.trim();
-  const inputPassword = document.querySelector('#password');
-  const inputPasswordValue = inputPassword.value.trim();
+  const inputEmailValue = document.querySelector('#email').value.trim();
+  const inputPasswordValue = document.querySelector('#password').value.trim();
 
   return {
-    data: {
+    body: {
       email: inputEmailValue,
       password: inputPasswordValue,
     },
@@ -38,7 +37,7 @@ export const getUserData = () => {
 };
 
 export function registr() {
-  api.postData(config.auth.register.link, getUserData()).then(data => {
+  api.postData(config.auth.register.link, getInputData()).then(data => {
     // console.log(data);
     if (data.registrationDate && data.email && data.id) {
       refs.modal.innerHTML = '';
@@ -74,6 +73,7 @@ export const logIn = () => {
     // return data;
     //
     rerenderLogIn();
+    renderCabinet();
   });
 };
 export const logOut = () => {
