@@ -3,6 +3,7 @@
   padding-top: 38px;
   padding-bottom: 38px;
 
+  margin-bottom: 0px;
 
   @media screen and (min-width: 768px) {
     padding-top: 62px;
@@ -63,10 +64,10 @@
 .link-download__wrapper {
   padding-bottom: 41px;
   padding-top: 41px;
-  background-color: #02172A;
+  background-color: #02172a;
   text-align: center;
 
-  .link-download{
+  .link-download {
     font-family: Montserrat;
     font-weight: 600;
     font-size: 20px;
@@ -74,9 +75,7 @@
     color: var(--primary-white-color);
     cursor: pointer;
   }
-
 }
-
 
 .isDisabled {
   color: currentColor;

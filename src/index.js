@@ -123,9 +123,6 @@ document.addEventListener('click', e => {
       logIn();
       success({ text: `You enter in your user profile`, delay: 1000 });
     }
-    if (buttonTag.dataset.action === 'are-you-sure') {
-      modalExit();
-    }
 
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
@@ -133,6 +130,7 @@ document.addEventListener('click', e => {
       info({ text: `You log out from user profile`, delay: 1000 });
 
       getMainPage();
+      refs.modal.innerHTML = '';
     }
 
     if (buttonTag.dataset.action === 'open-filter') {
