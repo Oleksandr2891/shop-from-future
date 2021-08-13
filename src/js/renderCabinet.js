@@ -16,15 +16,13 @@ export const renderCabinet = () => {
     refs.linkPaginationWrapper.classList.add('hidden');
     refs.ads.innerHTML = '';
   }
-  if (api.data.user.favourites.length < 1) {
-    document.querySelector('.favorite').classList.add('hidden');
+  if (api.data.user.favourites !== undefined && api.data.user.favourites.length < 1) {
+    document.querySelector('.swiper-container.favourite').classList.add('hidden');
   }
-  if (api.data.user.calls.length < 1) {
-    document.querySelector('.calls').classList.add('hidden');
+  if (api.data.user.calls !== undefined && api.data.user.calls.length < 1) {
+    document.querySelector('.swiper-container.calls').classList.add('hidden');
   }
 
-
-  history.pushState(null, null, '/favourites')
-  api.data.content = {}
-
+  history.pushState(null, null, '/favourites');
+  api.data.content = {};
 };

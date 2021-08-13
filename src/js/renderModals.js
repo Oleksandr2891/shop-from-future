@@ -22,7 +22,7 @@ export const renderModals = {
   },
   createEditProduct: () => {
     const contentForModal = require('../tpl/components/modals/createEditProduct.hbs').default;
-    const modalContent = contentForModal({category: api.data.categories}, Handlebars);
+    const modalContent = contentForModal({ category: api.data.categories }, Handlebars);
     refs.modal.innerHTML = modalTpl({ modalContent });
     refs.modal.querySelectorAll('.inputfile').forEach(input => {
       input.addEventListener('change', previewFile);
@@ -47,7 +47,10 @@ export const renderModals = {
     refs.modal.innerHTML = modalTpl({ modalContent });
     new Swiper('.swiper-container', swiperConfigCategories.card);
 
-    if (api.data.user.favourites.find(item => id === item._id)) {
+    if (
+      api.data.user.favourites !== undefined &&
+      api.data.user.favourites.find(item => id === item._id)
+    ) {
       const modalGoods = document.querySelector('#card-goods');
       modalGoods.querySelector('.card-goods-icon').textContent = 'favorite';
       modalGoods.querySelector('.card-goods-icon').classList.add('card-goods-icon-active');

@@ -4,7 +4,9 @@ import { renderContent, getMainPage } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
+
 import { addToFavourites, removeFromFavourites, addPost } from './js/productsCRUD';
+
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
@@ -16,6 +18,12 @@ import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import { error, success, info } from '@pnotify/core';
 import userDataTpl from './tpl/components/userData.hbs';
+
+export const pnotify = {
+  error,
+  success,
+  info,
+};
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -108,7 +116,6 @@ document.addEventListener('click', e => {
     //
     if (e.target.dataset.action === 'user-log-in') {
       logIn();
-
       success({ text: `You enter in your user profile`, delay: 1000 });
     }
     if (buttonTag.dataset.action === 'are-you-sure') {
@@ -117,6 +124,7 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
+
       info({ text: `You log out from user profile`, delay: 1000 });
 
       getMainPage();
