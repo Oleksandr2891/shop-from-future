@@ -4,11 +4,8 @@ import { renderContent, getMainPage } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
-
 import { addToFavourites, removeFromFavourites ,addPost } from './js/productsCRUD';
-
 import validator from 'validator';
-
 import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
 import { api } from './js/functions';
@@ -42,11 +39,11 @@ document.addEventListener('click', e => {
       e.preventDefault();
     }
 
+
     if (linkTag.dataset.action === 'show-main-img') {
       const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
       document.querySelector('#mainImg').setAttribute('src', srcChangeImg);
     }
-
 
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
@@ -91,7 +88,6 @@ document.addEventListener('click', e => {
       animateModal();
 
       refs.modal.querySelector('input').focus();
-
       if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
         document.querySelector('#user-log-in').disabled = true;
         document.querySelector('#user-register').disabled = true;
@@ -116,8 +112,8 @@ document.addEventListener('click', e => {
     if (e.target.dataset.action === 'user-log-in') {
 
       logIn();
-      success({ text: `You enter in your user profile`, delay: 1000 });
 
+      success({ text: `You enter in your user profile`, delay: 1000 });
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
@@ -128,11 +124,11 @@ document.addEventListener('click', e => {
     }
     if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
-      if (filterMenuNode.classList.contains('hidden')) {
-        filterMenuNode.classList.remove('hidden');
-      } else {
-        filterMenuNode.classList.add('hidden');
-      }
+      filterMenuNode.classList.add('is-open');
+    }
+    if (buttonTag.dataset.action === 'btn-close') {
+      const filterMenuNode = refs.header.querySelector('.mobile-menu');
+      filterMenuNode.classList.remove('is-open');
     }
     if (buttonTag.dataset.action === 'close-filter') {
       refs.linkPaginationWrapper.classList.remove('hidden');
@@ -152,20 +148,12 @@ document.addEventListener('click', e => {
         openMyCabinet.classList.add('hidden');
       }
     }
-    if (buttonTag.dataset.action === 'open-cabinet-mobile') {
-      const openMyCabinetMob = refs.header.querySelector('.modal-cabinet-mobile');
-      if (openMyCabinetMob.classList.contains('hidden')) {
-        openMyCabinetMob.classList.remove('hidden');
-      } else {
-        openMyCabinetMob.classList.add('hidden');
-      }
-    }
     if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.tablet-menu');
-      if (filterMenuNode.classList.contains('hidden')) {
-        filterMenuNode.classList.remove('hidden');
+      if (filterMenuNode.classList.contains('is-open')) {
+        filterMenuNode.classList.remove('is-open');
       } else {
-        filterMenuNode.classList.add('hidden');
+        filterMenuNode.classList.add('is-open');
       }
     }
 

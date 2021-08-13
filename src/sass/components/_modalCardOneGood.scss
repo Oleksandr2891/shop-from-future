@@ -195,6 +195,10 @@
   font-weight: 300;
   color: #878686;
 }
+.card-goods__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
 .hidden {
   display: none;
@@ -209,4 +213,5 @@
   @media screen and (max-width: 767px) {
     display: none;
   }
+
 }
