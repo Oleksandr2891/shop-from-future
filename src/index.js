@@ -108,7 +108,6 @@ document.addEventListener('click', e => {
     //
     if (e.target.dataset.action === 'user-log-in') {
       logIn();
-
       success({ text: `You enter in your user profile`, delay: 1000 });
     }
     if (buttonTag.dataset.action === 'are-you-sure') {
