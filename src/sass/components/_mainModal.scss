@@ -1,4 +1,7 @@
 .modal {
+  @media screen and (max-width: 767px) {
+    max-height: 550px;
+  }
   display: flex;
   flex-direction: column;
   position: absolute;

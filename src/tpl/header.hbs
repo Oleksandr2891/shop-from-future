@@ -117,10 +117,8 @@
     </ul>
     <ul class='list cabinet mobile-menu__cabinet ' id="cabinet-wraper-mobile">
       <li class='item cabinet__item menu-cabinet'>
-        <button class='cabinet__in' type='button' data-action='open-cabinet-mobile'>
-          <svg class='ikon-user' width='20px' height='20px'>
-            <use href=''></use>
-          </svg>Мой кабинет
+        <button class='cabinet__in' type='button'  data-action='open-cabinet-mobile'>
+          <span class="material-icons-outlined icons">account_circle</span>Мой кабинет</a>
         </button>
         <div class="modal-cabinet-mobile hidden">
           <ul class="menu-caminet">
@@ -140,7 +138,7 @@
           <span class="material-icons-round icons">tune</span>
         Фильтры
       </button>
-      <button class='reset-btn_mobile' type='reset'>
+      <button class='reset-btn_mobile' data-action='close-filter' type='reset'>
         <span class="material-icons-round icons">replay</span>
         Очистить
       </button>

@@ -130,8 +130,8 @@ document.addEventListener('click', e => {
     }
     if (buttonTag.dataset.action === 'close-filter') {
       refs.linkPaginationWrapper.classList.remove('hidden');
-      refs.header.querySelector('.mobile-menu').classList.add('hidden');
-      refs.header.querySelector('.tablet-menu').classList.add('hidden');
+      refs.header.querySelector('.mobile-menu').classList.remove('is-open');
+      refs.header.querySelector('.tablet-menu').classList.remove('is-open');
       refs.content.innerHTML = '';
       const path = '/';
       history.pushState(null, null, path);
