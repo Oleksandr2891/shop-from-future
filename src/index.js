@@ -114,9 +114,7 @@ document.addEventListener('click', e => {
     }
     //
     if (e.target.dataset.action === 'user-log-in') {
-      e.preventDefault();
 
-      // console.log('ok');      
       logIn();
       success({ text: `You enter in your user profile`, delay: 1000 });
 
