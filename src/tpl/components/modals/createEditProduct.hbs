@@ -1,9 +1,10 @@
 
-  <div class="modal-create__wrapper">
+  <div class="modal-create__wrapper" id="add-post-form">
   <h2 class='modal-create__heading'>Создать объявление</h2>
+ 
   <label class='modal-create__field'>
     Название товара
-    <input type='text' class='modal-create__input' required minlength='2' />
+    <input type='text' class='modal-create__input' id="product-title" required minlength='2' />
   </label>
 
   <div class='modal-create__field'>
@@ -40,6 +41,7 @@
   <label class='modal-create__field'>
     Описание товара
     <textarea
+      id='product-description'
       name='user-description'
       class='modal-create__input modal-create__description'
       placeholder='Введите описание'
@@ -47,20 +49,22 @@
   </label>
   <label class='modal-create__field'>
     Категория товара
-    {{!-- {{#each this.data}} --}}
-    <select class='modal-create__select'>
-      <option></option>
-      <option></option>      
+    
+    <select id='product-category' class='modal-create__select'>
+      {{#each category}}
+      <option value="{{this}}">{{__ this}}</option>      
+      {{/each}}
     </select>
-    {{!-- {{/each}} --}}
+    
   </label>
   <label class='modal-create__field'>
     Цена
-    <input type='text' class='modal-create__input' placeholder='0.00 €' />
+    <input id="product-price" type='text' class='modal-create__input' placeholder='0.00 €' />
   </label>
   <label class='modal-create__field'>
     Телефон
     <input
+      id='product-phone'
       type='tel'
       name='user-tel'
       class='modal-create__input'
@@ -71,5 +75,6 @@
     />
   </label>
 
-  <button type='submit' class='modal-create__btn'>Добавить</button>
+  <button type='submit' class='modal-create__btn' data-action="add-post">Добавить</button>
+ 
 </div>

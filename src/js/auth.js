@@ -1,16 +1,19 @@
 import config from '../config.json';
-import { api } from './functions';
+import { api, rerenderLogIn, rerenderLogOut } from './functions';
 import { refs } from './refs';
+// import { checkToken } from './api';
 
 // import validator from 'validator';
 
+// export const checkTokens = (config.auth.checkToken.link, api.checkToken()).then(data => {
+//   console.log(data);
+// });
 
 const getInputData = () => {
   const inputEmail = document.querySelector('#email');
   const inputEmailValue = inputEmail.value.trim();
   const inputPassword = document.querySelector('#password');
   const inputPasswordValue = inputPassword.value.trim();
-
 
   return {
     data: {
@@ -22,17 +25,17 @@ const getInputData = () => {
 };
 
 export const getUserData = () => {
-  return api.getData('/user', {
-    auth: true,
-    body: false,
-  })
+  return api
+    .getData('/user', {
+      auth: true,
+      body: false,
+    })
     .then(data => {
       api.data.user = data;
       console.log(api.data);
-      return data
+      return data;
     });
 };
-
 
 export function registr() {
   api.postData(config.auth.register.link, getUserData()).then(data => {
@@ -46,15 +49,12 @@ export function registr() {
     // console.log(data);
   });
 
-
-
   // if (data.accessToken) {
   //   console.log(data.accessToken);
   // refs.modal.innerHTML = '';
   // }
   // form.reset();
 }
-
 
 export const logIn = () => {
   api.postData(config.auth.login.link, getInputData()).then(data => {
@@ -73,8 +73,9 @@ export const logIn = () => {
     console.log(api.data);
     // return data;
     //
+    rerenderLogIn();
   });
-}
+};
 export const logOut = () => {
   console.log(api.data);
   const objLogOut = {
@@ -87,18 +88,15 @@ export const logOut = () => {
   localStorage.removeItem('refreshToken');
   localStorage.removeItem('accessToken');
   localStorage.removeItem('sid');
-  getUserData()
-}
-
-
+  getUserData();
+  rerenderLogOut();
+};
 
 export const signInWithGoogle = () => {
   fetch(config.apiUrl + '/auth/google')
     .then(res => {
-
-      return res.json()
+      return res.json();
     })
     .then(data => console.log(data))
     .catch(err => console.log(err));
-}
-
+};

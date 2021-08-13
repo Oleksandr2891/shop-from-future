@@ -5,7 +5,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, removeFromFavourites } from './js/productsCRUD';
+import { addToFavourites, removeFromFavourites ,addPost } from './js/productsCRUD';
 
 import validator from 'validator';
 
@@ -31,8 +31,12 @@ document.addEventListener('click', e => {
   const linkTag = e.target.closest('a');
   const buttonTag = e.target.closest('button');
 
-  if (!linkTag && !buttonTag) return false;
+  if (e.target.dataset.action === 'close-modal-backdrop') {
+    refs.modal.innerHTML = '';
+  }
 
+
+  if (!linkTag && !buttonTag) return false;
   if (linkTag) {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
@@ -70,9 +74,7 @@ document.addEventListener('click', e => {
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
-        // const path = '/call/sales'
-        // history.pushState(null, null, path);
-        // console.log(api.data.content.sales);
+
       } else {
         const path = linkTag.getAttribute('href');
 
@@ -89,8 +91,11 @@ document.addEventListener('click', e => {
       animateModal();
 
       refs.modal.querySelector('input').focus();
-      document.querySelector('#user-log-in').disabled = true;
-      document.querySelector('#user-register').disabled = true;
+
+      if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
+        document.querySelector('#user-log-in').disabled = true;
+        document.querySelector('#user-register').disabled = true;
+      }
     }
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
@@ -103,25 +108,23 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'user-register') {
       registr();
     }
+
+    if(buttonTag.dataset.action === 'add-post'){
+      addPost();
+    }
     //
     if (e.target.dataset.action === 'user-log-in') {
       e.preventDefault();
+
       // console.log('ok');      
       logIn();
       success({ text: `You enter in your user profile`, delay: 1000 });
-
-      document.querySelector('#register-wraper').classList.add('hide');
-      document.querySelector('#cabinet-wraper').classList.remove('hide');
-
-      renderCabinet();
 
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
       info({ text: `You log out from user profile`, delay: 1000 });
-      
-      document.querySelector('#cabinet-wraper').classList.add('hide');
-      document.querySelector('#register-wraper').classList.remove('hide');
+
 
       getMainPage();
     }
@@ -134,6 +137,7 @@ document.addEventListener('click', e => {
       }
     }
     if (buttonTag.dataset.action === 'close-filter') {
+      refs.linkPaginationWrapper.classList.remove('hidden');
       refs.header.querySelector('.mobile-menu').classList.add('hidden');
       refs.header.querySelector('.tablet-menu').classList.add('hidden');
       refs.content.innerHTML = '';
@@ -217,32 +221,20 @@ document.addEventListener('click', e => {
         error({ text: 'Please enter the date', delay: 1500 });
       }
     }
-  } else if (e.target) {
-    //   Закрытие модалки по нажатию на backdrop
-    if (e.target.classList.contains('backdrop')) {
-      refs.modal.innerHTML = '';
-    }
-  } else {
-    return false;
   }
 });
 
 document.addEventListener('keydown', e => {
-  // const key = e.key;
   if (e.key === 'Escape') {
     refs.modal.innerHTML = '';
   }
   if (e.key === 'Enter') {
-    // refs.modal.querySelector('form')?.submit();
   }
 });
 
 // Слушатель для input
 document.addEventListener('input', e => {
-  // console.log(e.target);
   if (e.target.dataset.action === 'register-email') {
-    // console.log(e.target.value);
-    // console.log(validator.isStrongPassword);
     if (!validator.isEmail(e.target.value)) {
       if (e.target.classList.contains('valid')) {
         e.target.classList.remove('valid');
@@ -278,5 +270,3 @@ document.addEventListener('input', e => {
     }
   }
 });
-
-// document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});
