@@ -30,9 +30,10 @@ let counter = 1;
 document.addEventListener('click', e => {
   const linkTag = e.target.closest('a');
   const buttonTag = e.target.closest('button');
-
+  if (e.target.dataset.action === 'close-modal-backdrop') {
+    refs.modal.innerHTML = '';
+  }
   if (!linkTag && !buttonTag) return false;
-
   if (linkTag) {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
@@ -83,9 +84,7 @@ document.addEventListener('click', e => {
       animateModal();
 
       refs.modal.querySelector('input').focus();
-      // document.querySelector('#backdrop').addEventListener('click', e => {
-      //   refs.modal.innerHTML = '';
-      // });
+
       if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
         document.querySelector('#user-log-in').disabled = true;
         document.querySelector('#user-register').disabled = true;
@@ -202,41 +201,20 @@ document.addEventListener('click', e => {
         error({ text: 'Please enter the date', delay: 1500 });
       }
     }
-  } else {
-    return false;
   }
 });
 
-// if (e.target.classList.contains('backdrop')) {
-// if (e.target.dataset.action === 'close-modal-backdrop') {
-
-//   console.log('ok-1');
-
-//   Закрытие модалки по нажатию на backdrop
-// if (e.target.classList.contains('backdrop')) {
-//   console.log('ok-2');
-// }
-// }
-// if (document.querySelector('#backdrop')) {
-
-// }
-
 document.addEventListener('keydown', e => {
-  // const key = e.key;
   if (e.key === 'Escape') {
     refs.modal.innerHTML = '';
   }
   if (e.key === 'Enter') {
-    // refs.modal.querySelector('form')?.submit();
   }
 });
 
 // Слушатель для input
 document.addEventListener('input', e => {
-  // console.log(e.target);
   if (e.target.dataset.action === 'register-email') {
-    // console.log(e.target.value);
-    // console.log(validator.isStrongPassword);
     if (!validator.isEmail(e.target.value)) {
       if (e.target.classList.contains('valid')) {
         e.target.classList.remove('valid');
@@ -272,5 +250,3 @@ document.addEventListener('input', e => {
     }
   }
 });
-
-// document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});
