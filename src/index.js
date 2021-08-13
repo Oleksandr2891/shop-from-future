@@ -114,9 +114,8 @@ document.addEventListener('click', e => {
     }
     //
     if (e.target.dataset.action === 'user-log-in') {
-      e.preventDefault();
       logIn();
-      renderCabinet();
+     
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
