@@ -10,6 +10,19 @@ import { renderCabinet } from './renderCabinet';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
 
+export const rerenderLogIn = () => {
+  document.querySelector('#register-wraper').classList.add('hide');
+  document.querySelector('#cabinet-wraper').classList.remove('hide');
+  document.querySelector('#register-wraper-mobile').classList.add('hide');
+  document.querySelector('#cabinet-wraper-mobile').classList.remove('hide');
+};
+export const rerenderLogOut = () => {
+  document.querySelector('#cabinet-wraper').classList.add('hide');
+  document.querySelector('#register-wraper').classList.remove('hide');
+  document.querySelector('#register-wraper-mobile').classList.remove('hide');
+  document.querySelector('#cabinet-wraper-mobile').classList.add('hide');
+};
+
 SwiperCore.use([Navigation, Pagination]);
 
 export const isJSON = data => {
@@ -42,6 +55,12 @@ const getHeader = () => {
     const obj = { data, logo };
     refs.header.innerHTML = headerTpl(obj, Handlebars);
     api.data.categories = data;
+    console.log(api.data.user.email);
+    if (api.data.user.email === undefined) {
+      rerenderLogOut();
+    } else {
+      rerenderLogIn();
+    }
   });
 };
 
@@ -53,7 +72,7 @@ const getFooter = () => {
 };
 
 export const getMainPage = (page = 1) => {
-  console.log('ok');
+  // console.log('ok');
   api.getData(config.componentsTpl.ads.getAds).then(data => {
     const mainAdsArr = [...data.slice(5)];
     const rigthAdsArr = [...data.slice(0, 2)];
@@ -112,9 +131,9 @@ const googleRegister = () => {
 
 export const renderContent = path => {
   googleRegister();
-  getUserData();
+  getUserData().then(data => getHeader());
 
-  getHeader();
+  // getHeader();
   getFooter();
   history.pushState(null, null, path);
   if (path !== '/') refs.linkPaginationWrapper.classList.add('hidden');
@@ -131,7 +150,6 @@ export const renderContent = path => {
     refs.ads.innerHTML = '';
   }
   api.getData(path).then(data => {
-
     history.pushState(null, null, path);
 
     api.data.content[data[0].category] = data;

@@ -83,8 +83,13 @@ document.addEventListener('click', e => {
       animateModal();
 
       refs.modal.querySelector('input').focus();
-      document.querySelector('#user-log-in').disabled = true;
-      document.querySelector('#user-register').disabled = true;
+      // document.querySelector('#backdrop').addEventListener('click', e => {
+      //   refs.modal.innerHTML = '';
+      // });
+      if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
+        document.querySelector('#user-log-in').disabled = true;
+        document.querySelector('#user-register').disabled = true;
+      }
     }
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
@@ -102,10 +107,7 @@ document.addEventListener('click', e => {
       e.preventDefault();
       // console.log('ok');
       logIn();
-      document.querySelector('#register-wraper').classList.add('hide');
-      document.querySelector('#cabinet-wraper').classList.remove('hide');
-      document.querySelector('#register-wraper-mobile').classList.add('hide');
-      document.querySelector('#cabinet-wraper-mobile').classList.remove('hide');
+
       renderCabinet();
       // getHeader();
 
@@ -113,10 +115,7 @@ document.addEventListener('click', e => {
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
-      document.querySelector('#cabinet-wraper').classList.add('hide');
-      document.querySelector('#register-wraper').classList.remove('hide');
-      document.querySelector('#register-wraper-mobile').classList.remove('hide');
-      document.querySelector('#cabinet-wraper-mobile').classList.add('hide');
+
       getMainPage();
     }
     if (buttonTag.dataset.action === 'open-filter') {
@@ -203,15 +202,24 @@ document.addEventListener('click', e => {
         error({ text: 'Please enter the date', delay: 1500 });
       }
     }
-  } else if (e.target) {
-    //   Закрытие модалки по нажатию на backdrop
-    if (e.target.classList.contains('backdrop')) {
-      refs.modal.innerHTML = '';
-    }
   } else {
     return false;
   }
 });
+
+// if (e.target.classList.contains('backdrop')) {
+// if (e.target.dataset.action === 'close-modal-backdrop') {
+
+//   console.log('ok-1');
+
+//   Закрытие модалки по нажатию на backdrop
+// if (e.target.classList.contains('backdrop')) {
+//   console.log('ok-2');
+// }
+// }
+// if (document.querySelector('#backdrop')) {
+
+// }
 
 document.addEventListener('keydown', e => {
   // const key = e.key;
