@@ -38,6 +38,12 @@ document.addEventListener('click', e => {
       e.preventDefault();
     }
 
+    if (linkTag.dataset.action === 'show-main-img') {
+      const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
+      document.querySelector('#mainImg').setAttribute('src', srcChangeImg);
+    }
+
+
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
     if (linkTag.dataset.action === 'load-more') {
@@ -102,13 +108,12 @@ document.addEventListener('click', e => {
       e.preventDefault();
       // console.log('ok');
       logIn();
+
       document.querySelector('#register-wraper').classList.add('hide');
       document.querySelector('#cabinet-wraper').classList.remove('hide');
 
       renderCabinet();
-      // getHeader();
 
-      // refs.modal.innerHTML = '';
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
