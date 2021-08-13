@@ -5,7 +5,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, removeFromFavourites ,addPost } from './js/productsCRUD';
+import { addToFavourites, removeFromFavourites, addPost } from './js/productsCRUD';
 
 import validator from 'validator';
 
@@ -82,9 +82,14 @@ document.addEventListener('click', e => {
       }
     } else {
       renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
+
     }
   } else if (buttonTag) {
     e.preventDefault();
+    if (buttonTag.dataset.action === 'open-card') {
+      renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
+      console.log("Карточка откройся");
+    }
 
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.dataset.value]();
@@ -109,7 +114,7 @@ document.addEventListener('click', e => {
       registr();
     }
 
-    if(buttonTag.dataset.action === 'add-post'){
+    if (buttonTag.dataset.action === 'add-post') {
       addPost();
     }
     //
@@ -167,6 +172,7 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-to-favourites') {
+
       addToFavourites(e.target.closest('button').dataset.id);
     }
 
