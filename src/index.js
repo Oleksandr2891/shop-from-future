@@ -132,6 +132,7 @@ document.addEventListener('click', e => {
       }
     }
     if (buttonTag.dataset.action === 'close-filter') {
+      refs.linkPaginationWrapper.classList.remove('hidden');
       refs.header.querySelector('.mobile-menu').classList.add('hidden');
       refs.header.querySelector('.tablet-menu').classList.add('hidden');
       refs.content.innerHTML = '';
