@@ -143,8 +143,10 @@ export const renderContent = path => {
     return false;
   }
   if (path === '/favourites') {
-    console.log(api.data);
-    renderCabinet();
+    console.log(api.data)
+    getUserData().then(data => {
+      renderCabinet()
+    })
   }
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';

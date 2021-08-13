@@ -21,8 +21,8 @@ export default class Api {
       options.method = method;
     }
 
-    if (obj.data) {
-      options.body = JSON.stringify(obj.data);
+    if (obj.body) {
+      options.body = JSON.stringify(obj.body);
     }
     if (obj.auth) {
       options.headers = {
@@ -30,6 +30,7 @@ export default class Api {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       };
     }
+    console.log(options)
     return await fetch(config.apiUrl + path, options)
       .then(res => {
         if (!isJSON(res)) {

@@ -1,5 +1,6 @@
 .center {
   text-align: center;
+  justify-content: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -79,7 +80,11 @@
 }
 
 .modal_button-register-google {
+  text-align: center;    
+  display: flex;
   margin-bottom: 30px;
+  padding-top: 16px;
+  padding-left: 32px;
   width: 150px;
   height: 50px;
   background: rgba(250, 250, 250, 1);

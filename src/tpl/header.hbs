@@ -48,7 +48,7 @@
         </li>
         <li class='item cabinet__item'>
           <button class='cabinet__out' type='button' data-action="log-out" id="logOut">
-            <span class="material-icons-round icons" >logout</span>
+            <span class="material-icons-round icons">logout</span>
           </button>
         </li>
       </ul>
@@ -76,10 +76,12 @@
       <span class="material-icons icons">tune</span>
       Фильтры
     </button>
-    <button class='reset-btn' type='reset'>
+
+    <a href="/" class='reset-btn' type='reset'>
+//    <button class='reset-btn' type='reset' data-action='close-filter'>
       <span class="material-icons icons">replay</span>
       Очистить
-    </button>
+    </a>
   </div>
 </div>
 <div class='tablet-menu hidden'>
@@ -140,7 +142,7 @@
         </svg>
         Фильтры
       </button>
-      <button class='reset-btn_mobile' type='reset'>
+      <button class='reset-btn_mobile' type='reset' data-action='close-filter'>
         <svg width='24px' height='24px'>
           <use href=''></use>
         </svg>

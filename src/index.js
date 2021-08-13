@@ -5,7 +5,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, removeFromFavourites } from './js/productsCRUD';
+import { addToFavourites, removeFromFavourites ,addPost } from './js/productsCRUD';
 
 import validator from 'validator';
 
@@ -30,14 +30,23 @@ let counter = 1;
 document.addEventListener('click', e => {
   const linkTag = e.target.closest('a');
   const buttonTag = e.target.closest('button');
+
   if (e.target.dataset.action === 'close-modal-backdrop') {
     refs.modal.innerHTML = '';
   }
+
+
   if (!linkTag && !buttonTag) return false;
   if (linkTag) {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
     }
+
+    if (linkTag.dataset.action === 'show-main-img') {
+      const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
+      document.querySelector('#mainImg').setAttribute('src', srcChangeImg);
+    }
+
 
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
@@ -65,9 +74,7 @@ document.addEventListener('click', e => {
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
-        const path = '/call/sales';
-        history.pushState(null, null, path);
-        // console.log(api.data.content.sales);
+
       } else {
         const path = linkTag.getAttribute('href');
 
@@ -101,16 +108,15 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'user-register') {
       registr();
     }
+
+    if(buttonTag.dataset.action === 'add-post'){
+      addPost();
+    }
     //
     if (e.target.dataset.action === 'user-log-in') {
       e.preventDefault();
-      // console.log('ok');
       logIn();
-
       renderCabinet();
-      // getHeader();
-
-      // refs.modal.innerHTML = '';
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
@@ -124,6 +130,14 @@ document.addEventListener('click', e => {
       } else {
         filterMenuNode.classList.add('hidden');
       }
+    }
+    if (buttonTag.dataset.action === 'close-filter') {
+      refs.header.querySelector('.mobile-menu').classList.add('hidden');
+      refs.header.querySelector('.tablet-menu').classList.add('hidden');
+      refs.content.innerHTML = '';
+      const path = '/'
+      history.pushState(null, null, path);
+      getMainPage();
     }
 
     if (buttonTag.dataset.action === 'open-cabinet') {

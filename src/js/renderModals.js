@@ -1,7 +1,14 @@
 import { refs } from './refs';
 import modalTpl from '../tpl/components/modal.hbs';
 import { api, previewFile, stringToCamelCase } from './functions';
+import Handlebars from '../helpers';
 
+import 'swiper/swiper-bundle.css';
+import Swiper from 'swiper/bundle';
+import swiperConfigCategories from '../configSwiper.json';
+
+import SwiperCore, { Navigation, Pagination } from 'swiper/core';
+SwiperCore.use([Navigation, Pagination]);
 
 export const renderModals = {
   auth: () => {
@@ -15,37 +22,37 @@ export const renderModals = {
   },
   createEditProduct: () => {
     const contentForModal = require('../tpl/components/modals/createEditProduct.hbs').default;
-
-    const modalContent = contentForModal();
+    const modalContent = contentForModal({category: api.data.categories}, Handlebars);
     refs.modal.innerHTML = modalTpl({ modalContent });
     refs.modal.querySelectorAll('.inputfile').forEach(input => {
       input.addEventListener('change', previewFile);
     });
   },
-  cardOneGood: (id, category) => {
 
+  cardOneGood: (id, category) => {
     const contentForModal = require('../tpl/components/modals/cardOneGood.hbs').default;
-    const normalizeCategory = stringToCamelCase(category)
-    const categories = []
-    Object.keys(api.data.content).forEach(item => categories.push(item))
-    console.log(categories)
-    let item = {}
-    if(location.pathname === '/favourites'){
-      item = api.data.user.favourites.find(item => id === item._id)
-    }else if(!categories.includes(normalizeCategory) && location.pathname !== '/favourites'){
-      item = api.data.content.sales.find(item => id === item._id)    
-    }else {
+    const normalizeCategory = stringToCamelCase(category);
+    const categories = [];
+    Object.keys(api.data.content).forEach(item => categories.push(item));
+    console.log(categories);
+    let item = {};
+    if (location.pathname === '/favourites') {
+      item = api.data.user.favourites.find(item => id === item._id);
+    } else if (!categories.includes(normalizeCategory) && location.pathname !== '/favourites') {
+      item = api.data.content.sales.find(item => id === item._id);
+    } else {
       item = api.data.content[normalizeCategory].find(item => id === item._id);
     }
     const modalContent = contentForModal(item);
     refs.modal.innerHTML = modalTpl({ modalContent });
+    new Swiper('.swiper-container', swiperConfigCategories.card);
 
-    if(api.data.user.favourites.find(item => id === item._id)){
-      
-      const modalGoods = document.querySelector('#card-goods')
-      modalGoods.querySelector('.card-goods-icon').textContent = 'favorite'
-      modalGoods.querySelector('.card-goods-icon').classList.add('card-goods-icon-active')
-      modalGoods.querySelector('.card-goods__btn-favorites').dataset.action = 'remove-from-favourites'
+    if (api.data.user.favourites.find(item => id === item._id)) {
+      const modalGoods = document.querySelector('#card-goods');
+      modalGoods.querySelector('.card-goods-icon').textContent = 'favorite';
+      modalGoods.querySelector('.card-goods-icon').classList.add('card-goods-icon-active');
+      modalGoods.querySelector('.card-goods__btn-favorites').dataset.action =
+        'remove-from-favourites';
     }
   },
 
