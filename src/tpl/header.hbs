@@ -47,7 +47,7 @@
           </div>
         </li>
         <li class='item cabinet__item'>
-          <button class='cabinet__out' type='button' data-action="log-out" id="logOut">
+          <button class='cabinet__out' type='button' data-action="are-you-sure" data-value="modalExit">
             <span class="material-icons-round icons">logout</span>
           </button>
         </li>
@@ -85,7 +85,9 @@
     </button>
   </div>
 </div>
-<div class='tablet-menu hidden'>
+{{!-- TABLET MENU --}}
+<div class="tablet-menu__wrapper">
+<div class='tablet-menu'>
   <div class='container'>
     <div class='filter_tablet'>
       <ul class='list filter__list_tablet'>
@@ -98,13 +100,12 @@
     </div>
   </div>
 </div>
+</div>
 <!-- MOBILE-MENU -->
 <div class='mobile-container'>
-  <div class='mobile-menu hidden'>
-    <button class='btn-close' type='button'>
-      <svg class='ikon-close' width='24px' height='24px'>
-        <use href=''></use>
-      </svg>
+  <div class='mobile-menu'>
+    <button class='btn-close' data-action="btn-close" type='button'>
+      <span class="material-icons-round icons">close</span>
     </button>
     <ul class='list log-in mobile-menu__registration' id="register-wraper-mobile">
       <li class='item registration__item'>
@@ -130,23 +131,17 @@
       </li>
       <li class='item cabinet__item'>
         <button class='cabinet__out' type='button'>
-          <svg class='ikon-out' width='20px' height='20px'>
-            <use href=''></use>
-          </svg>
+            <span class="material-icons-round icons">logout</span>
         </button>
       </li>
     </ul>
     <div class='mobile__wrapper'>
       <button class='filter__btn_mobile' type='button'>
-        <svg width='24px' height='24px'>
-          <use href=''></use>
-        </svg>
+          <span class="material-icons-round icons">tune</span>
         Фильтры
       </button>
-      <button class='reset-btn_mobile' type='reset' data-action='close-filter'>
-        <svg width='24px' height='24px'>
-          <use href=''></use>
-        </svg>
+      <button class='reset-btn_mobile' type='reset'>
+        <span class="material-icons-round icons">replay</span>
         Очистить
       </button>
     </div>
