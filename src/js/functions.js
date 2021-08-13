@@ -10,6 +10,19 @@ import { renderCabinet } from './renderCabinet';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
 
+export const rerenderLogIn = () => {
+  document.querySelector('#register-wraper').classList.add('hide');
+  document.querySelector('#cabinet-wraper').classList.remove('hide');
+  document.querySelector('#register-wraper-mobile').classList.add('hide');
+  document.querySelector('#cabinet-wraper-mobile').classList.remove('hide');
+};
+export const rerenderLogOut = () => {
+  document.querySelector('#cabinet-wraper').classList.add('hide');
+  document.querySelector('#register-wraper').classList.remove('hide');
+  document.querySelector('#register-wraper-mobile').classList.remove('hide');
+  document.querySelector('#cabinet-wraper-mobile').classList.add('hide');
+};
+
 SwiperCore.use([Navigation, Pagination]);
 
 export const isJSON = data => {
@@ -42,6 +55,12 @@ const getHeader = () => {
     const obj = { data, logo };
     refs.header.innerHTML = headerTpl(obj, Handlebars);
     api.data.categories = data;
+    console.log(api.data.user.email);
+    if (api.data.user.email === undefined) {
+      rerenderLogOut();
+    } else {
+      rerenderLogIn();
+    }
   });
 };
 
@@ -52,7 +71,8 @@ const getFooter = () => {
   // console.log(location.href);
 };
 
-const getMainPage = (page = 1) => {
+export const getMainPage = (page = 1) => {
+  // console.log('ok');
   api.getData(config.componentsTpl.ads.getAds).then(data => {
     const mainAdsArr = [...data.slice(5)];
     const rigthAdsArr = [...data.slice(0, 2)];
@@ -102,18 +122,18 @@ const getMainPage = (page = 1) => {
 };
 
 const googleRegister = () => {
-  const a = new URLSearchParams(location.search.slice(1))
-  if(a.get('accessToken')){
-    localStorage.setItem('accessToken', a.get('accessToken')) 
-    localStorage.setItem('refreshToken', a.get('refreshToken'))
-  };
-}
+  const a = new URLSearchParams(location.search.slice(1));
+  if (a.get('accessToken')) {
+    localStorage.setItem('accessToken', a.get('accessToken'));
+    localStorage.setItem('refreshToken', a.get('refreshToken'));
+  }
+};
 
 export const renderContent = path => {
- googleRegister()
-  getUserData();
+  googleRegister();
+  getUserData().then(data => getHeader());
 
-  getHeader();
+  // getHeader();
   getFooter();
   history.pushState(null, null, path);
   if (path !== '/') refs.linkPaginationWrapper.classList.add('hidden');
@@ -121,20 +141,20 @@ export const renderContent = path => {
   if (path === '/') {
     getMainPage();
     return false;
-
   }
   if (path === '/favourites') {
     console.log(api.data)
-    renderCabinet()
-
+    getUserData().then(data => {
+      renderCabinet()
+    })
   }
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
   }
   api.getData(path).then(data => {
+    history.pushState(null, null, path);
 
     api.data.content[data[0].category] = data;
-
 
     const categoryTpl = require('../tpl/category.hbs').default;
     const card = require('../tpl/components/productCard.hbs').default;

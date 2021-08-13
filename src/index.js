@@ -1,14 +1,11 @@
 import './sass/main.scss';
 import { refs } from './js/refs';
-import { renderContent } from './js/functions';
+import { renderContent, getMainPage } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
-
-import { addToFavourites, removeFromFavourites } from './js/productsCRUD';
-
+import { addToFavourites, removeFromFavourites ,addPost } from './js/productsCRUD';
 import validator from 'validator';
-
 import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
 import { api } from './js/functions';
@@ -17,7 +14,7 @@ import { getNextPage } from './js/nextPage';
 const sales = '/call/specific/sales';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
-import { error, success } from '@pnotify/core';
+import { error, success, info } from '@pnotify/core';
 import userDataTpl from './tpl/components/userData.hbs';
 
 const getPath = () => {
@@ -28,15 +25,24 @@ renderContent(getPath());
 let counter = 1;
 
 document.addEventListener('click', e => {
-  const linkTag = e.target.closest('a') || e.target.querySelector('a');
+  const linkTag = e.target.closest('a');
   const buttonTag = e.target.closest('button');
-  console.log(e.target);
-  // console.log(!linkTag);
-  // console.log(!buttonTag);
-  // if (!linkTag || !buttonTag) return false;
+
+  if (e.target.dataset.action === 'close-modal-backdrop') {
+    refs.modal.innerHTML = '';
+  }
+
+
+  if (!linkTag && !buttonTag) return false;
   if (linkTag) {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
+    }
+
+
+    if (linkTag.dataset.action === 'show-main-img') {
+      const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
+      document.querySelector('#mainImg').setAttribute('src', srcChangeImg);
     }
 
     if (linkTag.dataset.action === 'open-main')
@@ -59,13 +65,13 @@ document.addEventListener('click', e => {
       renderCabinet();
     } else if (linkTag.dataset.id === undefined) {
       if (linkTag.getAttribute('href') === sales) {
+        refs.linkPaginationWrapper.classList.add('hidden');
         const categoryTpl = require('./tpl/category.hbs').default;
         const card = require('./tpl/components/productCard.hbs').default;
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
 
-        // console.log(api.data.content.sales);
       } else {
         const path = linkTag.getAttribute('href');
 
@@ -82,8 +88,10 @@ document.addEventListener('click', e => {
       animateModal();
 
       refs.modal.querySelector('input').focus();
-      document.querySelector('#user-log-in').disabled = true;
-      document.querySelector('#user-register').disabled = true;
+      if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
+        document.querySelector('#user-log-in').disabled = true;
+        document.querySelector('#user-register').disabled = true;
+      }
     }
     if (buttonTag.dataset.action === 'close-modal') {
       refs.modal.innerHTML = '';
@@ -96,15 +104,23 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'user-register') {
       registr();
     }
+
+    if(buttonTag.dataset.action === 'add-post'){
+      addPost();
+    }
     //
     if (e.target.dataset.action === 'user-log-in') {
-      e.preventDefault();
-      // console.log('ok');
+
       logIn();
-      // refs.modal.innerHTML = '';
+
+      success({ text: `You enter in your user profile`, delay: 1000 });
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
+      info({ text: `You log out from user profile`, delay: 1000 });
+
+
+      getMainPage();
     }
     if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
@@ -113,6 +129,15 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'btn-close') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       filterMenuNode.classList.remove('is-open');
+    }
+    if (buttonTag.dataset.action === 'close-filter') {
+      refs.linkPaginationWrapper.classList.remove('hidden');
+      refs.header.querySelector('.mobile-menu').classList.add('hidden');
+      refs.header.querySelector('.tablet-menu').classList.add('hidden');
+      refs.content.innerHTML = '';
+      const path = '/'
+      history.pushState(null, null, path);
+      getMainPage();
     }
 
     if (buttonTag.dataset.action === 'open-cabinet') {
@@ -182,32 +207,20 @@ document.addEventListener('click', e => {
         error({ text: 'Please enter the date', delay: 1500 });
       }
     }
-  } else if (e.target) {
-    //   Закрытие модалки по нажатию на backdrop
-    if (e.target.classList.contains('backdrop')) {
-      refs.modal.innerHTML = '';
-    }
-  } else {
-    return false;
   }
 });
 
 document.addEventListener('keydown', e => {
-  // const key = e.key;
   if (e.key === 'Escape') {
     refs.modal.innerHTML = '';
   }
   if (e.key === 'Enter') {
-    // refs.modal.querySelector('form')?.submit();
   }
 });
 
 // Слушатель для input
 document.addEventListener('input', e => {
-  // console.log(e.target);
   if (e.target.dataset.action === 'register-email') {
-    // console.log(e.target.value);
-    // console.log(validator.isStrongPassword);
     if (!validator.isEmail(e.target.value)) {
       if (e.target.classList.contains('valid')) {
         e.target.classList.remove('valid');
@@ -215,9 +228,9 @@ document.addEventListener('input', e => {
       e.target.classList.add('invalid');
       document.querySelector('#user-log-in').disabled = true;
       document.querySelector('#user-register').disabled = true;
-    }
+      }
     if (validator.isEmail(e.target.value)) {
-      if (e.target.classList.contains('invalid')) {
+      if (e.target.classList.contains('invalid')) {     
         e.target.classList.remove('invalid');
       }
       e.target.classList.add('valid');
@@ -243,5 +256,3 @@ document.addEventListener('input', e => {
     }
   }
 });
-
-// document.querySelector('.card-goods__btn-information').addEventListener('click', e => {});

@@ -26,7 +26,7 @@
       </form>
     </nav>
     <div class='box'>
-      <ul class='list registration log-in'>
+      <ul class='list registration log-in' id="register-wraper">
         <li class='item registration__item'>
           <button class='registration__btn-reg' type='button' data-action="open-modal"
             data-value="auth">Регистрация</button>
@@ -35,10 +35,7 @@
           <button class='registration__btn-in' type='button' data-action="open-modal" data-value="auth">Войти</button>
         </li>
       </ul>
-      <div>
-        <button class='registration__btn-in' type='button' id="logOut" data-action="log-out">Выйти</button>
-      </div>
-      <ul class='list cabinet'>
+      <ul class='list cabinet ' id="cabinet-wraper">
         <li class='item cabinet__item my-cabinet'>
           <a class='cabinet__in' type='button' data-action='open-cabinet'>
             <span class="material-icons-outlined icons">account_circle</span>Мой кабинет</a>
@@ -50,7 +47,7 @@
           </div>
         </li>
         <li class='item cabinet__item'>
-          <button class='cabinet__out' type='button'>
+          <button class='cabinet__out' type='button' data-action="log-out" id="logOut">
             <span class="material-icons-round icons">logout</span>
           </button>
         </li>
@@ -79,9 +76,12 @@
       <span class="material-icons icons">tune</span>
       Фильтры
     </button>
-    <button class='reset-btn' type='reset'>
-      <span class="material-icons icons">replay</span>
-      Очистить
+
+    {{!-- <a href="/" class='reset-btn' type='reset'> --}}
+      <button class='reset-btn' type='reset' data-action='close-filter'>
+        <span class="material-icons icons">replay</span>
+        Очистить
+        {{!-- </a> --}}
     </button>
   </div>
 </div>
@@ -107,15 +107,15 @@
     <button class='btn-close' data-action="btn-close" type='button'>
       <span class="material-icons-round icons">close</span>
     </button>
-    <ul class='list log-in mobile-menu__registration'>
+    <ul class='list log-in mobile-menu__registration' id="register-wraper-mobile">
       <li class='item registration__item'>
-        <button class='registration__btn-reg' type='button'>Регистрация</button>
+        <button class='registration__btn-reg' type='button' data-action="open-modal" data-value="auth">Регистрация</button>
       </li>
       <li class='item registration__item'>
-        <button class='registration__btn-in' type='button'>Войти</button>
+        <button class='registration__btn-in' type='button' data-action="open-modal" data-value="auth">Войти</button>
       </li>
     </ul>
-    <ul class='list cabinet mobile-menu__cabinet'>
+    <ul class='list cabinet mobile-menu__cabinet ' id="cabinet-wraper-mobile">
       <li class='item cabinet__item menu-cabinet'>
         <button class='cabinet__in' type='button' data-action='open-cabinet-mobile'>
           <svg class='ikon-user' width='20px' height='20px'>

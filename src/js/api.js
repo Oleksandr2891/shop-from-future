@@ -4,7 +4,6 @@ import { isJSON } from './functions';
 export default class Api {
   #data = {
     content: {},
-
   };
 
   constructor(name, path, obj = {}) {
@@ -22,8 +21,8 @@ export default class Api {
       options.method = method;
     }
 
-    if (obj.data) {
-      options.body = JSON.stringify(obj.data);
+    if (obj.body) {
+      options.body = JSON.stringify(obj.body);
     }
     if (obj.auth) {
       options.headers = {
@@ -31,6 +30,7 @@ export default class Api {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       };
     }
+    console.log(options)
     return await fetch(config.apiUrl + path, options)
       .then(res => {
         if (!isJSON(res)) {
@@ -52,9 +52,9 @@ export default class Api {
     const res = await this.send(path, 'POST', obj);
     return res;
   }
-  async deleteData(path = this.path, obj = this.obj){
-    const res = await this.send(path, 'DELETE', obj); 
-    return res
+  async deleteData(path = this.path, obj = this.obj) {
+    const res = await this.send(path, 'DELETE', obj);
+    return res;
   }
 
   get data() {
