@@ -17,7 +17,7 @@ import { getNextPage } from './js/nextPage';
 const sales = '/call/specific/sales';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
-import { error, success } from '@pnotify/core';
+import { error, success, info } from '@pnotify/core';
 import userDataTpl from './tpl/components/userData.hbs';
 
 const getPath = () => {
@@ -106,8 +106,9 @@ document.addEventListener('click', e => {
     //
     if (e.target.dataset.action === 'user-log-in') {
       e.preventDefault();
-      // console.log('ok');
+      // console.log('ok');      
       logIn();
+      success({ text: `You enter in your user profile`, delay: 1000 });
 
       document.querySelector('#register-wraper').classList.add('hide');
       document.querySelector('#cabinet-wraper').classList.remove('hide');
@@ -117,6 +118,8 @@ document.addEventListener('click', e => {
     }
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
+      info({ text: `You log out from user profile`, delay: 1000 });
+      
       document.querySelector('#cabinet-wraper').classList.add('hide');
       document.querySelector('#register-wraper').classList.remove('hide');
 
@@ -247,9 +250,9 @@ document.addEventListener('input', e => {
       e.target.classList.add('invalid');
       document.querySelector('#user-log-in').disabled = true;
       document.querySelector('#user-register').disabled = true;
-    }
+      }
     if (validator.isEmail(e.target.value)) {
-      if (e.target.classList.contains('invalid')) {
+      if (e.target.classList.contains('invalid')) {     
         e.target.classList.remove('invalid');
       }
       e.target.classList.add('valid');
