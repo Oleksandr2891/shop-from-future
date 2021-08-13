@@ -84,13 +84,12 @@ document.addEventListener('click', e => {
       }
     } else {
       renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
-
     }
   } else if (buttonTag) {
     e.preventDefault();
     if (buttonTag.dataset.action === 'open-card') {
       renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
-      console.log("Карточка откройся");
+      console.log('Карточка откройся');
     }
 
     if (buttonTag.dataset.action === 'open-modal') {
@@ -169,7 +168,6 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-to-favourites') {
-
       addToFavourites(e.target.closest('button').dataset.id);
     }
 
@@ -206,6 +204,7 @@ document.addEventListener('click', e => {
           .then(good => {
             if (good.length < 1) {
               error({ text: 'Your request is incorrect!', delay: 1500 });
+              refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
             }
             if (good.length > 0) {
               success({ text: `Goods were found.`, delay: 1000 });
