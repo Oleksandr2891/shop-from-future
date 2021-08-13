@@ -26,7 +26,7 @@
       </form>
     </nav>
     <div class='box'>
-      <ul class='list registration log-in'>
+      <ul class='list registration log-in' id="register-wraper">
         <li class='item registration__item'>
           <button class='registration__btn-reg' type='button' data-action="open-modal"
             data-value="auth">Регистрация</button>
@@ -35,10 +35,7 @@
           <button class='registration__btn-in' type='button' data-action="open-modal" data-value="auth">Войти</button>
         </li>
       </ul>
-      <div>
-        <button class='registration__btn-in' type='button' id="logOut" data-action="log-out">Выйти</button>
-      </div>
-      <ul class='list cabinet'>
+      <ul class='list cabinet hide' id="cabinet-wraper">
         <li class='item cabinet__item my-cabinet'>
           <a class='cabinet__in' type='button' data-action='open-cabinet'>
             <span class="material-icons-outlined icons">account_circle</span>Мой кабинет</a>
@@ -50,7 +47,7 @@
           </div>
         </li>
         <li class='item cabinet__item'>
-          <button class='cabinet__out' type='button'>
+          <button class='cabinet__out' type='button' data-action="log-out" id="logOut">
             <span class="material-icons-round icons">logout</span>
           </button>
         </li>
@@ -79,7 +76,9 @@
       <span class="material-icons icons">tune</span>
       Фильтры
     </button>
+
     <a href="/" class='reset-btn' type='reset'>
+//    <button class='reset-btn' type='reset' data-action='close-filter'>
       <span class="material-icons icons">replay</span>
       Очистить
     </a>
@@ -143,7 +142,7 @@
         </svg>
         Фильтры
       </button>
-      <button class='reset-btn_mobile' type='reset'>
+      <button class='reset-btn_mobile' type='reset' data-action='close-filter'>
         <svg width='24px' height='24px'>
           <use href=''></use>
         </svg>
