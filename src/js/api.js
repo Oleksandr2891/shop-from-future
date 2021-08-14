@@ -31,7 +31,6 @@ export default class Api {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       };
     }
-    console.log(options);
     return await fetch(config.apiUrl + path, options)
       .then(res => {
         if (!isJSON(res)) {

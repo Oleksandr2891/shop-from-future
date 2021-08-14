@@ -11,7 +11,7 @@ SwiperCore.use([Navigation, Pagination]);
 export const renderCabinet = () => {
   const cabinet = require('../tpl/components/userCabinet.hbs').default;
   refs.content.innerHTML = cabinet({ userData: api.data.user });
-  new Swiper('.swiper-container', swiperConfigCategories.card);
+  new Swiper('.swiper-container', swiperConfigCategories.cabinet);
   if (refs.ads.childElementCount > 0) {
     refs.linkPaginationWrapper.classList.add('hidden');
     refs.ads.innerHTML = '';

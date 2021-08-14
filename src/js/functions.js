@@ -140,7 +140,7 @@ export const renderContent = path => {
   history.pushState(null, null, path);
   if (path !== '/') refs.linkPaginationWrapper.classList.add('hidden');
 
-  if (path === '/favourites') {
+  if (path === '/cabinet') {
     console.log(api.data);
     getUserData().then(data => {
       renderCabinet();

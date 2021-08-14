@@ -34,15 +34,20 @@ export const renderModals = {
     const normalizeCategory = stringToCamelCase(category);
     const categories = [];
     Object.keys(api.data.content).forEach(item => categories.push(item));
-    console.log(categories);
+    console.log(api.data.user);
     let item = {};
     if (location.pathname === '/favourites') {
-      item = api.data.user.favourites.find(item => id === item._id);
+      if (category === "trade") {
+        item = api.data.user.calls.find(item => id === item._id);
+      } else {
+        item = api.data.user.favourites.find(item => id === item._id);
+      }
     } else if (!categories.includes(normalizeCategory) && location.pathname !== '/favourites') {
       item = api.data.content.sales.find(item => id === item._id);
     } else {
       item = api.data.content[normalizeCategory].find(item => id === item._id);
     }
+
     const modalContent = contentForModal(item);
     refs.modal.innerHTML = modalTpl({ modalContent });
     new Swiper('.swiper-container', swiperConfigCategories.card);
@@ -80,6 +85,7 @@ export const renderModals = {
   },
 
   closeModal: () => {
+
     refs.modal.innerHTML = '';
   },
 };

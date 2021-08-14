@@ -33,7 +33,7 @@ export const removeFromFavourites = id => {
     modalGoods.querySelector('.card-goods-icon').classList.remove('card-goods-icon-active');
     modalGoods.querySelector('.card-goods__btn-favorites').dataset.action = 'add-to-favourites';
 
-    if (location.pathname === '/favourites') {
+    if (location.pathname === '/cabinet') {
       getUserData().then(data => {
         console.log(data);
         renderCabinet();

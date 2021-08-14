@@ -38,6 +38,9 @@ document.addEventListener('click', e => {
 
   if (e.target.dataset.action === 'close-modal-backdrop') {
     refs.modal.innerHTML = '';
+    if (location.pathname === '/favourites') {
+      renderCabinet();
+    }
   }
 
   if (!linkTag && !buttonTag) return false;
@@ -72,6 +75,11 @@ document.addEventListener('click', e => {
       }
     } else if (linkTag.dataset.action === 'open-cabinet') {
       renderCabinet();
+    } else if (linkTag.dataset.action === 'open-cabinet-mobile') {
+      renderCabinet();
+      const filterMenuNode = refs.header.querySelector('.mobile-menu');
+      filterMenuNode.classList.remove('is-open');
+
     } else if (linkTag.dataset.id === undefined) {
       if (linkTag.getAttribute('href') === sales) {
         refs.linkPaginationWrapper.classList.add('hidden');
@@ -82,17 +90,17 @@ document.addEventListener('click', e => {
         refs.content.innerHTML = categoryTpl({ categoryData });
       } else {
         const path = linkTag.getAttribute('href');
-
         renderContent(path);
       }
     } else {
       renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
+
     }
   } else if (buttonTag) {
     e.preventDefault();
     if (buttonTag.dataset.action === 'open-card') {
       renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
-      console.log('Карточка откройся');
+
     }
 
     if (buttonTag.dataset.action === 'open-modal') {
@@ -107,6 +115,9 @@ document.addEventListener('click', e => {
       }
     }
     if (buttonTag.dataset.action === 'close-modal') {
+      if (location.pathname === '/favourites') {
+        renderCabinet();
+      }
       refs.modal.innerHTML = '';
     }
 
@@ -137,6 +148,7 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'open-filter') {
+
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       filterMenuNode.classList.add('is-open');
     }
@@ -145,6 +157,7 @@ document.addEventListener('click', e => {
       filterMenuNode.classList.remove('is-open');
     }
     if (buttonTag.dataset.action === 'close-filter') {
+      console.log("or");
       refs.linkPaginationWrapper.classList.remove('hidden');
       refs.header.querySelector('.mobile-menu').classList.remove('is-open');
       refs.header.querySelector('.tablet-menu').classList.remove('is-open');
@@ -157,7 +170,7 @@ document.addEventListener('click', e => {
       document.querySelector('.header__form_mobile').classList.add('is-open');
     }
 
-    if (buttonTag.dataset.action === 'open-cabinet') {
+    if (buttonTag.dataset.action === 'open-cabinet-cabinet') {
       const openMyCabinet = refs.header.querySelector('.modal-cabinet');
       if (openMyCabinet.classList.contains('hidden')) {
         openMyCabinet.classList.remove('hidden');

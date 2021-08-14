@@ -93,21 +93,21 @@
     </button>
   </div>
 </div>
-    {{!-- TABLET MENU --}}
+{{!-- TABLET MENU --}}
 <div class="tablet-menu__wrapper">
-<div class='tablet-menu'>
-  <div class='container'>
-    <div class='filter_tablet'>
-      <ul class='list filter__list_tablet'>
-        {{#each this.data}}
-        <li class='item filter__item_tablet'>
-          <a href='/call/specific/{{this}}' class='filter__btn'>{{__ this}}</a>
-        </li>
-        {{/each}}
-      </ul>
+  <div class='tablet-menu'>
+    <div class='container'>
+      <div class='filter_tablet'>
+        <ul class='list filter__list_tablet'>
+          {{#each this.data}}
+          <li class='item filter__item_tablet'>
+            <a href='/call/specific/{{this}}' class='filter__btn'>{{__ this}}</a>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 </div>
 <!-- MOBILE-MENU -->
 <div class='mobile-container'>
@@ -117,7 +117,8 @@
     </button>
     <ul class='list log-in mobile-menu__registration' id="register-wraper-mobile">
       <li class='item registration__item'>
-        <button class='registration__btn-reg' type='button' data-action="open-modal" data-value="auth">Регистрация</button>
+        <button class='registration__btn-reg' type='button' data-action="open-modal"
+          data-value="auth">Регистрация</button>
       </li>
       <li class='item registration__item'>
         <button class='registration__btn-in' type='button' data-action="open-modal" data-value="auth">Войти</button>
@@ -125,9 +126,8 @@
     </ul>
     <ul class='list cabinet mobile-menu__cabinet ' id="cabinet-wraper-mobile">
       <li class='item cabinet__item menu-cabinet'>
-        <button class='cabinet__in' type='button'  data-action='open-cabinet-mobile'>
+        <a class='cabinet__in' type='button' data-action='open-cabinet-mobile'>
           <span class="material-icons-outlined icons">account_circle</span>Мой кабинет</a>
-        </button>
         <div class="modal-cabinet-mobile hidden">
           <ul class="menu-caminet">
             <li class="item"><a class="link" href="http://">Мои объявления</a></li>
@@ -137,13 +137,13 @@
       </li>
       <li class='item cabinet__item'>
         <button class='cabinet__out' type='button'>
-            <span class="material-icons-round icons">logout</span>
+          <span class="material-icons-round icons">logout</span>
         </button>
       </li>
     </ul>
     <div class='mobile__wrapper'>
-      <button  data-action="btn-close" class='filter__btn_mobile' type='button'>
-          <span class="material-icons-round icons">tune</span>
+      <button data-action="btn-close" class='filter__btn_mobile' type='button'>
+        <span class="material-icons-round icons">tune</span>
         Фильтры
       </button>
       <button class='reset-btn_mobile' data-action='close-filter' type='reset'>
