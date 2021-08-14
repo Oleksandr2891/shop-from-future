@@ -1,6 +1,6 @@
 import './sass/main.scss';
 import { refs } from './js/refs';
-import { renderContent, getMainPage } from './js/functions';
+import { renderContent, getMainPage, noWorkBtnAddProduct, workBtnAddProduct } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
@@ -53,6 +53,7 @@ document.addEventListener('click', e => {
     if (linkTag.classList.contains('swiper-link__once-category')) {
       window.scrollTo(0, 0);
     }
+
     if (linkTag.dataset.action === 'open-main')
       refs.linkPaginationWrapper.classList.remove('hidden');
     if (linkTag.dataset.action === 'load-more') {
@@ -97,6 +98,7 @@ document.addEventListener('click', e => {
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.closest('button').dataset.value]();
       animateModal();
+      noWorkBtnAddProduct();
 
       refs.modal.querySelector('input').focus();
       if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
@@ -237,6 +239,17 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// isValidModalCreateProduct();
+
+console.log('1 2 3');
+
+// document.querySelector('#product-title');
+// document.querySelector('#');
+// document.querySelector('#product-description');
+// document.querySelector('#');
+// document.querySelector('#product-price');
+// document.querySelector('#');
+// console.log(document.querySelector('#product-category').value);
 // Слушатель для input
 document.addEventListener('input', e => {
   if (e.target.dataset.action === 'register-email') {
@@ -245,8 +258,7 @@ document.addEventListener('input', e => {
         e.target.classList.remove('valid');
       }
       e.target.classList.add('invalid');
-      document.querySelector('#user-log-in').disabled = true;
-      document.querySelector('#user-register').disabled = true;
+      noWorkBtnAddProduct();
     }
     if (validator.isEmail(e.target.value)) {
       if (e.target.classList.contains('invalid')) {
@@ -262,16 +274,69 @@ document.addEventListener('input', e => {
         e.target.classList.remove('valid');
       }
       e.target.classList.add('invalid');
-      document.querySelector('#user-log-in').disabled = true;
-      document.querySelector('#user-register').disabled = true;
+      noWorkBtnAddProduct();
     }
     if (e.target.value.length >= 4) {
       if (e.target.classList.contains('invalid')) {
         e.target.classList.remove('invalid');
       }
       e.target.classList.add('valid');
-      document.querySelector('#user-log-in').disabled = false;
-      document.querySelector('#user-register').disabled = false;
+      workBtnAddProduct();
     }
   }
+  // Валидация модалки создания товара
+  if (e.target.dataset.action === 'name-product') {
+    // console.log(e.target.value);
+    if (e.target.value.length <= 3) {
+      if (e.target.classList.contains('valid')) {
+        e.target.classList.remove('valid');
+        workBtnAddProduct();
+      }
+      e.target.classList.add('invalid');
+      noWorkBtnAddProduct();
+    }
+    if (e.target.value.length > 3) {
+      if (e.target.classList.contains('invalid')) {
+        e.target.classList.remove('invalid');
+      }
+      e.target.classList.add('valid');
+      workBtnAddProduct();
+    }
+  }
+  if (e.target.dataset.action === 'description-product') {
+    if (e.target.value.length <= 10) {
+      if (e.target.classList.contains('valid')) {
+        e.target.classList.remove('valid');
+      }
+      e.target.classList.add('invalid');
+      noWorkBtnAddProduct();
+    }
+    if (e.target.value.length > 10) {
+      if (e.target.classList.contains('invalid')) {
+        e.target.classList.remove('invalid');
+      }
+      e.target.classList.add('valid');
+      workBtnAddProduct();
+    }
+  }
+  if (e.target.dataset.action === 'price-product') {
+    console.log(typeof Number(e.target.value));
+    if (/^[0-9]+$/.test(e.target.value)) {
+      // if (e.target.value < 0) {
+      //   if (e.target.classList.contains('valid')) {
+      //     e.target.classList.remove('valid');
+      //   }
+      //   e.target.classList.add('invalid');
+      // }
+      // if()
+      if (e.target.classList.contains('invalid')) {
+        e.target.classList.remove('invalid');
+      }
+      e.target.classList.add('valid');
+      // console.log('ok');
+    }
+  }
+
+  // if (e.target.dataset.value === 'img-for-back') {
+  // }
 });

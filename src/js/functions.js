@@ -186,3 +186,63 @@ export function previewFile(event) {
     preview.src = '';
   }
 }
+
+// export const noWorkBtnRegister = () => {
+//   if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
+//     document.querySelector('#user-log-in').disabled = true;
+//     document.querySelector('#user-register').disabled = true;
+//   }
+// };
+
+// export const workBtnRegister = () => {
+//   if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
+//     document.querySelector('#user-log-in').disabled = false;
+//     document.querySelector('#user-register').disabled = false;
+//   }
+// };
+
+export const workBtnAddProduct = () => {
+  if (document.querySelector('#addPostProduct')) {
+    document.querySelector('#addPostProduct').disabled = false;
+  }
+};
+
+export const noWorkBtnAddProduct = () => {
+  if (document.querySelector('#addPostProduct')) {
+    // console.log('OK');
+
+    document.querySelector('#addPostProduct').disabled = true;
+  }
+};
+
+// export const isValidModalCreateProduct = () => {
+//   if (
+//     document.querySelector('#product-title') &&
+//     document.querySelector('.inputfile') &&
+//     document.querySelector('#product-description') &&
+//     document.querySelector('#product-category') &&
+//     document.querySelector('#product-price') &&
+//     document.querySelector('#product-phone')
+//   ) {
+//     if (
+//       document.querySelector('#product-title').value === '' &&
+//       document.querySelector('#product-description').value === '' &&
+//       document.querySelector('#product-category') === null &&
+//       document.querySelector('#product-phone').value === ''
+//     ) {
+//       noWorkBtnAddProduct();
+//       const arrInputImg = document.querySelectorAll('.inputfile');
+//       arrInputImg.forEach(e => {
+//         // console.log(e.files.length);
+//         if (e.files.length !== 0) {
+//           // console.log('ok');
+//           workBtnAddProduct();
+//         }
+//         if (e.files.length === 0) {
+//           noWorkBtnAddProduct();
+//         }
+//         // if(e.file)
+//       });
+//     }
+//   }
+// };
