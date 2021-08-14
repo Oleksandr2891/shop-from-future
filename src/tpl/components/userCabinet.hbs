@@ -17,8 +17,6 @@
         {{/each}}
     </div>
     <div class="swiper-pagination"></div>
-    <div id="btn-slider" class='swiper-button-prev'></div>
-    <div id="btn-slider" class='swiper-button-next'></div>
 </div>
 
 
@@ -30,8 +28,7 @@
         {{#each userData.favourites}}
         <div class='swiper-slide'>
             <a href="/" class="swiper-container__link-card" data-id="{{_id}}" data-category="{{category}}">
-                <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}"
-                        alt="{{title}}">
+                <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}" alt="{{title}}">
                 </div>
                 <h3 class='card-name'>{{title}}</h3>
                 <p class='card-price'>
@@ -43,7 +40,4 @@
         {{/each}}
     </div>
     <div class="swiper-pagination"></div>
-    <div id="btn-slider" class='swiper-button-prev'></div>
-    <div id="btn-slider" class='swiper-button-next'></div>
 </div>
-
