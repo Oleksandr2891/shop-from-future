@@ -4,7 +4,7 @@
  
   <label class='modal-create__field'>
     Название товара
-    <input type='text' class='modal-create__input' id="product-title" required minlength='2' />
+    <input type='text' class='modal-create__input' id="product-title" minlength="3" required minlength='2' data-action="name-product"/>
   </label>
 
   <div class='modal-create__field'>
@@ -12,30 +12,30 @@
     {{!-- <input type='file' class='modal-create__input  modal-create__file'/>
     <label for="file">+</label> --}}
     <div class='modal-create__file-wrap'>
-    <input type="file" name="file" id="first" class="inputfile" />
+    <input type="file" name="file" id="first" class="inputfile" data-value="img-for-back" />
     <label for="first" class="img-plus">      
       <img src="" class="modal-create__preview-img" />
     </label>
-    <input type="file" name="file" id="second" class="inputfile" />
+    <input type="file" name="file" id="second" class="inputfile" data-value="img-for-back"/>
     <label for="second" class="img-plus" >
       <img src="" class="modal-create__preview-img" />
     </label>
-    <input type="file" name="file" id="third" class="inputfile" />
+    <input type="file" name="file" id="third" class="inputfile" data-value="img-for-back"/>
     <label for="third" class="img-plus">
       <img src="" class="modal-create__preview-img" />
     </label>
-    <input type="file" name="file" id="fourt" class="inputfile" />
+    <input type="file" name="file" id="fourt" class="inputfile" data-value="img-for-back"/>
     <label for="fourt" class="img-plus">
       <img src="" class="modal-create__preview-img" />
     </label>
-    <input type="file" name="file" id="fifth" class="inputfile" />
+    <input type="file" name="file" id="fifth" class="inputfile" data-value="img-for-back"/>
     <label for="fifth" class="img-plus">
       <img src="" class="modal-create__preview-img" />
     </label>
-    <input type="file" name="file" id="sixth" class="inputfile inputfile-sixth" />
+    {{!-- <input type="file" name="file" id="sixth" class="inputfile inputfile-sixth" />
     <label for="sixth" class="img-plus img-plus-sixth">
       <img src="" class="modal-create__preview-img" />
-    </label>
+    </label> --}}
   </div>        
   </div>
   <label class='modal-create__field'>
@@ -45,6 +45,8 @@
       name='user-description'
       class='modal-create__input modal-create__description'
       placeholder='Введите описание'
+      data-action="description-product"
+      minlength="10"
     ></textarea>
   </label>
   <label class='modal-create__field'>
@@ -59,7 +61,7 @@
   </label>
   <label class='modal-create__field'>
     Цена
-    <input id="product-price" type='text' class='modal-create__input' placeholder='0.00 €' />
+    <input id="product-price" type='number' min="0" class='modal-create__input'  placeholder='0.00 €'  data-action="price-product"/>
   </label>
   <label class='modal-create__field'>
     Телефон
@@ -75,6 +77,6 @@
     />
   </label>
 
-  <button type='submit' class='modal-create__btn' data-action="add-post">Добавить</button>
+  <button type='submit' class='modal-create__btn' data-action="add-post" id="addPostProduct">Добавить</button>
  
 </div>
