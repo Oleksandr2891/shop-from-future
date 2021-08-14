@@ -85,6 +85,7 @@ export const renderModals = {
   },
 
   closeModal: () => {
+
     refs.modal.innerHTML = '';
   },
 };

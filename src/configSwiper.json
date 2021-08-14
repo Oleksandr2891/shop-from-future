@@ -37,6 +37,10 @@
         "keyboardControl": true,
         "mousewheelControl": true,
         "autoplayDisableOnInteraction": false,
+        "pagination": {
+            "el": ".swiper-pagination",
+            "dynamicBullets": true
+        },
         "breakpoints": {
             "320": {
                 "slidesPerView": 1,

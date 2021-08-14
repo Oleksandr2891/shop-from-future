@@ -4,15 +4,27 @@
     <div class='swiper-wrapper'>
         {{#each userData.calls}}
         <div class='swiper-slide'>
-            <a href="/" class="swiper-container__link-card" data-id="{{_id}}" data-category="{{category}}">
-                <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}" alt="{{title}}">
-                </div>
-                <h3 class='card-name'>{{title}}</h3>
-                <p class='card-price'>
-                    <span class="old-price"> {{oldPrice}} </span>
-                    <span class="price"> {{price}}&#8364</span>
-                </p>
-            </a>
+            <div class="overlay">
+                <button type="button" data-action="add-to-favourites" class="favorite" data-id="{{_id}}">
+                    <span class="card-goods-icon material-icons-outlined">favorite_border</span>
+                </button>
+                <button type="button" data-action="open-card" class="link-card" data-id="{{_id}}"
+                    data-category="{{category}}">
+                    <span class="card-goods-icon material-icons-outlined">crop_free</span>
+                </button>
+            </div>
+            <div class="category__card">
+                <a href="/" class="swiper-container__link-card" data-id="{{_id}}" data-category="{{category}}">
+                    <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}"
+                            alt="{{title}}">
+                    </div>
+                    <h3 class='card-name'>{{title}}</h3>
+                    <p class='card-price'>
+                        <span class="old-price"> {{oldPrice}} </span>
+                        <span class="price"> {{price}}&#8364</span>
+                    </p>
+                </a>
+            </div>
         </div>
         {{/each}}
     </div>
@@ -27,15 +39,27 @@
     <div class='swiper-wrapper'>
         {{#each userData.favourites}}
         <div class='swiper-slide'>
-            <a href="/" class="swiper-container__link-card" data-id="{{_id}}" data-category="{{category}}">
-                <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}" alt="{{title}}">
-                </div>
-                <h3 class='card-name'>{{title}}</h3>
-                <p class='card-price'>
-                    <span class="old-price"> {{oldPrice}} </span>
-                    <span class="price"> {{price}}&#8364</span>
-                </p>
-            </a>
+            <div class="overlay">
+                <button type="button" data-action="add-to-favourites" class="favorite" data-id="{{_id}}">
+                    <span class="card-goods-icon material-icons-outlined">favorite_border</span>
+                </button>
+                <button type="button" data-action="open-card" class="link-card" data-id="{{_id}}"
+                    data-category="{{category}}">
+                    <span class="card-goods-icon material-icons-outlined">crop_free</span>
+                </button>
+            </div>
+            <div class="category__card">
+                <a href="/" class="swiper-container__link-card" data-id="{{_id}}" data-category="{{category}}">
+                    <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}"
+                            alt="{{title}}">
+                    </div>
+                    <h3 class='card-name'>{{title}}</h3>
+                    <p class='card-price'>
+                        <span class="old-price"> {{oldPrice}} </span>
+                        <span class="price"> {{price}}&#8364</span>
+                    </p>
+                </a>
+            </div>
         </div>
         {{/each}}
     </div>

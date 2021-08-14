@@ -113,8 +113,10 @@ document.addEventListener('click', e => {
       }
     }
     if (buttonTag.dataset.action === 'close-modal') {
+      if (location.pathname === '/favourites') {
+        renderCabinet();
+      }
       refs.modal.innerHTML = '';
-
     }
 
     if (buttonTag.dataset.action === 'sign-in-with-google') {
