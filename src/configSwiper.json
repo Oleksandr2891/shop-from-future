@@ -30,13 +30,13 @@
     },
     "cabinet": {
         "direction": "horizontal",
+        "watchOverflow": true,
         "loop": false,
         "slidesPerView": 1,
         "spaceBetween": 20,
         "keyboardControl": true,
         "mousewheelControl": true,
-        "pagination": ".swiper-pagination",
-        "paginationClickable": true,
+        "autoplayDisableOnInteraction": false,
         "breakpoints": {
             "320": {
                 "slidesPerView": 1,
