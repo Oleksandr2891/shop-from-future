@@ -5,7 +5,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, removeFromFavourites, addPost } from './js/productsCRUD';
+import { addToFavourites, createEditPost, removeFromFavourites} from './js/productsCRUD';
 
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
@@ -102,6 +102,12 @@ document.addEventListener('click', e => {
       renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
 
     }
+    if(buttonTag.dataset.action === 'edit-post'){
+      createEditPost('PATCH', `/${buttonTag.dataset.id}`)
+    }
+    if(buttonTag.dataset.action === 'open-modal-edit'){
+      renderModals.createEditProduct('PATCH', buttonTag.dataset.id)
+    }
 
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.closest('button').dataset.value]();
@@ -130,7 +136,8 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-post') {
-      addPost();
+      createEditPost('POST')
+      // renderModals.createEditProduct('POST')
     }
     //
     if (e.target.dataset.action === 'user-log-in') {

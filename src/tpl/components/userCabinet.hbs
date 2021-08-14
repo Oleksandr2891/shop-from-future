@@ -1,67 +1,92 @@
 <div class='swiper-container container-categories calls'>
-    <h2 class="swiper-title">Мои объявления</h2>
-    <a href="#" class="swiper-link__once-category">Смотреть все</a>
-    <div class='swiper-wrapper'>
-        {{#each userData.calls}}
-        <div class='swiper-slide'>
-            <div class="overlay">
-                <button type="button" data-action="add-to-favourites" class="favorite" data-id="{{_id}}">
-                    <span class="card-goods-icon material-icons-outlined">favorite_border</span>
-                </button>
-                <button type="button" data-action="open-card" class="link-card" data-id="{{_id}}"
-                    data-category="{{category}}">
-                    <span class="card-goods-icon material-icons-outlined">crop_free</span>
-                </button>
-            </div>
-            <div class="category__card">
-                <a href="/" class="swiper-container__link-card" data-id="{{_id}}" data-category="{{category}}">
-                    <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}"
-                            alt="{{title}}">
-                    </div>
-                    <h3 class='card-name'>{{title}}</h3>
-                    <p class='card-price'>
-                        <span class="old-price"> {{oldPrice}} </span>
-                        <span class="price"> {{price}}&#8364</span>
-                    </p>
-                </a>
-            </div>
+  <h2 class='swiper-title'>Мои объявления</h2>
+  <a href='#' class='swiper-link__once-category'>Смотреть все</a>
+  <div class='swiper-wrapper'>
+    {{#each userData.calls}}
+      <div class='swiper-slide'>
+        <div class='overlay'>
+          <button type='button' data-action='add-to-favourites' class='favorite' data-id='{{_id}}'>
+            <span class='card-goods-icon material-icons-outlined'>favorite_border</span>
+          </button>
+          <button
+            type='button'
+            data-action='open-modal-edit'
+            data-value='createEditProduct'
+            class='link-card'
+            data-id='{{_id}}'
+            data-category='{{category}}'
+          >
+            <span class='card-goods-icon material-icons-outlined'>crop_free</span>
+          </button>
         </div>
-        {{/each}}
-    </div>
-    <div class="swiper-pagination"></div>
+        <div class='category__card'>
+          <a
+            href='/'
+            class='swiper-container__link-card'
+            data-id='{{_id}}'
+            data-category='{{category}}'
+          >
+            <div class='card-image__wrapper'><img
+                class='card-image__img'
+                src='{{imageUrls.[0]}}'
+                alt='{{title}}'
+              />
+            </div>
+            <h3 class='card-name'>{{title}}</h3>
+            <p class='card-price'>
+              <span class='old-price'> {{oldPrice}} </span>
+              <span class='price'> {{price}}&#8364</span>
+            </p>
+          </a>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  <div class='swiper-pagination'></div>
 </div>
 
-
-
 <div class='swiper-container container-categories favourite'>
-    <h2 class="swiper-title">Избранное</h2>
-    <a href="#" class="swiper-link__once-category">Смотреть все</a>
-    <div class='swiper-wrapper'>
-        {{#each userData.favourites}}
-        <div class='swiper-slide'>
-            <div class="overlay">
-                <button type="button" data-action="add-to-favourites" class="favorite" data-id="{{_id}}">
-                    <span class="card-goods-icon material-icons-outlined">favorite_border</span>
-                </button>
-                <button type="button" data-action="open-card" class="link-card" data-id="{{_id}}"
-                    data-category="{{category}}">
-                    <span class="card-goods-icon material-icons-outlined">crop_free</span>
-                </button>
-            </div>
-            <div class="category__card">
-                <a href="/" class="swiper-container__link-card" data-id="{{_id}}" data-category="{{category}}">
-                    <div class='card-image__wrapper'><img class="card-image__img" src="{{imageUrls.[0]}}"
-                            alt="{{title}}">
-                    </div>
-                    <h3 class='card-name'>{{title}}</h3>
-                    <p class='card-price'>
-                        <span class="old-price"> {{oldPrice}} </span>
-                        <span class="price"> {{price}}&#8364</span>
-                    </p>
-                </a>
-            </div>
+  <h2 class='swiper-title'>Избранное</h2>
+  <a href='#' class='swiper-link__once-category'>Смотреть все</a>
+  <div class='swiper-wrapper'>
+    {{#each userData.favourites}}
+      <div class='swiper-slide'>
+        <div class='overlay'>
+          <button type='button' data-action='add-to-favourites' class='favorite' data-id='{{_id}}'>
+            <span class='card-goods-icon material-icons-outlined'>favorite_border</span>
+          </button>
+          <button
+            type='button'
+            data-action='open-card'
+            class='link-card'
+            data-id='{{_id}}'
+            data-category='{{category}}'
+          >
+            <span class='card-goods-icon material-icons-outlined'>crop_free</span>
+          </button>
         </div>
-        {{/each}}
-    </div>
-    <div class="swiper-pagination"></div>
+        <div class='category__card'>
+          <a
+            href='/'
+            class='swiper-container__link-card'
+            data-id='{{_id}}'
+            data-category='{{category}}'
+          >
+            <div class='card-image__wrapper'><img
+                class='card-image__img'
+                src='{{imageUrls.[0]}}'
+                alt='{{title}}'
+              />
+            </div>
+            <h3 class='card-name'>{{title}}</h3>
+            <p class='card-price'>
+              <span class='old-price'> {{oldPrice}} </span>
+              <span class='price'> {{price}}&#8364</span>
+            </p>
+          </a>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+  <div class='swiper-pagination'></div>
 </div>
