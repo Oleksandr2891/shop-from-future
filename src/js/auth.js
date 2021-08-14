@@ -89,6 +89,7 @@ export const logOut = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('sid');
     api.data.user = {};
+    rerenderLogOut();
   });
 };
 

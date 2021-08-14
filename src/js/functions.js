@@ -187,19 +187,19 @@ export function previewFile(event) {
   }
 }
 
-// export const noWorkBtnRegister = () => {
-//   if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
-//     document.querySelector('#user-log-in').disabled = true;
-//     document.querySelector('#user-register').disabled = true;
-//   }
-// };
+export const noWorkBtnRegister = () => {
+  if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
+    document.querySelector('#user-log-in').disabled = true;
+    document.querySelector('#user-register').disabled = true;
+  }
+};
 
-// export const workBtnRegister = () => {
-//   if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
-//     document.querySelector('#user-log-in').disabled = false;
-//     document.querySelector('#user-register').disabled = false;
-//   }
-// };
+export const workBtnRegister = () => {
+  if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
+    document.querySelector('#user-log-in').disabled = false;
+    document.querySelector('#user-register').disabled = false;
+  }
+};
 
 export const workBtnAddProduct = () => {
   if (document.querySelector('#addPostProduct')) {
