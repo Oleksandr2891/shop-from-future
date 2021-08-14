@@ -151,6 +151,9 @@ document.addEventListener('click', e => {
       history.pushState(null, null, path);
       getMainPage();
     }
+    if (buttonTag.dataset.action === 'open-input') {
+      document.querySelector('.header__form_mobile').classList.add('is-open');
+    }
 
     if (buttonTag.dataset.action === 'open-cabinet') {
       const openMyCabinet = refs.header.querySelector('.modal-cabinet');
@@ -214,6 +217,7 @@ document.addEventListener('click', e => {
           });
       }
       findGood();
+      document.querySelector('.header__form_mobile').classList.remove('is-open');
 
       if (input.value != '') {
         const path = input.dataset.search + input.value;

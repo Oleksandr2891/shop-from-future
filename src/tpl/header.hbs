@@ -1,4 +1,5 @@
 <div class='container'>
+  {{!-- MOBILE_HEADER --}}
   <div class='header__mobile'>
     <button type='button' class='mobile-button' data-action='open-filter'>
       <span class="material-icons-round icons">menu</span>
@@ -8,9 +9,15 @@
     <a href='/' data-action='open-main'>
       <img class='mobile__logo' src='{{this.logo}}' alt='logo' />
     </a>
-    <button type='button' class='mobile-button'>
+    <button type='button' class='mobile-button' data-action="open-input">
       <span class="material-icons-round icons">search</span>
     </button>
+    <form class='header__form_mobile'>
+      <input class='header__find' data-search='/call/find?search=' type='text' />
+      <button class="search__btn " data-search='search'>
+        <span class="material-icons icons">search</span>
+      </button>
+    </form>
   </div>
   <div class='header__wrapper'>
     <nav class='nav'>
@@ -66,6 +73,7 @@
       </li>
       {{/each}}
     </ul>
+
     <form class='header__form_tablet'>
       <input class='header__find' data-search='/call/find?search=' type='text' />
       <button type='submit' data-search='search' class='search__btn'>
@@ -85,7 +93,7 @@
     </button>
   </div>
 </div>
-{{!-- TABLET MENU --}}
+    {{!-- TABLET MENU --}}
 <div class="tablet-menu__wrapper">
 <div class='tablet-menu'>
   <div class='container'>
@@ -134,7 +142,7 @@
       </li>
     </ul>
     <div class='mobile__wrapper'>
-      <button class='filter__btn_mobile' type='button'>
+      <button  data-action="btn-close" class='filter__btn_mobile' type='button'>
           <span class="material-icons-round icons">tune</span>
         Фильтры
       </button>
