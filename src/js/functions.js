@@ -209,40 +209,40 @@ export const workBtnAddProduct = () => {
 
 export const noWorkBtnAddProduct = () => {
   if (document.querySelector('#addPostProduct')) {
-    console.log('OK');
+    // console.log('OK');
 
     document.querySelector('#addPostProduct').disabled = true;
   }
 };
 
-export const isValidModalCreateProduct = () => {
-  if (
-    document.querySelector('#product-title') &&
-    document.querySelector('.inputfile') &&
-    document.querySelector('#product-description') &&
-    document.querySelector('#product-category') &&
-    document.querySelector('#product-price') &&
-    document.querySelector('#product-phone')
-  ) {
-    if (
-      document.querySelector('#product-title').value === '' &&
-      document.querySelector('#product-description').value === '' &&
-      document.querySelector('#product-category') === null &&
-      document.querySelector('#product-phone').value === ''
-    ) {
-      noWorkBtnAddProduct();
-      const arrInputImg = document.querySelectorAll('.inputfile');
-      arrInputImg.forEach(e => {
-        // console.log(e.files.length);
-        if (e.files.length !== 0) {
-          // console.log('ok');
-          workBtnAddProduct();
-        }
-        if (e.files.length === 0) {
-          noWorkBtnAddProduct();
-        }
-        // if(e.file)
-      });
-    }
-  }
-};
+// export const isValidModalCreateProduct = () => {
+//   if (
+//     document.querySelector('#product-title') &&
+//     document.querySelector('.inputfile') &&
+//     document.querySelector('#product-description') &&
+//     document.querySelector('#product-category') &&
+//     document.querySelector('#product-price') &&
+//     document.querySelector('#product-phone')
+//   ) {
+//     if (
+//       document.querySelector('#product-title').value === '' &&
+//       document.querySelector('#product-description').value === '' &&
+//       document.querySelector('#product-category') === null &&
+//       document.querySelector('#product-phone').value === ''
+//     ) {
+//       noWorkBtnAddProduct();
+//       const arrInputImg = document.querySelectorAll('.inputfile');
+//       arrInputImg.forEach(e => {
+//         // console.log(e.files.length);
+//         if (e.files.length !== 0) {
+//           // console.log('ok');
+//           workBtnAddProduct();
+//         }
+//         if (e.files.length === 0) {
+//           noWorkBtnAddProduct();
+//         }
+//         // if(e.file)
+//       });
+//     }
+//   }
+// };

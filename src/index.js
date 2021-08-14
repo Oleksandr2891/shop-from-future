@@ -1,12 +1,6 @@
 import './sass/main.scss';
 import { refs } from './js/refs';
-import {
-  renderContent,
-  getMainPage,
-  noWorkBtnAddProduct,
-  workBtnAddProduct,
-  isValidModalCreateProduct,
-} from './js/functions';
+import { renderContent, getMainPage, noWorkBtnAddProduct, workBtnAddProduct } from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
