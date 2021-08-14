@@ -25,10 +25,11 @@ export const addToFavourites = id => {
   console.log(api.data.user);
 };
 
-export const removeFromFavourites = id => {
+export const removeFromFavourites = (id, node) => {
   api.deleteData(config.favourites_URL + '/' + id, { data: false, auth: true }).then(data => {
     getUserData();
-    const modalGoods = document.querySelector('#card-goods');
+    // const modalGoods = (node) ? document.querySelector('#favourite') : document.querySelector('#card-goods');
+    console.log(modalGoods);
     modalGoods.querySelector('.card-goods-icon').textContent = 'favorite_border';
     modalGoods.querySelector('.card-goods-icon').classList.remove('card-goods-icon-active');
     modalGoods.querySelector('.card-goods__btn-favorites').dataset.action = 'add-to-favourites';

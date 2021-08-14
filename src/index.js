@@ -188,11 +188,14 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-to-favourites') {
-      addToFavourites(e.target.closest('button').dataset.id);
+      const currentNode = e.target.closest('button').dataset;
+      console.log(nodeFavorite);
+      addToFavourites(e.target.closest('button').dataset.id, nodeFavorite);
     }
 
     if (buttonTag.dataset.action === 'remove-from-favourites') {
       removeFromFavourites(buttonTag.dataset.id);
+      console.log(e.target.closest('button').classList.contains("favorite"));
     }
 
     if (buttonTag.dataset.action === 'show-user-data') {

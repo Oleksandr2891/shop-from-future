@@ -34,7 +34,7 @@ export const renderModals = {
     const normalizeCategory = stringToCamelCase(category);
     const categories = [];
     Object.keys(api.data.content).forEach(item => categories.push(item));
-    console.log(api.data.user);
+
     let item = {};
     if (location.pathname === '/favourites') {
       if (category === "trade") {

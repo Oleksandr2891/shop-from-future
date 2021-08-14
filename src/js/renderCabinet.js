@@ -1,6 +1,6 @@
 import { api } from './functions';
 import { refs } from './refs';
-
+import Handlebars from '../helpers';
 import 'swiper/swiper-bundle.css';
 import Swiper from 'swiper/bundle';
 import swiperConfigCategories from '../configSwiper.json';
@@ -10,7 +10,7 @@ SwiperCore.use([Navigation, Pagination]);
 
 export const renderCabinet = () => {
   const cabinet = require('../tpl/components/userCabinet.hbs').default;
-  refs.content.innerHTML = cabinet({ userData: api.data.user });
+  refs.content.innerHTML = cabinet({ userData: api.data.user }, Handlebars);
   new Swiper('.swiper-container', swiperConfigCategories.cabinet);
   if (refs.ads.childElementCount > 0) {
     refs.linkPaginationWrapper.classList.add('hidden');
