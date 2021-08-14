@@ -55,7 +55,6 @@ const getHeader = () => {
     const obj = { data, logo };
     refs.header.innerHTML = headerTpl(obj, Handlebars);
     api.data.categories = data;
-    console.log(api.data.user.email);
     if (api.data.user.email === undefined) {
       rerenderLogOut();
     } else {
@@ -68,11 +67,9 @@ const getFooter = () => {
   if (refs.footer.childElementCount !== 0) return false;
   const footerTpl = require('../tpl/footer.hbs').default;
   refs.footer.innerHTML = footerTpl();
-  // console.log(location.href);
 };
 
 export const getMainPage = (page = 1) => {
-  // console.log('ok');
   api.getData(config.componentsTpl.ads.getAds).then(data => {
     const mainAdsArr = [...data.slice(5)];
     const rigthAdsArr = [...data.slice(0, 2)];
@@ -131,17 +128,18 @@ const googleRegister = () => {
 
 export const renderContent = path => {
   googleRegister();
-  getUserData().then(data => getHeader());
+  getUserData().then(data => {
+    getHeader();
+    getFooter();
+    if (path === '/') {
+      getMainPage();
+      return false;
+    }
+  });
 
-  // getHeader();
-  getFooter();
   history.pushState(null, null, path);
   if (path !== '/') refs.linkPaginationWrapper.classList.add('hidden');
 
-  if (path === '/') {
-    getMainPage();
-    return false;
-  }
   if (path === '/favourites') {
     console.log(api.data);
     getUserData().then(data => {
@@ -151,16 +149,18 @@ export const renderContent = path => {
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
   }
-  api.getData(path).then(data => {
-    history.pushState(null, null, path);
+  if (path !== '/') {
+    api.getData(path).then(data => {
+      history.pushState(null, null, path);
 
-    api.data.content[data[0].category] = data;
+      api.data.content[data[0].category] = data;
 
-    const categoryTpl = require('../tpl/category.hbs').default;
-    const card = require('../tpl/components/productCard.hbs').default;
-    const categoryData = card(data);
-    refs.content.innerHTML = categoryTpl({ categoryData });
-  });
+      const categoryTpl = require('../tpl/category.hbs').default;
+      const card = require('../tpl/components/productCard.hbs').default;
+      const categoryData = card(data);
+      refs.content.innerHTML = categoryTpl({ categoryData });
+    });
+  }
 };
 
 export const __ = key => {

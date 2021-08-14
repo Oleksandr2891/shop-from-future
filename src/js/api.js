@@ -4,6 +4,7 @@ import { isJSON } from './functions';
 export default class Api {
   #data = {
     content: {},
+    user: {},
   };
 
   constructor(name, path, obj = {}) {
@@ -30,7 +31,7 @@ export default class Api {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       };
     }
-    console.log(options)
+    console.log(options);
     return await fetch(config.apiUrl + path, options)
       .then(res => {
         if (!isJSON(res)) {
@@ -44,7 +45,7 @@ export default class Api {
 
   async getData(path = this.path, obj = this.obj) {
     const res = await this.send(path, 'GET', obj);
-    if (res.length < 1) return Promise.reject('Нет данных');
+    if (res === undefined || res.length < 1) return Promise.reject('Нет данных');
 
     return res;
   }

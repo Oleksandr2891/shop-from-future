@@ -1,12 +1,21 @@
 /* ==========================MOBILE-MENU==============================*/
 .mobile-menu {
   padding: 73px 20px;
-  width: 297px;
-  background-color: #02182d;
+  width: 100vw;
+
+  max-width: 297px;
   max-height: 568px;
+  background-color: #02182d;
+  overflow: auto;
   margin-right: auto;
 
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  transform: translateX(-100%);
+  transition: transform 300ms;
+  transition-timing-function: var(--transition-timing-function);
 }
 @media screen and (min-width: 768px) {
   .mobile-container {
@@ -89,4 +98,9 @@
 }
 .hidden {
   display: none;
+}
+
+.is-open {
+  transform: translateX(0%);
+  transform: translateY(0%);
 }

@@ -165,6 +165,8 @@
 
 .card-goods__desc {
   margin-top: 10px;
+  max-width: 340px;
+  word-wrap: break-word;
 }
 
 @media screen and (min-width: 768px) {
@@ -184,16 +186,26 @@
 @media screen and (min-width: 1280px) {
   .card-goods__right,
   .card-goods__left {
-    flex-basis: calc((100% - 140px) / 2);
+    flex-basis: calc((100% - 100px) / 2);
   }
 }
 
 .user-data {
-  margin-top: 10px;
+  margin-top: 40px;
   font-size: 12px;
   margin-bottom: 10px;
   font-weight: 300;
   color: #878686;
+  letter-spacing: 0.02em;
+}
+
+.user-data__email {
+  margin-bottom: 6px;
+}
+.card-goods__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .hidden {

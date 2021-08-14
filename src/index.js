@@ -8,7 +8,6 @@ import { animateModal } from './js/animation-modal';
 import { addToFavourites, removeFromFavourites, addPost } from './js/productsCRUD';
 
 import validator from 'validator';
-
 import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
 import { api } from './js/functions';
@@ -17,8 +16,14 @@ import { getNextPage } from './js/nextPage';
 const sales = '/call/specific/sales';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
-import { error, success } from '@pnotify/core';
+import { error, success, info } from '@pnotify/core';
 import userDataTpl from './tpl/components/userData.hbs';
+
+export const pnotify = {
+  error,
+  success,
+  info,
+};
 
 const getPath = () => {
   return location.pathname + location.search;
@@ -44,6 +49,9 @@ document.addEventListener('click', e => {
     if (linkTag.dataset.action === 'show-main-img') {
       const srcChangeImg = linkTag.firstElementChild.getAttribute('src');
       document.querySelector('#mainImg').setAttribute('src', srcChangeImg);
+    }
+    if (linkTag.classList.contains('swiper-link__once-category')) {
+      window.scrollTo(0, 0);
     }
 
     if (linkTag.dataset.action === 'open-main')
@@ -82,14 +90,17 @@ document.addEventListener('click', e => {
     }
   } else if (buttonTag) {
     e.preventDefault();
+    if (buttonTag.dataset.action === 'open-card') {
+      renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
+      console.log('Карточка откройся');
+    }
 
     if (buttonTag.dataset.action === 'open-modal') {
-      renderModals[e.target.dataset.value]();
+      renderModals[e.target.closest('button').dataset.value]();
       animateModal();
       noWorkBtnAddProduct();
 
       refs.modal.querySelector('input').focus();
-
       if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
         document.querySelector('#user-log-in').disabled = true;
         document.querySelector('#user-register').disabled = true;
@@ -112,31 +123,38 @@ document.addEventListener('click', e => {
     }
     //
     if (e.target.dataset.action === 'user-log-in') {
-      e.preventDefault();
       logIn();
-      renderCabinet();
+      success({ text: `You enter in your user profile`, delay: 1000 });
     }
+
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
 
+      info({ text: `You log out from user profile`, delay: 1000 });
+
       getMainPage();
+      refs.modal.innerHTML = '';
     }
+
     if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
-      if (filterMenuNode.classList.contains('hidden')) {
-        filterMenuNode.classList.remove('hidden');
-      } else {
-        filterMenuNode.classList.add('hidden');
-      }
+      filterMenuNode.classList.add('is-open');
+    }
+    if (buttonTag.dataset.action === 'btn-close') {
+      const filterMenuNode = refs.header.querySelector('.mobile-menu');
+      filterMenuNode.classList.remove('is-open');
     }
     if (buttonTag.dataset.action === 'close-filter') {
       refs.linkPaginationWrapper.classList.remove('hidden');
-      refs.header.querySelector('.mobile-menu').classList.add('hidden');
-      refs.header.querySelector('.tablet-menu').classList.add('hidden');
+      refs.header.querySelector('.mobile-menu').classList.remove('is-open');
+      refs.header.querySelector('.tablet-menu').classList.remove('is-open');
       refs.content.innerHTML = '';
       const path = '/';
       history.pushState(null, null, path);
       getMainPage();
+    }
+    if (buttonTag.dataset.action === 'open-input') {
+      document.querySelector('.header__form_mobile').classList.add('is-open');
     }
 
     if (buttonTag.dataset.action === 'open-cabinet') {
@@ -147,20 +165,12 @@ document.addEventListener('click', e => {
         openMyCabinet.classList.add('hidden');
       }
     }
-    if (buttonTag.dataset.action === 'open-cabinet-mobile') {
-      const openMyCabinetMob = refs.header.querySelector('.modal-cabinet-mobile');
-      if (openMyCabinetMob.classList.contains('hidden')) {
-        openMyCabinetMob.classList.remove('hidden');
-      } else {
-        openMyCabinetMob.classList.add('hidden');
-      }
-    }
     if (buttonTag.dataset.action === 'open-filter') {
       const filterMenuNode = refs.header.querySelector('.tablet-menu');
-      if (filterMenuNode.classList.contains('hidden')) {
-        filterMenuNode.classList.remove('hidden');
+      if (filterMenuNode.classList.contains('is-open')) {
+        filterMenuNode.classList.remove('is-open');
       } else {
-        filterMenuNode.classList.add('hidden');
+        filterMenuNode.classList.add('is-open');
       }
     }
 
@@ -174,6 +184,7 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'show-user-data') {
       const path = '/user/' + e.target.closest('button').dataset.userid;
+      const buttonUserNode = document.querySelector('.card-goods__btn-information');
 
       function findUserData() {
         return fetch(config.apiUrl + path)
@@ -185,6 +196,7 @@ document.addEventListener('click', e => {
           });
       }
       findUserData();
+      buttonUserNode.classList.add('hidden');
     }
 
     if (buttonTag.dataset.search === 'search') {
@@ -199,6 +211,7 @@ document.addEventListener('click', e => {
           .then(good => {
             if (good.length < 1) {
               error({ text: 'Your request is incorrect!', delay: 1500 });
+              refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
             }
             if (good.length > 0) {
               success({ text: `Goods were found.`, delay: 1000 });
@@ -206,6 +219,7 @@ document.addEventListener('click', e => {
           });
       }
       findGood();
+      document.querySelector('.header__form_mobile').classList.remove('is-open');
 
       if (input.value != '') {
         const path = input.dataset.search + input.value;

@@ -1,4 +1,5 @@
 <div class='container'>
+  {{!-- MOBILE_HEADER --}}
   <div class='header__mobile'>
     <button type='button' class='mobile-button' data-action='open-filter'>
       <span class="material-icons-round icons">menu</span>
@@ -8,9 +9,15 @@
     <a href='/' data-action='open-main'>
       <img class='mobile__logo' src='{{this.logo}}' alt='logo' />
     </a>
-    <button type='button' class='mobile-button'>
+    <button type='button' class='mobile-button' data-action="open-input">
       <span class="material-icons-round icons">search</span>
     </button>
+    <form class='header__form_mobile'>
+      <input class='header__find' data-search='/call/find?search=' type='text' />
+      <button class="search__btn " data-search='search'>
+        <span class="material-icons icons">search</span>
+      </button>
+    </form>
   </div>
   <div class='header__wrapper'>
     <nav class='nav'>
@@ -47,7 +54,7 @@
           </div>
         </li>
         <li class='item cabinet__item'>
-          <button class='cabinet__out' type='button' data-action="log-out" id="logOut">
+          <button class='cabinet__out' type='button' data-action="open-modal" data-value="modalExit">
             <span class="material-icons-round icons">logout</span>
           </button>
         </li>
@@ -66,6 +73,7 @@
       </li>
       {{/each}}
     </ul>
+
     <form class='header__form_tablet'>
       <input class='header__find' data-search='/call/find?search=' type='text' />
       <button type='submit' data-search='search' class='search__btn'>
@@ -85,7 +93,9 @@
     </button>
   </div>
 </div>
-<div class='tablet-menu hidden'>
+    {{!-- TABLET MENU --}}
+<div class="tablet-menu__wrapper">
+<div class='tablet-menu'>
   <div class='container'>
     <div class='filter_tablet'>
       <ul class='list filter__list_tablet'>
@@ -98,13 +108,12 @@
     </div>
   </div>
 </div>
+</div>
 <!-- MOBILE-MENU -->
 <div class='mobile-container'>
-  <div class='mobile-menu hidden'>
-    <button class='btn-close' type='button'>
-      <svg class='ikon-close' width='24px' height='24px'>
-        <use href=''></use>
-      </svg>
+  <div class='mobile-menu'>
+    <button class='btn-close' data-action="btn-close" type='button'>
+      <span class="material-icons-round icons">close</span>
     </button>
     <ul class='list log-in mobile-menu__registration' id="register-wraper-mobile">
       <li class='item registration__item'>
@@ -116,10 +125,8 @@
     </ul>
     <ul class='list cabinet mobile-menu__cabinet ' id="cabinet-wraper-mobile">
       <li class='item cabinet__item menu-cabinet'>
-        <button class='cabinet__in' type='button' data-action='open-cabinet-mobile'>
-          <svg class='ikon-user' width='20px' height='20px'>
-            <use href=''></use>
-          </svg>Мой кабинет
+        <button class='cabinet__in' type='button'  data-action='open-cabinet-mobile'>
+          <span class="material-icons-outlined icons">account_circle</span>Мой кабинет</a>
         </button>
         <div class="modal-cabinet-mobile hidden">
           <ul class="menu-caminet">
@@ -130,23 +137,17 @@
       </li>
       <li class='item cabinet__item'>
         <button class='cabinet__out' type='button'>
-          <svg class='ikon-out' width='20px' height='20px'>
-            <use href=''></use>
-          </svg>
+            <span class="material-icons-round icons">logout</span>
         </button>
       </li>
     </ul>
     <div class='mobile__wrapper'>
-      <button class='filter__btn_mobile' type='button'>
-        <svg width='24px' height='24px'>
-          <use href=''></use>
-        </svg>
+      <button  data-action="btn-close" class='filter__btn_mobile' type='button'>
+          <span class="material-icons-round icons">tune</span>
         Фильтры
       </button>
-      <button class='reset-btn_mobile' type='reset' data-action='close-filter'>
-        <svg width='24px' height='24px'>
-          <use href=''></use>
-        </svg>
+      <button class='reset-btn_mobile' data-action='close-filter' type='reset'>
+        <span class="material-icons-round icons">replay</span>
         Очистить
       </button>
     </div>

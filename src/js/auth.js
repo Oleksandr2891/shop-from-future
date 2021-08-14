@@ -1,6 +1,7 @@
 import config from '../config.json';
 import { api, rerenderLogIn, rerenderLogOut } from './functions';
 import { refs } from './refs';
+import { renderCabinet } from './renderCabinet';
 // import { checkToken } from './api';
 
 // import validator from 'validator';
@@ -10,13 +11,11 @@ import { refs } from './refs';
 // });
 
 const getInputData = () => {
-  const inputEmail = document.querySelector('#email');
-  const inputEmailValue = inputEmail.value.trim();
-  const inputPassword = document.querySelector('#password');
-  const inputPasswordValue = inputPassword.value.trim();
+  const inputEmailValue = document.querySelector('#email').value.trim();
+  const inputPasswordValue = document.querySelector('#password').value.trim();
 
   return {
-    data: {
+    body: {
       email: inputEmailValue,
       password: inputPasswordValue,
     },
@@ -25,6 +24,7 @@ const getInputData = () => {
 };
 
 export const getUserData = () => {
+  if (!localStorage.getItem('accessToken')) return Promise.resolve('no access token');
   return api
     .getData('/user', {
       auth: true,
@@ -38,7 +38,7 @@ export const getUserData = () => {
 };
 
 export function registr() {
-  api.postData(config.auth.register.link, getUserData()).then(data => {
+  api.postData(config.auth.register.link, getInputData()).then(data => {
     // console.log(data);
     if (data.registrationDate && data.email && data.id) {
       refs.modal.innerHTML = '';
@@ -74,6 +74,7 @@ export const logIn = () => {
     // return data;
     //
     rerenderLogIn();
+    renderCabinet();
   });
 };
 export const logOut = () => {
@@ -84,12 +85,11 @@ export const logOut = () => {
   };
   api.postData(config.auth.logout.link, objLogOut).then(data => {
     console.log(data);
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('sid');
+    api.data.user = {};
   });
-  localStorage.removeItem('refreshToken');
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('sid');
-  getUserData();
-  rerenderLogOut();
 };
 
 export const signInWithGoogle = () => {

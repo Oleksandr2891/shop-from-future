@@ -101,9 +101,9 @@
 // .log-in {
 //   display: none;
 // }
-.registration {
-  display: flex;
-}
+// .registration {
+//   display: none;
+// }
 
 .registration__btn-reg {
   padding: 0px 12px;
@@ -270,4 +270,27 @@
 .icons {
   margin-right: 10px;
   color: #445361;
+}
+.header__mobile {
+  position: relative;
+}
+.header__form_mobile {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  width: 275px;
+  transform: translateY(-200%);
+  transition: transform 300ms;
+  transition-timing-function: var(--transition-timing-function);
+
+  .header__find {
+    width: 100%;
+    height: 30px;
+    background-color: rgba($color: #ff6b09, $alpha: 0.8);
+    color: var(--primary-black-color);
+    font-weight: bold;
+  }
+  .search__btn {
+    margin-top: 3px;
+  }
 }
