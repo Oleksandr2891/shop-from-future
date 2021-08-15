@@ -31,12 +31,15 @@ export const renderCabinet = () => {
 };
 
 export const userFavourites = (data) => {
+  console.log(data.fauvorites)
   if(data === 'no access token') {
     refs.content.innerHTML = '<h1>Marty was here. Register before add favourites to cabinet.</h1>'
-    return false
+    return false;
   };
-  if(data.favourites === undefined){
+  if(data.favourites.length === 0){
+    console.log('hell')
     refs.content.innerHTML = '<h1>Вы пока не добавили ни одного объявления в избранное.</h1>'
+    return false;
   }
   const fauvorites = require('../tpl/category.hbs').default;
   const card = require('../tpl/components/productCard.hbs').default;
@@ -46,13 +49,13 @@ export const userFavourites = (data) => {
 }
 
 export const userCalls = (data) => {
-  console.log(data)
   if(data === 'no access token') {
     refs.content.innerHTML = '<h1>Marty was here. Register before add calls to cabinet.</h1>'
-    return false
+    return false;
   };
-  if(data.calls === undefined){
+  if(data.calls.length === 0){
     refs.content.innerHTML = '<h1>Вы пока не добавили ни одного объявления.</h1>'
+    return false;
   }
   const fauvorites = require('../tpl/category.hbs').default;
   const card = require('../tpl/components/productCard.hbs').default;

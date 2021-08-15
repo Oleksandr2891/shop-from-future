@@ -168,7 +168,6 @@ export const renderContent = path => {
       const pathRoot = 15;
       api.data.content[data[0].category] = data;
       const nameCategory = path.slice(pathRoot);
-      console.log(nameCategory)
       const categoryTpl = require('../tpl/category.hbs').default;
       const card = require('../tpl/components/productCard.hbs').default;
       const categoryData = card(data, Handlebars);
