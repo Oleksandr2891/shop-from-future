@@ -62,12 +62,14 @@
 }
 
 .link-download__wrapper {
-  padding-bottom: 41px;
-  padding-top: 41px;
+
   background-color: #02172a;
   text-align: center;
 
   .link-download {
+    padding-bottom: 41px;
+    padding-top: 41px;
+    display: block;
     font-family: Montserrat;
     font-weight: 600;
     font-size: 20px;

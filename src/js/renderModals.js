@@ -2,7 +2,7 @@ import { refs } from './refs';
 import modalTpl from '../tpl/components/modal.hbs';
 import { api, previewFile, stringToCamelCase } from './functions';
 import Handlebars from '../helpers';
-
+import { renderCabinet } from './renderCabinet';
 import 'swiper/swiper-bundle.css';
 import Swiper from 'swiper/bundle';
 import swiperConfigCategories from '../configSwiper.json';
@@ -58,7 +58,7 @@ export const renderModals = {
     const normalizeCategory = stringToCamelCase(category);
     const categories = [];
     Object.keys(api.data.content).forEach(item => categories.push(item));
-    console.log(api.data.user);
+
     let item = {};
     if (location.pathname === '/cabinet') {
       if (category === "trade") {
@@ -66,7 +66,7 @@ export const renderModals = {
       } else {
         item = api.data.user.favourites.find(item => id === item._id);
       }
-    } else if (!categories.includes(normalizeCategory) && location.pathname !== '/favourites') {
+    } else if (!categories.includes(normalizeCategory) && location.pathname !== '/cabinet') {
       item = api.data.content.sales.find(item => id === item._id);
     } else {
       item = api.data.content[normalizeCategory].find(item => id === item._id);
@@ -83,7 +83,8 @@ export const renderModals = {
       const modalGoods = document.querySelector('#card-goods');
       modalGoods.querySelector('.card-goods-icon').textContent = 'favorite';
       modalGoods.querySelector('.card-goods-icon').classList.add('card-goods-icon-active');
-      modalGoods.querySelector('.card-goods__btn-favorites').dataset.action = 'remove-from-favourites';
+      modalGoods.querySelector('.card-goods__btn-favorites').dataset.action =
+        'remove-from-favourites'
     }
   },
 

@@ -47,7 +47,7 @@ document.addEventListener('click', e => {
 
   if (e.target.dataset.action === 'close-modal-backdrop') {
     refs.modal.innerHTML = '';
-    if (location.pathname === '/favourites') {
+    if (location.pathname === '/cabinet') {
       renderCabinet();
     }
   }
@@ -132,7 +132,7 @@ document.addEventListener('click', e => {
       }
     }
     if (buttonTag.dataset.action === 'close-modal') {
-      if (location.pathname === '/favourites') {
+      if (location.pathname === '/cabinet') {
         renderCabinet();
       }
       refs.modal.innerHTML = '';
@@ -206,11 +206,15 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-to-favourites') {
-      addToFavourites(e.target.closest('button').dataset.id);
+
+      addToFavourites(buttonTag.dataset.id);
+
     }
 
     if (buttonTag.dataset.action === 'remove-from-favourites') {
+
       removeFromFavourites(buttonTag.dataset.id);
+
     }
 
     if (buttonTag.dataset.action === 'show-user-data') {
