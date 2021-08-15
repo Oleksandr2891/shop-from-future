@@ -20,10 +20,34 @@ export const renderModals = {
 
     refs.modal.innerHTML = modalTpl({ modalContent });
   },
-  createEditProduct: () => {
+  createEditProduct: (method, id) => {
     const contentForModal = require('../tpl/components/modals/createEditProduct.hbs').default;
     const modalContent = contentForModal({ category: api.data.categories }, Handlebars);
     refs.modal.innerHTML = modalTpl({ modalContent });
+    if(method === 'PATCH'){
+      document.querySelector('.modal-create__heading').textContent = 'Изменить объявление'
+      document.querySelector('#addPostProduct').textContent = 'Изменить'
+      document.querySelector('#addPostProduct').dataset.action = 'edit-post'
+      document.querySelector('#addPostProduct').dataset.id = id
+      const item = api.data.user.calls.find(item => id === item._id)
+      console.log(item)
+      const addModalNode = document.querySelector('#add-post-form');
+      addModalNode.querySelector('#product-title').value = item.title;
+      addModalNode.querySelector('#product-description').value = item.description;
+      addModalNode.querySelector('#product-category').value = item.category
+      addModalNode.querySelector('#product-price').value = item.price;
+      addModalNode.querySelector('#product-phone').value = item.phone
+      const images = []
+      item.imageUrls.forEach(item => images.push(item));
+      console.log(images)
+      const imagesNodes = addModalNode.querySelectorAll('img')
+      const inputNodes = addModalNode.querySelectorAll('.inputfile')
+      addModalNode.querySelector('img').setAttribute('src', item.imageUrls[0])
+      for(let i = 0; i < images.length; i++){
+        imagesNodes[i].setAttribute('src', images[i])
+        inputNodes[i].file = images[i]
+      }
+    }
     refs.modal.querySelectorAll('.inputfile').forEach(input => {
       input.addEventListener('change', previewFile);
     });
@@ -62,7 +86,6 @@ export const renderModals = {
       modalGoods.querySelector('.card-goods__btn-favorites').dataset.action =
         'remove-from-favourites'
     }
-
   },
 
   goItStudents: () => {

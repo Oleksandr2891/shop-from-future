@@ -1,11 +1,18 @@
 import './sass/main.scss';
 import { refs } from './js/refs';
-import { renderContent, getMainPage, noWorkBtnAddProduct, workBtnAddProduct } from './js/functions';
+import {
+  renderContent,
+  getMainPage,
+  noWorkBtnAddProduct,
+  workBtnAddProduct,
+  workBtnRegister,
+  noWorkBtnRegister,
+} from './js/functions';
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, removeFromFavourites, addPost } from './js/productsCRUD';
+import { addToFavourites, createEditPost, removeFromFavourites} from './js/productsCRUD';
 
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
@@ -18,6 +25,8 @@ import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import { error, success, info } from '@pnotify/core';
 import userDataTpl from './tpl/components/userData.hbs';
+
+const debounce = require('lodash.debounce');
 
 export const pnotify = {
   error,
@@ -102,13 +111,21 @@ document.addEventListener('click', e => {
       renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
 
     }
+    if(buttonTag.dataset.action === 'edit-post'){
+      createEditPost('PATCH', `/${buttonTag.dataset.id}`)
+    }
+    if(buttonTag.dataset.action === 'open-modal-edit'){
+      renderModals.createEditProduct('PATCH', buttonTag.dataset.id)
+    }
 
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.closest('button').dataset.value]();
       animateModal();
       noWorkBtnAddProduct();
+      if (modal.querySelector('input')) {
+        refs.modal.querySelector('input').focus();
+      }
 
-      refs.modal.querySelector('input').focus();
       if (document.querySelector('#user-log-in') && document.querySelector('#user-register')) {
         document.querySelector('#user-log-in').disabled = true;
         document.querySelector('#user-register').disabled = true;
@@ -130,7 +147,8 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-post') {
-      addPost();
+      createEditPost('POST')
+      // renderModals.createEditProduct('POST')
     }
     //
     if (e.target.dataset.action === 'user-log-in') {
@@ -258,7 +276,7 @@ document.addEventListener('keydown', e => {
 
 // isValidModalCreateProduct();
 
-console.log('1 2 3');
+// console.log('1 2 3');
 
 // document.querySelector('#product-title');
 // document.querySelector('#');
@@ -268,92 +286,100 @@ console.log('1 2 3');
 // document.querySelector('#');
 // console.log(document.querySelector('#product-category').value);
 // Слушатель для input
-document.addEventListener('input', e => {
-  if (e.target.dataset.action === 'register-email') {
-    if (!validator.isEmail(e.target.value)) {
-      if (e.target.classList.contains('valid')) {
-        e.target.classList.remove('valid');
+document.addEventListener(
+  'input',
+  debounce(e => {
+    if (e.target.dataset.action === 'register-email') {
+      if (!validator.isEmail(e.target.value)) {
+        if (e.target.classList.contains('valid')) {
+          e.target.classList.remove('valid');
+        }
+        e.target.classList.add('invalid');
+        noWorkBtnRegister();
+        pnotify.error({ text: 'Not correct email', delay: 1000 });
       }
-      e.target.classList.add('invalid');
-      noWorkBtnAddProduct();
-    }
-    if (validator.isEmail(e.target.value)) {
-      if (e.target.classList.contains('invalid')) {
-        e.target.classList.remove('invalid');
+      if (validator.isEmail(e.target.value)) {
+        if (e.target.classList.contains('invalid')) {
+          e.target.classList.remove('invalid');
+        }
+        e.target.classList.add('valid');
+        workBtnRegister();
       }
-      e.target.classList.add('valid');
     }
-  }
-  if (e.target.dataset.action === 'register-password') {
-    // if ()
-    if (e.target.value.length < 4) {
-      if (e.target.classList.contains('valid')) {
-        e.target.classList.remove('valid');
+    if (e.target.dataset.action === 'register-password') {
+      // if ()
+      if (e.target.value.length < 4) {
+        if (e.target.classList.contains('valid')) {
+          e.target.classList.remove('valid');
+        }
+        e.target.classList.add('invalid');
+        noWorkBtnRegister();
+        pnotify.error({ text: 'Not correct password. Please enter minimum 4', delay: 1000 });
       }
-      e.target.classList.add('invalid');
-      noWorkBtnAddProduct();
-    }
-    if (e.target.value.length >= 4) {
-      if (e.target.classList.contains('invalid')) {
-        e.target.classList.remove('invalid');
+      if (e.target.value.length >= 4) {
+        if (e.target.classList.contains('invalid')) {
+          e.target.classList.remove('invalid');
+        }
+        e.target.classList.add('valid');
+        workBtnRegister();
       }
-      e.target.classList.add('valid');
-      workBtnAddProduct();
     }
-  }
-  // Валидация модалки создания товара
-  if (e.target.dataset.action === 'name-product') {
-    // console.log(e.target.value);
-    if (e.target.value.length <= 3) {
-      if (e.target.classList.contains('valid')) {
-        e.target.classList.remove('valid');
+    // Валидация модалки создания товара
+    if (e.target.dataset.action === 'name-product') {
+      // console.log(e.target.value);
+      if (e.target.value.length <= 3) {
+        if (e.target.classList.contains('valid')) {
+          e.target.classList.remove('valid');
+          workBtnAddProduct();
+        }
+        e.target.classList.add('invalid');
+        noWorkBtnAddProduct();
+        pnotify.error({ text: 'auth first', delay: 1000 });
+      }
+      if (e.target.value.length > 3) {
+        if (e.target.classList.contains('invalid')) {
+          e.target.classList.remove('invalid');
+        }
+        e.target.classList.add('valid');
         workBtnAddProduct();
       }
-      e.target.classList.add('invalid');
-      noWorkBtnAddProduct();
     }
-    if (e.target.value.length > 3) {
-      if (e.target.classList.contains('invalid')) {
-        e.target.classList.remove('invalid');
+    if (e.target.dataset.action === 'description-product') {
+      if (e.target.value.length <= 10) {
+        if (e.target.classList.contains('valid')) {
+          e.target.classList.remove('valid');
+        }
+        e.target.classList.add('invalid');
+        noWorkBtnAddProduct();
+        pnotify.error({ text: 'auth first', delay: 1000 });
       }
-      e.target.classList.add('valid');
-      workBtnAddProduct();
-    }
-  }
-  if (e.target.dataset.action === 'description-product') {
-    if (e.target.value.length <= 10) {
-      if (e.target.classList.contains('valid')) {
-        e.target.classList.remove('valid');
+      if (e.target.value.length > 10) {
+        if (e.target.classList.contains('invalid')) {
+          e.target.classList.remove('invalid');
+        }
+        e.target.classList.add('valid');
+        workBtnAddProduct();
       }
-      e.target.classList.add('invalid');
-      noWorkBtnAddProduct();
     }
-    if (e.target.value.length > 10) {
-      if (e.target.classList.contains('invalid')) {
-        e.target.classList.remove('invalid');
+    if (e.target.dataset.action === 'price-product') {
+      console.log(typeof Number(e.target.value));
+      if (/^[0-9]+$/.test(e.target.value)) {
+        // if (e.target.value < 0) {
+        //   if (e.target.classList.contains('valid')) {
+        //     e.target.classList.remove('valid');
+        //   }
+        //   e.target.classList.add('invalid');
+        // }
+        // if()
+        if (e.target.classList.contains('invalid')) {
+          e.target.classList.remove('invalid');
+        }
+        e.target.classList.add('valid');
+        // console.log('ok');
       }
-      e.target.classList.add('valid');
-      workBtnAddProduct();
     }
-  }
-  if (e.target.dataset.action === 'price-product') {
-    console.log(typeof Number(e.target.value));
-    if (/^[0-9]+$/.test(e.target.value)) {
-      // if (e.target.value < 0) {
-      //   if (e.target.classList.contains('valid')) {
-      //     e.target.classList.remove('valid');
-      //   }
-      //   e.target.classList.add('invalid');
-      // }
-      // if()
-      if (e.target.classList.contains('invalid')) {
-        e.target.classList.remove('invalid');
-      }
-      e.target.classList.add('valid');
-      // console.log('ok');
-    }
-  }
+  }, 500),
+);
 
-  // if (e.target.dataset.value === 'img-for-back') {
-  // }
-});
+// if (e.target.dataset.value === 'img-for-back') {
+// }

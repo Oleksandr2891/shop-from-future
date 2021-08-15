@@ -50,7 +50,13 @@ export const removeFromFavourites = id => {
 
 };
 
-export const addPost = () => {
+export const editPost = () => {
+  const addModalNode = document.querySelector('#add-post-form')
+
+}
+
+export const createEditPost = (method = 'POST', path = '') => {
+  console.log(path)
   const addModalNode = document.querySelector('#add-post-form');
   const images = [];
   let imageCounter = 0;
@@ -61,12 +67,10 @@ export const addPost = () => {
     }
   });
 
-  if (images.length === 0) {
-    pnotify.error({ text: 'add images', delay: 1000 });
-    return false;
-  }
-
-  console.log(images);
+  // if (images.length === 0) {
+  //   pnotify.error({ text: 'add images', delay: 1000 });
+  //   return false;
+  // }
   const inputsValueNewProduct = {
     title: addModalNode.querySelector('#product-title').value,
     description: addModalNode.querySelector('#product-description').value,
@@ -74,16 +78,17 @@ export const addPost = () => {
     price: addModalNode.querySelector('#product-price').value,
     phone: addModalNode.querySelector('#product-phone').value,
   };
-  console.log(inputsValueNewProduct);
-  sendData('https://callboard-backend.goit.global/call', inputsValueNewProduct);
+  sendData('https://callboard-backend.goit.global/call' + `${path}`, inputsValueNewProduct);
   async function sendData(url, data) {
     const formData = new FormData();
     for (const name in data) {
       formData.append(name, data[name]);
+    }if(images !== 0){
+      images.forEach(item => formData.append('file', item));
     }
-    images.forEach(item => formData.append('file', item));
+    
     const response = await fetch(url, {
-      method: 'POST',
+      method: method,
       headers: {
         // 'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
