@@ -9,7 +9,7 @@ import { getUserData } from './auth';
 import { renderCabinet } from './renderCabinet';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
-import { searchFavoritesGoods } from './favourites'
+
 
 export const rerenderLogIn = () => {
   document.querySelector('#register-wraper').classList.add('hide');

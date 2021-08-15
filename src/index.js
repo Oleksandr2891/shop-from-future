@@ -38,7 +38,7 @@ document.addEventListener('click', e => {
 
   if (e.target.dataset.action === 'close-modal-backdrop') {
     refs.modal.innerHTML = '';
-    if (location.pathname === '/favourites') {
+    if (location.pathname === '/cabinet') {
       renderCabinet();
     }
   }
@@ -115,7 +115,7 @@ document.addEventListener('click', e => {
       }
     }
     if (buttonTag.dataset.action === 'close-modal') {
-      if (location.pathname === '/favourites') {
+      if (location.pathname === '/cabinet') {
         renderCabinet();
       }
       refs.modal.innerHTML = '';
@@ -188,14 +188,15 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-to-favourites') {
-      const currentNode = e.target.closest('button').dataset;
-      console.log(nodeFavorite);
-      addToFavourites(e.target.closest('button').dataset.id, nodeFavorite);
+
+      addToFavourites(buttonTag.dataset.id);
+
     }
 
     if (buttonTag.dataset.action === 'remove-from-favourites') {
+
       removeFromFavourites(buttonTag.dataset.id);
-      console.log(e.target.closest('button').classList.contains("favorite"));
+
     }
 
     if (buttonTag.dataset.action === 'show-user-data') {
