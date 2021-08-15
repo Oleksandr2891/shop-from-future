@@ -1,7 +1,7 @@
 import { api } from './functions';
 import config from '../config.json';
 import { getUserData } from './auth';
-import { renderCabinet } from './renderCabinet';
+import { renderCabinet, userCalls, userFavourites } from './renderCabinet';
 import { refs } from './refs';
 import { renderModals } from './renderModals';
 import { pnotify } from '../index';
@@ -15,7 +15,7 @@ export const addToFavourites = id => {
   }
   api.postData(config.favourites_URL + '/' + id, { data: false, auth: true }).then(data => {
     getUserData().then(() => {
-      let modalGoods = document.querySelectorAll(`button[data-id='${id}'][data-action="add-to-favourites"]`);
+      const modalGoods = document.querySelectorAll(`button[data-id='${id}'][data-action="add-to-favourites"]`);
       modalGoods.forEach(item => {
         item.querySelector('.card-goods-icon').textContent = 'favorite';
         item.querySelector('.card-goods-icon').classList.add('card-goods-icon-active');
@@ -27,8 +27,8 @@ export const addToFavourites = id => {
 
 export const removeFromFavourites = id => {
   api.deleteData(config.favourites_URL + '/' + id, { data: false, auth: true }).then(data => {
-    getUserData().then(() => {
-      let modalGoods = document.querySelectorAll(`button[data-id='${id}'][data-action="remove-from-favourites"]`);
+    getUserData().then(data => {
+      const modalGoods = document.querySelectorAll(`button[data-id='${id}'][data-action="remove-from-favourites"]`);
       modalGoods.forEach(item => {
         item.querySelector('.card-goods-icon').textContent = 'favorite_border';
         item.querySelector('.card-goods-icon').classList.remove('card-goods-icon-active');
@@ -37,6 +37,12 @@ export const removeFromFavourites = id => {
       if (location.pathname === '/cabinet') {
         refs.modal.innerHTML = "";
         renderCabinet();
+      }
+      if(location.pathname === '/cabinet/favourites'){
+        userFavourites(data)
+      }
+      if(location.pathname === '/cabinet/calls'){
+        userCalls(data)
       }
     }
     );
@@ -94,14 +100,18 @@ export const createEditPost = (method = 'POST', path = '') => {
         refs.modal.innerHTML = '';
         renderCabinet();
       })      
-    });
+    }).then(err => console.log(err));
   }
 };
 
 export const deletePost = (id) => { 
   api.deleteData('/call/' + id, { data: false, auth: true }).then(data => {
     refs.modal.innerHTML =  ''
-    getUserData().then(data =>{ 
+    getUserData().then(data =>{
+      if(location.pathname === '/cabinet/calls'){
+        userCalls(data);
+        return false;
+      } 
       renderCabinet()})
   })
 }
