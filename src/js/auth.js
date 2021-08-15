@@ -2,6 +2,9 @@ import config from '../config.json';
 import { api, rerenderLogIn, rerenderLogOut } from './functions';
 import { refs } from './refs';
 import { renderCabinet } from './renderCabinet';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+import { error, success, info } from '@pnotify/core';
 // import { checkToken } from './api';
 
 // import validator from 'validator';
@@ -58,14 +61,18 @@ export function registr() {
   api.postData(config.auth.register.link, getInputData()).then(data => {
     // console.log(data);
     if (data.registrationDate && data.email && data.id) {
+      success({ text: `You created an account`, delay: 1000 });
       const dataUserREgister = getInputData();
       loginRegistr(dataUserREgister);
       // refs.modal.innerHTML = '';
       // logIn();
 
-      console.log(data.email);
+      // console.log(data.email);
     }
-    if (data.message) console.log(data.message);
+    if (data.message) {
+      // console.log(data.message);
+      error({ text: data.message, delay: 1500 });
+    }
     // console.log(data);
   });
 
@@ -80,21 +87,23 @@ export const logIn = () => {
   api.postData(config.auth.login.link, getInputData()).then(data => {
     console.log(data);
 
-    if (data.message) console.log(data.message);
-    if (data.accessToken) {
-      // console.log(data.accessToken);
-      refs.modal.innerHTML = '';
+    if (data.message) {
+      // console.log(data.message);
+      error({ text: data.message, delay: 1500 });
     }
-
-    localStorage.setItem('refreshToken', data.refreshToken);
-    localStorage.setItem('accessToken', data.accessToken);
-    localStorage.setItem('sid', data.sid);
-    api.data.user = data.user;
-    console.log(api.data);
-    // return data;
-    //
-    rerenderLogIn();
-    renderCabinet();
+    if (data.accessToken) {
+      refs.modal.innerHTML = '';
+      success({ text: `You enter in your user profile`, delay: 1000 });
+      localStorage.setItem('refreshToken', data.refreshToken);
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('sid', data.sid);
+      api.data.user = data.user;
+      console.log(api.data);
+      // return data;
+      //
+      rerenderLogIn();
+      renderCabinet();
+    }
   });
 };
 export const logOut = () => {

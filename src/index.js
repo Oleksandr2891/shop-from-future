@@ -12,7 +12,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, createEditPost, removeFromFavourites} from './js/productsCRUD';
+import { addToFavourites, createEditPost, removeFromFavourites } from './js/productsCRUD';
 
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
@@ -88,7 +88,6 @@ document.addEventListener('click', e => {
       renderCabinet();
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       filterMenuNode.classList.remove('is-open');
-
     } else if (linkTag.dataset.id === undefined) {
       if (linkTag.getAttribute('href') === sales) {
         refs.linkPaginationWrapper.classList.add('hidden');
@@ -103,23 +102,22 @@ document.addEventListener('click', e => {
       }
     } else {
       renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
-
     }
   } else if (buttonTag) {
     e.preventDefault();
     if (buttonTag.dataset.action === 'open-card') {
       renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
-
     }
-    if(buttonTag.dataset.action === 'edit-post'){
-      createEditPost('PATCH', `/${buttonTag.dataset.id}`)
+    if (buttonTag.dataset.action === 'edit-post') {
+      createEditPost('PATCH', `/${buttonTag.dataset.id}`);
     }
-    if(buttonTag.dataset.action === 'open-modal-edit'){
-      renderModals.createEditProduct('PATCH', buttonTag.dataset.id)
+    if (buttonTag.dataset.action === 'open-modal-edit') {
+      renderModals.createEditProduct('PATCH', buttonTag.dataset.id);
     }
 
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.closest('button').dataset.value]();
+      document.querySelector('.mobile-menu').classList.remove('is-open');
       animateModal();
       noWorkBtnAddProduct();
       if (modal.querySelector('input')) {
@@ -147,26 +145,27 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-post') {
-      createEditPost('POST')
+      createEditPost('POST');
       // renderModals.createEditProduct('POST')
     }
     //
     if (e.target.dataset.action === 'user-log-in') {
       logIn();
-      success({ text: `You enter in your user profile`, delay: 1000 });
+      // success({ text: `You enter in your user profile`, delay: 1000 });
     }
 
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
-
+      document.querySelector('.mobile-menu').classList.remove('is-open');
       info({ text: `You log out from user profile`, delay: 1000 });
 
+      const path = '/';
+      history.pushState(null, null, path);
       getMainPage();
       refs.modal.innerHTML = '';
     }
 
     if (buttonTag.dataset.action === 'open-filter') {
-
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       filterMenuNode.classList.add('is-open');
     }
@@ -175,7 +174,7 @@ document.addEventListener('click', e => {
       filterMenuNode.classList.remove('is-open');
     }
     if (buttonTag.dataset.action === 'close-filter') {
-      console.log("or");
+      console.log('or');
       refs.linkPaginationWrapper.classList.remove('hidden');
       refs.header.querySelector('.mobile-menu').classList.remove('is-open');
       refs.header.querySelector('.tablet-menu').classList.remove('is-open');
