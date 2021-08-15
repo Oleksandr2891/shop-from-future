@@ -12,7 +12,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, createEditPost, removeFromFavourites} from './js/productsCRUD';
+import { addToFavourites, createEditPost, removeFromFavourites } from './js/productsCRUD';
 
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
@@ -88,7 +88,6 @@ document.addEventListener('click', e => {
       renderCabinet();
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       filterMenuNode.classList.remove('is-open');
-
     } else if (linkTag.dataset.id === undefined) {
       if (linkTag.getAttribute('href') === sales) {
         refs.linkPaginationWrapper.classList.add('hidden');
@@ -103,19 +102,17 @@ document.addEventListener('click', e => {
       }
     } else {
       renderModals.cardOneGood(linkTag.dataset.id, linkTag.dataset.category);
-
     }
   } else if (buttonTag) {
     e.preventDefault();
     if (buttonTag.dataset.action === 'open-card') {
       renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
-
     }
-    if(buttonTag.dataset.action === 'edit-post'){
-      createEditPost('PATCH', `/${buttonTag.dataset.id}`)
+    if (buttonTag.dataset.action === 'edit-post') {
+      createEditPost('PATCH', `/${buttonTag.dataset.id}`);
     }
-    if(buttonTag.dataset.action === 'open-modal-edit'){
-      renderModals.createEditProduct('PATCH', buttonTag.dataset.id)
+    if (buttonTag.dataset.action === 'open-modal-edit') {
+      renderModals.createEditProduct('PATCH', buttonTag.dataset.id);
     }
 
     if (buttonTag.dataset.action === 'open-modal') {
@@ -147,7 +144,7 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-post') {
-      createEditPost('POST')
+      createEditPost('POST');
       // renderModals.createEditProduct('POST')
     }
     //
@@ -166,7 +163,6 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'open-filter') {
-
       const filterMenuNode = refs.header.querySelector('.mobile-menu');
       filterMenuNode.classList.add('is-open');
     }
@@ -175,7 +171,7 @@ document.addEventListener('click', e => {
       filterMenuNode.classList.remove('is-open');
     }
     if (buttonTag.dataset.action === 'close-filter') {
-      console.log("or");
+      console.log('or');
       refs.linkPaginationWrapper.classList.remove('hidden');
       refs.header.querySelector('.mobile-menu').classList.remove('is-open');
       refs.header.querySelector('.tablet-menu').classList.remove('is-open');
@@ -250,10 +246,66 @@ document.addEventListener('click', e => {
           });
       }
       findGood();
-      document.querySelector('.header__form_mobile').classList.remove('is-open');
 
       if (input.value != '') {
         const path = input.dataset.search + input.value;
+        renderContent(path);
+      } else {
+        error({ text: 'Please enter the date', delay: 1500 });
+      }
+    }
+    if (buttonTag.dataset.search === 'searchmob') {
+      const input = refs.header.querySelector('.header__find_mobile');
+      const path = input.dataset.searchmob + input.value;
+
+      function findGood() {
+        return fetch(config.apiUrl + path)
+          .then(response => {
+            return response.json();
+          })
+          .then(good => {
+            if (good.length < 1) {
+              error({ text: 'Your request is incorrect!', delay: 1500 });
+              refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
+            }
+            if (good.length > 0) {
+              success({ text: `Goods were found.`, delay: 1000 });
+            }
+          });
+      }
+      findGood();
+      document.querySelector('.header__form_mobile').classList.remove('is-open');
+
+      if (input.value != '') {
+        const path = input.dataset.searchmob + input.value;
+        renderContent(path);
+      } else {
+        error({ text: 'Please enter the date', delay: 1500 });
+      }
+    }
+    if (buttonTag.dataset.search === 'searchtab') {
+      const input = refs.header.querySelector('.header__find_tablet');
+      const path = input.dataset.searchtab + input.value;
+
+      function findGood() {
+        return fetch(config.apiUrl + path)
+          .then(response => {
+            return response.json();
+          })
+          .then(good => {
+            if (good.length < 1) {
+              error({ text: 'Your request is incorrect!', delay: 1500 });
+              refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
+            }
+            if (good.length > 0) {
+              success({ text: `Goods were found.`, delay: 1000 });
+            }
+          });
+      }
+      findGood();
+
+      if (input.value != '') {
+        const path = input.dataset.searchtab + input.value;
         renderContent(path);
       } else {
         error({ text: 'Please enter the date', delay: 1500 });
