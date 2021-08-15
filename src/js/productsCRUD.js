@@ -39,6 +39,7 @@ export const removeFromFavourites = id => {
         renderCabinet();
       }
       if(location.pathname === '/cabinet/favourites'){
+        // refs.content.innerHTML = ''
         userFavourites(data)
       }
       if(location.pathname === '/cabinet/calls'){
@@ -109,6 +110,7 @@ export const deletePost = (id) => {
     refs.modal.innerHTML =  ''
     getUserData().then(data =>{
       if(location.pathname === '/cabinet/calls'){
+        // refs.content.innerHTML = ''
         userCalls(data);
         return false;
       } 
