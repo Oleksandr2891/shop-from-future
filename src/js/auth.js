@@ -37,12 +37,32 @@ export const getUserData = () => {
     });
 };
 
+const loginRegistr = dataUser => {
+  api.postData(config.auth.login.link, dataUser).then(data => {
+    if (data.message) console.log(data.message);
+    if (data.accessToken) {
+      // console.log(data.accessToken);
+      refs.modal.innerHTML = '';
+    }
+    localStorage.setItem('refreshToken', data.refreshToken);
+    localStorage.setItem('accessToken', data.accessToken);
+    localStorage.setItem('sid', data.sid);
+    api.data.user = data.user;
+
+    rerenderLogIn();
+    renderCabinet();
+  });
+};
+
 export function registr() {
   api.postData(config.auth.register.link, getInputData()).then(data => {
     // console.log(data);
     if (data.registrationDate && data.email && data.id) {
-      refs.modal.innerHTML = '';
+      const dataUserREgister = getInputData();
+      loginRegistr(dataUserREgister);
+      // refs.modal.innerHTML = '';
       // logIn();
+
       console.log(data.email);
     }
     if (data.message) console.log(data.message);
