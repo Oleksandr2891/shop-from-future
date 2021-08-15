@@ -85,7 +85,6 @@ export function registr() {
 
 export const logIn = () => {
   api.postData(config.auth.login.link, getInputData()).then(data => {
-    console.log(data);
 
     if (data.message) {
       // console.log(data.message);

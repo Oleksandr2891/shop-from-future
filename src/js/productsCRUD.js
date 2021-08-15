@@ -14,33 +14,40 @@ export const addToFavourites = id => {
     return false;
   }
   api.postData(config.favourites_URL + '/' + id, { data: false, auth: true }).then(data => {
+
     getUserData();
-    const modalGoods = document.querySelector('#card-goods');
+    let modalGoods = document.querySelector(`button[data-id='${id}']`);
+    if (refs.modal.childElementCount !== 0) {
+      modalGoods = refs.modal.querySelector(`button[data-id='${id}']`);
+    }
+    console.log("добавили в избранное");
     modalGoods.querySelector('.card-goods-icon').textContent = 'favorite';
     modalGoods.querySelector('.card-goods-icon').classList.add('card-goods-icon-active');
-    modalGoods.querySelector('.card-goods__btn-favorites').dataset.action =
-      'remove-from-favourites';
+    modalGoods.dataset.action = 'remove-from-favourites';
   });
 
-  console.log(api.data.user);
 };
 
 export const removeFromFavourites = id => {
   api.deleteData(config.favourites_URL + '/' + id, { data: false, auth: true }).then(data => {
+    console.log("Удалили из избранного");
     getUserData();
-    const modalGoods = document.querySelector('#card-goods');
+    let modalGoods = document.querySelector(`button[data-id='${id}']`);
+    if (refs.modal.childElementCount !== 0) {
+      modalGoods = refs.modal.querySelector(`button[data-id='${id}']`);
+    }
     modalGoods.querySelector('.card-goods-icon').textContent = 'favorite_border';
     modalGoods.querySelector('.card-goods-icon').classList.remove('card-goods-icon-active');
-    modalGoods.querySelector('.card-goods__btn-favorites').dataset.action = 'add-to-favourites';
+    modalGoods.dataset.action = 'add-to-favourites';
 
     if (location.pathname === '/cabinet') {
       getUserData().then(data => {
-        console.log(data);
+        refs.modal.innerHTML = "";
         renderCabinet();
       });
     }
   });
-  console.log(api.data.user);
+
 };
 
 export const editPost = () => {
@@ -93,3 +100,11 @@ export const createEditPost = (method = 'POST', path = '') => {
     });
   }
 };
+
+export const deletePost = (id) => { 
+  api.deleteData('/call/' + id, { data: false, auth: true }).then(data => {
+    refs.modal.innerHTML =  ''
+    getUserData().then(data =>{ 
+      renderCabinet()})
+  })
+}
