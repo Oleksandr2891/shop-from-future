@@ -6,7 +6,7 @@ import Swiper from 'swiper/bundle';
 import swiperConfigAds from './adsSwiper';
 import swiperConfigCategories from '../configSwiper.json';
 import { getUserData } from './auth';
-import { renderCabinet } from './renderCabinet';
+import { renderCabinet, userFavourites, userCalls } from './renderCabinet';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
 
@@ -144,10 +144,20 @@ export const renderContent = path => {
   if (path !== '/') refs.linkPaginationWrapper.classList.add('hidden');
 
   if (path === '/cabinet') {
-    console.log(api.data);
     getUserData().then(data => {
       renderCabinet();
     });
+  }
+
+  if(path === '/cabinet/favourites'){ 
+     getUserData().then(data => {
+       userFavourites(data)
+     })
+  }
+  if(path === '/cabinet/calls'){
+    getUserData().then(data => {
+      userCalls(data);
+    })
   }
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
