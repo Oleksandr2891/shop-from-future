@@ -23,6 +23,6 @@ export const renderCabinet = () => {
     document.querySelector('.swiper-container.calls').classList.add('hidden');
   }
 
-  history.pushState(null, null, '/favourites');
+  history.pushState(null, null, '/cabinet');
   api.data.content = {};
 };
