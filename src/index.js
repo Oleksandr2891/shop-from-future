@@ -12,7 +12,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, createEditPost, removeFromFavourites } from './js/productsCRUD';
+import { addToFavourites, createEditPost, removeFromFavourites, deletePost} from './js/productsCRUD';
 
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
@@ -47,7 +47,7 @@ document.addEventListener('click', e => {
 
   if (e.target.dataset.action === 'close-modal-backdrop') {
     refs.modal.innerHTML = '';
-    if (location.pathname === '/favourites') {
+    if (location.pathname === '/cabinet') {
       renderCabinet();
     }
   }
@@ -117,6 +117,7 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'open-modal') {
       renderModals[e.target.closest('button').dataset.value]();
+      document.querySelector('.mobile-menu').classList.remove('is-open');
       animateModal();
       noWorkBtnAddProduct();
       if (modal.querySelector('input')) {
@@ -129,12 +130,14 @@ document.addEventListener('click', e => {
       }
     }
     if (buttonTag.dataset.action === 'close-modal') {
-      if (location.pathname === '/favourites') {
+      if (location.pathname === '/cabinet') {
         renderCabinet();
       }
       refs.modal.innerHTML = '';
     }
-
+    if (buttonTag.dataset.action === 'delete-post-button') {
+      deletePost(buttonTag.dataset.id);
+    }
     if (buttonTag.dataset.action === 'sign-in-with-google') {
       signInWithGoogle();
     }
@@ -150,14 +153,16 @@ document.addEventListener('click', e => {
     //
     if (e.target.dataset.action === 'user-log-in') {
       logIn();
-      success({ text: `You enter in your user profile`, delay: 1000 });
+      // success({ text: `You enter in your user profile`, delay: 1000 });
     }
 
     if (buttonTag.dataset.action === 'log-out') {
       logOut();
-
+      document.querySelector('.mobile-menu').classList.remove('is-open');
       info({ text: `You log out from user profile`, delay: 1000 });
 
+      const path = '/';
+      history.pushState(null, null, path);
       getMainPage();
       refs.modal.innerHTML = '';
     }
@@ -202,11 +207,15 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-to-favourites') {
-      addToFavourites(e.target.closest('button').dataset.id);
+
+      addToFavourites(buttonTag.dataset.id);
+
     }
 
     if (buttonTag.dataset.action === 'remove-from-favourites') {
+
       removeFromFavourites(buttonTag.dataset.id);
+
     }
 
     if (buttonTag.dataset.action === 'show-user-data') {

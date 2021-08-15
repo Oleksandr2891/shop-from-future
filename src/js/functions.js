@@ -10,6 +10,7 @@ import { renderCabinet } from './renderCabinet';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
 
+
 export const rerenderLogIn = () => {
   document.querySelector('#register-wraper').classList.add('hide');
   document.querySelector('#cabinet-wraper').classList.remove('hide');
@@ -113,6 +114,8 @@ export const getMainPage = (page = 1) => {
       obj.text = categorySales(obj);
     });
 
+    // searchFavoritesGoods.getFavourites(goods);
+    console.log(api.data.user.favourites);
     refs.content.innerHTML = goodsTpl(goods, Handlebars);
     new Swiper('.swiper-container', swiperConfigCategories.card);
   });
@@ -152,13 +155,14 @@ export const renderContent = path => {
   if (path !== '/') {
     api.getData(path).then(data => {
       history.pushState(null, null, path);
-
+      const pathRoot = 15;
       api.data.content[data[0].category] = data;
-
+      const nameCategory = path.slice(pathRoot);
+      console.log(nameCategory)
       const categoryTpl = require('../tpl/category.hbs').default;
       const card = require('../tpl/components/productCard.hbs').default;
-      const categoryData = card(data);
-      refs.content.innerHTML = categoryTpl({ categoryData });
+      const categoryData = card(data, Handlebars);
+      refs.content.innerHTML = categoryTpl({ nameCategory, categoryData }, Handlebars);
     });
   }
 };
