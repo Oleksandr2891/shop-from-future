@@ -11,11 +11,7 @@ import {
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
-
-
 import { addToFavourites, createEditPost, removeFromFavourites, deletePost} from './js/productsCRUD';
-
-
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
@@ -111,6 +107,7 @@ document.addEventListener('click', e => {
       renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
     }
     if (buttonTag.dataset.action === 'edit-post') {
+
       createEditPost('PATCH', `/${buttonTag.dataset.id}`);
     }
     if (buttonTag.dataset.action === 'open-modal-edit') {
@@ -137,7 +134,7 @@ document.addEventListener('click', e => {
       }
       refs.modal.innerHTML = '';
     }
-    if(buttonTag.dataset.action === 'delete-post-button'){
+    if (buttonTag.dataset.action === 'delete-post-button') {
       deletePost(buttonTag.dataset.id);
     }
     if (buttonTag.dataset.action === 'sign-in-with-google') {
