@@ -57,6 +57,11 @@ document.addEventListener('click', e => {
     if (linkTag.dataset.action !== 'sign-in-with-google') {
       e.preventDefault();
     }
+    if (linkTag.dataset.action === 'open-modal-edit') {
+      console.log('hello')
+      renderModals.createEditProduct('PATCH', linkTag.dataset.id);
+      return false
+    }
 
     if (linkTag.dataset.action === 'show-main-img') {
       const srcChangeImg = linkTag.firstElementChild.getAttribute('src');

@@ -61,11 +61,6 @@ export const createEditPost = (method = 'POST', path = '') => {
       imageCounter += 1;
     }
   });
-
-  // if (images.length === 0) {
-  //   pnotify.error({ text: 'add images', delay: 1000 });
-  //   return false;
-  // }
   const inputsValueNewProduct = {
     title: addModalNode.querySelector('#product-title').value,
     description: addModalNode.querySelector('#product-description').value,
@@ -89,9 +84,16 @@ export const createEditPost = (method = 'POST', path = '') => {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
       body: formData,
-    }).then(data => {
-      pnotify.success({ text: 'seccess', delay: 1000 });
-      refs.modal.innerHTML = '';
+    }).then(() => {
+      getUserData().then(() => {
+        let pnotifyText = 'Товар успешно добавлен!'
+        if(method === 'PATCH'){
+          pnotifyText = 'Товар успешно изменен!'
+        }
+        pnotify.success({ text: pnotifyText, delay: 1000 });
+        refs.modal.innerHTML = '';
+        renderCabinet();
+      })      
     });
   }
 };
