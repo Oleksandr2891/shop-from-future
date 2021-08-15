@@ -149,12 +149,12 @@ export const renderContent = path => {
     });
   }
 
-  if(path === '/cabinet/favourites'){ 
-     getUserData().then(data => {
-       userFavourites(data)
-     })
+  if (path === '/cabinet/favourites') {
+    getUserData().then(data => {
+      userFavourites(data)
+    })
   }
-  if(path === '/cabinet/calls'){
+  if (path === '/cabinet/calls') {
     getUserData().then(data => {
       userCalls(data);
     })
@@ -165,10 +165,8 @@ export const renderContent = path => {
   if (path !== '/') {
     api.getData(path).then(data => {
       history.pushState(null, null, path);
-      const pathRoot = 15;
-      api.data.content[data[0].category] = data;
-      const nameCategory = path.slice(pathRoot);
-      console.log(nameCategory)
+      const nameCategory = data[0].category;
+      // console.log(nameCategory);
       const categoryTpl = require('../tpl/category.hbs').default;
       const card = require('../tpl/components/productCard.hbs').default;
       const categoryData = card(data, Handlebars);
