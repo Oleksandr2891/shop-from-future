@@ -66,8 +66,9 @@ export const renderModals = {
     Object.keys(api.data.content).forEach(item => categories.push(item));
 
     let item = {};
-    if (location.pathname === '/cabinet') {
-      if (category === 'trade') {
+
+    if (location.pathname === '/cabinet' || location.pathname === '/cabinet/favourites' || location.pathname === '/cabinet/calls') {
+      if (category === "trade") {
         item = api.data.user.calls.find(item => id === item._id);
       } else {
         item = api.data.user.favourites.find(item => id === item._id);

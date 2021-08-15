@@ -8,7 +8,7 @@ import {
   workBtnRegister,
   noWorkBtnRegister,
 } from './js/functions';
-import { renderModals } from './js/renderModals';
+import { renderModals} from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
@@ -20,7 +20,7 @@ import {
 } from './js/productsCRUD';
 
 import validator from 'validator';
-import { renderCabinet } from './js/renderCabinet';
+import { renderCabinet, userCalls, userFavourites } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
 import { api } from './js/functions';
 import config from './config.json';
@@ -106,6 +106,10 @@ document.addEventListener('click', e => {
         refs.ads.innerHTML = '';
         const categoryData = card(api.data.content.sales);
         refs.content.innerHTML = categoryTpl({ categoryData });
+      }else if(linkTag.getAttribute('href') === '/cabinet/favourites'){
+        userFavourites(api.data.user)
+      }else if(linkTag.getAttribute('href') === '/cabinet/calls'){
+        userCalls(api.data.user)
       } else {
         const path = linkTag.getAttribute('href');
         renderContent(path);
