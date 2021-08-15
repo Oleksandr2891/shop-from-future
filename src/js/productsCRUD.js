@@ -14,38 +14,33 @@ export const addToFavourites = id => {
     return false;
   }
   api.postData(config.favourites_URL + '/' + id, { data: false, auth: true }).then(data => {
-
-    getUserData();
-    let modalGoods = document.querySelector(`button[data-id='${id}']`);
-    if (refs.modal.childElementCount !== 0) {
-      modalGoods = refs.modal.querySelector(`button[data-id='${id}']`);
-    }
-    console.log("добавили в избранное");
-    modalGoods.querySelector('.card-goods-icon').textContent = 'favorite';
-    modalGoods.querySelector('.card-goods-icon').classList.add('card-goods-icon-active');
-    modalGoods.dataset.action = 'remove-from-favourites';
+    getUserData().then(() => {
+      let modalGoods = document.querySelectorAll(`button[data-id='${id}'][data-action="add-to-favourites"]`);
+      modalGoods.forEach(item => {
+        item.querySelector('.card-goods-icon').textContent = 'favorite';
+        item.querySelector('.card-goods-icon').classList.add('card-goods-icon-active');
+        item.dataset.action = 'remove-from-favourites';
+      })
+    });
   });
-
 };
 
 export const removeFromFavourites = id => {
   api.deleteData(config.favourites_URL + '/' + id, { data: false, auth: true }).then(data => {
-    console.log("Удалили из избранного");
-    getUserData();
-    let modalGoods = document.querySelector(`button[data-id='${id}']`);
-    if (refs.modal.childElementCount !== 0) {
-      modalGoods = refs.modal.querySelector(`button[data-id='${id}']`);
-    }
-    modalGoods.querySelector('.card-goods-icon').textContent = 'favorite_border';
-    modalGoods.querySelector('.card-goods-icon').classList.remove('card-goods-icon-active');
-    modalGoods.dataset.action = 'add-to-favourites';
-
-    if (location.pathname === '/cabinet') {
-      getUserData().then(data => {
+    getUserData().then(() => {
+      let modalGoods = document.querySelectorAll(`button[data-id='${id}'][data-action="remove-from-favourites"]`);
+      modalGoods.forEach(item => {
+        item.querySelector('.card-goods-icon').textContent = 'favorite_border';
+        item.querySelector('.card-goods-icon').classList.remove('card-goods-icon-active');
+        item.dataset.action = 'add-to-favourites';
+      })
+      if (location.pathname === '/cabinet') {
         refs.modal.innerHTML = "";
         renderCabinet();
-      });
+      }
     }
+    );
+    
   });
 
 };
