@@ -93,3 +93,11 @@ export const createEditPost = (method = 'POST', path = '') => {
     });
   }
 };
+
+export const deletePost = (id) => { 
+  api.deleteData('/call/' + id, { data: false, auth: true }).then(data => {
+    refs.modal.innerHTML =  ''
+    getUserData().then(data =>{ 
+      renderCabinet()})
+  })
+}

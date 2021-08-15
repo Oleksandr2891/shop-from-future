@@ -12,7 +12,7 @@ import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, createEditPost, removeFromFavourites} from './js/productsCRUD';
+import { addToFavourites, createEditPost, removeFromFavourites, deletePost} from './js/productsCRUD';
 
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
@@ -137,7 +137,9 @@ document.addEventListener('click', e => {
       }
       refs.modal.innerHTML = '';
     }
-
+    if(buttonTag.dataset.action === 'delete-post-button'){
+      deletePost(buttonTag.dataset.id);
+    }
     if (buttonTag.dataset.action === 'sign-in-with-google') {
       signInWithGoogle();
     }

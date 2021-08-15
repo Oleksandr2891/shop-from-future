@@ -21,14 +21,20 @@ export const renderModals = {
     refs.modal.innerHTML = modalTpl({ modalContent });
   },
   createEditProduct: (method, id) => {
+    if(api.data.user.email === undefined){ 
+      renderModals.auth(); 
+       return false
+    }
     const contentForModal = require('../tpl/components/modals/createEditProduct.hbs').default;
     const modalContent = contentForModal({ category: api.data.categories }, Handlebars);
     refs.modal.innerHTML = modalTpl({ modalContent });
     if(method === 'PATCH'){
+      document.querySelector('#delete-post-button').classList.remove('hidden')
       document.querySelector('.modal-create__heading').textContent = 'Изменить объявление'
       document.querySelector('#addPostProduct').textContent = 'Изменить'
       document.querySelector('#addPostProduct').dataset.action = 'edit-post'
       document.querySelector('#addPostProduct').dataset.id = id
+      document.querySelector('#delete-post-button').dataset.id = id
       const item = api.data.user.calls.find(item => id === item._id)
       console.log(item)
       const addModalNode = document.querySelector('#add-post-form');
