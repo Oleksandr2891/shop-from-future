@@ -18,9 +18,11 @@ export const renderCabinet = () => {
   }
   if (api.data.user.favourites !== undefined && api.data.user.favourites.length < 1) {
     document.querySelector('.swiper-container.favourite').classList.add('hidden');
+    document.querySelector('.empty-favourite').classList.remove('hidden');
   }
   if (api.data.user.calls !== undefined && api.data.user.calls.length < 1) {
     document.querySelector('.swiper-container.calls').classList.add('hidden');
+    document.querySelector('.empty-goods').classList.remove('hidden');
   }
 
   history.pushState(null, null, '/cabinet');

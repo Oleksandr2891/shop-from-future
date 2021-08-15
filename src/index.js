@@ -11,7 +11,9 @@ import {
 import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
+
 import { addToFavourites, createEditPost, removeFromFavourites, deletePost} from './js/productsCRUD';
+
 import validator from 'validator';
 import { renderCabinet } from './js/renderCabinet';
 import { registr, logIn, logOut, signInWithGoogle } from './js/auth';
@@ -107,7 +109,6 @@ document.addEventListener('click', e => {
       renderModals.cardOneGood(buttonTag.dataset.id, buttonTag.dataset.category);
     }
     if (buttonTag.dataset.action === 'edit-post') {
-
       createEditPost('PATCH', `/${buttonTag.dataset.id}`);
     }
     if (buttonTag.dataset.action === 'open-modal-edit') {
@@ -254,10 +255,66 @@ document.addEventListener('click', e => {
           });
       }
       findGood();
-      document.querySelector('.header__form_mobile').classList.remove('is-open');
 
       if (input.value != '') {
         const path = input.dataset.search + input.value;
+        renderContent(path);
+      } else {
+        error({ text: 'Please enter the date', delay: 1500 });
+      }
+    }
+    if (buttonTag.dataset.search === 'searchmob') {
+      const input = refs.header.querySelector('.header__find_mobile');
+      const path = input.dataset.searchmob + input.value;
+
+      function findGood() {
+        return fetch(config.apiUrl + path)
+          .then(response => {
+            return response.json();
+          })
+          .then(good => {
+            if (good.length < 1) {
+              error({ text: 'Your request is incorrect!', delay: 1500 });
+              refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
+            }
+            if (good.length > 0) {
+              success({ text: `Goods were found.`, delay: 1000 });
+            }
+          });
+      }
+      findGood();
+      document.querySelector('.header__form_mobile').classList.remove('is-open');
+
+      if (input.value != '') {
+        const path = input.dataset.searchmob + input.value;
+        renderContent(path);
+      } else {
+        error({ text: 'Please enter the date', delay: 1500 });
+      }
+    }
+    if (buttonTag.dataset.search === 'searchtab') {
+      const input = refs.header.querySelector('.header__find_tablet');
+      const path = input.dataset.searchtab + input.value;
+
+      function findGood() {
+        return fetch(config.apiUrl + path)
+          .then(response => {
+            return response.json();
+          })
+          .then(good => {
+            if (good.length < 1) {
+              error({ text: 'Your request is incorrect!', delay: 1500 });
+              refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
+            }
+            if (good.length > 0) {
+              success({ text: `Goods were found.`, delay: 1000 });
+            }
+          });
+      }
+      findGood();
+
+      if (input.value != '') {
+        const path = input.dataset.searchtab + input.value;
         renderContent(path);
       } else {
         error({ text: 'Please enter the date', delay: 1500 });
