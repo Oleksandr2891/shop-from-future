@@ -32,11 +32,11 @@ export const renderCabinet = () => {
 
 export const userFavourites = (data) => {
   console.log(data.fauvorites)
-  if(data === 'no access token') {
+  if (data === 'no access token') {
     refs.content.innerHTML = '<h1>Marty was here. Register before add favourites to cabinet.</h1>'
     return false;
   };
-  if(data.favourites.length === 0){
+  if (data.favourites.length === 0) {
     console.log('hell')
     refs.content.innerHTML = '<h1>Вы пока не добавили ни одного объявления в избранное.</h1>'
     return false;
@@ -49,11 +49,11 @@ export const userFavourites = (data) => {
 }
 
 export const userCalls = (data) => {
-  if(data === 'no access token') {
+  if (data === 'no access token') {
     refs.content.innerHTML = '<h1>Marty was here. Register before add calls to cabinet.</h1>'
     return false;
   };
-  if(data.calls.length === 0){
+  if (data.calls.length === 0) {
     refs.content.innerHTML = '<h1>Вы пока не добавили ни одного объявления.</h1>'
     return false;
   }
@@ -63,9 +63,9 @@ export const userCalls = (data) => {
   refs.content.innerHTML = fauvorites({ nameCategory: 'calls', categoryData }, Handlebars);
   const button = refs.content.querySelectorAll('.link-card')
   button.forEach(item => {
-    item.dataset.action = 'open-modal-edit'; 
+    item.dataset.action = 'open-modal-edit';
     item.dataset.value = 'createEditProduct'
   })
-  
+
   history.pushState(null, null, '/cabinet/calls')
 }
