@@ -114,8 +114,6 @@ export const getMainPage = (page = 1) => {
       obj.text = categorySales(obj);
     });
 
-    // searchFavoritesGoods.getFavourites(goods);
-    console.log(api.data.user.favourites);
     refs.content.innerHTML = goodsTpl(goods, Handlebars);
     new Swiper('.swiper-container', swiperConfigCategories.card);
   });
@@ -171,7 +169,7 @@ export const renderContent = path => {
       const card = require('../tpl/components/productCard.hbs').default;
       const categoryData = card(data, Handlebars);
       refs.content.innerHTML = categoryTpl({ nameCategory, categoryData }, Handlebars);
-      if(path.includes('/call/find?search=')){
+      if (path.includes('/call/find?search=')) {
         refs.content.querySelector('.name-category').classList.add('hidden')
       }
     });
@@ -224,8 +222,6 @@ export const workBtnAddProduct = () => {
 
 export const noWorkBtnAddProduct = () => {
   if (document.querySelector('#addPostProduct')) {
-    // console.log('OK');
-
     document.querySelector('#addPostProduct').disabled = true;
   }
 };
