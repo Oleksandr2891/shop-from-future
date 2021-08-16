@@ -68,6 +68,9 @@ export const createEditPost = (method = 'POST', path = '') => {
       imageCounter += 1;
     }
   });
+  // edit image
+  
+  
   const inputsValueNewProduct = {
     title: addModalNode.querySelector('#product-title').value,
     description: addModalNode.querySelector('#product-description').value,
@@ -75,6 +78,36 @@ export const createEditPost = (method = 'POST', path = '') => {
     price: addModalNode.querySelector('#product-price').value,
     phone: addModalNode.querySelector('#product-phone').value,
   };
+  if(method === 'PATCH'){
+    const imagesDataset = []
+    const imagesDatasetNodes = document.querySelector('#add-post-form').querySelectorAll('img');
+    imagesDatasetNodes.forEach(item => {
+      if(item.dataset.image !== undefined && item.getAttribute('src') !== item.dataset.image){
+        imagesDataset.push(item.dataset.image)
+      }   
+    })
+    console.log(imagesDataset)
+    const postId = path.slice(1)
+    const ownProduct = api.data.user.calls.find(item => item._id === postId)
+    const imageUrls = ownProduct.imageUrls
+    console.log(imageUrls)
+    const newImageUrls = [...imageUrls]
+    if(imagesDataset.length !== 0){
+      imagesDataset.forEach(item => {
+        if(newImageUrls.includes(item)){
+          imageUrls.splice(imageUrls.indexOf(newImageUrls), 1)
+        }
+      })
+    }
+    console.log(imageUrls)
+    if(imageUrls.length !== newImageUrls.length){ 
+    inputsValueNewProduct.imageUrls = JSON.stringify(imageUrls)
+    console.log(inputsValueNewProduct.imageUrls) 
+    }
+  }
+  
+  
+  // return false
   sendData('https://callboard-backend.goit.global/call' + `${path}`, inputsValueNewProduct);
   async function sendData(url, data) {
     const formData = new FormData();

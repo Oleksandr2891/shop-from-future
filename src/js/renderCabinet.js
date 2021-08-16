@@ -6,7 +6,6 @@ import Swiper from 'swiper/bundle';
 import swiperConfigCategories from '../configSwiper.json';
 
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
-import { renderModals } from './renderModals';
 SwiperCore.use([Navigation, Pagination]);
 
 export const renderCabinet = () => {

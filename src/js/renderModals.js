@@ -51,6 +51,7 @@ export const renderModals = {
       addModalNode.querySelector('img').setAttribute('src', item.imageUrls[0]);
       for (let i = 0; i < images.length; i++) {
         imagesNodes[i].setAttribute('src', images[i]);
+        imagesNodes[i].dataset.image = images[i];
         inputNodes[i].file = images[i];
       }
     }
@@ -93,6 +94,11 @@ export const renderModals = {
       modalGoods.querySelector('.card-goods__btn-favorites').dataset.action =
         'remove-from-favourites';
     }
+    let path = location.pathname + location.search 
+    path += `#${id}#${category}`
+    const hashParams = path.split('#')
+    console.log(hashParams)
+    history.pushState(null, null, path)
   },
 
   goItStudents: () => {
