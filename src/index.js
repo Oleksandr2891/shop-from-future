@@ -42,7 +42,7 @@ export const pnotify = {
 };
 
 const getPath = () => {
-  return location.pathname + location.search;
+  return location.pathname + location.search + location.hash;
 };
 
 renderContent(getPath());
@@ -54,6 +54,7 @@ document.addEventListener('click', e => {
 
   if (e.target.dataset.action === 'close-modal-backdrop') {
     refs.modal.innerHTML = '';
+    location.hash = '';
     if (location.pathname === '/cabinet') {
       renderCabinet();
     }
@@ -151,6 +152,7 @@ document.addEventListener('click', e => {
         renderCabinet();
       }
       refs.modal.innerHTML = '';
+      location.hash = ''
     }
     if (buttonTag.dataset.action === 'delete-post-button') {
       deletePost(buttonTag.dataset.id);
