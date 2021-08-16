@@ -95,8 +95,6 @@ export const renderModals = {
     }
     let path = location.pathname + location.search 
     path += `#${id}#${category}`
-    const hashParams = path.split('#')
-    console.log(hashParams)
     history.pushState(null, null, path)
   },
 
