@@ -141,7 +141,14 @@
     opacity: 1;
     pointer-events: initial;
   }
+  
   .overlay {
+    display: none;
+  }
+  
+  @media screen and(min-width: 768px) {
+  .overlay {
+    display: block;
     opacity: 0;
     position: absolute;
     z-index: -11;
@@ -157,9 +164,7 @@
     button {
       position: absolute;
       background-color: transparent;
- 
-    // position: absolute;
-      width: 100px;
+       width: 100px;
       height: 100px;
       right: 0px;
       bottom: 0px;
@@ -186,6 +191,7 @@
       }
      }
     }
+  }
 
   .card-image__wrapper {
     position: relative;
