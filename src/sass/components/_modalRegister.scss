@@ -1,5 +1,6 @@
 .center {
   text-align: center;
+  justify-content: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -8,59 +9,65 @@
   }
 }
 
-.modal_div {
-  position: absolute;
-  padding: 47px 20px;
-  z-index: 100;
-  background-color: white;
+.modal_register-div {
+  // box-sizing: border-box;
+  // position: absolute;
+  // padding: 47px 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  @media screen and (min-width: 768px) {
+    padding-left: 52px;
+    padding-right: 52px;
+  }
 }
 
+// .modal_div {
+//   position: absolute;
+//   padding: 47px 20px;
+//   // z-index: 100000;
+//   background-color: var(--primary-white-color);
+// }
+
 @media screen and (max-width: 320px) {
-  .modal_div {
+  .modal_register-div {
     width: calc(100% - 30px);
     height: 85vh;
   }
 }
 
 @media screen and (min-width: 321px) {
-  .modal_div {
+  .modal_register-div {
     width: 290px;
-    height: 482px;
-    left: 50%;
-    transform: translate(-50%, 0);
+    // height: 482px;
+    // left: 50%;
+    // top: 50%;
+    // transform: translate(-50%, -50%);
   }
 }
 
 @media screen and (min-width: 768px) {
-  .modal_div {
+  .modal_register-div {
     width: 530px;
-    height: 530px;
-    padding: 50px 52px;
+    // height: 530px;
+    // padding: 50px 52px;
   }
 }
 
 // Наполнение
-.modal_close-btn {
-  position: absolute;
-  top: 19px;
-  right: 20px;
-  width: 14px;
-  height: 14px;
-}
 
-@media screen and (min-width: 768px) {
-  .modal_close-btn {
-    top: 17px;
-    right: 18px;
-  }
-}
+// @media screen and (min-width: 768px) {
+//   .modal_close-btn {
+//     top: 17px;
+//     right: 18px;
+//   }
+// }
 
 .modal_paragraph-register-google {
   margin-bottom: 20px;
   font-size: 12px;
   line-height: 1.25;
   font-weight: 500;
-  text-align: center;
+  // text-align: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -68,11 +75,16 @@
     font-size: 14px;
     line-height: 1.21;
     margin-bottom: 30px;
+    text-align: center;
   }
 }
 
 .modal_button-register-google {
+  text-align: center;    
+  display: flex;
   margin-bottom: 30px;
+  padding-top: 16px;
+  padding-left: 32px;
   width: 150px;
   height: 50px;
   background: rgba(250, 250, 250, 1);
@@ -82,6 +94,11 @@
   .modal_button-register-google {
     margin-bottom: 50px;
   }
+}
+
+.modal_button-svg-google {
+  width: 85px;
+  height: 18px;
 }
 
 .modal_paragraph-register-email {
@@ -127,6 +144,9 @@
   line-height: 1.25;
   letter-spacing: 0.02em;
   color: #bbbbbb;
+}
+.modal_input-register {
+  border: 1px solid #bbbbbb;
 }
 
 @media screen and (min-width: 768px) {
@@ -184,11 +204,18 @@
 }
 
 .modal_button-register-entrance {
-  background: rgba(255, 107, 9, 1);
-  color: #ffffff;
+  background: var(--accent-color);
+  color: var(--primary-white-color);
 }
 
 .modal_button-registeration {
   border: 1px solid #bbbbbb;
   background: rgba(255, 255, 255, 1);
+  color: var(--primary-black-color);
+}
+
+.modal_button-registeration:hover {
+  background: var(--accent-color);
+  color: var(--primary-white-color);
+  // animation-duration: 3000ms;
 }
