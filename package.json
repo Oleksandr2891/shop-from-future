@@ -3,10 +3,10 @@
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://Oleksandr2891.github.io/shop-from-future",
+  "homepage": "https://Oleksandr2891.github.io/",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /shop-from-future/"
+    "build": "parcel build src/*.html --public-url /"
   },
   "repository": {
     "type": "git",
