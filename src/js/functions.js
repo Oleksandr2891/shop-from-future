@@ -9,6 +9,7 @@ import { getUserData } from './auth';
 import { renderCabinet, userFavourites, userCalls } from './renderCabinet';
 import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
+import { renderModals } from './renderModals';
 
 
 export const rerenderLogIn = () => {
@@ -81,7 +82,7 @@ export const getMainPage = (page = 1) => {
     new Swiper('.Ads-slider-container', swiperConfigAds);
   });
 
-  api.getData(config.componentsTpl.goods.getGoods + page).then(data => {
+  return api.getData(config.componentsTpl.goods.getGoods + page).then(data => {
     const obj = {};
     Object.keys(data).forEach(item => {
       obj[item] = data[item];
@@ -90,7 +91,7 @@ export const getMainPage = (page = 1) => {
 
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
-    const categorySales = function (obj) {
+    const categorySales =  (obj) => {
       let text = [];
 
       if (obj.name === 'sales') {
@@ -114,8 +115,6 @@ export const getMainPage = (page = 1) => {
       obj.text = categorySales(obj);
     });
 
-    // searchFavoritesGoods.getFavourites(goods);
-    console.log(api.data.user.favourites);
     refs.content.innerHTML = goodsTpl(goods, Handlebars);
     new Swiper('.swiper-container', swiperConfigCategories.card);
   });
@@ -130,18 +129,23 @@ const googleRegister = () => {
 };
 
 export const renderContent = path => {
+  const hashArr = location.hash.slice(1).split('#')
   googleRegister();
   getUserData().then(data => {
     getHeader();
     getFooter();
-    if (path === '/') {
-      getMainPage();
-      return false;
+    if (path === '/' + location.hash) {
+      getMainPage().then(() => {
+        if(hashArr.length > 1){  
+          console.log(hashArr)
+          renderModals.cardOneGood(hashArr[0], hashArr[1])
+          return false
+        }
+      });
     }
   });
 
   history.pushState(null, null, path);
-  if (path !== '/') refs.linkPaginationWrapper.classList.add('hidden');
 
   if (path === '/cabinet') {
     getUserData().then(data => {
@@ -149,12 +153,12 @@ export const renderContent = path => {
     });
   }
 
-  if(path === '/cabinet/favourites'){ 
-     getUserData().then(data => {
-       userFavourites(data)
-     })
+  if (path === '/cabinet/favourites') {
+    getUserData().then(data => {
+      userFavourites(data)
+    })
   }
-  if(path === '/cabinet/calls'){
+  if (path === '/cabinet/calls') {
     getUserData().then(data => {
       userCalls(data);
     })
@@ -163,15 +167,26 @@ export const renderContent = path => {
     refs.ads.innerHTML = '';
   }
   if (path !== '/') {
+    refs.linkPaginationWrapper.classList.add('hidden')
     api.getData(path).then(data => {
-      history.pushState(null, null, path);
-      const pathRoot = 15;
-      api.data.content[data[0].category] = data;
-      const nameCategory = path.slice(pathRoot);
+      const hashArr = location.hash.slice(1).split('#')
+      console.log(hashArr)
+      const nameCategory = data[0].category;
+      api.data.content[nameCategory] = data;
       const categoryTpl = require('../tpl/category.hbs').default;
       const card = require('../tpl/components/productCard.hbs').default;
       const categoryData = card(data, Handlebars);
       refs.content.innerHTML = categoryTpl({ nameCategory, categoryData }, Handlebars);
+      if (path.includes('/call/find?search=')) {
+        refs.content.querySelector('.name-category').classList.add('hidden')
+      }
+      if(hashArr.length > 1){  
+        console.log(hashArr[1])
+        renderModals.cardOneGood(hashArr[0], hashArr[1])
+        return false
+      }
+      history.pushState(null, null, path);
+
     });
   }
 };
@@ -222,8 +237,6 @@ export const workBtnAddProduct = () => {
 
 export const noWorkBtnAddProduct = () => {
   if (document.querySelector('#addPostProduct')) {
-    // console.log('OK');
-
     document.querySelector('#addPostProduct').disabled = true;
   }
 };

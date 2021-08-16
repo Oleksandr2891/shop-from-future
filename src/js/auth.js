@@ -10,7 +10,7 @@ import { error, success, info } from '@pnotify/core';
 // import validator from 'validator';
 
 // export const checkTokens = (config.auth.checkToken.link, api.checkToken()).then(data => {
-//   console.log(data);
+
 // });
 
 const getInputData = () => {
@@ -44,7 +44,6 @@ const loginRegistr = dataUser => {
   api.postData(config.auth.login.link, dataUser).then(data => {
     if (data.message) console.log(data.message);
     if (data.accessToken) {
-      // console.log(data.accessToken);
       refs.modal.innerHTML = '';
     }
     localStorage.setItem('refreshToken', data.refreshToken);
@@ -59,35 +58,21 @@ const loginRegistr = dataUser => {
 
 export function registr() {
   api.postData(config.auth.register.link, getInputData()).then(data => {
-    // console.log(data);
     if (data.registrationDate && data.email && data.id) {
       success({ text: `You created an account`, delay: 1000 });
       const dataUserREgister = getInputData();
       loginRegistr(dataUserREgister);
-      // refs.modal.innerHTML = '';
-      // logIn();
-
-      // console.log(data.email);
     }
     if (data.message) {
-      // console.log(data.message);
       error({ text: data.message, delay: 1500 });
     }
-    // console.log(data);
   });
-
-  // if (data.accessToken) {
-  //   console.log(data.accessToken);
-  // refs.modal.innerHTML = '';
-  // }
-  // form.reset();
 }
 
 export const logIn = () => {
   api.postData(config.auth.login.link, getInputData()).then(data => {
 
     if (data.message) {
-      // console.log(data.message);
       error({ text: data.message, delay: 1500 });
     }
     if (data.accessToken) {
@@ -97,7 +82,6 @@ export const logIn = () => {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('sid', data.sid);
       api.data.user = data.user;
-      console.log(api.data);
       // return data;
       //
       rerenderLogIn();
@@ -106,13 +90,11 @@ export const logIn = () => {
   });
 };
 export const logOut = () => {
-  console.log(api.data);
   const objLogOut = {
     auth: true,
     body: false,
   };
   api.postData(config.auth.logout.link, objLogOut).then(data => {
-    console.log(data);
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('sid');

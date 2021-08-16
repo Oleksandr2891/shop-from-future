@@ -134,6 +134,7 @@
   @media screen and (min-width: 1280px) {
     width: 286px;
     height: 60px;
+    margin-bottom: 10px;
   }
 }
 
@@ -247,10 +248,9 @@
   outline: -webkit-focus-ring-color auto 5px;
 }
 
-
-#delete-post-button{
+#delete-post-button {
   background-color: transparent;
-  color: black; 
+  color: black;
   display: block;
   margin-right: auto;
   margin-left: auto;
@@ -258,4 +258,11 @@
   margin-bottom: -10px;
   font-size: 12px;
   font-weight: normal;
+
+  display: inline-flex;
+  align-items: center;
+}
+
+.delete-icon {
+  color: #bbbbbb;
 }

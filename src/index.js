@@ -8,11 +8,18 @@ import {
   workBtnRegister,
   noWorkBtnRegister,
 } from './js/functions';
-import { renderModals} from './js/renderModals';
+import { renderModals } from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
+import Handlebars from './helpers';
 
-import { addToFavourites, createEditPost, removeFromFavourites, deletePost} from './js/productsCRUD';
+import {
+  addToFavourites,
+  createEditPost,
+  removeFromFavourites,
+  deletePost,
+  findGood
+} from './js/productsCRUD';
 
 import validator from 'validator';
 import { renderCabinet, userCalls, userFavourites } from './js/renderCabinet';
@@ -35,7 +42,7 @@ export const pnotify = {
 };
 
 const getPath = () => {
-  return location.pathname + location.search;
+  return location.pathname + location.search + location.hash;
 };
 
 renderContent(getPath());
@@ -47,6 +54,7 @@ document.addEventListener('click', e => {
 
   if (e.target.dataset.action === 'close-modal-backdrop') {
     refs.modal.innerHTML = '';
+    location.hash = '';
     if (location.pathname === '/cabinet') {
       renderCabinet();
     }
@@ -54,13 +62,12 @@ document.addEventListener('click', e => {
 
   if (!linkTag && !buttonTag) return false;
   if (linkTag) {
-    if (linkTag.dataset.action !== 'sign-in-with-google') {
+    if (linkTag.dataset.action !== 'sign-in-with-google' && linkTag.dataset.action !== 'github') {
       e.preventDefault();
     }
     if (linkTag.dataset.action === 'open-modal-edit') {
-      console.log('hello')
       renderModals.createEditProduct('PATCH', linkTag.dataset.id);
-      return false
+      return false;
     }
 
     if (linkTag.dataset.action === 'show-main-img') {
@@ -99,11 +106,13 @@ document.addEventListener('click', e => {
         const categoryTpl = require('./tpl/category.hbs').default;
         const card = require('./tpl/components/productCard.hbs').default;
         refs.ads.innerHTML = '';
-        const categoryData = card(api.data.content.sales);
-        refs.content.innerHTML = categoryTpl({ categoryData });
-      }else if(linkTag.getAttribute('href') === '/cabinet/favourites'){
+        const categoryData = card((api.data.content.sales), Handlebars);
+        const nameCategory = "Распродажа";
+        refs.content.innerHTML = categoryTpl({ nameCategory, categoryData }, Handlebars);
+        // refs.content.innerHTML = "ЗАДОЛБАЛО"
+      } else if (linkTag.getAttribute('href') === '/cabinet/favourites') {
         userFavourites(api.data.user)
-      }else if(linkTag.getAttribute('href') === '/cabinet/calls'){
+      } else if (linkTag.getAttribute('href') === '/cabinet/calls') {
         userCalls(api.data.user)
       } else {
         const path = linkTag.getAttribute('href');
@@ -143,6 +152,7 @@ document.addEventListener('click', e => {
         renderCabinet();
       }
       refs.modal.innerHTML = '';
+      location.hash = ''
     }
     if (buttonTag.dataset.action === 'delete-post-button') {
       deletePost(buttonTag.dataset.id);
@@ -185,7 +195,6 @@ document.addEventListener('click', e => {
       filterMenuNode.classList.remove('is-open');
     }
     if (buttonTag.dataset.action === 'close-filter') {
-      console.log('or');
       refs.linkPaginationWrapper.classList.remove('hidden');
       refs.header.querySelector('.mobile-menu').classList.remove('is-open');
       refs.header.querySelector('.tablet-menu').classList.remove('is-open');
@@ -216,15 +225,11 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-to-favourites') {
-
       addToFavourites(buttonTag.dataset.id);
-
     }
 
     if (buttonTag.dataset.action === 'remove-from-favourites') {
-
       removeFromFavourites(buttonTag.dataset.id);
-
     }
 
     if (buttonTag.dataset.action === 'show-user-data') {
@@ -248,22 +253,8 @@ document.addEventListener('click', e => {
       const input = refs.header.querySelector('.header__find');
       const path = input.dataset.search + input.value;
 
-      function findGood() {
-        return fetch(config.apiUrl + path)
-          .then(response => {
-            return response.json();
-          })
-          .then(good => {
-            if (good.length < 1) {
-              error({ text: 'Your request is incorrect!', delay: 1500 });
-              refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
-            }
-            if (good.length > 0) {
-              success({ text: `Goods were found.`, delay: 1000 });
-            }
-          });
-      }
-      findGood();
+
+      findGood(path);
 
       if (input.value != '') {
         const path = input.dataset.search + input.value;
@@ -271,27 +262,13 @@ document.addEventListener('click', e => {
       } else {
         error({ text: 'Please enter the date', delay: 1500 });
       }
+      input.value = ''
     }
     if (buttonTag.dataset.search === 'searchmob') {
       const input = refs.header.querySelector('.header__find_mobile');
       const path = input.dataset.searchmob + input.value;
 
-      function findGood() {
-        return fetch(config.apiUrl + path)
-          .then(response => {
-            return response.json();
-          })
-          .then(good => {
-            if (good.length < 1) {
-              error({ text: 'Your request is incorrect!', delay: 1500 });
-              refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
-            }
-            if (good.length > 0) {
-              success({ text: `Goods were found.`, delay: 1000 });
-            }
-          });
-      }
-      findGood();
+      findGood(path)
       document.querySelector('.header__form_mobile').classList.remove('is-open');
 
       if (input.value != '') {
@@ -300,34 +277,19 @@ document.addEventListener('click', e => {
       } else {
         error({ text: 'Please enter the date', delay: 1500 });
       }
+      input.value = ''
     }
     if (buttonTag.dataset.search === 'searchtab') {
       const input = refs.header.querySelector('.header__find_tablet');
       const path = input.dataset.searchtab + input.value;
-
-      function findGood() {
-        return fetch(config.apiUrl + path)
-          .then(response => {
-            return response.json();
-          })
-          .then(good => {
-            if (good.length < 1) {
-              error({ text: 'Your request is incorrect!', delay: 1500 });
-              refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
-            }
-            if (good.length > 0) {
-              success({ text: `Goods were found.`, delay: 1000 });
-            }
-          });
-      }
-      findGood();
-
+      findGood(path);
       if (input.value != '') {
         const path = input.dataset.searchtab + input.value;
         renderContent(path);
       } else {
         error({ text: 'Please enter the date', delay: 1500 });
       }
+      input.value = ''
     }
   }
 });
@@ -342,7 +304,6 @@ document.addEventListener('keydown', e => {
 
 // isValidModalCreateProduct();
 
-// console.log('1 2 3');
 
 // document.querySelector('#product-title');
 // document.querySelector('#');
@@ -350,7 +311,6 @@ document.addEventListener('keydown', e => {
 // document.querySelector('#');
 // document.querySelector('#product-price');
 // document.querySelector('#');
-// console.log(document.querySelector('#product-category').value);
 // Слушатель для input
 document.addEventListener(
   'input',
@@ -392,7 +352,6 @@ document.addEventListener(
     }
     // Валидация модалки создания товара
     if (e.target.dataset.action === 'name-product') {
-      // console.log(e.target.value);
       if (e.target.value.length <= 3) {
         if (e.target.classList.contains('valid')) {
           e.target.classList.remove('valid');
@@ -428,7 +387,6 @@ document.addEventListener(
       }
     }
     if (e.target.dataset.action === 'price-product') {
-      console.log(typeof Number(e.target.value));
       if (/^[0-9]+$/.test(e.target.value)) {
         // if (e.target.value < 0) {
         //   if (e.target.classList.contains('valid')) {
@@ -441,7 +399,6 @@ document.addEventListener(
           e.target.classList.remove('invalid');
         }
         e.target.classList.add('valid');
-        // console.log('ok');
       }
     }
   }, 500),
