@@ -15,7 +15,6 @@ Handlebars.registerHelper('isSelectedFavourites', (id) => {
 
 
 Handlebars.registerHelper('isEnoughSlides', (amount) => {
-    console.log(amount);
     return amount > 4;
 });
 

@@ -38,16 +38,16 @@ export const removeFromFavourites = id => {
         refs.modal.innerHTML = "";
         renderCabinet();
       }
-      if(location.pathname === '/cabinet/favourites'){
+      if (location.pathname === '/cabinet/favourites') {
         // refs.content.innerHTML = ''
         userFavourites(data)
       }
-      if(location.pathname === '/cabinet/calls'){
+      if (location.pathname === '/cabinet/calls') {
         userCalls(data)
       }
     }
     );
-    
+
   });
 
 };
@@ -58,7 +58,6 @@ export const editPost = () => {
 }
 
 export const createEditPost = (method = 'POST', path = '') => {
-  console.log(path)
   const addModalNode = document.querySelector('#add-post-form');
   const images = [];
   let imageCounter = 0;
@@ -80,10 +79,10 @@ export const createEditPost = (method = 'POST', path = '') => {
     const formData = new FormData();
     for (const name in data) {
       formData.append(name, data[name]);
-    }if(images !== 0){
+    } if (images !== 0) {
       images.forEach(item => formData.append('file', item));
     }
-    
+
     const response = await fetch(url, {
       method: method,
       headers: {
@@ -92,47 +91,47 @@ export const createEditPost = (method = 'POST', path = '') => {
       },
       body: formData,
     }).then(res => res.json()).then(data => {
-      if(data.title === undefined) {
-        pnotify.error({text: data.message, delay: 1000})
+      if (data.title === undefined) {
+        pnotify.error({ text: data.message, delay: 1000 })
         return false
       };
       getUserData().then(() => {
         let pnotifyText = 'Товар успешно добавлен!'
-        if(method === 'PATCH'){
+        if (method === 'PATCH') {
           pnotifyText = 'Товар успешно изменен!'
         }
         pnotify.success({ text: pnotifyText, delay: 1000 });
         refs.modal.innerHTML = '';
         renderCabinet();
-      })      
+      })
     }).then(err => console.log(err));
   }
 };
 
-export const deletePost = (id) => { 
+export const deletePost = (id) => {
   api.deleteData('/call/' + id, { data: false, auth: true }).then(data => {
-    refs.modal.innerHTML =  ''
-    getUserData().then(data =>{
-      if(location.pathname === '/cabinet/calls'){
+    refs.modal.innerHTML = ''
+    getUserData().then(data => {
+      if (location.pathname === '/cabinet/calls') {
         // refs.content.innerHTML = ''
         userCalls(data);
         return false;
-      } 
-      renderCabinet()})
+      }
+      renderCabinet()
+    })
   })
 }
 
 export const findGood = (path) => {
-  console.log(path)
-  api.getData(path, {body: false, auth: false})
-  .then(res => res.json())
-  .then(good => {
-    if (good.length < 1) {
-      error({ text: 'Your request is incorrect!', delay: 1500 });
-      refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
-    }
-    if (good.length > 0) {
-      success({ text: `Goods were found.`, delay: 1000 });
-    }
-  })
+  api.getData(path, { body: false, auth: false })
+    .then(res => res.json())
+    .then(good => {
+      if (good.length < 1) {
+        error({ text: 'Your request is incorrect!', delay: 1500 });
+        refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
+      }
+      if (good.length > 0) {
+        success({ text: `Goods were found.`, delay: 1000 });
+      }
+    })
 }

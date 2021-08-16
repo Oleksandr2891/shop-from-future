@@ -15,13 +15,11 @@ SwiperCore.use([Navigation, Pagination]);
 
 export const getNextPage = (path) => {
     api.getData(path).then(data => {
-        // console.log(data);
         const obj = {};
         Object.keys(data).forEach(item => {
             obj[item] = data[item];
         });
         api.data.content = { ...api.data.content, ...obj };
-        console.log(api.data);
         const goodsTpl = require('../tpl/components/goods.hbs').default;
 
         const goods = [];

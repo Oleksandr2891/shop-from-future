@@ -36,7 +36,6 @@ export const renderModals = {
       document.querySelector('#addPostProduct').dataset.id = id;
       document.querySelector('#delete-post-button').dataset.id = id;
       const item = api.data.user.calls.find(item => id === item._id);
-      console.log(item);
       const addModalNode = document.querySelector('#add-post-form');
       addModalNode.querySelector('#product-title').value = item.title;
       addModalNode.querySelector('#product-description').value = item.description;
@@ -45,7 +44,7 @@ export const renderModals = {
       addModalNode.querySelector('#product-phone').value = item.phone;
       const images = [];
       item.imageUrls.forEach(item => images.push(item));
-      console.log(images);
+
       const imagesNodes = addModalNode.querySelectorAll('img');
       const inputNodes = addModalNode.querySelectorAll('.inputfile');
       addModalNode.querySelector('img').setAttribute('src', item.imageUrls[0]);
