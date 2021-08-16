@@ -90,7 +90,7 @@ export const getMainPage = (page = 1) => {
 
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
-    const categorySales = function (obj) {
+    const categorySales =  (obj) => {
       let text = [];
 
       if (obj.name === 'sales') {
@@ -128,6 +128,7 @@ const googleRegister = () => {
 };
 
 export const renderContent = path => {
+  console.log(location.hash)
   googleRegister();
   getUserData().then(data => {
     getHeader();
@@ -162,16 +163,21 @@ export const renderContent = path => {
   }
   if (path !== '/') {
     api.getData(path).then(data => {
-      history.pushState(null, null, path);
+      
       const nameCategory = data[0].category;
       api.data.content[nameCategory] = data;
       const categoryTpl = require('../tpl/category.hbs').default;
       const card = require('../tpl/components/productCard.hbs').default;
       const categoryData = card(data, Handlebars);
       refs.content.innerHTML = categoryTpl({ nameCategory, categoryData }, Handlebars);
+
+      
+      history.pushState(null, null, path);
+
       if (path.includes('/call/find?search=')) {
         refs.content.querySelector('.name-category').classList.add('hidden')
       }
+
     });
   }
 };
