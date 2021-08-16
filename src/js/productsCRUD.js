@@ -91,7 +91,11 @@ export const createEditPost = (method = 'POST', path = '') => {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
       body: formData,
-    }).then(() => {
+    }).then(res => res.json()).then(data => {
+      if(data.title === undefined) {
+        pnotify.error({text: data.message, delay: 1000})
+        return false
+      };
       getUserData().then(() => {
         let pnotifyText = 'Товар успешно добавлен!'
         if(method === 'PATCH'){

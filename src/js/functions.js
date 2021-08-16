@@ -166,7 +166,7 @@ export const renderContent = path => {
     api.getData(path).then(data => {
       history.pushState(null, null, path);
       const nameCategory = data[0].category;
-      // console.log(nameCategory);
+      api.data.content[nameCategory] = data;
       const categoryTpl = require('../tpl/category.hbs').default;
       const card = require('../tpl/components/productCard.hbs').default;
       const categoryData = card(data, Handlebars);
