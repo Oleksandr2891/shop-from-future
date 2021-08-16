@@ -91,7 +91,7 @@ export const getMainPage = (page = 1) => {
 
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
-    const categorySales =  (obj) => {
+    const categorySales = (obj) => {
       let text = [];
 
       if (obj.name === 'sales') {
@@ -134,9 +134,9 @@ export const renderContent = path => {
   getUserData().then(data => {
     getHeader();
     getFooter();
-    if (path === '/' + location.hash) {
+    if (path === '/' + location.hash || path === "/shop-from-future/") {
       getMainPage().then(() => {
-        if(hashArr.length > 1){  
+        if (hashArr.length > 1) {
           console.log(hashArr)
           renderModals.cardOneGood(hashArr[0], hashArr[1])
           return false
@@ -180,7 +180,7 @@ export const renderContent = path => {
       if (path.includes('/call/find?search=')) {
         refs.content.querySelector('.name-category').classList.add('hidden')
       }
-      if(hashArr.length > 1){  
+      if (hashArr.length > 1) {
         console.log(hashArr[1])
         renderModals.cardOneGood(hashArr[0], hashArr[1])
         return false
