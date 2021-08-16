@@ -13,4 +13,11 @@ Handlebars.registerHelper('isSelectedFavourites', (id) => {
     return false;
 });
 
+
+Handlebars.registerHelper('isEnoughSlides', (amount) => {
+    return amount > 4;
+});
+
+
+
 export default Handlebars;
