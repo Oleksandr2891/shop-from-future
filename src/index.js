@@ -12,7 +12,12 @@ import { renderModals} from './js/renderModals';
 import 'material-icons/iconfont/material-icons.css';
 import { animateModal } from './js/animation-modal';
 
-import { addToFavourites, createEditPost, removeFromFavourites, deletePost} from './js/productsCRUD';
+import {
+  addToFavourites,
+  createEditPost,
+  removeFromFavourites,
+  deletePost,
+} from './js/productsCRUD';
 
 import validator from 'validator';
 import { renderCabinet, userCalls, userFavourites } from './js/renderCabinet';
@@ -54,13 +59,13 @@ document.addEventListener('click', e => {
 
   if (!linkTag && !buttonTag) return false;
   if (linkTag) {
-    if (linkTag.dataset.action !== 'sign-in-with-google') {
+    if (linkTag.dataset.action !== 'sign-in-with-google' && linkTag.dataset.action !== 'github') {
       e.preventDefault();
     }
     if (linkTag.dataset.action === 'open-modal-edit') {
-      console.log('hello')
+      console.log('hello');
       renderModals.createEditProduct('PATCH', linkTag.dataset.id);
-      return false
+      return false;
     }
 
     if (linkTag.dataset.action === 'show-main-img') {
@@ -216,15 +221,11 @@ document.addEventListener('click', e => {
     }
 
     if (buttonTag.dataset.action === 'add-to-favourites') {
-
       addToFavourites(buttonTag.dataset.id);
-
     }
 
     if (buttonTag.dataset.action === 'remove-from-favourites') {
-
       removeFromFavourites(buttonTag.dataset.id);
-
     }
 
     if (buttonTag.dataset.action === 'show-user-data') {
