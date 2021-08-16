@@ -171,6 +171,9 @@ export const renderContent = path => {
       const card = require('../tpl/components/productCard.hbs').default;
       const categoryData = card(data, Handlebars);
       refs.content.innerHTML = categoryTpl({ nameCategory, categoryData }, Handlebars);
+      if(path.includes('/call/find?search=')){
+        refs.content.querySelector('.name-category').classList.add('hidden')
+      }
     });
   }
 };

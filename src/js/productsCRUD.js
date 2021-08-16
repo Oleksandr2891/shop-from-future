@@ -121,3 +121,18 @@ export const deletePost = (id) => {
       renderCabinet()})
   })
 }
+
+export const findGood = (path) => {
+  console.log(path)
+  api.getData(path, {body: false, auth: false})
+  .then(res => res.json())
+  .then(good => {
+    if (good.length < 1) {
+      error({ text: 'Your request is incorrect!', delay: 1500 });
+      refs.content.innerHTML = 'Your request is incorrect! Please enter the date.';
+    }
+    if (good.length > 0) {
+      success({ text: `Goods were found.`, delay: 1000 });
+    }
+  })
+}
