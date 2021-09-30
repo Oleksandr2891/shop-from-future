@@ -11,7 +11,6 @@ import SwiperCore, { Navigation, Pagination } from 'swiper/core';
 import Handlebars from '../helpers';
 import { renderModals } from './renderModals';
 
-
 export const rerenderLogIn = () => {
   document.querySelector('#register-wraper').classList.add('hide');
   document.querySelector('#cabinet-wraper').classList.remove('hide');
@@ -91,7 +90,7 @@ export const getMainPage = (page = 1) => {
 
     const goodsTpl = require('../tpl/components/goods.hbs').default;
 
-    const categorySales = (obj) => {
+    const categorySales = obj => {
       let text = [];
 
       if (obj.name === 'sales') {
@@ -129,17 +128,16 @@ const googleRegister = () => {
 };
 
 export const renderContent = path => {
-  const hashArr = location.hash.slice(1).split('#')
+  const hashArr = location.hash.slice(1).split('#');
   googleRegister();
   getUserData().then(data => {
     getHeader();
     getFooter();
-    if (path === '/' + location.hash || path === "/shop-from-future/") {
+    if (path === '/' + location.hash || path === '/shop-from-future/') {
       getMainPage().then(() => {
         if (hashArr.length > 1) {
-          console.log(hashArr)
-          renderModals.cardOneGood(hashArr[0], hashArr[1])
-          return false
+          renderModals.cardOneGood(hashArr[0], hashArr[1]);
+          return false;
         }
       });
     }
@@ -155,22 +153,21 @@ export const renderContent = path => {
 
   if (path === '/cabinet/favourites') {
     getUserData().then(data => {
-      userFavourites(data)
-    })
+      userFavourites(data);
+    });
   }
   if (path === '/cabinet/calls') {
     getUserData().then(data => {
       userCalls(data);
-    })
+    });
   }
   if (refs.ads.childElementCount > 0) {
     refs.ads.innerHTML = '';
   }
   if (path !== '/') {
-    refs.linkPaginationWrapper.classList.add('hidden')
+    refs.linkPaginationWrapper.classList.add('hidden');
     api.getData(path).then(data => {
-      const hashArr = location.hash.slice(1).split('#')
-      console.log(hashArr)
+      const hashArr = location.hash.slice(1).split('#');
       const nameCategory = data[0].category;
       api.data.content[nameCategory] = data;
       const categoryTpl = require('../tpl/category.hbs').default;
@@ -178,15 +175,13 @@ export const renderContent = path => {
       const categoryData = card(data, Handlebars);
       refs.content.innerHTML = categoryTpl({ nameCategory, categoryData }, Handlebars);
       if (path.includes('/call/find?search=')) {
-        refs.content.querySelector('.name-category').classList.add('hidden')
+        refs.content.querySelector('.name-category').classList.add('hidden');
       }
       if (hashArr.length > 1) {
-        console.log(hashArr[1])
-        renderModals.cardOneGood(hashArr[0], hashArr[1])
-        return false
+        renderModals.cardOneGood(hashArr[0], hashArr[1]);
+        return false;
       }
       history.pushState(null, null, path);
-
     });
   }
 };
@@ -240,35 +235,3 @@ export const noWorkBtnAddProduct = () => {
     document.querySelector('#addPostProduct').disabled = true;
   }
 };
-
-// export const isValidModalCreateProduct = () => {
-//   if (
-//     document.querySelector('#product-title') &&
-//     document.querySelector('.inputfile') &&
-//     document.querySelector('#product-description') &&
-//     document.querySelector('#product-category') &&
-//     document.querySelector('#product-price') &&
-//     document.querySelector('#product-phone')
-//   ) {
-//     if (
-//       document.querySelector('#product-title').value === '' &&
-//       document.querySelector('#product-description').value === '' &&
-//       document.querySelector('#product-category') === null &&
-//       document.querySelector('#product-phone').value === ''
-//     ) {
-//       noWorkBtnAddProduct();
-//       const arrInputImg = document.querySelectorAll('.inputfile');
-//       arrInputImg.forEach(e => {
-//         // console.log(e.files.length);
-//         if (e.files.length !== 0) {
-//           // console.log('ok');
-//           workBtnAddProduct();
-//         }
-//         if (e.files.length === 0) {
-//           noWorkBtnAddProduct();
-//         }
-//         // if(e.file)
-//       });
-//     }
-//   }
-// };

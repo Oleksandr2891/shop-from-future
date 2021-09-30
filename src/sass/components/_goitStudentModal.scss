@@ -1,12 +1,3 @@
-// @import url('../../fonts/BTTF.ttf');
-// .team-backdrop {
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   width: 100vh;
-//   height: 100vh;
-//   background-color: black;
-// }
 @font-face {
   font-family: 'Back ttf';
   src: url('../fonts/BTTF.ttf');
@@ -22,41 +13,13 @@
   display: block;
 }
 
-/* Globals */
-// body {
-//   font-family: "Inter", sans-serif;
-//   max-width: 55rem;
-//   padding: 2rem 1.5rem;
-//   margin: 0 auto;
-//   color: #241623;
-//   background: #eef2f4;
-// }
-
-// h1 {
-//   font-weight: 900;
-//   font-size: 2.7rem;
-//   max-width: 20ch;
-// }
-
-// p {
-//   max-width: 60ch;
-// }
-
-// a {
-//   color: currentcolor;
-// }
-
 .hackers_title {
   font-size: 35px;
   color: white;
   font-family: 'Back ttf';
-  //   display: flex;
-  //   align-items: center;
-  //   flex-direction: column;
   width: 170px;
   margin: 0 auto;
 }
-
 
 .hackers_arrow {
   position: relative;
@@ -70,7 +33,6 @@
   transform: scaleY(-1);
 }
 
-
 .hackers_arrow-div:hover .hackers_arrow {
   color: var(--accent-color);
 }
@@ -82,20 +44,12 @@
   transform: scaleY(-1);
 }
 
-// .hackers_arrow
-
-/* Utilities */
 .auto-grid {
   display: flex;
   flex-wrap: wrap;
   margin-left: -20px;
   margin-top: -20px;
-  //   padding-top: 50px;
   padding-left: 50px;
-  //   display: grid;
-  //   grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size, 14rem), 1fr));
-  //   grid-gap: var(--auto-grid-gap, 0);
-  //   padding: 0;
 }
 
 .list__item:not(:nth-child(3n)) {

@@ -5,13 +5,6 @@ import { renderCabinet } from './renderCabinet';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import { error, success, info } from '@pnotify/core';
-// import { checkToken } from './api';
-
-// import validator from 'validator';
-
-// export const checkTokens = (config.auth.checkToken.link, api.checkToken()).then(data => {
-
-// });
 
 const getInputData = () => {
   const inputEmailValue = document.querySelector('#email').value.trim();
@@ -35,14 +28,12 @@ export const getUserData = () => {
     })
     .then(data => {
       api.data.user = data;
-      console.log(api.data);
       return data;
     });
 };
 
 const loginRegistr = dataUser => {
   api.postData(config.auth.login.link, dataUser).then(data => {
-    if (data.message) console.log(data.message);
     if (data.accessToken) {
       refs.modal.innerHTML = '';
     }
@@ -71,7 +62,6 @@ export function registr() {
 
 export const logIn = () => {
   api.postData(config.auth.login.link, getInputData()).then(data => {
-
     if (data.message) {
       error({ text: data.message, delay: 1500 });
     }
@@ -82,8 +72,6 @@ export const logIn = () => {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('sid', data.sid);
       api.data.user = data.user;
-      // return data;
-      //
       rerenderLogIn();
       renderCabinet();
     }
@@ -108,6 +96,6 @@ export const signInWithGoogle = () => {
     .then(res => {
       return res.json();
     })
-    .then(data => console.log(data))
+    // .then(data => console.log(data))
     .catch(err => console.log(err));
 };

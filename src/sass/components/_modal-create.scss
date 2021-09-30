@@ -28,7 +28,6 @@
 }
 
 .modal-create__field {
-  // margin-top: 20px;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -153,7 +152,6 @@
   }
 }
 
-///input
 .inputfile {
   width: 0.1px;
   height: 0.1px;
@@ -174,12 +172,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // &:nth-child(2n) {
-  //   background-image: url(../images/plus.jpg);
-  //   background-repeat: no-repeat;
-  //   background-position-x: center;
-  //   background-position-y: center;
-  // }
 }
 .img-plus {
   background-image: url(../images/plus.jpg);
@@ -187,26 +179,10 @@
   background-position-x: center;
   background-position-y: center;
   margin-bottom: 10px;
-  // position: relative;
-  // overflow: hidden;
-  // width: 78px;
-  // height: 50px;
 }
 
 .modal-create__preview-img {
   height: 100%;
-  // width: 100%;
-  // background-color: white;
-  // width: 100%;
-  // width: 78px;
-  // height: 50px;
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  // width: 286px;
-  // height: 239px;
-  // object-fit: cover;
 }
 
 .modal-create__file-wrap {
