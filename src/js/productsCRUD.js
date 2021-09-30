@@ -15,12 +15,14 @@ export const addToFavourites = id => {
   }
   api.postData(config.favourites_URL + '/' + id, { data: false, auth: true }).then(data => {
     getUserData().then(() => {
-      const modalGoods = document.querySelectorAll(`button[data-id='${id}'][data-action="add-to-favourites"]`);
+      const modalGoods = document.querySelectorAll(
+        `button[data-id='${id}'][data-action="add-to-favourites"]`,
+      );
       modalGoods.forEach(item => {
         item.querySelector('.card-goods-icon').textContent = 'favorite';
         item.querySelector('.card-goods-icon').classList.add('card-goods-icon-active');
         item.dataset.action = 'remove-from-favourites';
-      })
+      });
     });
   });
 };
@@ -28,34 +30,31 @@ export const addToFavourites = id => {
 export const removeFromFavourites = id => {
   api.deleteData(config.favourites_URL + '/' + id, { data: false, auth: true }).then(data => {
     getUserData().then(data => {
-      const modalGoods = document.querySelectorAll(`button[data-id='${id}'][data-action="remove-from-favourites"]`);
+      const modalGoods = document.querySelectorAll(
+        `button[data-id='${id}'][data-action="remove-from-favourites"]`,
+      );
       modalGoods.forEach(item => {
         item.querySelector('.card-goods-icon').textContent = 'favorite_border';
         item.querySelector('.card-goods-icon').classList.remove('card-goods-icon-active');
         item.dataset.action = 'add-to-favourites';
-      })
+      });
       if (location.pathname === '/cabinet') {
-        refs.modal.innerHTML = "";
+        refs.modal.innerHTML = '';
         renderCabinet();
       }
       if (location.pathname === '/cabinet/favourites') {
-        // refs.content.innerHTML = ''
-        userFavourites(data)
+        userFavourites(data);
       }
       if (location.pathname === '/cabinet/calls') {
-        userCalls(data)
+        userCalls(data);
       }
-    }
-    );
-
+    });
   });
-
 };
 
 export const editPost = () => {
-  const addModalNode = document.querySelector('#add-post-form')
-
-}
+  const addModalNode = document.querySelector('#add-post-form');
+};
 
 export const createEditPost = (method = 'POST', path = '') => {
   const addModalNode = document.querySelector('#add-post-form');
@@ -67,9 +66,7 @@ export const createEditPost = (method = 'POST', path = '') => {
       imageCounter += 1;
     }
   });
-  // edit image
-  
-  
+
   const inputsValueNewProduct = {
     title: addModalNode.querySelector('#product-title').value,
     description: addModalNode.querySelector('#product-description').value,
@@ -77,86 +74,85 @@ export const createEditPost = (method = 'POST', path = '') => {
     price: addModalNode.querySelector('#product-price').value,
     phone: addModalNode.querySelector('#product-phone').value,
   };
-  if(method === 'PATCH'){
-    const imagesDataset = []
+  if (method === 'PATCH') {
+    const imagesDataset = [];
     const imagesDatasetNodes = document.querySelector('#add-post-form').querySelectorAll('img');
     imagesDatasetNodes.forEach(item => {
-      if(item.dataset.image !== undefined && item.getAttribute('src') !== item.dataset.image){
-        imagesDataset.push(item.dataset.image)
-      }   
-    })
-    console.log(imagesDataset)
-    const postId = path.slice(1)
-    const ownProduct = api.data.user.calls.find(item => item._id === postId)
-    const imageUrls = ownProduct.imageUrls
-    console.log(imageUrls)
-    const newImageUrls = [...imageUrls]
-    if(imagesDataset.length !== 0){
+      if (item.dataset.image !== undefined && item.getAttribute('src') !== item.dataset.image) {
+        imagesDataset.push(item.dataset.image);
+      }
+    });
+
+    const postId = path.slice(1);
+    const ownProduct = api.data.user.calls.find(item => item._id === postId);
+    const imageUrls = ownProduct.imageUrls;
+    const newImageUrls = [...imageUrls];
+    if (imagesDataset.length !== 0) {
       imagesDataset.forEach(item => {
-        if(newImageUrls.includes(item)){
-          imageUrls.splice(imageUrls.indexOf(newImageUrls), 1)
+        if (newImageUrls.includes(item)) {
+          imageUrls.splice(imageUrls.indexOf(newImageUrls), 1);
         }
-      })
+      });
     }
-    console.log(imageUrls)
-    if(imageUrls.length !== newImageUrls.length){ 
-    inputsValueNewProduct.imageUrls = JSON.stringify(imageUrls)
-    console.log(inputsValueNewProduct.imageUrls) 
+
+    if (imageUrls.length !== newImageUrls.length) {
+      inputsValueNewProduct.imageUrls = JSON.stringify(imageUrls);
     }
   }
-  
-  
-  // return false
+
   sendData('https://callboard-backend.goit.global/call' + `${path}`, inputsValueNewProduct);
   async function sendData(url, data) {
     const formData = new FormData();
     for (const name in data) {
       formData.append(name, data[name]);
-    } if (images !== 0) {
+    }
+    if (images !== 0) {
       images.forEach(item => formData.append('file', item));
     }
 
     const response = await fetch(url, {
       method: method,
       headers: {
-        // 'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
       body: formData,
-    }).then(res => res.json()).then(data => {
-      if (data.title === undefined) {
-        pnotify.error({ text: data.message, delay: 1000 })
-        return false
-      };
-      getUserData().then(() => {
-        let pnotifyText = 'Товар успешно добавлен!'
-        if (method === 'PATCH') {
-          pnotifyText = 'Товар успешно изменен!'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.title === undefined) {
+          pnotify.error({ text: data.message, delay: 1000 });
+          return false;
         }
-        pnotify.success({ text: pnotifyText, delay: 1000 });
-        refs.modal.innerHTML = '';
-        renderCabinet();
+        getUserData().then(() => {
+          let pnotifyText = 'Товар успешно добавлен!';
+          if (method === 'PATCH') {
+            pnotifyText = 'Товар успешно изменен!';
+          }
+          pnotify.success({ text: pnotifyText, delay: 1000 });
+          refs.modal.innerHTML = '';
+          renderCabinet();
+        });
       })
-    }).then(err => console.log(err));
+      .then(err => console.log(err));
   }
 };
 
-export const deletePost = (id) => {
+export const deletePost = id => {
   api.deleteData('/call/' + id, { data: false, auth: true }).then(data => {
-    refs.modal.innerHTML = ''
+    refs.modal.innerHTML = '';
     getUserData().then(data => {
       if (location.pathname === '/cabinet/calls') {
-        // refs.content.innerHTML = ''
         userCalls(data);
         return false;
       }
-      renderCabinet()
-    })
-  })
-}
+      renderCabinet();
+    });
+  });
+};
 
-export const findGood = (path) => {
-  api.getData(path, { body: false, auth: false })
+export const findGood = path => {
+  api
+    .getData(path, { body: false, auth: false })
     .then(res => res.json())
     .then(good => {
       if (good.length < 1) {
@@ -166,5 +162,5 @@ export const findGood = (path) => {
       if (good.length > 0) {
         success({ text: `Goods were found.`, delay: 1000 });
       }
-    })
-}
+    });
+};

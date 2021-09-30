@@ -18,7 +18,7 @@ import {
   createEditPost,
   removeFromFavourites,
   deletePost,
-  findGood
+  findGood,
 } from './js/productsCRUD';
 
 import validator from 'validator';
@@ -106,14 +106,13 @@ document.addEventListener('click', e => {
         const categoryTpl = require('./tpl/category.hbs').default;
         const card = require('./tpl/components/productCard.hbs').default;
         refs.ads.innerHTML = '';
-        const categoryData = card((api.data.content.sales), Handlebars);
-        const nameCategory = "Распродажа";
+        const categoryData = card(api.data.content.sales, Handlebars);
+        const nameCategory = 'Распродажа';
         refs.content.innerHTML = categoryTpl({ nameCategory, categoryData }, Handlebars);
-        // refs.content.innerHTML = "ЗАДОЛБАЛО"
       } else if (linkTag.getAttribute('href') === '/cabinet/favourites') {
-        userFavourites(api.data.user)
+        userFavourites(api.data.user);
       } else if (linkTag.getAttribute('href') === '/cabinet/calls') {
-        userCalls(api.data.user)
+        userCalls(api.data.user);
       } else {
         const path = linkTag.getAttribute('href');
         renderContent(path);
@@ -152,7 +151,7 @@ document.addEventListener('click', e => {
         renderCabinet();
       }
       refs.modal.innerHTML = '';
-      location.hash = ''
+      location.hash = '';
     }
     if (buttonTag.dataset.action === 'delete-post-button') {
       deletePost(buttonTag.dataset.id);
@@ -167,12 +166,10 @@ document.addEventListener('click', e => {
 
     if (buttonTag.dataset.action === 'add-post') {
       createEditPost('POST');
-      // renderModals.createEditProduct('POST')
     }
-    //
+
     if (e.target.dataset.action === 'user-log-in') {
       logIn();
-      // success({ text: `You enter in your user profile`, delay: 1000 });
     }
 
     if (buttonTag.dataset.action === 'log-out') {
@@ -253,7 +250,6 @@ document.addEventListener('click', e => {
       const input = refs.header.querySelector('.header__find');
       const path = input.dataset.search + input.value;
 
-
       findGood(path);
 
       if (input.value != '') {
@@ -262,13 +258,13 @@ document.addEventListener('click', e => {
       } else {
         error({ text: 'Please enter the date', delay: 1500 });
       }
-      input.value = ''
+      input.value = '';
     }
     if (buttonTag.dataset.search === 'searchmob') {
       const input = refs.header.querySelector('.header__find_mobile');
       const path = input.dataset.searchmob + input.value;
 
-      findGood(path)
+      findGood(path);
       document.querySelector('.header__form_mobile').classList.remove('is-open');
 
       if (input.value != '') {
@@ -277,7 +273,7 @@ document.addEventListener('click', e => {
       } else {
         error({ text: 'Please enter the date', delay: 1500 });
       }
-      input.value = ''
+      input.value = '';
     }
     if (buttonTag.dataset.search === 'searchtab') {
       const input = refs.header.querySelector('.header__find_tablet');
@@ -289,7 +285,7 @@ document.addEventListener('click', e => {
       } else {
         error({ text: 'Please enter the date', delay: 1500 });
       }
-      input.value = ''
+      input.value = '';
     }
   }
 });
@@ -302,16 +298,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// isValidModalCreateProduct();
-
-
-// document.querySelector('#product-title');
-// document.querySelector('#');
-// document.querySelector('#product-description');
-// document.querySelector('#');
-// document.querySelector('#product-price');
-// document.querySelector('#');
-// Слушатель для input
 document.addEventListener(
   'input',
   debounce(e => {
@@ -333,7 +319,6 @@ document.addEventListener(
       }
     }
     if (e.target.dataset.action === 'register-password') {
-      // if ()
       if (e.target.value.length < 4) {
         if (e.target.classList.contains('valid')) {
           e.target.classList.remove('valid');
@@ -359,7 +344,7 @@ document.addEventListener(
         }
         e.target.classList.add('invalid');
         noWorkBtnAddProduct();
-        pnotify.error({ text: 'auth first', delay: 1000 });
+        pnotify.error({ text: 'Name-product must be more than 3 characters', delay: 1000 });
       }
       if (e.target.value.length > 3) {
         if (e.target.classList.contains('invalid')) {
@@ -376,7 +361,7 @@ document.addEventListener(
         }
         e.target.classList.add('invalid');
         noWorkBtnAddProduct();
-        pnotify.error({ text: 'auth first', delay: 1000 });
+        pnotify.error({ text: 'Description must be more than 10 characters', delay: 1000 });
       }
       if (e.target.value.length > 10) {
         if (e.target.classList.contains('invalid')) {
@@ -388,13 +373,6 @@ document.addEventListener(
     }
     if (e.target.dataset.action === 'price-product') {
       if (/^[0-9]+$/.test(e.target.value)) {
-        // if (e.target.value < 0) {
-        //   if (e.target.classList.contains('valid')) {
-        //     e.target.classList.remove('valid');
-        //   }
-        //   e.target.classList.add('invalid');
-        // }
-        // if()
         if (e.target.classList.contains('invalid')) {
           e.target.classList.remove('invalid');
         }
@@ -403,6 +381,3 @@ document.addEventListener(
     }
   }, 500),
 );
-
-// if (e.target.dataset.value === 'img-for-back') {
-// }

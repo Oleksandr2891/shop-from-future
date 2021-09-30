@@ -10,9 +10,6 @@
 }
 
 .modal_register-div {
-  // box-sizing: border-box;
-  // position: absolute;
-  // padding: 47px 20px;
   padding-left: 20px;
   padding-right: 20px;
   @media screen and (min-width: 768px) {
@@ -20,13 +17,6 @@
     padding-right: 52px;
   }
 }
-
-// .modal_div {
-//   position: absolute;
-//   padding: 47px 20px;
-//   // z-index: 100000;
-//   background-color: var(--primary-white-color);
-// }
 
 @media screen and (max-width: 320px) {
   .modal_register-div {
@@ -38,36 +28,20 @@
 @media screen and (min-width: 321px) {
   .modal_register-div {
     width: 290px;
-    // height: 482px;
-    // left: 50%;
-    // top: 50%;
-    // transform: translate(-50%, -50%);
   }
 }
 
 @media screen and (min-width: 768px) {
   .modal_register-div {
     width: 530px;
-    // height: 530px;
-    // padding: 50px 52px;
   }
 }
-
-// Наполнение
-
-// @media screen and (min-width: 768px) {
-//   .modal_close-btn {
-//     top: 17px;
-//     right: 18px;
-//   }
-// }
 
 .modal_paragraph-register-google {
   margin-bottom: 20px;
   font-size: 12px;
   line-height: 1.25;
   font-weight: 500;
-  // text-align: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -80,7 +54,7 @@
 }
 
 .modal_button-register-google {
-  text-align: center;    
+  text-align: center;
   display: flex;
   margin-bottom: 30px;
   padding-top: 16px;
@@ -217,5 +191,4 @@
 .modal_button-registeration:hover {
   background: var(--accent-color);
   color: var(--primary-white-color);
-  // animation-duration: 3000ms;
 }

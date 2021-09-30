@@ -2,7 +2,6 @@
   width: 290px;
   height: 845px;
   padding-left: 20px;
-  // z-index: 1000;
 
   @media screen and (min-width: 768px) {
     width: 724px;
@@ -44,11 +43,6 @@
   }
 }
 
-// .card-goods__left {
-//   display: flex;
-//   flex-direction: column;
-// }
-
 .card-goods__firstwrapper {
   position: relative;
   overflow: hidden;
@@ -88,9 +82,6 @@
     height: 465px;
   }
 }
-// .card-goods__wrapper {
-//   display: flex;
-// }
 
 .card-goods__container {
   display: flex;
@@ -149,8 +140,6 @@
   display: inline-flex;
   align-items: center;
   text-align: center;
-  // flex-wrap: nowrap;
-  // width: 96px;
 }
 
 .card-goods__btn-share {
