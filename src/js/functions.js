@@ -169,8 +169,8 @@ export const renderContent = path => {
   if (path !== '/') {
     refs.linkPaginationWrapper.classList.add('hidden')
     api.getData(path).then(data => {
-      const hashArr = location.hash.slice(1).split('#')
-      console.log(hashArr)
+      const hashArr = location.hash.slice(1).split('#');
+      console.log(hashArr);
       const nameCategory = data[0].category;
       api.data.content[nameCategory] = data;
       const categoryTpl = require('../tpl/category.hbs').default;
